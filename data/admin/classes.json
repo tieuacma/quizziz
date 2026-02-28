@@ -1,0 +1,26 @@
+[
+    {
+        "id": "cls-001",
+        "name": "Lớp Toán 10A1",
+        "grade": "Khối 10",
+        "activeQuizzes": 2,
+        "completedQuizzes": 4,
+        "avgScore": 78
+    },
+    {
+        "id": "cls-002",
+        "name": "Lớp Lý 10A1",
+        "grade": "Khối 10",
+        "activeQuizzes": 2,
+        "completedQuizzes": 3,
+        "avgScore": 82
+    },
+    {
+        "id": "cls-003",
+        "name": "Lớp Anh Văn B1",
+        "grade": "Ngoại ngữ",
+        "activeQuizzes": 1,
+        "completedQuizzes": 6,
+        "avgScore": 85
+    }
+]

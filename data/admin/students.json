@@ -1,0 +1,40 @@
+[
+    {
+        "id": "std-001",
+        "name": "Nguyễn Văn Anh",
+        "email": "vananh.nguyen@example.com",
+        "classIds": [
+            "cls-001",
+            "cls-002"
+        ],
+        "quizzesCompleted": 15,
+        "avgScore": 88,
+        "lastActivity": "2024-03-20",
+        "status": "Hoạt động"
+    },
+    {
+        "id": "std-002",
+        "name": "Trần Thị Bình",
+        "email": "binh.tran@example.com",
+        "classIds": [
+            "cls-001",
+            "cls-003"
+        ],
+        "quizzesCompleted": 10,
+        "avgScore": 75,
+        "lastActivity": "2024-03-18",
+        "status": "Hoạt động"
+    },
+    {
+        "id": "std-003",
+        "name": "Lê Hoàng Cường",
+        "email": "cuong.le@example.com",
+        "classIds": [
+            "cls-003"
+        ],
+        "quizzesCompleted": 5,
+        "avgScore": 59,
+        "lastActivity": "2024-03-15",
+        "status": "Nghỉ học"
+    }
+]

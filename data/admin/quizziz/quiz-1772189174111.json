@@ -1,0 +1,248 @@
+{
+  "id": "quiz-1772189174111",
+  "description": "",
+  "questions": [
+    {
+      "id": "c1aa6758-5db6-45e7-92ef-1a66bd040d0d",
+      "type": "multiple_choice",
+      "question": "Quốc gia khởi đầu trong cuộc cách mạng công nghiệp lần thứ nhất diễn ra vào giữa thế kỉ XVIII là",
+      "options": [
+        {
+          "id": "23a9e850-c2e0-4e12-97e8-53e6e59f0b3d",
+          "text": "Anh"
+        },
+        {
+          "id": "19c1f977-a823-401b-a2de-5baef13b07fe",
+          "text": "Mỹ"
+        },
+        {
+          "id": "435020ce-5665-4d64-890f-4f250bc46019",
+          "text": "Nhật"
+        },
+        {
+          "id": "be70448f-52e6-40a9-becd-bbc4e8cd3436",
+          "text": "Pháp"
+        }
+      ],
+      "correctOptionId": "23a9e850-c2e0-4e12-97e8-53e6e59f0b3d"
+    },
+    {
+      "id": "4c28e86c-6841-4bda-ab98-d14af99cc635",
+      "type": "multiple_choice",
+      "question": "Quốc gia khởi đầu trong cuộc cách mạng công nghiệp lần thứ nhất diễn ra vào giữa thế kỉ XVIII là",
+      "options": [
+        {
+          "id": "f3d09de6-8953-4887-a986-e4783c44063b",
+          "text": "Anh"
+        },
+        {
+          "id": "dc6be0e9-f1b7-4c03-bc57-af2dd0f49dc6",
+          "text": "Mỹ"
+        },
+        {
+          "id": "7b09f9c6-9ba7-4639-a0f8-76987a7e25c8",
+          "text": "Nhật"
+        },
+        {
+          "id": "9645e81c-f283-4289-870c-85dafb1fe639",
+          "text": "Pháp"
+        }
+      ],
+      "correctOptionId": "f3d09de6-8953-4887-a986-e4783c44063b"
+    },
+    {
+      "id": "fe8e7cff-739c-469e-9874-2526832f61d6",
+      "type": "multiple_choice",
+      "question": "Quốc gia khởi đầu trong cuộc cách mạng công nghiệp lần thứ nhất diễn ra vào giữa thế kỉ XVIII là",
+      "options": [
+        {
+          "id": "80fa9085-7a94-4e90-8562-2a7076c7119e",
+          "text": "Anh"
+        },
+        {
+          "id": "28ddf226-781c-4b6a-8076-984cfb2a38b7",
+          "text": "Mỹ"
+        },
+        {
+          "id": "2666e45e-2a6d-4f0c-b18d-67b5a3f2eef8",
+          "text": "Nhật"
+        },
+        {
+          "id": "4b0cc648-bcc7-4130-989c-ced51fbbbed4",
+          "text": "Pháp"
+        }
+      ],
+      "correctOptionId": "80fa9085-7a94-4e90-8562-2a7076c7119e"
+    },
+    {
+      "id": "f6b0cd73-2259-4a28-9295-6fe489e02288",
+      "type": "multiple_choice",
+      "question": "Quốc gia khởi đầu trong cuộc cách mạng công nghiệp lần thứ nhất diễn ra vào giữa thế kỉ XVIII là",
+      "options": [
+        {
+          "id": "c795b444-1a4c-42d0-bb5f-85bbea931360",
+          "text": "Anh"
+        },
+        {
+          "id": "e2e64f80-2e04-459a-aca5-9a4ba2595022",
+          "text": "Mỹ"
+        },
+        {
+          "id": "8f375660-8820-4a64-85b4-42682c693270",
+          "text": "Nhật"
+        },
+        {
+          "id": "162c243c-0cf3-4fb2-9531-e00c76c028c9",
+          "text": "Pháp"
+        }
+      ],
+      "correctOptionId": "c795b444-1a4c-42d0-bb5f-85bbea931360"
+    },
+    {
+      "id": "eefa3c7d-5307-475e-89f5-3272a602c58f",
+      "type": "multiple_choice",
+      "question": "Quốc gia khởi đầu trong cuộc cách mạng công nghiệp lần thứ nhất diễn ra vào giữa thế kỉ XVIII là",
+      "options": [
+        {
+          "id": "c4181015-55de-4f8f-bfdd-050bbafa6cd7",
+          "text": "Anh"
+        },
+        {
+          "id": "d6208e42-a531-44f6-9ba3-ff0b0dc3aa9e",
+          "text": "Mỹ"
+        },
+        {
+          "id": "0ed9c12d-366c-45f8-859b-ac31a813b9a0",
+          "text": "Nhật"
+        },
+        {
+          "id": "f9fed758-7c77-485c-9f27-40bbaba57e16",
+          "text": "Pháp"
+        }
+      ],
+      "correctOptionId": "c4181015-55de-4f8f-bfdd-050bbafa6cd7"
+    },
+    {
+      "id": "8c2dc7ed-648a-4a95-b19a-7a19b8c30ad0",
+      "type": "multiple_choice",
+      "question": "Quốc gia khởi đầu trong cuộc cách mạng công nghiệp lần thứ nhất diễn ra vào giữa thế kỉ XVIII là",
+      "options": [
+        {
+          "id": "55299214-bb9a-4aac-a3c5-e0a953864c45",
+          "text": "Anh"
+        },
+        {
+          "id": "2ad7088e-d9de-4db1-a193-796c60dfa280",
+          "text": "Mỹ"
+        },
+        {
+          "id": "2647e18d-eabc-4c65-bf05-f937bfc98a32",
+          "text": "Nhật"
+        },
+        {
+          "id": "fd69732c-dd3e-459c-bc9c-a54bb72dbb4a",
+          "text": "Pháp"
+        }
+      ],
+      "correctOptionId": "55299214-bb9a-4aac-a3c5-e0a953864c45"
+    },
+    {
+      "id": "698c60f7-af09-4878-bce2-d1e28a3a50b9",
+      "type": "multiple_choice",
+      "question": "Quốc gia khởi đầu trong cuộc cách mạng công nghiệp lần thứ nhất diễn ra vào giữa thế kỉ XVIII là",
+      "options": [
+        {
+          "id": "bd6bba85-2f21-41ba-885f-990026022996",
+          "text": "Pháp"
+        },
+        {
+          "id": "f3a5df86-f259-42d4-909e-7159b7e69531",
+          "text": "Nhật"
+        },
+        {
+          "id": "d6cecb60-66f1-4bbf-a565-d484e4aaaf96",
+          "text": "Mỹ"
+        },
+        {
+          "id": "1d8f56c6-3fd0-4eda-b96e-79bb85a78817",
+          "text": "Anh"
+        }
+      ],
+      "correctOptionId": "1d8f56c6-3fd0-4eda-b96e-79bb85a78817"
+    },
+    {
+      "id": "6cbb56ca-1868-4cfa-940c-d74902e2412c",
+      "type": "multiple_choice",
+      "question": "Quốc gia khởi đầu trong cuộc cách mạng công nghiệp lần thứ nhất diễn ra vào giữa thế kỉ XVIII là",
+      "options": [
+        {
+          "id": "49f5ce56-f568-417d-ab15-a632cad02a87",
+          "text": "Pháp"
+        },
+        {
+          "id": "6e2e8b24-d776-4df4-9014-8bb764dab53c",
+          "text": "Nhật"
+        },
+        {
+          "id": "3cbe920e-6b98-44e5-974e-10efaa2ad545",
+          "text": "Mỹ"
+        },
+        {
+          "id": "41f30aca-d4fe-450a-bd3e-5545511dc081",
+          "text": "Anh"
+        }
+      ],
+      "correctOptionId": "41f30aca-d4fe-450a-bd3e-5545511dc081"
+    },
+    {
+      "id": "2c43411c-29c2-4d8b-8946-bf13d8011a3f",
+      "type": "multiple_choice",
+      "question": "Quốc gia khởi đầu trong cuộc cách mạng công nghiệp lần thứ nhất diễn ra vào giữa thế kỉ XVIII là",
+      "options": [
+        {
+          "id": "6d08135a-7c6d-4b9e-b9fd-94e7410562c4",
+          "text": "Pháp"
+        },
+        {
+          "id": "f9ae8380-1da3-44ed-aaea-4f7f73bcdb49",
+          "text": "Nhật"
+        },
+        {
+          "id": "17043091-5893-4626-a3c5-c139526337c6",
+          "text": "Mỹ"
+        },
+        {
+          "id": "7fd38b05-f720-4c28-842a-3692163ca26e",
+          "text": "Anh"
+        }
+      ],
+      "correctOptionId": "7fd38b05-f720-4c28-842a-3692163ca26e"
+    },
+    {
+      "id": "a4c53bc4-34da-4889-986e-282dc64cec11",
+      "type": "multiple_choice",
+      "question": "Quốc gia khởi đầu trong cuộc cách mạng công nghiệp lần thứ nhất diễn ra vào giữa thế kỉ XVIII là",
+      "options": [
+        {
+          "id": "d9089f0d-4348-4f10-8704-e3cc1eb17abe",
+          "text": "Pháp"
+        },
+        {
+          "id": "9dde3ebf-36e2-49b7-98cc-b6a9f363d638",
+          "text": "Nhật"
+        },
+        {
+          "id": "08bc634f-c300-4b55-a0aa-7e2707694ff6",
+          "text": "Anh"
+        },
+        {
+          "id": "be1b7096-bca5-4bf0-80ac-857fa90b2318",
+          "text": "Mỹ"
+        }
+      ],
+      "correctOptionId": "08bc634f-c300-4b55-a0aa-7e2707694ff6"
+    }
+  ],
+  "createdAt": "2026-02-27T10:49:32.246Z",
+  "updatedAt": "2026-02-28T14:33:38.079Z"
+}

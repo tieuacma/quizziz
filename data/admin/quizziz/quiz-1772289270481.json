@@ -1,0 +1,35 @@
+{
+  "id": "quiz-1772289270481",
+  "title": "tesst",
+  "subject": "Lịch sử",
+  "classId": "cls-001",
+  "description": "",
+  "questions": [
+    {
+      "id": "1bd809cf-27a7-41ab-ac45-2ceaaaef6e93",
+      "type": "multiple_choice",
+      "question": "1",
+      "options": [
+        {
+          "id": "96c27eb3-3336-4a03-bc67-211a046c999c",
+          "text": "1"
+        },
+        {
+          "id": "6b272062-3be9-4b0d-ba8e-ed97844fa1d6",
+          "text": "2"
+        },
+        {
+          "id": "3ec02845-28b0-4e84-99af-fe0811756691",
+          "text": "34"
+        },
+        {
+          "id": "68f15373-44ed-414f-808c-e1ca423c1c49",
+          "text": "4"
+        }
+      ],
+      "correctOptionId": "96c27eb3-3336-4a03-bc67-211a046c999c"
+    }
+  ],
+  "createdAt": "2026-02-28T14:34:30.481Z",
+  "updatedAt": "2026-02-28T14:34:39.896Z"
+}

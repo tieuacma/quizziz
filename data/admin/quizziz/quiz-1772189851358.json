@@ -1,0 +1,75 @@
+{
+  "id": "quiz-1772189851358",
+  "description": "",
+  "questions": [
+    {
+      "id": "834497fd-3e01-4ca7-adad-56ce7f9bc5f4",
+      "type": "multiple_choice",
+      "question": "chọn 1",
+      "options": [
+        {
+          "id": "752460e9-c84e-4e36-95bc-446fb07d7d46",
+          "text": "1"
+        },
+        {
+          "id": "f2f78342-e99e-4f24-8ea3-9846e5de0fb0",
+          "text": "2"
+        },
+        {
+          "id": "5481f8d8-75b6-4878-9b49-9aca8bc35d4d",
+          "text": "3"
+        },
+        {
+          "id": "3809bd36-379e-4d91-acda-f7b60ef03867",
+          "text": "4"
+        }
+      ],
+      "correctOptionId": "752460e9-c84e-4e36-95bc-446fb07d7d46"
+    },
+    {
+      "id": "c7299b4b-c257-4205-b0e0-be24d46f58ff",
+      "type": "fill_blank",
+      "question": "điền 1 ",
+      "correctAnswer": "1"
+    },
+    {
+      "id": "d6a11762-430c-4011-a6d0-006bff2bcb9b",
+      "type": "reading",
+      "context": "abc...xuz",
+      "subQuestions": [
+        {
+          "id": "22c92a62-c588-4dde-a673-59db24d8aa0e",
+          "type": "multiple_choice",
+          "question": "chọn a",
+          "options": [
+            {
+              "id": "4802e6fe-8ce2-4c39-8357-22d1d02bb2cb",
+              "text": "a"
+            },
+            {
+              "id": "57185a46-6fe3-44c5-a96e-e29d87ae4989",
+              "text": "c"
+            },
+            {
+              "id": "b8fdc071-8ce0-4941-b941-2589cd2f18cd",
+              "text": "b"
+            },
+            {
+              "id": "45f31e69-88a0-43a5-8224-d8209e0d4379",
+              "text": "d"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "0fd04ec7-52ec-49ad-bbe4-2941f6af3680",
+          "type": "fill_blank",
+          "question": "điền a",
+          "correctAnswer": "a"
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-02-27T10:58:43.487Z",
+  "updatedAt": "2026-02-27T10:58:43.487Z"
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "id": "quiz-1772189174111",
+    "createdAt": "2026-02-27T10:46:14.111Z",
+    "description": ""
+  },
+  {
+    "id": "quiz-1772189851358",
+    "createdAt": "2026-02-27T10:57:31.358Z"
+  },
+  {
+    "id": "quiz-1772210092117",
+    "title": "tester",
+    "subject": "Hóa học",
+    "classId": "cls-001",
+    "description": "cyper",
+    "createdAt": "2026-02-27T16:34:52.117Z"
+  },
+  {
+    "id": "quiz-1772289270481",
+    "title": "tesst",
+    "subject": "Lịch sử",
+    "classId": "cls-001",
+    "description": "",
+    "createdAt": "2026-02-28T14:34:30.481Z"
+  }
+]
