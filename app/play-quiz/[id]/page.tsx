@@ -165,16 +165,25 @@ export default function PlayQuizPage() {
 
                         <Button
                             onClick={async () => {
+                                /** * TẠM THỜI BYPASS SUPABASE ĐỂ CHƠI NGAY
+                                 * Khi nào rảnh hãy sửa lại logic Database sau
+                                 */
+                                /*
                                 const result = await initializeAttempt(quiz.id, studentName);
                                 if (result.success) {
                                     setAttemptId(result.attemptId!);
                                     setShowQuiz(true);
                                 } else {
-                                    alert('Lỗi khởi tạo phiên làm bài: ' + (result.error as Error).message);
+                                    alert('Lỗi khởi tạo: ' + (result.error as Error).message);
                                 }
+                                */
+
+                                // Tạo ID giả để Component QuizPlayer không bị lỗi prop
+                                setAttemptId("temp-id-" + Date.now());
+                                setShowQuiz(true);
                             }}
                             disabled={!studentName.trim()}
-                            className="w-full bg-gradient-to-r from-[#00ff88] to-[#00d2ad]"
+                            className="w-full bg-gradient-to-r from-[#00ff88] to-[#00d2ad] text-white font-bold"
                         >
                             Bắt đầu làm bài
                         </Button>
