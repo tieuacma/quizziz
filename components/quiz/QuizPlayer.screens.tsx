@@ -7,8 +7,13 @@ import { Button } from "@/components/ui/button";
 import { QuizResults } from "./QuizResults";
 import { QuizDetail } from "@/lib/types/quiz";
 
+import { RedemptionOffer } from "@/components/quiz/RedemptionOffer"
+import { TrulyFinishedScreen } from "@/components/quiz/TrulyFinishedScreen"
+import { useAuth } from "@/hooks/use-auth";
+
+
 interface QuizPlayerScreensProps {
-    status: "loading" | "ready" | "playing" | "finished";
+    status: "loading" | "ready" | "playing" | "finished" | "redemption" | "truly_finished";
     quiz: QuizDetail;
     totalQuestions: number;
     onStart: () => void;
@@ -17,6 +22,10 @@ interface QuizPlayerScreensProps {
     correctAnswers: number;
     maxStreak: number;
     accuracy: number;
+    wrongCount?: number;
+    onStartRedemption?: () => void;
+    onEndRedemption?: () => void;
+    finalData?: any;
 }
 
 // Loading Screen with Skeleton - Dark Purple Theme
@@ -186,6 +195,8 @@ export function FinishedScreen({
 
 // QuizPlayerScreens component that handles all non-playing states
 export function QuizPlayerScreens(props: QuizPlayerScreensProps) {
+    const { user } = useAuth();
+    const studentNameFromAuth = user?.user_metadata?.full_name || (user?.email && user.email.split('@')[0]) || 'Học sinh';
     const { status } = props;
 
     switch (status) {
@@ -198,12 +209,29 @@ export function QuizPlayerScreens(props: QuizPlayerScreensProps) {
                 onStart={props.onStart}
             />;
         case "finished":
+            if (props.wrongCount! > 0 && props.onStartRedemption && props.onEndRedemption) {
+                return <RedemptionOffer
+                    wrongCount={props.wrongCount!}
+                    onStartRedemption={props.onStartRedemption}
+                    onEndRedemption={props.onEndRedemption}
+                />;
+            }
             return <FinishedScreen
                 score={props.score}
                 correctAnswers={props.correctAnswers}
                 totalQuestions={props.totalQuestions}
                 maxStreak={props.maxStreak}
                 accuracy={props.accuracy}
+                onRestart={props.onRestart}
+            />;
+        case "truly_finished":
+            return <TrulyFinishedScreen
+                score={props.score}
+                correctCount={props.correctAnswers}
+                wrongCount={props.wrongCount || 0}
+                streak={props.maxStreak}
+                finalData={props.finalData!}
+                studentName={studentNameFromAuth}
                 onRestart={props.onRestart}
             />;
         default:

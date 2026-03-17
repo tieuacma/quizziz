@@ -9,6 +9,7 @@ interface QuizPlayerHeaderProps {
     quizTitle: string;
     currentIndex: number;
     totalQuestions: number;
+    redemptionMode?: boolean;
     progress: number;
     accuracy: number;
     displayScore: number;

@@ -110,3 +110,24 @@ export interface StudentData {
     lastActivity: string;
     status: string;
 }
+
+/* =========================
+   QUIZ ATTEMPT (NEW)
+========================= */
+
+export interface QuizAttempt {
+    id: string;
+    quiz_id: string;
+    student_name: string;
+    score: number;
+    correct_count: number;
+    wrong_count: number;
+    streak: number;
+    wrong_answers: Array<{
+        questionId: string;
+        userAnswer: string;
+        correctAnswer: string;
+        timeSpent: number;
+    }>; // JSONB array
+    completed_at: string | null;
+}

@@ -11,7 +11,7 @@ import {
     FillBlankQuestion,
     ReadingQuestion,
 } from "@/lib/types/quiz";
-import { useQuizStore } from "@/lib/stores/quizStore";
+import { useQuizStore } from "@/stores/quizStore";
 import { QuestionType } from "./QuizEditor.constants";
 
 interface UseQuizEditorOptions {

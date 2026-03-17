@@ -1,4 +1,4 @@
-// app/lib/stores/quizStore.ts
+// app/stores/quizStore.ts
 "use client";
 
 import { create } from "zustand";

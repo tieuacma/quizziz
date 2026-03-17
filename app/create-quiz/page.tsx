@@ -73,20 +73,9 @@ export default function CreateQuizPage() {
             }
 
             const newQuiz = await response.json();
-            const quizId = newQuiz.id;
-
-            // Also save to localStorage as fallback
-            const quizDetail = {
-                ...newQuiz,
-                questions: [],
-            };
-
-            const existingQuizzes = JSON.parse(localStorage.getItem("quizziz") || "[]");
-            localStorage.setItem("quizziz", JSON.stringify([...existingQuizzes, newQuiz]));
-            localStorage.setItem(`quizziz_${quizId}`, JSON.stringify(quizDetail));
 
             setIsLoading(false);
-            router.push(`/quiz/${quizId}`);
+            router.push(`/quiz/${newQuiz.id}`);
         } catch (error) {
             console.error("Error creating quiz:", error);
             alert("Có lỗi xảy ra khi tạo quiz. Vui lòng thử lại.");

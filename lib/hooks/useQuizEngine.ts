@@ -8,12 +8,13 @@ import {
     MultipleChoiceQuestion,
     FillBlankQuestion,
     ReadingQuestion,
+    QuizAttempt,
 } from "@/lib/types/quiz";
 
 // Quiz state types
 export interface QuizState {
     // Quiz status
-    status: "loading" | "ready" | "playing" | "paused" | "finished";
+    status: "loading" | "ready" | "playing" | "paused" | "finished" | "redemption" | "truly_finished";
 
     // Questions
     questions: Question[];
@@ -37,6 +38,12 @@ export interface QuizState {
 
     // Reading passage tracking
     currentReadingPassage: string | null;
+
+    // Redemption (NEW)
+    redemptionMode: boolean;
+    wrongAnswers: string[];
+    redemptionQuestions: FlattenedQuestion[];
+    finalQuizData: Partial<QuizAttempt> | null;
 }
 
 export interface FlattenedQuestion {
@@ -70,10 +77,13 @@ type QuizAction =
     | { type: "START_QUIZ" }
     | { type: "TICK" }
     | { type: "ANSWER_QUESTION"; payload: { questionId: string; answer: string } }
+    | { type: "ANSWER_REDEMPTION"; payload: { questionId: string; answer: string } }
     | { type: "NEXT_QUESTION" }
     | { type: "PREVIOUS_QUESTION" }
     | { type: "TIME_UP" }
+    | { type: "START_REDEMPTION" }
     | { type: "FINISH_QUIZ" }
+    | { type: "END_REDEMPTION" }
     | { type: "RESTART_QUIZ" };
 
 // Constants
@@ -168,6 +178,10 @@ function getInitialState(): QuizState {
         totalAnswered: 0,
         answers: {},
         currentReadingPassage: null,
+        redemptionMode: false,
+        wrongAnswers: [],
+        redemptionQuestions: [],
+        finalQuizData: null,
     };
 }
 
@@ -350,9 +364,123 @@ function quizReducer(state: QuizState, action: QuizAction): QuizState {
         }
 
         case "FINISH_QUIZ": {
+            // Conditional redemption
+            const wrongIds = Object.values(state.answers)
+                .filter((a) => !a.isCorrect)
+                .map((a) => a.questionId);
+
+            if (wrongIds.length === 0) {
+                // No wrongs, compute final data directly
+                const finalData: Partial<QuizAttempt> = {
+                    quiz_id: state.questions[0]?.id || "",
+                    student_name: "Player", // Will be overwritten in UI
+                    score: state.score,
+                    correct_count: state.correctAnswers,
+                    wrong_count: state.totalAnswered - state.correctAnswers,
+                    streak: state.maxStreak,
+                    wrong_answers: [],
+                };
+                return {
+                    ...state,
+                    status: "truly_finished",
+                    finalQuizData: finalData,
+                };
+            } else {
+                // Pick min(3, wrongs) randomly for redemption
+                const redemptionCount = Math.min(3, wrongIds.length);
+                const shuffledWrongs = wrongIds.sort(() => Math.random() - 0.5);
+                const redemptionIds = shuffledWrongs.slice(0, redemptionCount);
+
+                const redemptionQuestions = redemptionIds.map(id =>
+                    state.flattenedQuestions.find(f => f.id === id)!
+                );
+
+                return {
+                    ...state,
+                    status: "finished",
+                    wrongAnswers: wrongIds,
+                    redemptionQuestions,
+                };
+            }
+        }
+
+        case "START_REDEMPTION": {
+            // Switch to redemptionQuestions
             return {
                 ...state,
-                status: "finished",
+                status: "redemption",
+                redemptionMode: true,
+                flattenedQuestions: state.redemptionQuestions,
+                currentFlattenedIndex: 0,
+                timeRemaining: DEFAULT_TIME_PER_QUESTION,
+            };
+        }
+
+        case "ANSWER_REDEMPTION": {
+            const { questionId, answer } = action.payload;
+            const currentQ = state.redemptionQuestions[state.currentFlattenedIndex];
+
+            if (!currentQ || state.answers[questionId]) return state;
+
+            let isCorrect = false;
+
+            if (currentQ.type === "multiple_choice") {
+                isCorrect = String(answer) === String(currentQ.correctOptionId);
+            } else {
+                const normalize = (a: any) => String(a || "").trim().toLowerCase();
+                isCorrect = normalize(answer) === normalize(currentQ.correctAnswer);
+            }
+
+            const newStreak = isCorrect ? state.streak + 1 : 0;
+            const maxStreak = Math.max(state.maxStreak, newStreak);
+
+            const pointsEarned = isCorrect ? calculatePoints(state.timeRemaining, state.totalTimePerQuestion, state.streak) : 0;
+            const timeSpent = state.totalTimePerQuestion - state.timeRemaining;
+
+            const answeredQuestion: AnsweredQuestion = {
+                questionId,
+                userAnswer: answer,
+                isCorrect,
+                pointsEarned,
+                timeSpent,
+                streakAtAnswer: state.streak,
+            };
+
+            let newWrongAnswers = state.wrongAnswers.filter(id => id !== questionId);
+            let newCorrect = state.correctAnswers;
+            if (isCorrect) {
+                newCorrect += 1;
+            }
+
+            return {
+                ...state,
+                score: state.score + pointsEarned,
+                streak: newStreak,
+                maxStreak,
+                correctAnswers: newCorrect,
+                answers: {
+                    ...state.answers,
+                    [questionId]: answeredQuestion,
+                },
+                wrongAnswers: newWrongAnswers,
+            };
+        }
+
+        case "END_REDEMPTION": {
+            const remainingWrongIds = state.wrongAnswers;
+            const finalData: Partial<QuizAttempt> = {
+                quiz_id: state.questions[0]?.id || "",
+                student_name: "Player", // Will be overwritten in UI
+                score: state.score,
+                correct_count: state.correctAnswers,
+                wrong_count: remainingWrongIds.length,
+                streak: state.maxStreak,
+                wrong_answers: [],
+            };
+            return {
+                ...state,
+                status: "truly_finished",
+                finalQuizData: finalData,
             };
         }
 
@@ -460,6 +588,20 @@ export function useQuizEngine(quiz: QuizDetail | null) {
         : 0;
     const isOnFire = state.streak >= 3;
 
+    const wrongCount = state.totalAnswered - state.correctAnswers;
+
+    const startRedemption = useCallback(() => {
+        dispatch({ type: 'START_REDEMPTION' });
+    }, []);
+
+    const endRedemption = useCallback(() => {
+        dispatch({ type: 'END_REDEMPTION' });
+    }, []);
+
+    const answerRedemption = useCallback((questionId: string, answer: string) => {
+        dispatch({ type: 'ANSWER_REDEMPTION', payload: { questionId, answer } });
+    }, []);
+
     return {
         state,
         currentQuestion,
@@ -468,9 +610,15 @@ export function useQuizEngine(quiz: QuizDetail | null) {
         isOnFire,
         startQuiz,
         answerQuestion,
+        answerRedemption,
         nextQuestion,
         previousQuestion,
         finishQuiz,
+        startRedemption,
+        endRedemption,
         restartQuiz,
+        wrongCount,
+        redemptionMode: state.redemptionMode,
+        finalQuizData: state.finalQuizData,
     };
 }

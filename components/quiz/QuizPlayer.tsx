@@ -4,6 +4,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useQuizEngine, FlattenedQuestion } from "@/lib/hooks/useQuizEngine";
 import { QuizDetail } from "@/lib/types/quiz";
+import { useSupabaseQuiz } from "@/lib/hooks/useSupabaseQuiz";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
@@ -20,9 +21,11 @@ import { DEFAULT_TIME_PER_QUESTION } from "./QuizPlayer.constants";
 
 interface QuizPlayerProps {
     quiz: QuizDetail;
+    attemptId?: string | null;
 }
 
-export function QuizPlayer({ quiz }: QuizPlayerProps) {
+export function QuizPlayer({ quiz, attemptId }: QuizPlayerProps) {
+    const { updateAttempt } = useSupabaseQuiz();
     const {
         state,
         currentQuestion,
@@ -32,8 +35,14 @@ export function QuizPlayer({ quiz }: QuizPlayerProps) {
         startQuiz,
         answerQuestion,
         nextQuestion,
+        previousQuestion,
         finishQuiz,
         restartQuiz,
+        startRedemption,
+        endRedemption,
+        wrongCount = 0,
+        finalQuizData,
+        redemptionMode,
     } = useQuizEngine(quiz);
 
     // Sound state
@@ -203,8 +212,27 @@ export function QuizPlayer({ quiz }: QuizPlayerProps) {
         }
 
         // 6. Gửi kết quả về Engine để cập nhật State tổng (Score, Streak...)
-        requestAnimationFrame(() => {
+        requestAnimationFrame(async () => {
             answerQuestion(currentQuestion.id, answerToUse);
+
+            // Real-time save after optimistic update
+            if (attemptId && currentQuestion) {
+                const timeSpent = DEFAULT_TIME_PER_QUESTION - state.timeRemaining;
+                const isCorrect = feedbackResult!.isCorrect;
+                const wrongQuestion = isCorrect ? undefined : {
+                    questionId: currentQuestion.id,
+                    userAnswer: answerToUse,
+                    correctAnswer: feedbackResult!.correctAnswer,
+                    timeSpent
+                };
+                updateAttempt(attemptId, {
+                    score: state.score + pointsEarned,
+                    correct_count: state.correctAnswers + (isCorrect ? 1 : 0),
+                    wrong_count: state.wrongAnswers.length + (isCorrect ? 0 : 1),
+                    streak: state.maxStreak
+                    , wrongQuestion
+                }).catch(console.error); // Fire-and-forget
+            }
         });
 
         // 7. Tự động chuyển câu sau 1.2s
@@ -233,7 +261,7 @@ export function QuizPlayer({ quiz }: QuizPlayerProps) {
     }, [showFeedback, handleSubmitAnswer]);
 
     // Handle non-playing states
-    if (state.status === "loading" || state.status === "ready" || state.status === "finished") {
+    if (state.status === "loading" || state.status === "ready" || state.status === "finished" || state.status === "truly_finished") {
         return (
             <QuizPlayerScreens
                 status={state.status}
@@ -245,6 +273,10 @@ export function QuizPlayer({ quiz }: QuizPlayerProps) {
                 correctAnswers={state.correctAnswers}
                 maxStreak={state.maxStreak}
                 accuracy={accuracy}
+                wrongCount={wrongCount}
+                onStartRedemption={startRedemption}
+                onEndRedemption={endRedemption}
+                finalData={finalQuizData}
             />
         );
     }
@@ -260,7 +292,7 @@ export function QuizPlayer({ quiz }: QuizPlayerProps) {
                     <QuizPlayerHeader
                         quizTitle={quiz.title}
                         currentIndex={state.currentFlattenedIndex}
-                        totalQuestions={state.flattenedQuestions.length}
+                        totalQuestions={state.redemptionMode ? state.redemptionQuestions.length : state.flattenedQuestions.length}
                         progress={progress}
                         accuracy={accuracy}
                         displayScore={displayScore}
@@ -358,10 +390,11 @@ export function QuizPlayer({ quiz }: QuizPlayerProps) {
                 <div className="border-t border-[#00d4ff]/10">
                     <QuizPlayerFooter
                         correctAnswers={state.correctAnswers}
-                        wrongAnswers={state.totalAnswered - state.correctAnswers}
+                        wrongAnswers={state.wrongAnswers.length}
                         streak={state.streak}
                         isOnFire={isOnFire}
                     />
+
                 </div>
             </div>
         </div>

@@ -12,4 +12,4 @@ export type {
 } from "@/lib/types/quiz";
 
 // Re-export store functions
-export { useQuizStore, getQuizStore } from "@/lib/stores/quizStore";
+export { useQuizStore, getQuizStore } from "@/stores/quizStore";

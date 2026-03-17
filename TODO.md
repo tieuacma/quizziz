@@ -1,44 +1,30 @@
-# TODO: Improve Play Quiz UI - Production Ready Plan
+# Task: Real-time Supabase quiz_attempts saving after each answer
 
-## Phase 0 – Define Design System (NEW)
-- [ ] Define primary color & accent palette
-- [ ] Define border radius scale (lg, xl, 2xl)
-- [ ] Define shadow system
-- [ ] Define animation duration tokens
-- [ ] Create reusable Card component (glass variant)
+## Information Gathered
+- lib/types/quiz.ts: Has QuizAttempt type matching table structure.
+- lib/hooks/useSupabaseQuiz.ts: Has createQuizAttempt; need to add initializeAttempt (insert initial) and updateAttempt (update by id).
+- lib/hooks/useQuizEngine.ts: Manages state.score, correctAnswers, streak, etc. Exposes state.
+- components/quiz/QuizPlayer.tsx: Uses useQuizEngine, has handleSubmitAnswer calling answerQuestion then nextQuestion.
+- app/play-quiz/[id]/page.tsx: Loads quiz, studentName input, renders QuizPlayer.
 
-## Phase 1 – Layout Refactor
-- [ ] Centered responsive container (max-w-2xl)
-- [ ] Sticky top progress section
-- [ ] Card-based question layout
-- [ ] Consistent spacing system (8px scale)
+## Plan
+1. lib/hooks/useSupabaseQuiz.ts: Add `initializeAttempt` (insert initial record with quiz_id, student_name, 0s), return id; `updateAttempt` (update by id with score, correct_count, wrong_count=totalAnswered-correct, streak=maxStreak, append to wrong_answers jsonb if wrong).
+2. app/play-quiz/[id]/page.tsx: On startQuiz (showQuiz=true), call initializeAttempt with quiz.id, studentName → save attemptId to new context/state passed to QuizPlayer.
+3. components/quiz/QuizPlayer.tsx: Accept attemptId prop, useSupabaseQuiz, after answerQuestion (optimistic), call updateAttempt with current state values. On finishQuiz, final update with completed_at.
+4. lib/hooks/useQuizEngine.ts: Expose wrongAnswers array from state for wrong_answers jsonb ( {questionId, userAnswer, correctAnswer} ).
+5. Handle async silently (fire-and-forget after optimistic UI), error logging.
 
-## Phase 2 – Question Interaction UX
-- [ ] Highlight selected answer
-- [ ] Show correct/incorrect state with color feedback
-- [ ] Disable options after selection
-- [ ] 800ms delay before auto next
-- [ ] Animated progress bar
-- [ ] Smooth slide transition between questions
+## Dependent Files
+- lib/hooks/useSupabaseQuiz.ts
+- lib/types/quiz.ts (add AttemptId type if needed)
+- app/play-quiz/[id]/page.tsx 
+- components/quiz/QuizPlayer.tsx
+- lib/hooks/useQuizEngine.ts (minor expose)
 
-## Phase 3 – Screen States
-- [ ] Loading skeleton
-- [ ] Ready screen with CTA emphasis
-- [ ] Results screen:
-  - [ ] Animated score counter
-  - [ ] Performance message (Excellent / Good / Try Again)
-  - [ ] Confetti (only when >80%)
-  - [ ] Retry & Back buttons
+## Followup steps
+- npm run dev
+- Test: play quiz, check Supabase dashboard for real-time inserts/updates after each answer.
+- Handle edge: offline, errors (queue? log).
 
-## Phase 4 – Micro Interactions
-- [ ] Button press scale animation
-- [ ] Option hover elevation
-- [ ] Timer pulse when <5s
-- [ ] Reduced motion fallback
+Approve plan before edits?
 
-## Phase 5 – Responsive & Accessibility
-- [ ] Mobile-first layout
-- [ ] Keyboard navigation
-- [ ] Focus ring styling
-- [ ] ARIA roles for options
-- [ ] Color contrast check
