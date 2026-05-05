@@ -729,7 +729,7 @@
 		},
 		{
 			"id": "q30_2",
-			"question": "Ở Việt Nam hiện nay có bao nhiêu dân tộc thiểu số?",
+			"question": "Ở Việt Nam hiện nay có bao nhiêu dân tộc?",
 			"type": "multiple-choice",
 			"options": [
 				{
@@ -1805,7 +1805,7 @@
 					"text": "Tôn giáo, tín ngưỡng phong phú"
 				}
 			],
-			"correctOptionId": "q65c"
+			"correctOptionId": "q65a"
 		},
 		{
 			"id": "q66",
