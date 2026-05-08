@@ -20,39 +20,42 @@ export default function ProgressStats({
 
   return (
     <motion.div
-      className="flex items-center gap-8"
+      className="w-full flex items-center justify-between gap-6 max-w-5xl"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="flex flex-col items-center gap-2"
-        whileHover={{ scale: 1.05 }}
+        className="flex flex-col items-start gap-1"
+        whileHover={{ scale: 1.02 }}
       >
-        <Badge className="text-xl font-bold px-6 py-3 text-green-700 bg-green-100/90 shadow-lg ring-2 ring-green-200/50">
-          <CheckCircle className="w-5 h-5 mr-1" />
-          {correctCount}
+        <Badge className="text-base sm:text-lg font-bold px-4 py-3 rounded-2xl bg-gradient-to-r from-emerald-500/30 to-teal-500/30 border border-emerald-300/40 text-emerald-200 shadow-[0_0_30px_rgba(16,185,129,0.15)] backdrop-blur-md">
+          <CheckCircle className="w-5 h-5 mr-2 inline-block" />
+          {correctCount} 
+          <span className="ml-1 text-emerald-200">Số câu đúng ✅</span>
         </Badge>
-        <span className="text-sm text-slate-300 font-medium">Correct</span>
       </motion.div>
 
       <motion.div
         className="flex flex-col items-center gap-2"
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.02 }}
       >
-        <Badge className="text-xl font-bold px-6 py-3 text-red-700 bg-red-100/90 shadow-lg ring-2 ring-red-200/50">
-          <XCircle className="w-5 h-5 mr-1" />
+        <Badge className="text-base sm:text-lg font-bold px-5 py-3 rounded-2xl bg-gradient-to-r from-indigo-500/30 via-purple-500/30 to-pink-500/30 border border-purple-300/40 text-white shadow-[0_0_40px_rgba(147,51,234,0.18)] backdrop-blur-md">
+          <span className="mr-2">🎯</span>
+          {accuracy}%
+          <span className="ml-2 text-white/80">Chính xác</span>
+        </Badge>
+      </motion.div>
+
+      <motion.div
+        className="flex flex-col items-end gap-1"
+        whileHover={{ scale: 1.02 }}
+      >
+        <Badge className="text-base sm:text-lg font-bold px-4 py-3 rounded-2xl bg-gradient-to-r from-red-500/30 to-rose-500/30 border border-red-300/40 text-red-200 shadow-[0_0_30px_rgba(239,68,68,0.15)] backdrop-blur-md">
+          <XCircle className="w-5 h-5 mr-2 inline-block" />
           {wrongCount}
+          <span className="ml-1 text-red-200">Số câu sai ❌</span>
         </Badge>
-        <span className="text-sm text-slate-300 font-medium">Wrong</span>
-      </motion.div>
-
-      <motion.div
-        className="text-2xl font-black bg-gradient-to-r from-slate-200 to-indigo-200 bg-clip-text text-transparent drop-shadow-lg"
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ duration: 1, repeat: Infinity }}
-      >
-        {accuracy}%
       </motion.div>
     </motion.div>
   );

@@ -59,14 +59,22 @@ export default function MultiChoiceCard({
                 onClick={() => handleOptionClick(option.id)}
                 disabled={submitted}
                 className={cn(
-                  "h-full rounded-3xl border-4 font-bold text-xl flex items-center justify-center p-6 transition-all duration-300 shadow-2xl relative overflow-hidden",
+                  "h-full rounded-3xl border font-bold text-xl flex items-center justify-center p-6 transition-all duration-300 relative overflow-hidden backdrop-blur-md",
+                  "border-white/20 bg-white/5 hover:border-white/35",
                   submitted
                     ? "cursor-default scale-100"
-                    : "border-white/30 bg-white/10 hover:border-indigo-400 hover:bg-indigo-500/20 hover:shadow-indigo-500/50 hover:scale-[1.02] active:scale-95",
+                    : "hover:shadow-[0_0_30px_rgba(139,92,246,0.35)] active:scale-95",
+                  isSelected && !submitted
+                    ? "border-transparent"
+                    : "",
+                  // Vibrant gradient overlay when selected
+                  !submitted && isSelected
+                    ? "!shadow-none"
+                    : "",
                   isCorrect &&
-                    "border-emerald-400 bg-emerald-500/40 shadow-emerald-500/50 !scale-105",
+                    "border-emerald-300/70 bg-emerald-500/20 shadow-[0_0_35px_rgba(16,185,129,0.35)]",
                   isWrong &&
-                    "border-red-400 bg-red-500/40 shadow-red-500/50 !scale-105",
+                    "border-red-300/70 bg-red-500/20 shadow-[0_0_35px_rgba(239,68,68,0.35)]",
                 )}
                 whileHover={submitted ? { scale: 1 } : { scale: 1.02 }}
                 whileTap={submitted ? { scale: 1 } : { scale: 0.98 }}
@@ -81,8 +89,12 @@ export default function MultiChoiceCard({
                 {isWrong && (
                   <XCircle className="absolute top-3 right-3 w-10 h-10 text-red-400 drop-shadow-2xl z-20" />
                 )}
-                {submitted && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-transparent z-0" />
+                {/* glass highlight when submitted */}
+                {submitted && isCorrect && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/25 via-indigo-500/10 to-transparent z-0" />
+                )}
+                {submitted && isWrong && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-500/25 via-purple-500/10 to-transparent z-0" />
                 )}
               </motion.button>
             );

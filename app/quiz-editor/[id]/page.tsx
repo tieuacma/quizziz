@@ -16,8 +16,6 @@ import {
 } from "@/types/quiz";
 import {
   Trash2,
-  Eye,
-  EyeOff,
   Save,
   ChevronUp,
   ChevronDown,
@@ -122,10 +120,6 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
       newQuestions[index],
     ];
     setQuestions(newQuestions);
-  };
-
-  const toggleExpand = (id: string) => {
-    setExpandedQuestion((prev) => (prev === id ? null : id));
   };
 
   // Apply default time to all questions (client state)
@@ -326,13 +320,17 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => toggleExpand(q.id)}
+                      onClick={() =>
+                        setExpandedQuestion((prev) =>
+                          prev === q.id ? null : q.id,
+                        )
+                      }
+                      title="Chỉnh sửa"
                     >
-                      {expandedQuestion === q.id ? (
-                        <EyeOff className="w-4 h-4" />
-                      ) : (
-                        <Eye className="w-4 h-4" />
-                      )}
+                      {/* Pencil icon (lucide-react) */}
+                      <span className="inline-flex items-center justify-center rounded-md text-indigo-200/90 bg-indigo-500/10 border border-indigo-400/20 shadow-[0_0_14px_rgba(99,102,241,0.35)]">
+                        ✏️
+                      </span>
                     </Button>
                     <Button
                       variant="ghost"
@@ -376,10 +374,216 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
               )}
 
               {expandedQuestion !== q.id && (
-                <CardContent className="text-sm text-slate-400">
-                  {q.type === "reading"
-                    ? q.passage || "Chưa có đoạn văn"
-                    : q.question || "Chưa có nội dung"}
+                <CardContent className="pt-4">
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <div className="text-xs font-mono tracking-wide text-indigo-200/80">
+                        Câu hỏi • Xem đầy đủ
+                      </div>
+                      <div className="text-sm text-slate-200 leading-relaxed">
+                        {q.type === "reading"
+                          ? q.question || "(Không có tiêu đề câu hỏi)"
+                          : q.question || "Chưa có nội dung"}
+                      </div>
+                    </div>
+
+                    {q.type === "multiple-choice" && (
+                      <div className="grid grid-cols-1 gap-2">
+                        {(q.options || []).map((opt, idx) => {
+                          const isCorrect = q.correctOptionId === opt.id;
+                          const letter = String.fromCharCode(65 + idx);
+                          return (
+                            <div
+                              key={opt.id}
+                              className={
+                                "flex items-start gap-3 rounded-lg border p-3 backdrop-blur-sm " +
+                                (isCorrect
+                                  ? "border-emerald-400/30 bg-emerald-500/10 shadow-[0_0_18px_rgba(52,211,153,0.35)]"
+                                  : "border-white/10 bg-white/5")
+                              }
+                            >
+                              <div
+                                className={
+                                  "mt-0.5 font-mono text-sm px-2 py-0.5 rounded-md " +
+                                  (isCorrect
+                                    ? "text-emerald-100 bg-emerald-400/20 border border-emerald-400/30"
+                                    : "text-slate-300 bg-slate-800/40 border border-white/10")
+                                }
+                              >
+                                {letter}
+                              </div>
+                              <div className="text-sm text-slate-200 leading-relaxed">
+                                {opt.text || (
+                                  <span className="text-slate-500">
+                                    (Trống)
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {q.type === "fill-in-the-blank" && (
+                      <div className="space-y-2">
+                        <div className="text-xs text-slate-400">Đáp án</div>
+                        <div className="flex flex-wrap gap-2">
+                          {(q.answers || []).map((a, idx) => {
+                            const text = a?.trim();
+                            if (!text) return null;
+                            return (
+                              <div
+                                key={idx}
+                                className="font-mono text-sm px-3 py-1 rounded-full bg-gradient-to-r from-emerald-500/15 via-indigo-500/10 to-purple-500/15 border border-emerald-400/20 text-emerald-100 shadow-[0_0_16px_rgba(52,211,153,0.25)]"
+                              >
+                                {text}
+                              </div>
+                            );
+                          })}
+                          {(q.answers || []).every((a) => !a?.trim()) && (
+                            <div className="text-sm text-slate-500">
+                              Chưa có đáp án
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {q.type === "true-false" && (
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={
+                            "px-4 py-2 rounded-xl border text-sm font-semibold " +
+                            (q.correctAnswer
+                              ? "bg-emerald-500/15 border-emerald-400/30 text-emerald-100 shadow-[0_0_18px_rgba(52,211,153,0.35)]"
+                              : "bg-red-500/15 border-red-400/30 text-red-100 shadow-[0_0_18px_rgba(248,113,113,0.35)]")
+                          }
+                        >
+                          {q.correctAnswer ? "✅ ĐÚNG" : "❌ SAI"}
+                        </div>
+                        {q.explanation?.trim() && (
+                          <div className="text-sm text-slate-300">
+                            {q.explanation}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {q.type === "reading" && (
+                      <div className="space-y-4">
+                        <div className="text-xs font-mono tracking-wide text-indigo-200/80">
+                          Đoạn văn đọc hiểu
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-pink-500/10 p-4 shadow-[0_0_24px_rgba(139,92,246,0.18)]">
+                          <div className="text-sm text-slate-200 leading-relaxed whitespace-pre-wrap">
+                            {q.passage || "Chưa có đoạn văn"}
+                          </div>
+                        </div>
+
+                        <div className="space-y-3">
+                          <div className="text-xs text-slate-400">
+                            Câu hỏi phụ
+                          </div>
+                          <div className="space-y-2">
+                            {(q.questions || []).map((sq, idx) => (
+                              <div
+                                key={sq.id}
+                                className="rounded-lg border border-white/10 bg-white/5 p-3"
+                              >
+                                <div className="flex items-center gap-2 mb-2">
+                                  <div className="font-mono text-xs text-indigo-200/80">
+                                    {idx + 1}.
+                                  </div>
+                                  <div className="text-sm text-slate-200">
+                                    {sq.question || "(Trống)"}
+                                  </div>
+                                </div>
+
+                                {sq.type === "multiple-choice" && (
+                                  <div className="grid grid-cols-1 gap-2">
+                                    {(sq.options || []).map((opt, j) => {
+                                      const isCorrect =
+                                        sq.correctOptionId === opt.id;
+                                      const letter = String.fromCharCode(
+                                        65 + j,
+                                      );
+                                      return (
+                                        <div
+                                          key={opt.id}
+                                          className={
+                                            "flex items-start gap-3 rounded-lg border p-2 " +
+                                            (isCorrect
+                                              ? "border-emerald-400/30 bg-emerald-500/10 shadow-[0_0_18px_rgba(52,211,153,0.35)]"
+                                              : "border-white/10 bg-white/5")
+                                          }
+                                        >
+                                          <div
+                                            className={
+                                              "font-mono text-xs px-2 py-0.5 rounded-md " +
+                                              (isCorrect
+                                                ? "text-emerald-100 bg-emerald-400/20 border border-emerald-400/30"
+                                                : "text-slate-300 bg-slate-800/40 border border-white/10")
+                                            }
+                                          >
+                                            {letter}
+                                          </div>
+                                          <div className="text-sm text-slate-200">
+                                            {opt.text || (
+                                              <span className="text-slate-500">
+                                                (Trống)
+                                              </span>
+                                            )}
+                                          </div>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                )}
+
+                                {sq.type === "fill-in-the-blank" && (
+                                  <div className="text-sm text-slate-200">
+                                    {(sq.answers || []).filter((a) => a?.trim())
+                                      .length > 0 ? (
+                                      <div className="flex flex-wrap gap-2">
+                                        {(sq.answers || [])
+                                          .filter((a) => a?.trim())
+                                          .map((a, k) => (
+                                            <span
+                                              key={k}
+                                              className="font-mono text-xs px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-400/20 text-emerald-100 shadow-[0_0_16px_rgba(52,211,153,0.25)]"
+                                            >
+                                              {a}
+                                            </span>
+                                          ))}
+                                      </div>
+                                    ) : (
+                                      <span className="text-slate-500">
+                                        Chưa có đáp án
+                                      </span>
+                                    )}
+                                  </div>
+                                )}
+
+                                {sq.type === "true-false" && (
+                                  <div
+                                    className={
+                                      "inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border " +
+                                      (sq.correctAnswer
+                                        ? "bg-emerald-500/15 border-emerald-400/30 text-emerald-100 shadow-[0_0_18px_rgba(52,211,153,0.35)]"
+                                        : "bg-red-500/15 border-red-400/30 text-red-100 shadow-[0_0_18px_rgba(248,113,113,0.35)]")
+                                    }
+                                  >
+                                    {sq.correctAnswer ? "✅ ĐÚNG" : "❌ SAI"}
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </CardContent>
               )}
             </Card>

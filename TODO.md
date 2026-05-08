@@ -1,26 +1,8 @@
-**Updated from BlackboxAI**
+# TODO
 
-# Quiz Detail Page Implementation TODO
+## Quiz Editor UI Refactor (Neon Gradient + Read-only full cards)
 
-## [x] Step 0: Analysis Complete
-
-- Analyzed data/quiz.json, types/quiz.ts, QuizGame props, quiz-service.ts
-
-## [x] Step 1: Create app/quiz-game/[id]/page.tsx (TS Error Fixed)
-
-## [x] Step 2: Create app/quiz-game/[id]/not-found.tsx
-
-## [x] Step 3: Test & Verify
-
-```
-- Files created successfully
-- TS errors fixed
-- Ready for npm run dev
-- Test URLs:
-  * Valid: /quiz-game/017241f6-562d-4887-a5b1-dc4369016c1f
-  * Invalid: /quiz-game/abc123 → not-found
-```
-
-```
-
-```
+- [ ] app/quiz-editor/[id]/page.tsx: Tạo View Mode render full content theo type
+- [ ] app/quiz-editor/[id]/page.tsx: Giữ Edit Mode chỉ khi bấm pencil icon
+- [ ] app/quiz-editor/[id]/page.tsx: Tinh chỉnh UI card theme neon/gradient + glow borders
+- [ ] Chạy dev server và kiểm tra UX (View Mode full content, pencil chuyển edit)
