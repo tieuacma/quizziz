@@ -72,7 +72,9 @@ export function useQuizLogic(
     const normalized = initialQuestions.map(q => ({
       ...q,
       // Ưu tiên defaultTime từ DB, mặc định 180s nếu thiếu
-      timeLimit: (q as any).defaultTime ?? 180 
+      // defaultTime không có trong type BaseQuestion; giữ fallback an toàn
+      timeLimit: ("defaultTime" in q ? (q as { defaultTime?: number }).defaultTime : undefined) ?? 180 
+
     }));
 
     return superShuffle(normalized);

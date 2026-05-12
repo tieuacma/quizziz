@@ -361,7 +361,31 @@ export default function QuestionEditor({
                 </div>
               </div>
             ))}
-            <Button type="button" variant="outline" className="gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              className="gap-2"
+              onClick={() => {
+                if (question.type !== "reading") return;
+
+                const newSubQ: ReadingSubQuestion = {
+                  id: crypto.randomUUID(),
+                  question: "",
+                  type: "multiple-choice",
+                  options: [
+                    { id: crypto.randomUUID(), text: "" },
+                    { id: crypto.randomUUID(), text: "" },
+                  ],
+                  correctOptionId: "",
+                };
+
+                const newQuestion = question as ReadingQuestion;
+                onChange({
+                  ...newQuestion,
+                  questions: [...newQuestion.questions, newSubQ],
+                });
+              }}
+            >
               <Plus className="h-4 w-4" />
               Thêm câu hỏi phụ
             </Button>
