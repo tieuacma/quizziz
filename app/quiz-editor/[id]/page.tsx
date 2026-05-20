@@ -7,7 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { updateQuizAction, getQuizAction } from "@/app/actions/quiz-actions";
+import {
+  updateQuizAction,
+  getQuizAction,
+  updateQuestionAction,
+} from "@/app/actions/quiz-actions";
+
 import {
   QuizQuestion,
   QuizQuestionType,
@@ -23,6 +28,8 @@ import {
   Clock,
   Plus,
   CheckCircle2,
+  AlertTriangle,
+  X,
 } from "lucide-react";
 import QuestionEditor from "@/components/quiz-create/QuestionEditor";
 import {
@@ -45,10 +52,24 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
   const [metadata, setMetadata] = useState<QuizMetadata | null>(null);
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [expandedQuestion, setExpandedQuestion] = useState<string | null>(null);
+  const [draftQuestions, setDraftQuestions] = useState<
+    Record<string, QuizQuestion>
+  >({});
+
+  const [errorByQuestionId, setErrorByQuestionId] = useState<
+    Record<string, string>
+  >({});
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const [deleteConfirm, setDeleteConfirm] = useState<{
+    show: boolean;
+    questionId: string | null;
+    questionText: string;
+  }>({ show: false, questionId: null, questionText: "" });
+  const [scrolled, setScrolled] = useState(false);
 
   const addToast = useCallback((message: string, type: ToastType) => {
     const id = crypto.randomUUID();
@@ -60,6 +81,15 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
 
   const removeToast = useCallback((id: string) => {
     setToasts((prev: Toast[]) => prev.filter((t: Toast) => t.id !== id));
+  }, []);
+
+  // Handle scroll for sticky header
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Load quiz data on mount
@@ -96,17 +126,66 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
     addToast(`Đã thêm câu hỏi ${QuestionTypeLabel[type]}`, "info");
   };
 
+  const confirmDeleteQuestion = (q: QuizQuestion) => {
+    setDeleteConfirm({
+      show: true,
+      questionId: q.id,
+      questionText: q.question || "Câu hỏi không tiêu đề",
+    });
+  };
+
   const removeQuestion = (id: string) => {
     setQuestions((prev: QuizQuestion[]) =>
       prev.filter((q: QuizQuestion) => q.id !== id),
     );
     if (expandedQuestion === id) setExpandedQuestion(null);
+    setDeleteConfirm({ show: false, questionId: null, questionText: "" });
+  };
+
+  const cancelDelete = () => {
+    setDeleteConfirm({ show: false, questionId: null, questionText: "" });
   };
 
   const updateQuestion = (id: string, updates: QuizQuestion) => {
     setQuestions((prev: QuizQuestion[]) =>
       prev.map((q: QuizQuestion) => (q.id === id ? updates : q)),
     );
+  };
+
+  const ensureDraftForQuestion = useCallback((question: QuizQuestion) => {
+    setDraftQuestions((prev) => {
+      if (prev[question.id]) return prev;
+      return { ...prev, [question.id]: question };
+    });
+  }, []);
+
+  // Wrap on open: snapshot original state for Cancel
+  const toggleExpandQuestion = (qid: string) => {
+    setExpandedQuestion((prev) => {
+      if (prev === qid) return null;
+      const q = questions.find((item) => item.id === qid);
+      if (q) ensureDraftForQuestion(q);
+      return qid;
+    });
+  };
+
+  const saveQuestionToJson = async (question: QuizQuestion) => {
+    // Partial update: update only this question in quiz.json
+    const formData = new FormData();
+    formData.append("quizId", quizId);
+    formData.append("questionId", question.id);
+    formData.append("question", JSON.stringify(question));
+
+    // updateQuestionAction hiện nằm ở src/app/actions/quiz-actions.ts
+    const result = await updateQuestionAction(undefined, formData);
+
+    if (result?.success) {
+      addToast("Đã lưu câu hỏi", "success");
+      return true;
+    }
+
+    addToast(result?.error || "Lỗi khi lưu câu hỏi", "error");
+    return false;
   };
 
   const moveQuestion = (index: number, direction: "up" | "down"): void => {
@@ -130,32 +209,102 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
     addToast(`Đã áp dụng ${defaultTime} giây cho tất cả câu hỏi`, "info");
   };
 
+  const scrollToQuestion = (questionId: string) => {
+    const el = document.querySelector(
+      `[data-question-id="${questionId}"]`,
+    ) as HTMLElement | null;
+
+    if (!el) return;
+
+    // Prefer scrolling such that the card error area is visible.
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // If the error is rendered inside expanded/collapsed, scroll again a bit.
+    // (No-op if not found)
+    const err = el.querySelector(".text-red-400") as HTMLElement | null;
+    if (err) {
+      err.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  };
+
+  const validateQuestion = (q: QuizQuestion) => {
+    // reading note: question field in schema is title; validate content based on type
+    if (q.type !== "reading" && !q.question.trim())
+      return "Câu hỏi chưa có nội dung";
+
+    if (q.type === "multiple-choice") {
+      if (!q.correctOptionId)
+        return "Câu hỏi trắc nghiệm chưa chọn đáp án đúng";
+      if (q.options.some((o) => !o.text.trim()))
+        return "Lựa chọn trắc nghiệm chưa nhập nội dung";
+    }
+
+    if (q.type === "fill-in-the-blank") {
+      if (q.answers.every((a) => !a.trim()))
+        return "Câu hỏi điền khuyết chưa có đáp án";
+    }
+
+    if (q.type === "reading") {
+      if (!q.passage.trim()) return "Đoạn văn đọc hiểu chưa có nội dung";
+      if (!q.questions?.length) return "Cần ít nhất 1 câu hỏi phụ";
+
+      // Validate sub-questions
+      for (const sub of q.questions) {
+        if (!sub.question.trim()) return "Câu hỏi phụ chưa có nội dung";
+
+        if (sub.type === "multiple-choice") {
+          if (!sub.correctOptionId)
+            return "Câu hỏi phụ trắc nghiệm chưa chọn đáp án";
+          if (!sub.options?.length)
+            return "Câu hỏi phụ trắc nghiệm thiếu lựa chọn";
+          if (sub.options.some((o) => !o.text?.trim()))
+            return "Câu hỏi phụ trắc nghiệm có lựa chọn trống";
+        }
+
+        if (sub.type === "fill-in-the-blank") {
+          if (!sub.answers?.length || sub.answers.every((a) => !a.trim()))
+            return "Câu hỏi phụ điền khuyết chưa có đáp án";
+        }
+
+        if (sub.type === "true-false") {
+          // correctAnswer is boolean, so just ensure it's present
+          if (typeof sub.correctAnswer !== "boolean")
+            return "Câu hỏi phụ đúng/sai chưa chọn đáp án";
+        }
+      }
+    }
+
+    return null;
+  };
+
   const handleSave = async () => {
-    // Validation
     if (questions.length === 0) {
       addToast("Vui lòng thêm ít nhất một câu hỏi", "error");
       return;
     }
 
+    // Validate all and collect first error
+    const nextErrors: Record<string, string> = {};
+    let firstInvalidId: string | null = null;
+
     for (const q of questions) {
-      if (!q.question.trim()) {
-        addToast("Có câu hỏi chưa có nội dung", "error");
-        return;
+      const msg = validateQuestion(q);
+      if (msg) {
+        nextErrors[q.id] = msg;
+        if (!firstInvalidId) firstInvalidId = q.id;
       }
-      if (q.type === "multiple-choice") {
-        if (!q.correctOptionId) {
-          addToast("Có câu hỏi trắc nghiệm chưa chọn đáp án đúng", "error");
-          return;
-        }
-        if (q.options.some((o) => !o.text.trim())) {
-          addToast("Có lựa chọn trắc nghiệm chưa nhập nội dung", "error");
-          return;
-        }
-      }
-      if (q.type === "fill-in-the-blank" && q.answers.every((a) => !a.trim())) {
-        addToast("Có câu hỏi điền khuyết chưa có đáp án", "error");
-        return;
-      }
+    }
+
+    setErrorByQuestionId(nextErrors);
+
+    if (firstInvalidId) {
+      // Scroll to the first invalid question (near nhất theo thứ tự xuất hiện)
+      addToast(
+        "Quiz có lỗi. Vui lòng kiểm tra các câu hỏi được tô đỏ.",
+        "error",
+      );
+      scrollToQuestion(firstInvalidId);
+      return;
     }
 
     setIsSubmitting(true);
@@ -204,8 +353,49 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-slate-950 relative overflow-x-hidden">
+      {/* Enhanced Background Effects */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-500/5 rounded-full blur-3xl animate-pulse delay-500" />
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAzMHYySDI0di0yaDEyek0zNiAyNnYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30" />
+      </div>
+
+      {/* Sticky Header (appears on scroll) */}
+      {scrolled && (
+        <div className="fixed top-0 left-0 right-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-white/10 shadow-lg">
+          <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Badge
+                variant="outline"
+                className="bg-indigo-500/10 border-indigo-400/30"
+              >
+                {questions.length} câu hỏi
+              </Badge>
+              <span className="text-sm text-slate-300">
+                {metadata?.title || "Quiz"}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => router.push("/dashboard/teacher")}
+              >
+                <ArrowLeft className="w-4 h-4 mr-1" />
+                Thoát
+              </Button>
+              <Button size="sm" onClick={handleSave} disabled={isSubmitting}>
+                <Save className="w-4 h-4 mr-1" />
+                {isSubmitting ? "Đang lưu..." : "Lưu"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="max-w-4xl mx-auto px-4 py-8 relative z-10">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
@@ -213,6 +403,7 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
               variant="ghost"
               size="icon"
               onClick={() => router.push("/dashboard/teacher")}
+              className="hover:bg-white/10"
             >
               <ArrowLeft className="w-5 h-5" />
             </Button>
@@ -226,14 +417,18 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
             </div>
           </div>
 
-          <Button onClick={handleSave} disabled={isSubmitting}>
+          <Button
+            onClick={handleSave}
+            disabled={isSubmitting}
+            className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600"
+          >
             <Save className="w-4 h-4 mr-2" />
             {isSubmitting ? "Đang lưu..." : "Lưu Quiz"}
           </Button>
         </div>
 
         {/* Quiz Settings Summary */}
-        <Card className="mb-6">
+        <Card className="mb-6 bg-slate-900/50 border-white/10 backdrop-blur-sm">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4 text-sm text-slate-400">
@@ -276,7 +471,7 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
                 key={qt}
                 variant="outline"
                 onClick={() => addQuestion(qt)}
-                className="gap-2"
+                className="gap-2 bg-slate-900/50 border-white/10 hover:bg-indigo-500/20 hover:border-indigo-400/30 transition-all"
               >
                 <Plus className="w-4 h-4" />
                 {QuestionTypeLabel[qt]}
@@ -288,10 +483,28 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
         {/* Questions List */}
         <div className="space-y-4">
           {questions.map((q, i) => (
-            <Card key={q.id}>
+            <Card
+              key={q.id}
+              data-question-id={q.id}
+              className="bg-slate-900/40 border-white/10 backdrop-blur-sm hover:border-indigo-400/30 transition-all duration-300"
+            >
               <CardHeader>
-                <div className="flex justify-between">
-                  <div className="flex gap-2 items-center">
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-3">
+                    <Badge>{QuestionTypeLabel[q.type]}</Badge>
+                    <span className="text-xs text-slate-500 flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {q.timeLimit}s
+                    </span>
+                  </div>
+
+                  {errorByQuestionId[q.id] && (
+                    <div className="w-[260px] text-red-400 text-sm text-right">
+                      {errorByQuestionId[q.id]}
+                    </div>
+                  )}
+
+                  <div className="flex gap-1">
                     <Badge>{QuestionTypeLabel[q.type]}</Badge>
                     <DifficultyBadge difficulty={q.difficulty} />
                     <span className="text-xs text-slate-500 flex items-center gap-1">
@@ -320,24 +533,22 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() =>
-                        setExpandedQuestion((prev) =>
-                          prev === q.id ? null : q.id,
-                        )
-                      }
+                      onClick={() => toggleExpandQuestion(q.id)}
                       title="Chỉnh sửa"
+                      className="hover:bg-indigo-500/20"
                     >
-                      {/* Pencil icon (lucide-react) */}
                       <span className="inline-flex items-center justify-center rounded-md text-indigo-200/90 bg-indigo-500/10 border border-indigo-400/20 shadow-[0_0_14px_rgba(99,102,241,0.35)]">
                         ✏️
                       </span>
                     </Button>
+
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => removeQuestion(q.id)}
+                      onClick={() => confirmDeleteQuestion(q)}
+                      className="text-red-400 hover:bg-red-500/20 hover:text-red-300"
                     >
-                      <Trash2 className="w-4 h-4 text-red-400" />
+                      <Trash2 className="w-4 h-4" />
                     </Button>
                   </div>
                 </div>
@@ -345,12 +556,65 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
 
               {expandedQuestion === q.id && (
                 <CardContent>
+                  {errorByQuestionId[q.id] && (
+                    <div className="w-full text-red-400 text-sm mb-3">
+                      {errorByQuestionId[q.id]}
+                    </div>
+                  )}
+
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="text-xs text-slate-400">
+                      Chỉnh sửa • {QuestionTypeLabel[q.type]}
+                    </div>
+                    <div className="flex gap-2">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => {
+                          const snapshot = draftQuestions[q.id];
+                          if (!snapshot) {
+                            addToast("Chưa có bản lưu tạm để hủy", "error");
+                            return;
+                          }
+                          setQuestions((prev) =>
+                            prev.map((item) =>
+                              item.id === q.id ? snapshot : item,
+                            ),
+                          );
+                          setExpandedQuestion(null);
+                          setDraftQuestions((prev) => {
+                            const next = { ...prev };
+                            delete next[q.id];
+                            return next;
+                          });
+                        }}
+                      >
+                        Cancel
+                      </Button>
+
+                      <Button
+                        type="button"
+                        variant="default"
+                        onClick={async () => {
+                          const ok = await saveQuestionToJson(q);
+                          if (ok) {
+                            addToast("Đã lưu thay đổi câu hỏi", "success");
+                          }
+                        }}
+                      >
+                        <Save className="w-4 h-4 mr-2" />
+                        Save
+                      </Button>
+                    </div>
+                  </div>
+
                   <QuestionEditor
                     question={q}
                     onChange={(newQ: QuizQuestion) =>
                       updateQuestion(q.id, newQ)
                     }
                   />
+
                   {/* Individual time limit */}
                   <div className="mt-4 pt-4 border-t">
                     <Label className="text-xs text-slate-400 mb-2 block">
@@ -375,6 +639,12 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
 
               {expandedQuestion !== q.id && (
                 <CardContent className="pt-4">
+                  {errorByQuestionId[q.id] && (
+                    <div className="w-full text-red-400 text-sm mb-3">
+                      {errorByQuestionId[q.id]}
+                    </div>
+                  )}
+
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <div className="text-xs font-mono tracking-wide text-indigo-200/80">
@@ -592,13 +862,71 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
 
         {/* Empty State */}
         {questions.length === 0 && (
-          <Card>
+          <Card className="bg-slate-900/40 border-white/10 backdrop-blur-sm">
             <CardContent className="py-12 text-center text-slate-500">
               Chưa có câu hỏi nào. Bấm nút bên trên để thêm câu hỏi.
             </CardContent>
           </Card>
         )}
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirm.show && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={cancelDelete}
+          />
+
+          {/* Modal */}
+          <div className="relative bg-slate-900 border border-white/10 rounded-2xl p-6 max-w-sm mx-4 shadow-2xl animate-in fade-in zoom-in duration-200">
+            <button
+              onClick={cancelDelete}
+              className="absolute top-3 right-3 text-slate-400 hover:text-white transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+                <AlertTriangle className="w-5 h-5 text-red-400" />
+              </div>
+              <h3 className="text-lg font-semibold text-white">Xóa câu hỏi</h3>
+            </div>
+
+            <p className="text-slate-300 text-sm mb-2">
+              Bạn có chắc chắn muốn xóa câu hỏi này?
+            </p>
+
+            <div className="bg-slate-800/50 rounded-lg p-3 mb-6">
+              <p className="text-sm text-slate-200 line-clamp-2">
+                {deleteConfirm.questionText}
+              </p>
+            </div>
+
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
+                onClick={cancelDelete}
+                className="flex-1 bg-slate-800/50 border-white/10 hover:bg-slate-700/50"
+              >
+                Hủy
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={() =>
+                  deleteConfirm.questionId &&
+                  removeQuestion(deleteConfirm.questionId)
+                }
+                className="flex-1 bg-red-500 hover:bg-red-600"
+              >
+                Xóa
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <ToastContainer toasts={toasts} onRemove={removeToast} />
     </div>

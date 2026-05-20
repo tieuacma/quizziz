@@ -107,7 +107,7 @@ export async function updateQuiz(id: string, params: {
 }): Promise<{ success: boolean; error?: string }> {
   try {
     const data = await readQuizFile()
-    
+
     if (data.metadata?.id !== id) {
       return { success: false, error: 'Quiz not found' }
     }
@@ -133,9 +133,55 @@ export async function updateQuiz(id: string, params: {
     return { success: true }
   } catch (error) {
     console.error('Error updating quiz:', error)
-    return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    }
   }
 }
+
+// ── Public: Update a single question inside quiz file ──
+export async function updateQuestionInQuizFile(
+  quizId: string,
+  questionId: string,
+  updatedQuestion: QuizQuestion,
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const data = await readQuizFile()
+
+    if (data.metadata?.id !== quizId) {
+      return { success: false, error: 'Quiz not found' }
+    }
+
+    const idx = data.questions.findIndex((q) => q.id === questionId)
+    if (idx === -1) {
+      return { success: false, error: 'Question not found' }
+    }
+
+    const questions = [...data.questions]
+    questions[idx] = updatedQuestion
+
+    const now = new Date().toISOString()
+    const quizData: QuizData = {
+      metadata: {
+        ...data.metadata,
+        updatedAt: now,
+        totalQuestions: questions.length,
+      },
+      questions,
+    }
+
+    await writeQuizFile(quizData)
+    return { success: true }
+  } catch (error) {
+    console.error('Error updating question:', error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    }
+  }
+}
+
 
 // ── Get quiz data (for preview) ──
 export async function getQuizData(): Promise<QuizData | null> {
