@@ -26,6 +26,7 @@ import {
   ReadingSubQuestion,
 } from "@/types/quiz";
 import { QuestionTypeLabel } from "./utils";
+import SelectionCards from "@/components/quiz-editor/SelectionCards";
 
 interface QuestionEditorProps {
   question: QuizQuestion;
@@ -63,18 +64,6 @@ export default function QuestionEditor({
     }
   };
 
-  const updateOptionText = (optionId: string, text: string) => {
-    if (question.type === "multiple-choice") {
-      const newQuestion = question as MultipleChoiceQuestion;
-      onChange({
-        ...newQuestion,
-        options: newQuestion.options.map((opt) =>
-          opt.id === optionId ? { ...opt, text } : opt,
-        ),
-      });
-    }
-  };
-
   const removeOption = (optionId: string) => {
     if (question.type === "multiple-choice") {
       const newQuestion = question as MultipleChoiceQuestion;
@@ -91,16 +80,6 @@ export default function QuestionEditor({
           answers: newQuestion.answers.filter((_, i) => i !== index),
         });
       }
-    }
-  };
-
-  const setCorrectOption = (optionId: string) => {
-    if (question.type === "multiple-choice") {
-      const newQuestion = question as MultipleChoiceQuestion;
-      onChange({
-        ...newQuestion,
-        correctOptionId: optionId,
-      });
     }
   };
 
@@ -171,73 +150,31 @@ export default function QuestionEditor({
         )}
       </div>
 
-      {/* Multiple Choice */}
+      {/* Multiple Choice Selection Cards System */}
       {question.type === "multiple-choice" && (
-        <Card>
-          <CardContent className="pt-6 space-y-3">
-            <Label className="text-sm font-medium">
-              Lựa chọn (chọn đáp án đúng)
-            </Label>
-            <div className="space-y-2">
-              {(question as MultipleChoiceQuestion).options.map(
-                (option, index) => (
-                  <div
-                    key={option.id}
-                    className="flex items-start gap-3 p-3 bg-slate-900/50 rounded-lg"
-                  >
-                    <Label className="text-sm font-mono min-w-[24px] mt-1">
-                      {String(index + 1)}.
-                    </Label>
-                    <Input
-                      value={option.text}
-                      onChange={(e) =>
-                        updateOptionText(option.id, e.target.value)
-                      }
-                      placeholder={`Lựa chọn ${index + 1}...`}
-                      className="flex-1"
-                    />
-                    <Select
-                      value={
-                        question.correctOptionId === option.id
-                          ? "correct"
-                          : "wrong"
-                      }
-                      onValueChange={(value) =>
-                        setCorrectOption(value === "correct" ? option.id : "")
-                      }
-                    >
-                      <SelectTrigger className="w-20">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="wrong">Sai</SelectItem>
-                        <SelectItem value="correct">Đúng</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => removeOption(option.id)}
-                      className="h-8 w-8 p-0"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </div>
-                ),
-              )}
-            </div>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={addOption}
-              className="gap-2"
-            >
-              <Plus className="h-4 w-4" />
-              Thêm lựa chọn
-            </Button>
-          </CardContent>
-        </Card>
+        <SelectionCards
+          options={(question as MultipleChoiceQuestion).options}
+          correctOptionId={(question as MultipleChoiceQuestion).correctOptionId || ""}
+          isMultiChoice={(question as MultipleChoiceQuestion).isMultiChoice}
+          onChangeOptions={(newOptions) => {
+            onChange({
+              ...question,
+              options: newOptions,
+            } as QuizQuestion);
+          }}
+          onChangeCorrect={(correctId) => {
+            onChange({
+              ...question,
+              correctOptionId: correctId,
+            } as QuizQuestion);
+          }}
+          onChangeMultiChoice={(isMulti) => {
+            onChange({
+              ...question,
+              isMultiChoice: isMulti,
+            } as QuizQuestion);
+          }}
+        />
       )}
 
       {/* Fill in the Blank */}

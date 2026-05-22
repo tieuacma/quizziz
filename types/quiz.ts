@@ -26,6 +26,7 @@ export interface MultipleChoiceQuestion extends BaseQuestion {
   type: 'multiple-choice'
   options: MultipleChoiceOption[]
   correctOptionId: string // ID of the correct option
+  isMultiChoice?: boolean // Support multiple correct answers
   explanation?: string // Optional explanation for the answer
 }
 
