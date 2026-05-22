@@ -19,6 +19,10 @@ const PATH_MAP: Record<string, string> = {
   settings: "Cài đặt",
   analytics: "Phân tích",
   overview: "Tổng quan",
+  "my-courses": "Môn học",
+  assignments: "Bài tập",
+  "learning-results": "Kết quả học tập",
+  schedule: "Lịch học",
 };
 
 export default function Breadcrumbs() {

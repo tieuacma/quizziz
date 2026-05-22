@@ -1,34 +1,16 @@
-# TODO - Nâng cấp UI/UX Dashboard
+# TODO
+- [x] Đọc các component UI liên quan (SectionHeader, StatCard, DashboardCard) để đồng bộ style
+- [x] Refactor `app/dashboard/student/page.tsx`: chuẩn hoá card/section, spacing, typography, layout grid cho Stats/Courses/Assignments
 
-## Plan (đã duyệt: hướng 2)
+- [x] Chuẩn hoá `app/dashboard/student/my-courses/page.tsx` để đồng nhất với homepage
 
-### 1) Khảo sát & chuẩn hóa
-- [x] Đọc `app/dashboard/layout.tsx`, `app/dashboard/student/page.tsx`, `app/dashboard/teacher/page.tsx`
-- [ ] (Nếu cần) rà thêm các component UI hiện có trong `components/ui/*`
-
-### 2) Tạo component reusable cho dashboard
-- [ ] Tạo `components/dashboard/SectionHeader.tsx`
-- [ ] Tạo `components/dashboard/StatCard.tsx`
-- [ ] (Tuỳ chọn) Tạo `components/dashboard/DashboardCard.tsx` để glow/border thống nhất
-
-### 3) Nâng cấp layout/dashboard shell
-- [ ] Thêm active state cho nav items trong `app/dashboard/layout.tsx`
-- [ ] Chuẩn hóa focus-visible/focus ring cho Link/Button trong sidebar
-- [ ] Đồng bộ spacing/typography header & main
-
-### 4) Nâng cấp Student page
-- [x] Dùng `StatCard` thay cho div thô
-- [x] Đồng bộ style section headers (SectionHeader)
-- [x] Tối ưu affordance clickable cho card khóa học (focus ring + role button)
+- [x] Đảm bảo các class Tailwind thống nhất với design hệ thống (màu nền/border/radius/hover)
 
 
-### 5) Nâng cấp Teacher page
-- [ ] Đồng bộ style section headers
-- [ ] Chuẩn hóa CTA button & hover/focus
-- [ ] Thêm “View all”/link nhỏ nếu phù hợp (không ảnh hưởng backend)
+- [x] Chạy `npm run lint` và `npm run build`
 
-### 6) Kiểm thử
-- [ ] Chạy `npm run lint`
-- [ ] Chạy `npm run build`
-- [ ] Kiểm tra responsive: desktop sidebar + mobile Sheet
+
+- [ ] Verify render trên các breakpoint (mobile/tablet/desktop) cho `/dashboard/student`
+
+
 

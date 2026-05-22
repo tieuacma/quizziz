@@ -18,6 +18,9 @@ import {
   User,
   Menu,
   GraduationCap,
+  BookOpen,
+  CalendarDays,
+  ClipboardList,
   School,
   CheckCircle,
   AlertCircle,
@@ -207,10 +210,30 @@ export default function DashboardShell({ children, user }: DashboardShellProps) 
         ]
       : [
           { label: "Overview", vietnamese: "Tổng quan", href: studentBase, icon: Home },
-          { label: "Quizzes", vietnamese: "Trắc nghiệm", href: studentBase, icon: Puzzle },
-          { label: "Students", vietnamese: "Học sinh", href: studentBase, icon: Users },
-          { label: "Analytics", vietnamese: "Báo cáo", href: studentBase, icon: TrendingUp },
-          { label: "Settings", vietnamese: "Cài đặt", href: studentBase, icon: Settings },
+          {
+            label: "My Courses",
+            vietnamese: "Môn học",
+            href: `${studentBase}/my-courses`,
+            icon: BookOpen,
+          },
+          {
+            label: "Assignments",
+            vietnamese: "Bài tập",
+            href: `${studentBase}/assignments`,
+            icon: ClipboardList,
+          },
+          {
+            label: "Results",
+            vietnamese: "Kết quả",
+            href: `${studentBase}/learning-results`,
+            icon: TrendingUp,
+          },
+          {
+            label: "Schedule",
+            vietnamese: "Lịch học",
+            href: `${studentBase}/schedule`,
+            icon: CalendarDays,
+          },
         ];
 
   // Dummy Notifications
@@ -232,8 +255,9 @@ export default function DashboardShell({ children, user }: DashboardShellProps) 
   ];
 
   const isItemActive = (href: string, label: string) => {
+    const hrefPath = href.split("#")[0];
     if (label === "Overview") {
-      return pathname === href;
+      return pathname === hrefPath;
     }
     if (label === "Quizzes") {
       return (
@@ -244,7 +268,7 @@ export default function DashboardShell({ children, user }: DashboardShellProps) 
         pathname.includes("quiz-create")
       );
     }
-    return pathname === href || pathname.startsWith(`${href}/`);
+    return pathname === hrefPath || pathname.startsWith(`${hrefPath}/`);
   };
 
   const handleLogout = () => {
