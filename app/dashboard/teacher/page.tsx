@@ -1,4 +1,4 @@
-import { getSession } from "@/app/lib/session";
+import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";

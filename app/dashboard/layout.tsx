@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { getSession } from "@/app/lib/session";
+import { getSession } from "@/lib/session";
 import DashboardShell from "@/components/dashboard/DashboardShell";
 
 export default async function DashboardLayout({
@@ -16,4 +16,3 @@ export default async function DashboardLayout({
     </DashboardShell>
   );
 }
-

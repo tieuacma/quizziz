@@ -1,17 +1,17 @@
-import { getSession } from '@/app/lib/session'
-import { redirect } from 'next/navigation'
-import { ClipboardList } from 'lucide-react'
-import SectionHeader from '@/components/dashboard/SectionHeader'
-import AssignmentsPanel from '@/components/dashboard/student/AssignmentsPanel'
-import StudentSubpageHeader from '@/components/dashboard/student/StudentSubpageHeader'
-import { ASSIGNMENTS } from '@/app/dashboard/student/data'
+import { getSession } from "@/lib/session";
+import { redirect } from "next/navigation";
+import { ClipboardList } from "lucide-react";
+import SectionHeader from "@/components/dashboard/SectionHeader";
+import AssignmentsPanel from "@/components/dashboard/student/AssignmentsPanel";
+import StudentSubpageHeader from "@/components/dashboard/student/StudentSubpageHeader";
+import { ASSIGNMENTS } from "@/app/dashboard/student/data";
 
 export default async function AssignmentsPage() {
-  const session = await getSession()
-  if (!session || session.role !== 'student') redirect('/dashboard')
+  const session = await getSession();
+  if (!session || session.role !== "student") redirect("/dashboard");
 
-  const pending = ASSIGNMENTS.filter((a) => a.status === 'pending')
-  const submitted = ASSIGNMENTS.filter((a) => a.status === 'submitted')
+  const pending = ASSIGNMENTS.filter((a) => a.status === "pending");
+  const submitted = ASSIGNMENTS.filter((a) => a.status === "submitted");
 
   return (
     <div className="mx-auto w-full max-w-6xl space-y-8">
@@ -24,13 +24,17 @@ export default async function AssignmentsPage() {
               <p className="text-[11px] uppercase tracking-wider text-amber-400/80 font-semibold">
                 Chờ nộp
               </p>
-              <p className="text-2xl font-bold text-amber-400 mt-0.5">{pending.length}</p>
+              <p className="text-2xl font-bold text-amber-400 mt-0.5">
+                {pending.length}
+              </p>
             </div>
             <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-5 py-3 text-center min-w-[100px]">
               <p className="text-[11px] uppercase tracking-wider text-emerald-400/80 font-semibold">
                 Đã nộp
               </p>
-              <p className="text-2xl font-bold text-emerald-400 mt-0.5">{submitted.length}</p>
+              <p className="text-2xl font-bold text-emerald-400 mt-0.5">
+                {submitted.length}
+              </p>
             </div>
           </div>
         }
@@ -50,5 +54,5 @@ export default async function AssignmentsPage() {
         </section>
       )}
     </div>
-  )
+  );
 }

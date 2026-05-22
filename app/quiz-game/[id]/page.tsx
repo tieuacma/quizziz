@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getQuizById } from "@/app/lib/quiz-service";
+import { getQuizById } from "@/lib/quiz-service";
 import QuizGame from "@/components/quiz-game/QuizGame";
 import { QuizData } from "@/types/quiz";
 

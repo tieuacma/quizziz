@@ -1,18 +1,18 @@
-import { getSession } from '@/app/lib/session'
-import { redirect } from 'next/navigation'
-import { BookOpen } from 'lucide-react'
-import SectionHeader from '@/components/dashboard/SectionHeader'
-import CourseCard from '@/components/dashboard/student/CourseCard'
-import StudentSubpageHeader from '@/components/dashboard/student/StudentSubpageHeader'
-import { COURSES } from '@/app/dashboard/student/data'
+import { getSession } from "@/lib/session";
+import { redirect } from "next/navigation";
+import { BookOpen } from "lucide-react";
+import SectionHeader from "@/components/dashboard/SectionHeader";
+import CourseCard from "@/components/dashboard/student/CourseCard";
+import StudentSubpageHeader from "@/components/dashboard/student/StudentSubpageHeader";
+import { COURSES } from "@/app/dashboard/student/data";
 
 export default async function CoursesPage() {
-  const session = await getSession()
-  if (!session || session.role !== 'student') redirect('/dashboard')
+  const session = await getSession();
+  if (!session || session.role !== "student") redirect("/dashboard");
 
   const avgProgress = Math.round(
-    COURSES.reduce((sum, c) => sum + c.progress, 0) / COURSES.length
-  )
+    COURSES.reduce((sum, c) => sum + c.progress, 0) / COURSES.length,
+  );
 
   return (
     <div className="mx-auto w-full max-w-6xl space-y-8">
@@ -40,5 +40,5 @@ export default async function CoursesPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

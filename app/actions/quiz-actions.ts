@@ -1,7 +1,7 @@
 'use server'
 
 import { redirect } from 'next/navigation'
-import { createQuiz, updateQuiz, getQuizById } from '../lib/quiz-service'
+import { createQuiz, updateQuiz, getQuizById } from '../../lib/quiz-service'
 import { QuizFormState, QuizData, QuizQuestion } from '@/types/quiz'
 
 

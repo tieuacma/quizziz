@@ -1,4 +1,4 @@
-import { getSession } from "@/app/lib/session";
+import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,9 +8,18 @@ import { Puzzle, Plus, Users, BarChart3 } from "lucide-react";
 import { QUIZZES } from "../data";
 
 const STATUS_LABEL = {
-  active: { text: "Đang mở", className: "bg-emerald-500/15 text-emerald-400 hover:bg-emerald-500/20" },
-  closed: { text: "Đã đóng", className: "bg-slate-500/20 text-slate-400 hover:bg-slate-500/30" },
-  draft: { text: "Nháp", className: "bg-amber-500/15 text-amber-400 hover:bg-amber-500/20" },
+  active: {
+    text: "Đang mở",
+    className: "bg-emerald-500/15 text-emerald-400 hover:bg-emerald-500/20",
+  },
+  closed: {
+    text: "Đã đóng",
+    className: "bg-slate-500/20 text-slate-400 hover:bg-slate-500/30",
+  },
+  draft: {
+    text: "Nháp",
+    className: "bg-amber-500/15 text-amber-400 hover:bg-amber-500/20",
+  },
 };
 
 export default async function TeacherQuizziesPage() {
@@ -42,7 +51,9 @@ export default async function TeacherQuizziesPage() {
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         <Card className="bg-white/[0.03] border-white/8">
           <CardContent className="p-5">
-            <p className="text-3xl font-bold text-emerald-400">{QUIZZES.length}</p>
+            <p className="text-3xl font-bold text-emerald-400">
+              {QUIZZES.length}
+            </p>
             <p className="text-slate-400 text-sm mt-0.5">Tổng quiz</p>
           </CardContent>
         </Card>
@@ -54,14 +65,18 @@ export default async function TeacherQuizziesPage() {
         </Card>
         <Card className="bg-white/[0.03] border-white/8 col-span-2 lg:col-span-1">
           <CardContent className="p-5">
-            <p className="text-3xl font-bold text-amber-400">{totalSubmissions}</p>
+            <p className="text-3xl font-bold text-amber-400">
+              {totalSubmissions}
+            </p>
             <p className="text-slate-400 text-sm mt-0.5">Lượt nộp (tổng)</p>
           </CardContent>
         </Card>
       </div>
 
       <section>
-        <h2 className="text-lg font-semibold text-white mb-4">Danh sách quiz</h2>
+        <h2 className="text-lg font-semibold text-white mb-4">
+          Danh sách quiz
+        </h2>
         <div className="grid sm:grid-cols-2 gap-4">
           {QUIZZES.map((q) => {
             const status = STATUS_LABEL[q.status];
@@ -72,10 +87,14 @@ export default async function TeacherQuizziesPage() {
               >
                 <CardContent className="p-5">
                   <div className="flex items-start justify-between gap-2 mb-2">
-                    <h3 className="text-white font-medium text-sm">{q.title}</h3>
+                    <h3 className="text-white font-medium text-sm">
+                      {q.title}
+                    </h3>
                     <Badge className={status.className}>{status.text}</Badge>
                   </div>
-                  <p className="text-slate-400 text-xs">📌 Lớp {q.class} · {q.createdAt}</p>
+                  <p className="text-slate-400 text-xs">
+                    📌 Lớp {q.class} · {q.createdAt}
+                  </p>
                   <div className="flex gap-4 mt-3 pt-3 border-t border-white/8">
                     <div className="flex items-center gap-1.5">
                       <Users className="w-3.5 h-3.5 text-slate-500" />

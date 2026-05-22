@@ -1,25 +1,20 @@
-import { getSession } from '@/app/lib/session'
-import { redirect } from 'next/navigation'
-import Link from 'next/link'
+import { getSession } from "@/lib/session";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 import {
   BookOpen,
   ClipboardList,
   CalendarDays,
   GraduationCap,
   ChevronRight,
-} from 'lucide-react'
-import SectionHeader from '@/components/dashboard/SectionHeader'
-import StatCard from '@/components/dashboard/StatCard'
-import CourseCard from '@/components/dashboard/student/CourseCard'
-import AssignmentsPanel from '@/components/dashboard/student/AssignmentsPanel'
-import LearningResultsPanel from '@/components/dashboard/student/LearningResultsPanel'
-import SchedulePanel from '@/components/dashboard/student/SchedulePanel'
-import {
-  ASSIGNMENTS,
-  COURSES,
-  LEARNING_RESULTS,
-  SCHEDULE,
-} from './data'
+} from "lucide-react";
+import SectionHeader from "@/components/dashboard/SectionHeader";
+import StatCard from "@/components/dashboard/StatCard";
+import CourseCard from "@/components/dashboard/student/CourseCard";
+import AssignmentsPanel from "@/components/dashboard/student/AssignmentsPanel";
+import LearningResultsPanel from "@/components/dashboard/student/LearningResultsPanel";
+import SchedulePanel from "@/components/dashboard/student/SchedulePanel";
+import { ASSIGNMENTS, COURSES, LEARNING_RESULTS, SCHEDULE } from "./data";
 
 function SectionLink({ href, label }: { href: string; label: string }) {
   return (
@@ -30,33 +25,52 @@ function SectionLink({ href, label }: { href: string; label: string }) {
       {label}
       <ChevronRight className="w-3.5 h-3.5" />
     </Link>
-  )
+  );
 }
 
 export default async function StudentPage() {
-  const session = await getSession()
-  if (!session || session.role !== 'student') redirect('/dashboard')
+  const session = await getSession();
+  if (!session || session.role !== "student") redirect("/dashboard");
 
-  const pendingCount = ASSIGNMENTS.filter((a) => a.status === 'pending').length
+  const pendingCount = ASSIGNMENTS.filter((a) => a.status === "pending").length;
 
   return (
     <div className="mx-auto w-full max-w-6xl space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-white">Xin chào, {session.name} 👋</h1>
-        <p className="text-slate-400 mt-1">Tổng quan học tập và lịch học của bạn hôm nay.</p>
+        <h1 className="text-2xl font-bold text-white">
+          Xin chào, {session.name} 👋
+        </h1>
+        <p className="text-slate-400 mt-1">
+          Tổng quan học tập và lịch học của bạn hôm nay.
+        </p>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Môn học', value: String(COURSES.length), icon: '📚', color: 'text-blue-400' },
           {
-            label: 'Bài tập',
-            value: String(pendingCount),
-            icon: '📝',
-            color: 'text-amber-400',
+            label: "Môn học",
+            value: String(COURSES.length),
+            icon: "📚",
+            color: "text-blue-400",
           },
-          { label: 'Điểm TB', value: '3.6', icon: '🏆', color: 'text-emerald-400' },
-          { label: 'Điểm danh', value: '94%', icon: '✅', color: 'text-violet-400' },
+          {
+            label: "Bài tập",
+            value: String(pendingCount),
+            icon: "📝",
+            color: "text-amber-400",
+          },
+          {
+            label: "Điểm TB",
+            value: "3.6",
+            icon: "🏆",
+            color: "text-emerald-400",
+          },
+          {
+            label: "Điểm danh",
+            value: "94%",
+            icon: "✅",
+            color: "text-violet-400",
+          },
         ].map((s) => (
           <StatCard
             key={s.label}
@@ -74,7 +88,10 @@ export default async function StudentPage() {
             icon={BookOpen}
             title="My Courses"
             right={
-              <SectionLink href="/dashboard/student/my-courses" label="Xem tất cả" />
+              <SectionLink
+                href="/dashboard/student/my-courses"
+                label="Xem tất cả"
+              />
             }
           />
           <div className="grid sm:grid-cols-2 gap-4 flex-1">
@@ -105,7 +122,10 @@ export default async function StudentPage() {
             icon={ClipboardList}
             title="Assignments"
             right={
-              <SectionLink href="/dashboard/student/assignments" label="Xem tất cả" />
+              <SectionLink
+                href="/dashboard/student/assignments"
+                label="Xem tất cả"
+              />
             }
           />
           <AssignmentsPanel assignments={ASSIGNMENTS.slice(0, 2)} />
@@ -116,7 +136,10 @@ export default async function StudentPage() {
             icon={CalendarDays}
             title="Schedule"
             right={
-              <SectionLink href="/dashboard/student/schedule" label="Xem tất cả" />
+              <SectionLink
+                href="/dashboard/student/schedule"
+                label="Xem tất cả"
+              />
             }
           />
           <div className="flex-1 min-h-[240px] lg:min-h-0">
@@ -125,5 +148,5 @@ export default async function StudentPage() {
         </section>
       </div>
     </div>
-  )
+  );
 }

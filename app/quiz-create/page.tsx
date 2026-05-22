@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { createQuizAction } from "@/app/actions/quiz-actions";
+import { createQuizMongoAction } from "@/app/actions/quiz-mongodb";
 import { ArrowLeft, Clock, Layers, FileText } from "lucide-react";
 
 export default function QuizCreatePage() {
@@ -38,7 +38,7 @@ export default function QuizCreatePage() {
       if (category) formData.append("category", category);
       formData.append("defaultTime", defaultTime || "30");
 
-      const result = await createQuizAction(undefined, formData);
+      const result = await createQuizMongoAction(undefined, formData);
 
       // If successful, redirect happens in server action
       // If error, result will have error field

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, use } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,10 +8,10 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  updateQuizAction,
-  getQuizAction,
-  updateQuestionAction,
-} from "@/app/actions/quiz-actions";
+  updateQuizMongoAction,
+  getQuizMongoAction,
+  type QuizLoadResult,
+} from "@/app/actions/quiz-mongodb";
 
 import {
   QuizQuestion,
@@ -46,9 +46,20 @@ interface QuizEditorPageProps {
   params: Promise<{ id: string }>;
 }
 
+function isQuizLoaded(result: QuizLoadResult): result is Extract<
+  QuizLoadResult,
+  { success: true }
+> {
+  if (result.success !== true || result.data == null) return false;
+  const metaId = result.data.metadata?.id ?? result.data.id;
+  return typeof metaId === "string" && metaId.length > 0;
+}
+
 export default function QuizEditorPage({ params }: QuizEditorPageProps) {
+  const { id: routeQuizId } = use(params);
   const router = useRouter();
-  const [quizId, setQuizId] = useState<string>("");
+  const [loadedQuizId, setLoadedQuizId] = useState<string | null>(null);
+  const isLoading = loadedQuizId !== routeQuizId;
   const [metadata, setMetadata] = useState<QuizMetadata | null>(null);
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [expandedQuestion, setExpandedQuestion] = useState<string | null>(null);
@@ -61,7 +72,6 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
   >({});
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [deleteConfirm, setDeleteConfirm] = useState<{
@@ -92,30 +102,40 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Load quiz data on mount
+  // Load quiz data when route id is known (stable string dep, not params Promise)
   useEffect(() => {
-    const loadQuiz = async () => {
-      const resolvedParams = await params;
-      setQuizId(resolvedParams.id);
+    let cancelled = false;
 
+    const loadQuiz = async () => {
       try {
-        const result = await getQuizAction(resolvedParams.id);
-        if (result.success && result.data) {
+        const result = await getQuizMongoAction(routeQuizId);
+
+        if (cancelled) return;
+
+        if (isQuizLoaded(result)) {
           setMetadata(result.data.metadata);
-          setQuestions(result.data.questions || []);
+          setQuestions(result.data.questions ?? []);
+          setLoadedQuizId(routeQuizId);
         } else {
-          addToast(result.error || "Không tìm thấy quiz", "error");
+          const message =
+            result.success === false
+              ? result.error
+              : "Không tìm thấy quiz";
+          addToast(message, "error");
           router.push("/dashboard/teacher");
         }
       } catch {
+        if (cancelled) return;
         addToast("Lỗi khi tải quiz", "error");
         router.push("/dashboard/teacher");
-      } finally {
-        setIsLoading(false);
       }
     };
-    loadQuiz();
-  }, [params, router, addToast]);
+
+    void loadQuiz();
+    return () => {
+      cancelled = true;
+    };
+  }, [routeQuizId, addToast, router]);
 
   const defaultTime = metadata?.defaultTime || 30;
 
@@ -169,24 +189,8 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
     });
   };
 
-  const saveQuestionToJson = async (question: QuizQuestion) => {
-    // Partial update: update only this question in quiz.json
-    const formData = new FormData();
-    formData.append("quizId", quizId);
-    formData.append("questionId", question.id);
-    formData.append("question", JSON.stringify(question));
-
-    // updateQuestionAction hiện nằm ở src/app/actions/quiz-actions.ts
-    const result = await updateQuestionAction(undefined, formData);
-
-    if (result?.success) {
-      addToast("Đã lưu câu hỏi", "success");
-      return true;
-    }
-
-    addToast(result?.error || "Lỗi khi lưu câu hỏi", "error");
-    return false;
-  };
+  // Note: Individual question saving is handled by the main save button
+  // which saves all questions at once to MongoDB
 
   const moveQuestion = (index: number, direction: "up" | "down"): void => {
     if (direction === "up" && index === 0) return;
@@ -310,7 +314,7 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
     setIsSubmitting(true);
     try {
       const formData = new FormData();
-      formData.append("id", quizId);
+      formData.append("id", routeQuizId);
       if (metadata?.title) formData.append("title", metadata.title);
       if (metadata?.description)
         formData.append("description", metadata.description);
@@ -321,7 +325,7 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
       );
       formData.append("questions", JSON.stringify(questions));
 
-      const result = await updateQuizAction(undefined, formData);
+      const result = await updateQuizMongoAction(undefined, formData);
 
       if (result && result.success) {
         addToast(result.message || "Đã lưu quiz thành công!", "success");
@@ -595,11 +599,8 @@ export default function QuizEditorPage({ params }: QuizEditorPageProps) {
                       <Button
                         type="button"
                         variant="default"
-                        onClick={async () => {
-                          const ok = await saveQuestionToJson(q);
-                          if (ok) {
-                            addToast("Đã lưu thay đổi câu hỏi", "success");
-                          }
+                        onClick={() => {
+                          addToast("Lưu câu hỏi khi lưu toàn bộ quiz", "info");
                         }}
                       >
                         <Save className="w-4 h-4 mr-2" />

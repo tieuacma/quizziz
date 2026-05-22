@@ -1,4 +1,4 @@
-import { getSession } from "@/app/lib/session";
+import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -57,7 +57,9 @@ export default async function TeacherStudentsPage() {
               <CardContent className="p-5">
                 <h3 className="text-white font-semibold text-sm">{cls.name}</h3>
                 <p className="text-slate-400 text-xs mt-1">{cls.lesson}</p>
-                <p className="text-amber-400 font-bold text-2xl mt-3">{cls.students}</p>
+                <p className="text-amber-400 font-bold text-2xl mt-3">
+                  {cls.students}
+                </p>
                 <p className="text-slate-500 text-xs">học sinh</p>
               </CardContent>
             </Card>
@@ -66,7 +68,9 @@ export default async function TeacherStudentsPage() {
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold text-white mb-4">Danh sách học sinh</h2>
+        <h2 className="text-lg font-semibold text-white mb-4">
+          Danh sách học sinh
+        </h2>
         <Card className="bg-white/[0.03] border-white/8 overflow-hidden">
           {STUDENTS.map((s, i) => (
             <div
@@ -86,7 +90,9 @@ export default async function TeacherStudentsPage() {
                   {s.class}
                 </Badge>
                 <div className="text-right">
-                  <p className="text-emerald-400 font-semibold text-sm">{s.avg}/10</p>
+                  <p className="text-emerald-400 font-semibold text-sm">
+                    {s.avg}/10
+                  </p>
                   <p className="text-slate-500 text-xs">{s.quizzesDone} quiz</p>
                 </div>
               </div>

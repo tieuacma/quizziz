@@ -1,4 +1,4 @@
-import { getSession } from "@/app/lib/session";
+import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { TrendingUp, Users, Puzzle, Target } from "lucide-react";
@@ -12,19 +12,41 @@ export default async function TeacherAnalyticsPage() {
 
   const totalStudents = CLASSES.reduce((sum, c) => sum + c.students, 0);
   const avgScore =
-    QUIZZES.filter((q) => q.status !== "draft").reduce((sum, q) => sum + q.avg, 0) /
-    QUIZZES.filter((q) => q.status !== "draft").length;
+    QUIZZES.filter((q) => q.status !== "draft").reduce(
+      (sum, q) => sum + q.avg,
+      0,
+    ) / QUIZZES.filter((q) => q.status !== "draft").length;
   const completionRate = Math.round(
     (QUIZZES.reduce((sum, q) => sum + q.submissions, 0) /
       QUIZZES.reduce((sum, q) => sum + q.total, 0)) *
-      100
+      100,
   );
 
   const stats = [
-    { label: "Học sinh", value: String(totalStudents), icon: Users, color: "text-amber-400" },
-    { label: "Quiz hoạt động", value: String(QUIZZES.filter((q) => q.status === "active").length), icon: Puzzle, color: "text-emerald-400" },
-    { label: "Điểm TB", value: avgScore.toFixed(1), icon: Target, color: "text-violet-400" },
-    { label: "Tỷ lệ nộp bài", value: `${completionRate}%`, icon: TrendingUp, color: "text-blue-400" },
+    {
+      label: "Học sinh",
+      value: String(totalStudents),
+      icon: Users,
+      color: "text-amber-400",
+    },
+    {
+      label: "Quiz hoạt động",
+      value: String(QUIZZES.filter((q) => q.status === "active").length),
+      icon: Puzzle,
+      color: "text-emerald-400",
+    },
+    {
+      label: "Điểm TB",
+      value: avgScore.toFixed(1),
+      icon: Target,
+      color: "text-violet-400",
+    },
+    {
+      label: "Tỷ lệ nộp bài",
+      value: `${completionRate}%`,
+      icon: TrendingUp,
+      color: "text-blue-400",
+    },
   ];
 
   return (
@@ -55,18 +77,30 @@ export default async function TeacherAnalyticsPage() {
       </div>
 
       <section>
-        <h2 className="text-lg font-semibold text-white mb-4">Lượt nộp theo ngày (tuần này)</h2>
+        <h2 className="text-lg font-semibold text-white mb-4">
+          Lượt nộp theo ngày (tuần này)
+        </h2>
         <Card className="bg-white/[0.03] border-white/8">
           <CardContent className="p-6">
             <div className="flex items-end justify-between gap-2 h-40">
               {ANALYTICS_WEEKLY.map((d) => (
-                <div key={d.day} className="flex-1 flex flex-col items-center gap-2">
-                  <span className="text-[10px] text-slate-500">{d.submissions}</span>
+                <div
+                  key={d.day}
+                  className="flex-1 flex flex-col items-center gap-2"
+                >
+                  <span className="text-[10px] text-slate-500">
+                    {d.submissions}
+                  </span>
                   <div
                     className="w-full max-w-10 rounded-t-lg bg-gradient-to-t from-indigo-600 to-violet-500 transition-all"
-                    style={{ height: `${(d.submissions / maxSubmissions) * 100}%`, minHeight: "8px" }}
+                    style={{
+                      height: `${(d.submissions / maxSubmissions) * 100}%`,
+                      minHeight: "8px",
+                    }}
                   />
-                  <span className="text-xs text-slate-400 font-medium">{d.day}</span>
+                  <span className="text-xs text-slate-400 font-medium">
+                    {d.day}
+                  </span>
                 </div>
               ))}
             </div>
@@ -78,7 +112,9 @@ export default async function TeacherAnalyticsPage() {
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold text-white mb-4">Điểm trung bình theo ngày</h2>
+        <h2 className="text-lg font-semibold text-white mb-4">
+          Điểm trung bình theo ngày
+        </h2>
         <Card className="bg-white/[0.03] border-white/8 overflow-hidden">
           {ANALYTICS_WEEKLY.map((d, i) => (
             <div
@@ -87,7 +123,9 @@ export default async function TeacherAnalyticsPage() {
                 i !== 0 ? "border-t border-white/8" : ""
               }`}
             >
-              <span className="text-white text-sm font-medium w-8">{d.day}</span>
+              <span className="text-white text-sm font-medium w-8">
+                {d.day}
+              </span>
               <div className="flex-1 mx-4 h-2 rounded-full bg-white/[0.06] overflow-hidden">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-emerald-600 to-teal-500"

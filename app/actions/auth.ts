@@ -1,8 +1,8 @@
 'use server'
 
 import { redirect } from 'next/navigation'
-import { createSession, deleteSession } from '@/app/lib/session'
-import type { UserRole } from '@/app/lib/types'
+import { createSession, deleteSession } from '@/lib/session'
+import type { UserRole } from '@/lib/types'
 
 export type AuthFormState = { error?: string } | undefined
 

@@ -1,4 +1,4 @@
-import { getSession } from "@/app/lib/session";
+import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,9 @@ export default async function TeacherSettingsPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <label className="text-xs text-slate-400 block mb-1.5">Họ và tên</label>
+            <label className="text-xs text-slate-400 block mb-1.5">
+              Họ và tên
+            </label>
             <input
               type="text"
               defaultValue={session.name}
@@ -64,7 +66,9 @@ export default async function TeacherSettingsPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <label className="text-xs text-slate-400 block mb-1.5">Mật khẩu mới</label>
+            <label className="text-xs text-slate-400 block mb-1.5">
+              Mật khẩu mới
+            </label>
             <input
               type="password"
               placeholder="••••••••"
@@ -72,7 +76,9 @@ export default async function TeacherSettingsPage() {
             />
           </div>
           <div>
-            <label className="text-xs text-slate-400 block mb-1.5">Xác nhận mật khẩu</label>
+            <label className="text-xs text-slate-400 block mb-1.5">
+              Xác nhận mật khẩu
+            </label>
             <input
               type="password"
               placeholder="••••••••"
