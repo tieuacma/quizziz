@@ -80,7 +80,7 @@ export interface QuizState {
   current_question_index: number
   score: number
   streak: number
-  status: 'idle' | 'playing' | 'finished'
+  status: 'idle' | 'ready' | 'playing' | 'finished'
   incorrect_questions: string[]
   currentSubQuestionIndex?: number
 }

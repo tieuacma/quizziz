@@ -1,20 +1,28 @@
 "use client";
 
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import type {
   QuizQuestion,
   QuizState,
   ReadingQuestion,
   MultipleChoiceQuestion,
+  FillInBlankQuestion,
+  TrueFalseQuestion,
 } from "@/types/quiz";
 import MultiChoiceCard from "./MultiChoiceCard";
 import ReadingCard from "./ReadingCard";
+import FillBlankCard from "./FillBlankCard";
+import TrueFalseCard from "./TrueFalseCard";
+import { quizGameCopy } from "./copy";
+import { useQuestionMotion } from "./motion";
 
 interface QuestionEngineProps {
   question?: QuizQuestion;
+  questionKey: string;
   quizState: QuizState & { currentSubQuestionIndex: number };
   handleAnswer: (isCorrect: boolean) => void;
-  handleSubQuestionAnswer?: (subId: string, optionId: string) => void;
+  handleSubQuestionAnswer?: (subId: string, answer: string) => void;
   handleCompleteReading?: (question: ReadingQuestion) => void;
   readingSubAnswers: Record<string, string>;
   isReadingQuestionComplete: (question?: QuizQuestion) => boolean;
@@ -22,6 +30,7 @@ interface QuestionEngineProps {
 
 export default function QuestionEngine({
   question,
+  questionKey,
   quizState,
   handleAnswer,
   handleSubQuestionAnswer,
@@ -29,40 +38,48 @@ export default function QuestionEngine({
   readingSubAnswers,
   isReadingQuestionComplete,
 }: QuestionEngineProps) {
-  if (!question) {
-    return (
-      <div className="w-full h-full flex items-center justify-center bg-black/50">
-        Loading question...
-      </div>
-    );
-  }
+  const { variants, transition } = useQuestionMotion();
 
-  const renderQuestionContent = () => {
-    switch (question.type) {
+  const renderQuestionContent = (q: QuizQuestion) => {
+    switch (q.type) {
       case "multiple-choice":
         return (
           <MultiChoiceCard
-            question={question as MultipleChoiceQuestion}
+            question={q as MultipleChoiceQuestion}
+            onAnswer={handleAnswer}
+          />
+        );
+      case "fill-in-the-blank":
+        return (
+          <FillBlankCard
+            question={q as FillInBlankQuestion}
+            onAnswer={handleAnswer}
+          />
+        );
+      case "true-false":
+        return (
+          <TrueFalseCard
+            question={q as TrueFalseQuestion}
             onAnswer={handleAnswer}
           />
         );
       case "reading":
         return (
           <ReadingCard
-            question={question as ReadingQuestion}
+            question={q as ReadingQuestion}
             onSubAnswer={handleSubQuestionAnswer!}
             onComplete={handleCompleteReading!}
             readingSubAnswers={readingSubAnswers}
-            currentSubQuestionIndex={quizState.currentSubQuestionIndex}
-            isReadingQuestionComplete={() =>
-              isReadingQuestionComplete(question)
-            }
+            currentSubQuestionIndex={quizState.currentSubQuestionIndex ?? 0}
+            isReadingQuestionComplete={() => isReadingQuestionComplete(q)}
           />
         );
       default:
         return (
           <div className="w-full h-full flex items-center justify-center text-white text-2xl">
-            Question type not supported: {question.type}
+            {quizGameCopy.unsupported(
+              (q as QuizQuestion).type ?? "unknown",
+            )}
           </div>
         );
     }
@@ -70,7 +87,31 @@ export default function QuestionEngine({
 
   return (
     <div className="w-full h-full overflow-hidden flex flex-col">
-      {renderQuestionContent()}
+      <AnimatePresence mode="wait">
+        {question ? (
+          <motion.div
+            key={questionKey}
+            className="w-full h-full flex flex-col"
+            variants={variants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={transition}
+          >
+            {renderQuestionContent(question)}
+          </motion.div>
+        ) : (
+          <motion.div
+            key="loading"
+            className="w-full h-full flex items-center justify-center bg-black/50 text-white"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {quizGameCopy.loading}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -95,7 +95,27 @@ export default async function TeacherQuizziesPage() {
                   <p className="text-slate-400 text-xs">
                     📌 Lớp {q.class} · {q.createdAt}
                   </p>
-                  <div className="flex gap-4 mt-3 pt-3 border-t border-white/8">
+                  <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t border-white/8">
+                    <Link href={`/quiz-editor/${q.id}`}>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-xs border-white/15"
+                      >
+                        Sửa quiz
+                      </Button>
+                    </Link>
+                    <Link href={`/quiz-game/${q.id}`} target="_blank">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-xs border-white/15"
+                      >
+                        Chơi thử
+                      </Button>
+                    </Link>
+                  </div>
+                  <div className="flex gap-4 mt-3">
                     <div className="flex items-center gap-1.5">
                       <Users className="w-3.5 h-3.5 text-slate-500" />
                       <div>

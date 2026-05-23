@@ -1,55 +1,84 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef, useMemo } from 'react'
-import type { 
-  QuizQuestion, 
+import { useState, useCallback, useEffect, useRef, useMemo } from "react";
+import type {
+  QuizQuestion,
   QuizState,
   MultipleChoiceQuestion,
-  ReadingQuestion
-} from '@/types/quiz'
+  ReadingQuestion,
+} from "@/types/quiz";
+import { gradeReadingSub } from "@/lib/quiz-game/grade";
+import { READING_SUB_ADVANCE_MS } from "@/components/quiz-game/motion";
 
-// --- Super Shuffle Algorithm (Fisher-Yates 2-pass) ---
+const DEFAULT_TIME_LIMIT = 180;
+
 export function superShuffle<T extends QuizQuestion[]>(questions: T): T {
-  const globalShuffled = [...questions]
+  const globalShuffled = [...questions];
   for (let i = globalShuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[globalShuffled[i], globalShuffled[j]] = [globalShuffled[j], globalShuffled[i]]
+    const j = Math.floor(Math.random() * (i + 1));
+    [globalShuffled[i], globalShuffled[j]] = [
+      globalShuffled[j],
+      globalShuffled[i],
+    ];
   }
 
-  return globalShuffled.map(question => {
-    if ('options' in question) {
-      const mcq = question as MultipleChoiceQuestion
-      const options = [...mcq.options]
+  return globalShuffled.map((question) => {
+    if (question.type === "multiple-choice") {
+      const mcq = question as MultipleChoiceQuestion;
+      const options = [...mcq.options];
       for (let i = options.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1))
-        ;[options[i], options[j]] = [options[j], options[i]]
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
       }
-      return { ...mcq, options } as MultipleChoiceQuestion
+      return { ...mcq, options } as MultipleChoiceQuestion;
     }
-    
-    if ('questions' in question) {
-      const reading = question as ReadingQuestion
-      const subQuestions = [...reading.questions]
+
+    if (question.type === "reading") {
+      const reading = question as ReadingQuestion;
+      const subQuestions = [...reading.questions];
       for (let i = subQuestions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1))
-        ;[subQuestions[i], subQuestions[j]] = [subQuestions[j], subQuestions[i]]
+        const j = Math.floor(Math.random() * (i + 1));
+        [subQuestions[i], subQuestions[j]] = [
+          subQuestions[j],
+          subQuestions[i],
+        ];
       }
-      return { ...reading, questions: subQuestions } as ReadingQuestion
+      return { ...reading, questions: subQuestions } as ReadingQuestion;
     }
-    
-    return question
-  }) as T
+
+    return question;
+  }) as T;
 }
 
-// --- Main Quiz Logic Hook ---
+function normalizeTimeLimit(q: QuizQuestion): QuizQuestion {
+  const raw =
+    q.timeLimit ??
+    ("defaultTime" in q
+      ? (q as QuizQuestion & { defaultTime?: number }).defaultTime
+      : undefined);
+  const timeLimit =
+    typeof raw === "number" && raw > 0 ? raw : DEFAULT_TIME_LIMIT;
+  return { ...q, timeLimit };
+}
+
 export function useQuizLogic(
   initialQuestions: QuizQuestion[],
   profileId: string,
-  quizId: string
+  quizId: string,
 ) {
-  const isInitialized = useRef(false);
-  
-  const [quizState, setQuizState] = useState<QuizState & { currentSubQuestionIndex: number }>({
+  const sourceQuestions = useMemo(
+    () => initialQuestions.map(normalizeTimeLimit),
+    [initialQuestions],
+  );
+
+  const [gameQuestions, setGameQuestions] = useState<QuizQuestion[]>([]);
+  const [isPracticeMode, setIsPracticeMode] = useState(false);
+
+  const questions = gameQuestions;
+
+  const [quizState, setQuizState] = useState<
+    QuizState & { currentSubQuestionIndex: number }
+  >(() => ({
     profile_id: profileId,
     quiz_id: quizId,
     correct_count: 0,
@@ -57,28 +86,28 @@ export function useQuizLogic(
     current_question_index: 0,
     score: 0,
     streak: 0,
-    status: 'idle' as const,
+    status: initialQuestions.length > 0 ? "ready" : "idle",
     incorrect_questions: [],
-    currentSubQuestionIndex: 0
-  });
+    currentSubQuestionIndex: 0,
+  }));
 
   const [timeLeft, setTimeLeft] = useState(0);
-  const [readingSubAnswers, setReadingSubAnswers] = useState<Record<string, string>>({});
-  const [answeredSubQuestions, setAnsweredSubQuestions] = useState<Record<string, boolean>>({});
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timeLeftRef = useRef(0);
+  const [readingSubAnswers, setReadingSubAnswers] = useState<
+    Record<string, string>
+  >({});
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const streakRef = useRef(0);
+  const isTransitioningRef = useRef(false);
 
-  // 1. CHUẨN HÓA LOGIC TIME: Lấy defaultTime làm time chính cho mọi câu hỏi
-  const questions = useMemo(() => {
-    const normalized = initialQuestions.map(q => ({
-      ...q,
-      // Ưu tiên defaultTime từ DB, mặc định 180s nếu thiếu
-      // defaultTime không có trong type BaseQuestion; giữ fallback an toàn
-      timeLimit: ("defaultTime" in q ? (q as { defaultTime?: number }).defaultTime : undefined) ?? 180 
-
-    }));
-
-    return superShuffle(normalized);
-  }, [initialQuestions]);
+  const estimatedSeconds = useMemo(
+    () =>
+      sourceQuestions.reduce(
+        (sum, q) => sum + (q.timeLimit ?? DEFAULT_TIME_LIMIT),
+        0,
+      ),
+    [sourceQuestions],
+  );
 
   const clearTimer = useCallback(() => {
     if (timerRef.current) {
@@ -87,183 +116,251 @@ export function useQuizLogic(
     }
   }, []);
 
-  // 2. AUTO-START: Khởi tạo với thời gian chuẩn từ câu hỏi đầu tiên
+  const releaseTransition = useCallback(() => {
+    isTransitioningRef.current = false;
+  }, []);
+
   useEffect(() => {
-    if (isInitialized.current || questions.length === 0) return;
-    
-    const firstQuestionTime = questions[0].timeLimit;
-    
-    setQuizState(prev => ({
-      ...prev,
-      status: 'playing'
-    }));
-    
-    setTimeLeft(firstQuestionTime);
-    isInitialized.current = true;
-  }, [questions]);
+    timeLeftRef.current = timeLeft;
+  }, [timeLeft]);
 
-  // Reset trạng thái câu hỏi con khi chuyển câu hỏi chính
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setReadingSubAnswers({});
-      setAnsweredSubQuestions({});
-      setQuizState(prev => ({ ...prev, currentSubQuestionIndex: 0 }));
-    }, 0);
-    return () => clearTimeout(timeout);
-  }, [quizState.current_question_index]);
+    streakRef.current = quizState.streak;
+  }, [quizState.streak]);
 
-  const calculateScore = useCallback((isCorrect: boolean, question?: QuizQuestion) => {
-    if (!isCorrect || !question) return 0
+  const calculateScore = useCallback(
+    (isCorrect: boolean, question?: QuizQuestion, ratio = 1) => {
+      if (!isCorrect || !question) return 0;
+      const baseScore =
+        (timeLeftRef.current / question.timeLimit) * 1000 * ratio;
+      const bonusScore = Math.min((streakRef.current / 3) * 200, 1000);
+      return Math.round(baseScore + bonusScore);
+    },
+    [],
+  );
 
-    // Sử dụng timeLimit (đã gán bằng defaultTime) để tính điểm
-    const baseScore = (timeLeft / question.timeLimit) * 1000
-    const bonusScore = Math.min((quizState.streak / 3) * 200, 1000)
-    return Math.round(baseScore + bonusScore)
-  }, [timeLeft, quizState.streak]);
+  const advanceAfterAnswer = useCallback(
+    (isCorrect: boolean, points: number) => {
+      if (isTransitioningRef.current) return;
+      isTransitioningRef.current = true;
 
-  const handleAnswer = useCallback((isCorrect: boolean) => {
-    clearTimer();
-    
-    const currentQuestion = questions[quizState.current_question_index];
-    const points = calculateScore(isCorrect, currentQuestion);
+      setQuizState((prev) => {
+        if (prev.status !== "playing") {
+          releaseTransition();
+          return prev;
+        }
 
-    const newStreak = isCorrect ? quizState.streak + 1 : 0;
-    const incorrect = isCorrect 
-      ? quizState.incorrect_questions 
-      : [...quizState.incorrect_questions, currentQuestion.id];
-    
-    const nextIndex = quizState.current_question_index + 1;
-    const isFinished = nextIndex >= questions.length;
+        const currentQuestion = questions[prev.current_question_index];
+        if (!currentQuestion) {
+          releaseTransition();
+          return prev;
+        }
 
-    if (isFinished) {
-      setQuizState(prev => ({
-        ...prev,
-        status: 'finished',
-        correct_count: isCorrect ? prev.correct_count + 1 : prev.correct_count,
-        wrong_count: isCorrect ? prev.wrong_count : prev.wrong_count + 1,
-        score: prev.score + points,
-        streak: newStreak,
-        incorrect_questions: incorrect
-      }));
-      return;
-    }
+        const newStreak = isCorrect ? streakRef.current + 1 : 0;
+        streakRef.current = newStreak;
 
-    // Reset thời gian cho câu hỏi tiếp theo
-    const nextQuestionTime = questions[nextIndex].timeLimit;
-    setTimeLeft(nextQuestionTime);
-    
-    setQuizState(prev => ({
-      ...prev,
-      correct_count: isCorrect ? prev.correct_count + 1 : prev.correct_count,
-      wrong_count: isCorrect ? prev.wrong_count : prev.wrong_count + 1,
-      score: prev.score + points,
-      streak: newStreak,
-      current_question_index: nextIndex,
-      incorrect_questions: incorrect
-    }));
-  }, [questions, quizState, calculateScore, clearTimer]);
+        const incorrect = isCorrect
+          ? prev.incorrect_questions
+          : [...prev.incorrect_questions, currentQuestion.id];
+
+        const nextIndex = prev.current_question_index + 1;
+        const isFinished = nextIndex >= questions.length;
+
+        const baseUpdate = {
+          correct_count: isCorrect
+            ? prev.correct_count + 1
+            : prev.correct_count,
+          wrong_count: isCorrect ? prev.wrong_count : prev.wrong_count + 1,
+          score: prev.score + points,
+          streak: newStreak,
+          incorrect_questions: incorrect,
+        };
+
+        if (isFinished) {
+          clearTimer();
+          queueMicrotask(() => {
+            setReadingSubAnswers({});
+            releaseTransition();
+          });
+          return { ...prev, ...baseUpdate, status: "finished" as const };
+        }
+
+        const nextTime = questions[nextIndex].timeLimit;
+        queueMicrotask(() => {
+          setTimeLeft(nextTime);
+          timeLeftRef.current = nextTime;
+          setReadingSubAnswers({});
+          releaseTransition();
+        });
+
+        return {
+          ...prev,
+          ...baseUpdate,
+          current_question_index: nextIndex,
+          currentSubQuestionIndex: 0,
+        };
+      });
+    },
+    [questions, clearTimer, releaseTransition],
+  );
+
+  const handleAnswer = useCallback(
+    (isCorrect: boolean) => {
+      if (isTransitioningRef.current) return;
+      clearTimer();
+      const currentQuestion = questions[quizState.current_question_index];
+      const points = calculateScore(isCorrect, currentQuestion);
+      advanceAfterAnswer(isCorrect, points);
+    },
+    [
+      questions,
+      quizState.current_question_index,
+      calculateScore,
+      advanceAfterAnswer,
+      clearTimer,
+    ],
+  );
 
   const handleTimeOut = useCallback(() => {
+    if (isTransitioningRef.current) return;
     handleAnswer(false);
   }, [handleAnswer]);
 
-  // --- SUB-QUESTION HANDLERS ---
-  const handleSubQuestionAnswer = useCallback((subQuestionId: string, selectedOptionId: string) => {
-    setReadingSubAnswers(prev => ({ ...prev, [subQuestionId]: selectedOptionId }));
-    
-    const currentQuestion = questions[quizState.current_question_index];
-    if ('questions' in currentQuestion) {
-      const sub = (currentQuestion as ReadingQuestion).questions.find(q => q.id === subQuestionId);
-      if (sub && 'correctOptionId' in sub && sub.correctOptionId === selectedOptionId) {
-        setAnsweredSubQuestions(prev => ({ ...prev, [subQuestionId]: true }));
-      }
+  const handleSubQuestionAnswer = useCallback(
+    (subQuestionId: string, answer: string) => {
+      setReadingSubAnswers((prev) => {
+        if (prev[subQuestionId]) return prev;
+        return { ...prev, [subQuestionId]: answer };
+      });
 
-      // Tự động chuyển sub-question tiếp theo
+      const currentQuestion = questions[quizState.current_question_index];
+      if (currentQuestion?.type !== "reading") return;
+
       const readingQuestion = currentQuestion as ReadingQuestion;
       setTimeout(() => {
-        setQuizState(prev => {
-          if (prev.currentSubQuestionIndex < readingQuestion.questions.length - 1) {
-            return { ...prev, currentSubQuestionIndex: prev.currentSubQuestionIndex + 1 };
+        setQuizState((prev) => {
+          if (
+            prev.currentSubQuestionIndex <
+            readingQuestion.questions.length - 1
+          ) {
+            return {
+              ...prev,
+              currentSubQuestionIndex: prev.currentSubQuestionIndex + 1,
+            };
           }
           return prev;
         });
-      }, 800);
-    }
-  }, [questions, quizState.current_question_index]);
+      }, READING_SUB_ADVANCE_MS);
+    },
+    [questions, quizState.current_question_index],
+  );
 
-  const getCurrentSubQuestion = useCallback((question: ReadingQuestion) => {
-    return question.questions[quizState.currentSubQuestionIndex];
-  }, [quizState.currentSubQuestionIndex]);
+  const isReadingQuestionComplete = useCallback(
+    (question?: QuizQuestion) => {
+      if (!question || question.type !== "reading") return true;
+      const reading = question as ReadingQuestion;
+      return reading.questions.every((sub) => !!readingSubAnswers[sub.id]);
+    },
+    [readingSubAnswers],
+  );
 
-  const isReadingQuestionComplete = useCallback((question?: QuizQuestion) => {
-    if (!question || !('questions' in question)) return true;
-    const reading = question as ReadingQuestion;
-    return Object.keys(readingSubAnswers).length === reading.questions.length;
-  }, [readingSubAnswers]);
+  const handleCompleteReading = useCallback(
+    (question: ReadingQuestion) => {
+      if (isTransitioningRef.current) return;
+      if (!isReadingQuestionComplete(question)) return;
 
-  const handleCompleteReading = useCallback((question: ReadingQuestion) => {
-    if (!isReadingQuestionComplete(question)) return;
+      let correctSubCount = 0;
+      const totalSubs = question.questions.length;
 
-    let correctSubCount = 0;
-    const totalSubs = question.questions.length;
+      question.questions.forEach((sub) => {
+        const userAnswer = readingSubAnswers[sub.id];
+        if (userAnswer && gradeReadingSub(sub, userAnswer)) {
+          correctSubCount++;
+        }
+      });
 
-    question.questions.forEach(sub => {
-      const userAnswer = readingSubAnswers[sub.id];
-      if (userAnswer === sub.correctOptionId) {
-        correctSubCount++;
-      }
-    });
+      const ratio = totalSubs > 0 ? correctSubCount / totalSubs : 0;
+      const isOverallCorrect = correctSubCount === totalSubs;
+      const points = calculateScore(isOverallCorrect, question, ratio);
 
-    const isOverallCorrect = correctSubCount === totalSubs;
-    const points = calculateScore(isOverallCorrect, question) * (correctSubCount / totalSubs);
+      advanceAfterAnswer(isOverallCorrect, points);
+    },
+    [
+      isReadingQuestionComplete,
+      readingSubAnswers,
+      calculateScore,
+      advanceAfterAnswer,
+    ],
+  );
 
-    const nextIndex = quizState.current_question_index + 1;
-    const isFinished = nextIndex >= questions.length;
-
-    setQuizState(prev => ({
-      ...prev,
-      correct_count: isOverallCorrect ? prev.correct_count + 1 : prev.correct_count,
-      wrong_count: isOverallCorrect ? prev.wrong_count : prev.wrong_count + 1,
-      score: prev.score + Math.round(points),
-      streak: isOverallCorrect ? prev.streak + 1 : 0,
-      status: isFinished ? 'finished' : prev.status,
-      current_question_index: isFinished ? prev.current_question_index : nextIndex
-    }));
-
-    if (!isFinished) {
-      setTimeLeft(questions[nextIndex].timeLimit);
-    }
-    
-    setReadingSubAnswers({});
-  }, [isReadingQuestionComplete, readingSubAnswers, calculateScore, quizState.current_question_index, questions]);
-
-  // --- TIMER EFFECT ---
   useEffect(() => {
-    if (quizState.status !== 'playing' || questions.length === 0 || timeLeft === 0) return;
+    if (quizState.status !== "playing" || questions.length === 0) {
+      clearTimer();
+      return;
+    }
 
     timerRef.current = setInterval(() => {
-      setTimeLeft(prev => {
+      setTimeLeft((prev) => {
+        if (isTransitioningRef.current) return prev;
         if (prev <= 1) {
+          clearTimer();
           handleTimeOut();
           return 0;
         }
-        return prev - 1;
+        const next = prev - 1;
+        timeLeftRef.current = next;
+        return next;
       });
     }, 1000);
 
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [quizState.status, questions.length, timeLeft, handleTimeOut]);
+    return clearTimer;
+  }, [
+    quizState.status,
+    quizState.current_question_index,
+    questions.length,
+    handleTimeOut,
+    clearTimer,
+  ]);
 
-  const goToPrevious = useCallback(() => {
-    setQuizState(prev => ({
-      ...prev,
-      current_question_index: Math.max(0, prev.current_question_index - 1)
-    }));
-  }, []);
+  const startQuiz = useCallback(
+    (questionSet?: QuizQuestion[]) => {
+      const pool = questionSet ?? sourceQuestions;
+      if (pool.length === 0) return;
+
+      clearTimer();
+      isTransitioningRef.current = false;
+      const shuffled = superShuffle(pool.map(normalizeTimeLimit));
+      setGameQuestions(shuffled);
+      setIsPracticeMode(!!questionSet);
+      const firstTime = shuffled[0].timeLimit;
+      setTimeLeft(firstTime);
+      timeLeftRef.current = firstTime;
+
+      setQuizState({
+        profile_id: profileId,
+        quiz_id: quizId,
+        correct_count: 0,
+        wrong_count: 0,
+        current_question_index: 0,
+        score: 0,
+        streak: 0,
+        status: "playing",
+        incorrect_questions: [],
+        currentSubQuestionIndex: 0,
+      });
+      setReadingSubAnswers({});
+    },
+    [sourceQuestions, profileId, quizId, clearTimer],
+  );
 
   const restartQuiz = useCallback(() => {
+    clearTimer();
+    isTransitioningRef.current = false;
+    setGameQuestions([]);
+    setIsPracticeMode(false);
+    setReadingSubAnswers({});
+    setTimeLeft(0);
+    timeLeftRef.current = 0;
     setQuizState({
       profile_id: profileId,
       quiz_id: quizId,
@@ -272,31 +369,44 @@ export function useQuizLogic(
       current_question_index: 0,
       score: 0,
       streak: 0,
-      status: 'idle',
+      status: "ready",
       incorrect_questions: [],
-      currentSubQuestionIndex: 0
+      currentSubQuestionIndex: 0,
     });
-    setReadingSubAnswers({});
-    setAnsweredSubQuestions({});
-    setTimeLeft(0);
-    isInitialized.current = false;
-    clearTimer();
   }, [profileId, quizId, clearTimer]);
+
+  const startPracticeWrong = useCallback(() => {
+    const wrongIds = quizState.incorrect_questions;
+    const wrongQuestions = sourceQuestions.filter((q) =>
+      wrongIds.includes(q.id),
+    );
+    if (wrongQuestions.length === 0) return;
+    startQuiz(wrongQuestions);
+  }, [quizState.incorrect_questions, sourceQuestions, startQuiz]);
+
+  const currentQuestion =
+    quizState.status === "playing"
+      ? questions[quizState.current_question_index]
+      : undefined;
 
   return {
     questions,
+    sourceQuestions,
     quizState,
     timeLeft,
+    estimatedSeconds,
     readingSubAnswers,
-    answeredSubQuestions,
-    currentQuestion: questions[quizState.current_question_index],
+    currentQuestion,
     handleAnswer,
     handleSubQuestionAnswer,
     handleCompleteReading,
-    getCurrentSubQuestion,
     isReadingQuestionComplete,
-    goToPrevious,
+    startQuiz,
     restartQuiz,
-    isQuizFinished: quizState.status === 'finished'
+    startPracticeWrong,
+    isPracticeMode,
+    isQuizFinished: quizState.status === "finished",
+    isReady: quizState.status === "ready",
+    isIdle: quizState.status === "idle",
   };
 }

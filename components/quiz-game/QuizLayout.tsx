@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 import type { ReadingQuestion } from "@/types/quiz";
 import { Progress } from "@/components/ui/progress";
 import { Clock } from "lucide-react";
@@ -16,13 +16,12 @@ interface QuizLayoutProps {
   timeLeft: number;
   currentQuestion: QuizQuestion | undefined;
   questions: QuizQuestion[];
+  questionKey: string;
   handleAnswer: (isCorrect: boolean) => void;
-  handleSubQuestionAnswer: (subId: string, optionId: string) => void;
+  handleSubQuestionAnswer: (subId: string, answer: string) => void;
   handleCompleteReading: (question: ReadingQuestion) => void;
   readingSubAnswers: Record<string, string>;
   isReadingQuestionComplete: (question?: QuizQuestion) => boolean;
-  goToPrevious: () => void;
-  restartQuiz: () => void;
 }
 
 export default function QuizLayout({
@@ -30,20 +29,23 @@ export default function QuizLayout({
   timeLeft,
   currentQuestion,
   questions,
+  questionKey,
   handleAnswer,
   handleSubQuestionAnswer,
   handleCompleteReading,
   readingSubAnswers,
   isReadingQuestionComplete,
 }: QuizLayoutProps) {
-  const rawProgress =
-    ((quizState.current_question_index ?? 0) + 1) / (questions.length || 1);
-
+  const currentIndex = quizState.current_question_index ?? 0;
+  const totalQuestions = questions.length || 1;
+  const rawProgress = (currentIndex + 1) / totalQuestions;
   const progress = Number.isFinite(rawProgress) ? rawProgress * 100 : 0;
+  const isLowTime = timeLeft <= 10 && timeLeft > 0;
+  const timeLimit = currentQuestion?.timeLimit ?? 1;
+  const timeRatio = Math.max(0, Math.min(100, (timeLeft / timeLimit) * 100));
 
   return (
     <div className="relative h-screen w-screen flex flex-col overflow-hidden text-white">
-      {/* Mesh Gradient background (subtle moving) */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900/70 to-pink-900/60" />
         <div className="absolute inset-0 opacity-80 blur-3xl">
@@ -55,40 +57,65 @@ export default function QuizLayout({
       </div>
 
       <div className="relative z-10 h-full w-full flex flex-col">
-        {/* Header - Glassmorphism */}
         <header className="sticky top-0 w-full shrink-0 backdrop-blur-md bg-white/10 border-b border-white/20 px-6 py-4 flex items-center justify-between z-50">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 md:gap-6">
             <StreakAndRank streak={quizState.streak} />
 
-            <div className="relative">
+            <div className="flex flex-col gap-1.5">
+              <span className="text-xs font-semibold text-white/70 uppercase tracking-wide">
+                Câu {currentIndex + 1}/{totalQuestions}
+              </span>
               <Progress
                 value={progress}
-                className="w-48 h-3 bg-white/20 [&>div]:bg-gradient-to-r [&>div]:from-indigo-400 via-purple-400 to-pink-400 shadow-lg [&>div]:shadow-[0_0_20px_rgba(147,51,234,0.6)]"
-              />
-              <motion.div
-                className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-75 animate-shimmer"
-                style={{ width: `${progress}%` }}
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="w-40 md:w-48 h-3 bg-white/20 [&>div]:bg-gradient-to-r [&>div]:from-indigo-400 [&>div]:via-purple-400 [&>div]:to-pink-400 [&>div]:transition-all [&>div]:duration-500 [&>div]:shadow-[0_0_16px_rgba(147,51,234,0.5)]"
               />
             </div>
           </div>
 
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 px-4 py-2 backdrop-blur-sm bg-black/20 rounded-xl">
-              <Clock className="w-5 h-5" />
-              <span className="font-mono font-bold text-lg">{timeLeft}s</span>
+          <div className="flex items-center gap-4 md:gap-6">
+            <div
+              className={cn(
+                "flex flex-col gap-1 px-4 py-2 backdrop-blur-sm rounded-xl border transition-colors",
+                isLowTime
+                  ? "bg-red-500/25 border-red-400/50 animate-pulse"
+                  : "bg-black/20 border-white/10",
+              )}
+            >
+              <div className="flex items-center gap-2">
+                <Clock
+                  className={cn(
+                    "w-5 h-5",
+                    isLowTime ? "text-red-300" : "text-white",
+                  )}
+                />
+                <span
+                  className={cn(
+                    "font-mono font-bold text-lg tabular-nums",
+                    isLowTime && "text-red-200",
+                  )}
+                >
+                  {timeLeft}s
+                </span>
+              </div>
+              <Progress
+                value={timeRatio}
+                className={cn(
+                  "w-20 h-1 bg-white/15",
+                  isLowTime
+                    ? "[&>div]:bg-red-400"
+                    : "[&>div]:bg-emerald-400/80",
+                )}
+              />
             </div>
             <ScoreBoard score={quizState.score} />
           </div>
         </header>
 
-        {/* Main Vertical Stack Content */}
-        <main className="flex-1 flex flex-col overflow-hidden">
+        <main className="flex-1 flex flex-col overflow-hidden min-h-0 pb-24">
           <div className="flex-1 min-h-0">
             <QuestionEngine
               question={currentQuestion}
+              questionKey={questionKey}
               quizState={
                 quizState as QuizState & { currentSubQuestionIndex: number }
               }
@@ -101,8 +128,7 @@ export default function QuizLayout({
           </div>
         </main>
 
-        {/* Footer - Glassmorphism */}
-        <footer className="fixed bottom-0 left-0 right-0 shrink-0 backdrop-blur-md bg-white/10/60 border-t border-white/15 py-4 flex justify-center z-50">
+        <footer className="fixed bottom-0 left-0 right-0 shrink-0 backdrop-blur-md bg-white/10 border-t border-white/15 py-4 flex justify-center z-50">
           <div className="w-full max-w-5xl flex items-center justify-center px-6">
             <ProgressStats
               correctCount={quizState.correct_count}
@@ -114,4 +140,3 @@ export default function QuizLayout({
     </div>
   );
 }
-

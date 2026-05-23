@@ -1,23 +1,130 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ChevronRight } from "lucide-react";
-import type {
-  ReadingQuestion,
-  ReadingSubQuestion,
-  MultipleChoiceOption,
-} from "@/types/quiz";
+import type { ReadingQuestion, ReadingSubQuestion } from "@/types/quiz";
+import { quizGameCopy } from "./copy";
+import { useSubQuestionMotion } from "./motion";
 
 interface ReadingCardProps {
   question: ReadingQuestion;
-  onSubAnswer: (subId: string, optionId: string) => void;
+  onSubAnswer: (subId: string, answer: string) => void;
   onComplete: (question: ReadingQuestion) => void;
   readingSubAnswers: Record<string, string>;
   currentSubQuestionIndex: number;
   isReadingQuestionComplete: () => boolean;
+}
+
+function SubQuestionInput({
+  sub,
+  userAnswer,
+  onAnswer,
+}: {
+  sub: ReadingSubQuestion;
+  userAnswer?: string;
+  onAnswer: (answer: string) => void;
+}) {
+  const [fillText, setFillText] = useState("");
+  const answered = !!userAnswer;
+
+  if (sub.type === "multiple-choice" && sub.options?.length) {
+    return (
+      <div className="space-y-3" role="group" aria-label="Lựa chọn">
+        {sub.options.map((option) => {
+          const isSelected = userAnswer === option.id;
+          const isCorrect =
+            answered && sub.correctOptionId === option.id;
+          const isWrong = answered && isSelected && !isCorrect;
+
+          return (
+            <motion.button
+              key={option.id}
+              type="button"
+              onClick={() => !answered && onAnswer(option.id)}
+              disabled={answered}
+              className={cn(
+                "w-full min-h-[72px] rounded-2xl border p-4 font-semibold text-lg text-left transition-all",
+                answered
+                  ? "cursor-default"
+                  : "border-white/20 bg-white/10 hover:border-indigo-400",
+                isCorrect && "border-emerald-400 bg-emerald-500/30",
+                isWrong && "border-red-400 bg-red-500/30",
+              )}
+            >
+              {option.text}
+            </motion.button>
+          );
+        })}
+      </div>
+    );
+  }
+
+  if (sub.type === "fill-in-the-blank") {
+    return (
+      <div className="space-y-3">
+        <Input
+          value={answered ? userAnswer : fillText}
+          onChange={(e) => setFillText(e.target.value)}
+          disabled={answered}
+          placeholder={quizGameCopy.fillBlank.placeholder}
+          className="h-16 text-xl text-center bg-white/10 border-white/20 text-white"
+        />
+        {!answered && (
+          <Button
+            className="w-full h-12"
+            disabled={!fillText.trim()}
+            onClick={() => onAnswer(fillText.trim())}
+          >
+            {quizGameCopy.fillBlank.submit}
+          </Button>
+        )}
+      </div>
+    );
+  }
+
+  if (sub.type === "true-false") {
+    const options = [
+      { value: "true", label: quizGameCopy.trueFalse.true },
+      { value: "false", label: quizGameCopy.trueFalse.false },
+    ] as const;
+
+    return (
+      <div className="grid grid-cols-2 gap-3" role="group">
+        {options.map(({ value, label }) => {
+          const isSelected = userAnswer === value;
+          const isCorrect =
+            answered &&
+            String(sub.correctAnswer) === value;
+          const isWrong = answered && isSelected && !isCorrect;
+
+          return (
+            <Button
+              key={value}
+              type="button"
+              variant="outline"
+              disabled={answered}
+              onClick={() => !answered && onAnswer(value)}
+              className={cn(
+                "h-20 text-xl font-bold",
+                isCorrect && "border-emerald-400 bg-emerald-500/30",
+                isWrong && "border-red-400 bg-red-500/30",
+              )}
+            >
+              {label}
+            </Button>
+          );
+        })}
+      </div>
+    );
+  }
+
+  return (
+    <p className="text-slate-400">{quizGameCopy.reading.noOptions}</p>
+  );
 }
 
 export default function ReadingCard({
@@ -28,154 +135,95 @@ export default function ReadingCard({
   currentSubQuestionIndex,
   isReadingQuestionComplete,
 }: ReadingCardProps) {
-  const currentSub = question.questions[
-    currentSubQuestionIndex
-  ] as ReadingSubQuestion & {
-    correctOptionId?: string;
-    options?: MultipleChoiceOption[];
-  };
-
+  const currentSub = question.questions[currentSubQuestionIndex];
   const isComplete = isReadingQuestionComplete();
   const answeredCount = Object.keys(readingSubAnswers).length;
   const totalSubs = question.questions.length;
+  const { variants: subVariants, transition: subTransition } =
+    useSubQuestionMotion();
 
-  const handleOptionClick = (optionId: string) => {
-    if (!currentSub.correctOptionId || readingSubAnswers[currentSub.id]) return;
-    onSubAnswer(currentSub.id, optionId);
+  if (!currentSub) {
+    return null;
+  }
+
+  const handleSubSubmit = (answer: string) => {
+    if (readingSubAnswers[currentSub.id]) return;
+    onSubAnswer(currentSub.id, answer);
   };
 
   return (
     <div className="w-full h-full flex flex-col overflow-hidden bg-black/10 min-h-0">
-      {/* Tầng Trên: h-[60vh] flex-row */}
-      <div className="flex-1 flex border-b border-white/10 min-h-0">
-        {/* Nửa Trái (w-1/2): Passage scrollable */}
-        <div className="w-1/2 overflow-y-auto min-h-0 p-8 scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-black/50">
-          <motion.div
-            className="h-full prose prose-xl max-w-none text-slate-200 leading-relaxed bg-white/5 backdrop-blur-xl rounded-3xl border border-white/20 p-8 shadow-2xl"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="prose prose-lg">
-              <p className="break-words whitespace-pre-wrap">
-                {question.passage}
-              </p>
-            </div>
-          </motion.div>
+      <div className="flex-1 flex flex-col lg:flex-row border-b border-white/10 min-h-0">
+        <div className="lg:w-1/2 h-[40vh] lg:h-auto overflow-y-auto p-4 md:p-6">
+          <div className="prose prose-invert max-w-none text-slate-200 leading-relaxed bg-white/5 rounded-2xl border border-white/20 p-6 whitespace-pre-wrap">
+            {question.passage}
+          </div>
         </div>
 
-        {/* Nửa Phải (w-1/2): Current subquestion centered */}
-        <div className="w-1/2 flex items-center justify-center p-8 bg-black/20">
-          <motion.div
-            className="text-center w-full max-w-3xl px-8"
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-12 leading-tight drop-shadow-2xl">
-              {currentSub.question}
-            </h2>
-            <div className="text-xl text-slate-300 font-semibold">
-              Question {currentSubQuestionIndex + 1} of {totalSubs}
-            </div>
-          </motion.div>
+        <div className="lg:w-1/2 flex flex-col p-4 md:p-6 min-h-0 overflow-y-auto">
+          <div className="flex items-center gap-2 mb-4">
+            {question.questions.map((sub, i) => (
+              <span
+                key={sub.id}
+                className={cn(
+                  "h-2.5 w-2.5 rounded-full transition-colors",
+                  i < answeredCount
+                    ? "bg-emerald-400"
+                    : i === currentSubQuestionIndex
+                      ? "bg-indigo-400 ring-2 ring-indigo-300/50"
+                      : "bg-white/25",
+                )}
+                aria-hidden
+              />
+            ))}
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSub.id}
+              variants={subVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={subTransition}
+            >
+              <h2 className="text-2xl md:text-3xl font-black text-white mb-2">
+                {currentSub.question}
+              </h2>
+              <p className="text-slate-400 mb-4">
+                {quizGameCopy.reading.questionOf(
+                  currentSubQuestionIndex + 1,
+                  totalSubs,
+                )}
+              </p>
+              <SubQuestionInput
+                key={currentSub.id}
+                sub={currentSub}
+                userAnswer={readingSubAnswers[currentSub.id]}
+                onAnswer={handleSubSubmit}
+              />
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
 
-      {/* Tầng Dưới: flex-1 bg-black/40 options + complete btn */}
-      <div className="flex-1 flex flex-col overflow-hidden min-h-0 bg-black/40 border-t border-white/20">
-        {/* Options scrollable area */}
-        <div className="flex-1 overflow-y-auto p-8 space-y-4 min-h-0 scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-black/50">
-          {currentSub.options?.map((option) => {
-            const userAnswer = readingSubAnswers[currentSub.id];
-            const isCorrect =
-              !!currentSub.correctOptionId &&
-              currentSub.correctOptionId === option.id;
-            const isAnswered = !!userAnswer;
-            const isSelected = userAnswer === option.id;
-
-            return (
-              <motion.button
-                key={option.id}
-                onClick={() => handleOptionClick(option.id)}
-                disabled={isAnswered}
-                className={cn(
-                  "w-full h-24 rounded-3xl border-3 p-6 font-bold text-xl flex items-center shadow-2xl transition-all duration-300 relative overflow-hidden group",
-                  isAnswered
-                    ? "cursor-default scale-100"
-                    : "border-white/20 bg-white/10 hover:border-indigo-400 hover:bg-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-[1.02] active:scale-98",
-                  isAnswered &&
-                    isCorrect &&
-                    "border-emerald-400 bg-emerald-500/40 shadow-emerald-500/50 !scale-105",
-                  isAnswered &&
-                    isSelected &&
-                    !isCorrect &&
-                    "border-red-400 bg-red-500/40 shadow-red-500/50 !scale-105",
-                )}
-                whileHover={isAnswered ? { scale: 1 } : { scale: 1.02 }}
-                whileTap={isAnswered ? { scale: 1 } : { scale: 0.98 }}
-              >
-                {isAnswered && (
-                  <div className="mr-6 flex-shrink-0">
-                    {isCorrect ? (
-                      <div className="w-12 h-12 bg-emerald-400/20 rounded-2xl flex items-center justify-center border-2 border-emerald-400">
-                        <span className="text-emerald-400 font-bold text-2xl">
-                          ✓
-                        </span>
-                      </div>
-                    ) : isSelected ? (
-                      <div className="w-12 h-12 bg-red-400/20 rounded-2xl flex items-center justify-center border-2 border-red-400">
-                        <span className="text-red-400 font-bold text-2xl">
-                          ✗
-                        </span>
-                      </div>
-                    ) : null}
-                  </div>
-                )}
-                <span className="flex-1 text-left leading-relaxed group-hover:text-white">
-                  {option.text}
-                </span>
-              </motion.button>
-            );
-          }) || (
-            <div className="w-full h-full flex items-center justify-center text-slate-400 text-xl">
-              No options available
-            </div>
+      <div className="p-4 md:p-6 border-t border-white/20 bg-black/50 shrink-0">
+        <Button
+          onClick={() => onComplete(question)}
+          disabled={!isComplete}
+          size="lg"
+          className={cn(
+            "w-full h-16 text-lg font-bold rounded-2xl",
+            isComplete
+              ? "bg-gradient-to-r from-emerald-500 to-teal-600"
+              : "opacity-50",
           )}
-        </div>
-
-        {/* Complete button fixed bottom */}
-        <div className="p-8 border-t border-white/30 bg-black/60">
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-          >
-            <Button
-              onClick={() => onComplete(question)}
-              disabled={!isComplete}
-              size="lg"
-              className={cn(
-                "w-full h-20 text-2xl font-black rounded-3xl shadow-2xl border-4 transition-all duration-500 flex items-center justify-center gap-3 group",
-                isComplete
-                  ? "bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-600 hover:via-teal-600 hover:to-emerald-700 border-emerald-400/50 shadow-emerald-500/50 hover:shadow-emerald-500/75 hover:scale-[1.02] hover:-translate-y-1"
-                  : "bg-gray-800/50 border-gray-600/50 cursor-not-allowed opacity-60 scale-95",
-              )}
-            >
-              <ChevronRight
-                className={cn(
-                  "w-8 h-8 transition-transform group-hover:translate-x-1",
-                  !isComplete && "opacity-50",
-                )}
-              />
-              <span className="uppercase tracking-wider">
-                {isComplete
-                  ? `Complete Reading Section (${answeredCount}/${totalSubs})`
-                  : `Answer all ${totalSubs} questions first`}
-              </span>
-            </Button>
-          </motion.div>
-        </div>
+        >
+          <ChevronRight className="w-6 h-6 mr-2" />
+          {isComplete
+            ? quizGameCopy.reading.complete(answeredCount, totalSubs)
+            : quizGameCopy.reading.answerAll(totalSubs)}
+        </Button>
       </div>
     </div>
   );

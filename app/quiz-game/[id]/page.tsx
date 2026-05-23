@@ -27,10 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const data = await getQuizById("017241f6-562d-4887-a5b1-dc4369016c1f");
-  if (!data) return [];
-
-  return [{ id: data.metadata.id }];
+  return [];
 }
 
 export default async function QuizDetailPage({ params }: Props) {

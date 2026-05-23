@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { motion, useSpring, useTransform } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 
@@ -14,6 +14,10 @@ export default function ScoreBoard({ score }: ScoreBoardProps) {
     stiffness: 100,
     damping: 20,
   });
+
+  useEffect(() => {
+    springValue.set(score);
+  }, [score, springValue]);
 
   const formattedScore = useTransform(springValue, (latest) =>
     Math.round(latest),

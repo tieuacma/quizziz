@@ -1,12 +1,16 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+
 import { motion } from "framer-motion";
-import { FillInBlankQuestion } from "@/types/quiz";
+import type { FillInBlankQuestion } from "@/types/quiz";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { gradeFillBlank } from "@/lib/quiz-game/grade";
+import { quizGameCopy } from "./copy";
+import { QUESTION_FEEDBACK_MS } from "./motion";
 
 interface FillBlankCardProps {
   question: FillInBlankQuestion;
@@ -24,93 +28,73 @@ export default function FillBlankCard({
   const checkAnswer = () => {
     if (submitted) return;
 
-    const normalizedUserAnswer = question.caseSensitive
-      ? userAnswer.trim()
-      : userAnswer.trim().toLowerCase();
-
-    const isMatch = question.answers.some((answer) =>
-      question.caseSensitive
-        ? normalizedUserAnswer === answer.trim()
-        : normalizedUserAnswer === answer.toLowerCase().trim(),
+    const match = gradeFillBlank(
+      question.answers,
+      userAnswer,
+      question.caseSensitive,
     );
 
-    setIsCorrect(isMatch);
+    setIsCorrect(match);
     setSubmitted(true);
-
-    setTimeout(() => {
-      onAnswer(isMatch);
-    }, 1200);
+    setTimeout(() => onAnswer(match), QUESTION_FEEDBACK_MS);
   };
 
-  useEffect(() => {
-    return () => {
-      setUserAnswer("");
-      setSubmitted(false);
-    };
-  }, []);
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="w-full max-w-4xl flex flex-col items-center gap-12"
-    >
-      <div className="w-full bg-white rounded-2xl shadow-md p-8 md:p-12 border border-slate-200">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 text-center leading-tight mb-12 px-4">
+    <div className="w-full h-full flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col items-center justify-center p-6 md:p-10 gap-8">
+        <motion.h2
+          className="text-3xl md:text-5xl font-black text-white text-center leading-tight max-w-4xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
           {question.question}
-        </h2>
+        </motion.h2>
 
-        <div className="flex flex-col items-center gap-8">
-          <div className="w-full max-w-3xl relative mx-auto">
-            <Input
-              value={userAnswer}
-              onChange={(e) => setUserAnswer(e.target.value)}
-              placeholder="Enter your answer here..."
-              className="w-full h-24 lg:h-28 text-3xl lg:text-4xl text-center rounded-3xl border-4 border-slate-300 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 shadow-xl transition-all p-0"
-              disabled={submitted}
-            />
-            {submitted && (
-              <motion.div
-                className={cn(
-                  "absolute inset-0 flex items-center justify-center rounded-3xl text-4xl font-black shadow-2xl transition-all duration-500 z-10",
-                  isCorrect ? "bg-emerald-500" : "bg-red-500",
-                )}
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-              >
-                {isCorrect ? (
-                  <CheckCircle className="w-20 h-20 text-white" />
-                ) : (
-                  <XCircle className="w-20 h-20 text-white" />
-                )}
-              </motion.div>
-            )}
-          </div>
-
-          {!submitted ? (
+        <div className="w-full max-w-2xl relative">
+          <Input
+            value={userAnswer}
+            onChange={(e) => setUserAnswer(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && checkAnswer()}
+            placeholder={quizGameCopy.fillBlank.placeholder}
+            className="w-full h-20 md:h-24 text-2xl md:text-3xl text-center rounded-3xl border-2 border-white/20 bg-white/10 text-white placeholder:text-slate-400"
+            disabled={submitted}
+            aria-label={quizGameCopy.fillBlank.placeholder}
+          />
+          {submitted && (
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
+              className={cn(
+                "absolute inset-0 flex items-center justify-center rounded-3xl z-10",
+                isCorrect ? "bg-emerald-500/90" : "bg-red-500/90",
+              )}
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
             >
-              <Button
-                size="lg"
-                className="w-full max-w-lg px-16 py-10 text-2xl font-bold bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 shadow-2xl"
-                onClick={checkAnswer}
-              >
-                Check Answer
-              </Button>
-            </motion.div>
-          ) : (
-            <motion.div
-              initial={{ scale: 1.1, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="text-4xl font-black text-center px-8 py-6 rounded-2xl bg-slate-100 border-4 border-slate-300"
-            >
-              {isCorrect ? "✅ Correct!" : "❌ Keep trying!"}
+              {isCorrect ? (
+                <CheckCircle className="w-16 h-16 text-white" />
+              ) : (
+                <XCircle className="w-16 h-16 text-white" />
+              )}
             </motion.div>
           )}
         </div>
+
+        {!submitted ? (
+          <Button
+            size="lg"
+            className="h-14 px-12 text-xl font-bold"
+            onClick={checkAnswer}
+            disabled={!userAnswer.trim()}
+          >
+            {quizGameCopy.fillBlank.submit}
+          </Button>
+        ) : (
+          <p className="text-2xl font-bold text-white">
+            {isCorrect
+              ? quizGameCopy.fillBlank.correct
+              : quizGameCopy.fillBlank.wrong}
+          </p>
+        )}
       </div>
-    </motion.div>
+    </div>
   );
 }
