@@ -27,7 +27,7 @@ export default function RootLayout({
       lang="vi"
       // suppressHydrationWarning cực kỳ quan trọng khi dùng dark mode hoặc thư viện theme
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark scroll-smooth`}
     >
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
