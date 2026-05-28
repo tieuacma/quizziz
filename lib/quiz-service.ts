@@ -40,10 +40,12 @@ export async function createQuiz(params: {
   description?: string
   category?: string
   defaultTime?: number
+  examTimeLimit?: number
 }): Promise<{ id: string; success: boolean }> {
   try {
     const now = new Date().toISOString()
     const defaultTime = params.defaultTime || 30
+    const examTimeLimit = params.examTimeLimit || 1800
 
     const quizDoc = {
       title: params.title,
@@ -53,6 +55,7 @@ export async function createQuiz(params: {
       createdAt: now,
       updatedAt: now,
       defaultTime,
+      examTimeLimit,
       questions: [] as QuizQuestion[],
       totalQuestions: 0,
     }
@@ -77,6 +80,7 @@ export async function updateQuiz(
     category?: string
     questions?: QuizQuestion[]
     defaultTime?: number
+    examTimeLimit?: number
   },
 ): Promise<{ success: boolean; error?: string }> {
   try {
@@ -94,6 +98,7 @@ export async function updateQuiz(
       description: params.description ?? flat.description,
       category: params.category ?? flat.category,
       defaultTime: params.defaultTime ?? flat.defaultTime,
+      examTimeLimit: params.examTimeLimit ?? flat.examTimeLimit ?? 1800,
       authorId: flat.authorId ?? null,
       createdAt: flat.createdAt,
       updatedAt: now,

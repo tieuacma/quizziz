@@ -20,6 +20,16 @@ export type QuizLoadResult =
 	| { success: true; data: ClientQuiz }
 	| { success: false; error: string };
 
+const DEFAULT_EXAM_TIME_LIMIT_SECONDS = 1800;
+
+function parseExamTimeLimitSeconds(
+	value: FormDataEntryValue | null,
+): number {
+	const raw = typeof value === "string" ? Number.parseInt(value, 10) : Number.NaN;
+	if (!Number.isFinite(raw) || raw <= 0) return DEFAULT_EXAM_TIME_LIMIT_SECONDS;
+	return raw;
+}
+
 export async function createQuizMongoAction(
 	_prev: QuizFormState,
 	formData: FormData,
@@ -30,6 +40,7 @@ export async function createQuizMongoAction(
 		const category = (formData.get("category") as string)?.trim();
 		const defaultTimeStr = formData.get("defaultTime") as string | null;
 		const defaultTime = defaultTimeStr ? parseInt(defaultTimeStr, 10) : 30;
+		const examTimeLimit = parseExamTimeLimitSeconds(formData.get("examTimeLimit"));
 
 		if (!title) {
 			return {
@@ -52,6 +63,7 @@ export async function createQuizMongoAction(
 			createdAt: now,
 			updatedAt: now,
 			defaultTime,
+			examTimeLimit,
 			questions: [] as QuizQuestion[],
 			totalQuestions: 0,
 		};
@@ -129,6 +141,7 @@ export async function updateQuizMongoAction(
 		const defaultTime = defaultTimeStr
 			? parseInt(defaultTimeStr, 10)
 			: undefined;
+		const examTimeLimit = parseExamTimeLimitSeconds(formData.get("examTimeLimit"));
 
 		const questionsJson = formData.get("questions") as string | null;
 		if (!questionsJson)
@@ -162,6 +175,8 @@ export async function updateQuizMongoAction(
 					: new Date().toISOString(),
 			updatedAt: now,
 			defaultTime: (defaultTime ?? flat.defaultTime ?? 30) as number,
+			examTimeLimit:
+				(examTimeLimit ?? (flat.examTimeLimit as number) ?? DEFAULT_EXAM_TIME_LIMIT_SECONDS) as number,
 			questions,
 			totalQuestions: questions.length,
 			slug: (flat.slug as string | undefined) ?? id,

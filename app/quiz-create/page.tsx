@@ -19,6 +19,7 @@ export default function QuizCreatePage() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [defaultTime, setDefaultTime] = useState("30");
+  const [examTimeLimitMinutes, setExamTimeLimitMinutes] = useState("30");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,6 +38,10 @@ export default function QuizCreatePage() {
       if (description) formData.append("description", description);
       if (category) formData.append("category", category);
       formData.append("defaultTime", defaultTime || "30");
+      formData.append(
+        "examTimeLimit",
+        String((parseInt(examTimeLimitMinutes || "30", 10) || 30) * 60),
+      );
 
       const result = await createQuizMongoAction(undefined, formData);
 
@@ -131,6 +136,23 @@ export default function QuizCreatePage() {
                 />
                 <p className="text-xs text-slate-500 mt-1">
                   Thời gian mặc định cho mỗi câu hỏi
+                </p>
+              </div>
+
+              <div>
+                <Label className="text-xs text-slate-400 mb-2 block flex items-center gap-2">
+                  <Clock className="w-3 h-3" /> Thời gian làm bài thi (phút)
+                </Label>
+                <Input
+                  type="number"
+                  value={examTimeLimitMinutes}
+                  onChange={(e) => setExamTimeLimitMinutes(e.target.value)}
+                  placeholder="30"
+                  min="5"
+                  max="180"
+                />
+                <p className="text-xs text-slate-500 mt-1">
+                  Dùng cho chế độ Exam (đếm tổng thời gian)
                 </p>
               </div>
 

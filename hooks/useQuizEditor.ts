@@ -238,6 +238,10 @@ export function useQuizEditor(
         formData.append("description", metadata.description);
       if (metadata?.category) formData.append("category", metadata.category);
       formData.append("defaultTime", String(defaultTime));
+      formData.append(
+        "examTimeLimit",
+        String(metadata?.examTimeLimit ?? 1800),
+      );
       formData.append("questions", JSON.stringify(questions));
 
       const result = await updateQuizMongoAction(undefined, formData);

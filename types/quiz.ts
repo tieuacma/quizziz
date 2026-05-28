@@ -97,6 +97,7 @@ export interface QuizMetadata {
   authorId?: string
   totalQuestions: number
   defaultTime: number // in seconds (per question)
+  examTimeLimit?: number // in seconds (total exam duration)
 }
 
 export interface QuizData {

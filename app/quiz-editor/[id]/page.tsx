@@ -19,6 +19,7 @@ import {
   AlertTriangle,
   X,
   Play,
+  ShieldCheck,
 } from "lucide-react";
 import { QuizQuestionType } from "@/types/quiz";
 import QuestionEditor from "@/components/quiz-create/QuestionEditor";
@@ -158,6 +159,16 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
                 Chơi thử
               </Link>
             </Button>
+            <Button variant="outline" asChild>
+              <Link
+                href={`/do-exam/${routeQuizId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ShieldCheck className="w-4 h-4 mr-2" />
+                Thi thử
+              </Link>
+            </Button>
             <Button
               onClick={handleSave}
               disabled={isSubmitting}
@@ -219,6 +230,28 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
               <Button variant="outline" size="sm" onClick={applyTimeToAll}>
                 Áp dụng cho tất cả
               </Button>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <Label className="text-slate-400">Thời gian thi (phút)</Label>
+              <Input
+                type="number"
+                className="w-24 bg-slate-950/50 border-white/10"
+                value={Math.max(
+                  1,
+                  Math.floor((metadata?.examTimeLimit ?? 1800) / 60),
+                )}
+                min={5}
+                max={240}
+                onChange={(e) =>
+                  updateMetadata({
+                    examTimeLimit:
+                      (parseInt(e.target.value, 10) || 30) * 60,
+                  })
+                }
+              />
+              <p className="text-xs text-slate-500">
+                Dùng cho chế độ Exam tại /do-exam/[id]
+              </p>
             </div>
           </CardContent>
         </Card>

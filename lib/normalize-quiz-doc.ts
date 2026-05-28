@@ -31,7 +31,10 @@ type LegacyMetadata = {
   updatedAt?: string
   totalQuestions?: number
   defaultTime?: number
+  examTimeLimit?: number
 }
+
+const DEFAULT_EXAM_TIME_LIMIT = 1800
 
 /** Canonical quiz id: root `id`, then legacy metadata.id / slug, then Mongo `_id`. */
 export function resolveQuizId(
@@ -87,6 +90,7 @@ export function normalizeRawQuizDoc(
     createdAt: doc.createdAt ?? meta.createdAt ?? now,
     updatedAt: doc.updatedAt ?? meta.updatedAt ?? now,
     defaultTime: doc.defaultTime ?? meta.defaultTime ?? 30,
+    examTimeLimit: doc.examTimeLimit ?? meta.examTimeLimit ?? DEFAULT_EXAM_TIME_LIMIT,
     totalQuestions:
       doc.totalQuestions ?? meta.totalQuestions ?? questions.length,
     questions,
@@ -137,6 +141,10 @@ export function mongoDocToQuizData(
       typeof serialized.defaultTime === 'number'
         ? serialized.defaultTime
         : Number(serialized.defaultTime ?? 30),
+    examTimeLimit:
+      typeof serialized.examTimeLimit === 'number'
+        ? serialized.examTimeLimit
+        : Number(serialized.examTimeLimit ?? DEFAULT_EXAM_TIME_LIMIT),
   }
 
   return { id: quizId, metadata, questions }

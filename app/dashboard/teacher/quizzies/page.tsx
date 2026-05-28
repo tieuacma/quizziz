@@ -114,6 +114,15 @@ export default async function TeacherQuizziesPage() {
                         Chơi thử
                       </Button>
                     </Link>
+                    <Link href={`/do-exam/${q.id}`} target="_blank">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-xs border-white/15"
+                      >
+                        Thi thử
+                      </Button>
+                    </Link>
                   </div>
                   <div className="flex gap-4 mt-3">
                     <div className="flex items-center gap-1.5">
