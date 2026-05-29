@@ -47,6 +47,7 @@ export default function QuestionEngine({
           <MultiChoiceCard
             question={q as MultipleChoiceQuestion}
             onAnswer={handleAnswer}
+            eraserActive={quizState.powerups?.active.eraser}
           />
         );
       case "fill-in-the-blank":

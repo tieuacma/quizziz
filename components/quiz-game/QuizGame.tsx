@@ -42,6 +42,11 @@ export default function QuizGame({
     isQuizFinished,
     isReady,
     isIdle,
+    activatePowerUp,
+    toggleAudioSetting,
+    powerups,
+    leaderboard,
+    audioSettings,
   } = useQuizLogic(pool, profileId, quizId);
 
   const { variants: summaryVariants, transition: summaryTransition } =
@@ -66,6 +71,8 @@ export default function QuizGame({
         estimatedSeconds={estimatedSeconds}
         isPracticeMode={isPracticeMode}
         onStart={() => startQuiz()}
+        audioSettings={audioSettings}
+        toggleAudioSetting={toggleAudioSetting}
       />
     );
   }
@@ -108,6 +115,11 @@ export default function QuizGame({
       handleCompleteReading={handleCompleteReading}
       readingSubAnswers={readingSubAnswers}
       isReadingQuestionComplete={isReadingQuestionComplete}
+      activatePowerUp={activatePowerUp}
+      powerups={powerups}
+      leaderboard={leaderboard}
+      audioSettings={audioSettings}
+      toggleAudioSetting={toggleAudioSetting}
     />
   );
 }
