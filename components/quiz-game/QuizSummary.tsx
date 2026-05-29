@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Trophy, Flame, CheckCircle, XCircle } from "lucide-react";
+import { Trophy, Flame, CheckCircle, XCircle, List, Layers } from "lucide-react";
 import { motion } from "framer-motion";
 import { QuizState, QuizQuestion } from "@/types/quiz";
 import { quizGameCopy } from "./copy";
+import FlashcardReview from "./FlashcardReview";
 
 interface QuizSummaryProps {
   quizState: QuizState;
@@ -23,6 +24,8 @@ export default function QuizSummary({
   onPracticeWrong,
   canPractice,
 }: QuizSummaryProps) {
+  const [reviewMode, setReviewMode] = useState<"list" | "flashcard">("flashcard");
+  
   const accuracy =
     quizState.correct_count + quizState.wrong_count > 0
       ? Math.round(
@@ -110,36 +113,73 @@ export default function QuizSummary({
 
           {incorrectQuestions.length > 0 ? (
             <motion.div
-              className="bg-white/90 rounded-2xl shadow-lg border border-yellow-200 overflow-hidden"
+              className="bg-white/90 rounded-2xl shadow-lg border border-emerald-200 overflow-hidden"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <div className="p-6 border-b border-yellow-200 bg-yellow-500/10">
-                <CardTitle className="flex items-center gap-3 text-xl font-bold text-yellow-800">
-                  <Flame className="w-8 h-8" />
+              <div className="flex flex-col sm:flex-row border-b border-emerald-100 bg-emerald-500/5 p-6 justify-between items-center gap-4">
+                <CardTitle className="flex items-center gap-3 text-xl font-black text-emerald-800">
+                  <Flame className="w-7 h-7 text-emerald-600 animate-pulse" />
                   {quizGameCopy.summary.reviewTitle(incorrectQuestions.length)}
                 </CardTitle>
-              </div>
-              <div className="p-6 space-y-3 max-h-64 overflow-y-auto">
-                {incorrectQuestions.map((q, index) => (
-                  <div
-                    key={q.id}
-                    className="p-4 rounded-xl bg-yellow-50 border border-yellow-200"
+
+                {/* Tab selection buttons */}
+                <div className="flex gap-2 w-full sm:w-auto shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setReviewMode("flashcard")}
+                    className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
+                      reviewMode === "flashcard"
+                        ? "bg-emerald-600 border-emerald-500 text-white shadow-md shadow-emerald-600/25"
+                        : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
+                    }`}
                   >
-                    <span className="font-bold text-yellow-700 mr-2">
-                      Q{index + 1}
-                    </span>
-                    <span className="text-gray-900">{q.question}</span>
-                    <p className="text-sm text-yellow-700 mt-2">
-                      {quizGameCopy.summary.reviewHint}
-                    </p>
-                  </div>
-                ))}
+                    <Layers className="w-4 h-4" />
+                    Thẻ 3D Flashcards
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setReviewMode("list")}
+                    className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
+                      reviewMode === "list"
+                        ? "bg-emerald-600 border-emerald-500 text-white shadow-md shadow-emerald-600/25"
+                        : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
+                    }`}
+                  >
+                    <List className="w-4 h-4" />
+                    Danh sách câu sai
+                  </button>
+                </div>
               </div>
+
+              {reviewMode === "flashcard" ? (
+                <div className="p-8 bg-white/40">
+                  <FlashcardReview questions={incorrectQuestions} />
+                </div>
+              ) : (
+                <div className="p-6 space-y-3 max-h-96 overflow-y-auto">
+                  {incorrectQuestions.map((q, index) => (
+                    <div
+                      key={q.id}
+                      className="p-4 rounded-xl bg-red-50/50 border border-red-100 flex flex-col gap-1"
+                    >
+                      <div>
+                        <span className="font-extrabold text-red-600 mr-2">
+                          Q{index + 1}
+                        </span>
+                        <span className="text-slate-800 font-bold">{q.question}</span>
+                      </div>
+                      <p className="text-xs text-slate-500 mt-1 italic">
+                        {quizGameCopy.summary.reviewHint}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </motion.div>
           ) : (
-            <p className="text-center text-emerald-700 font-medium">
+            <p className="text-center text-emerald-700 font-bold text-lg">
               {quizGameCopy.summary.noWrong}
             </p>
           )}

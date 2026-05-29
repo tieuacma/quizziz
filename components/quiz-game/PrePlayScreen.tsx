@@ -7,11 +7,15 @@ import { Button } from "@/components/ui/button";
 import { quizGameCopy } from "./copy";
 import { cn } from "@/lib/utils";
 
+import { AudioSettingsState } from "@/types/quiz";
+
 interface PrePlayScreenProps {
   questionCount: number;
   estimatedSeconds: number;
   isPracticeMode?: boolean;
   onStart: () => void;
+  audioSettings?: AudioSettingsState;
+  toggleAudioSetting?: (setting: "music" | "sfx") => void;
 }
 
 export default function PrePlayScreen({
@@ -19,6 +23,8 @@ export default function PrePlayScreen({
   estimatedSeconds,
   isPracticeMode,
   onStart,
+  audioSettings,
+  toggleAudioSetting,
 }: PrePlayScreenProps) {
   const minutes = Math.ceil(estimatedSeconds / 60);
 
@@ -64,6 +70,7 @@ export default function PrePlayScreen({
         <p className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-6">
           Chuẩn bị sẵn sàng cho bài thi trắc nghiệm tương tác
         </p>
+<<<<<<< HEAD
 
         {/* Quick Stats Grid */}
         <div className="grid grid-cols-2 gap-4 mb-8">
@@ -106,6 +113,45 @@ export default function PrePlayScreen({
         <motion.div
           animate={{ scale: [1, 1.02, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+=======
+        <p className="text-slate-400 text-sm mb-4">
+          {quizGameCopy.prePlay.estimatedTime(estimatedSeconds)}
+        </p>
+        
+        {/* Sound toggle switches */}
+        <div className="flex justify-center gap-4 mb-6">
+          <button
+            type="button"
+            onClick={() => toggleAudioSetting?.("music")}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-all cursor-pointer ${
+              audioSettings?.music
+                ? "bg-indigo-500/10 border-indigo-400/50 text-indigo-300 shadow-[0_0_12px_rgba(99,102,241,0.2)]"
+                : "bg-slate-900/40 border-slate-800 text-slate-500"
+            }`}
+          >
+            {audioSettings?.music ? "🎵 Nhạc nền: Bật" : "🔇 Nhạc nền: Tắt"}
+          </button>
+          <button
+            type="button"
+            onClick={() => toggleAudioSetting?.("sfx")}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-all cursor-pointer ${
+              audioSettings?.sfx
+                ? "bg-indigo-500/10 border-indigo-400/50 text-indigo-300 shadow-[0_0_12px_rgba(99,102,241,0.2)]"
+                : "bg-slate-900/40 border-slate-800 text-slate-500"
+            }`}
+          >
+            {audioSettings?.sfx ? "⚡ Âm thanh: Bật" : "🔇 Âm thanh: Tắt"}
+          </button>
+        </div>
+
+        <p className="text-slate-500 text-xs mb-8">
+          Trả lời xong sẽ tự chuyển sang câu tiếp theo
+        </p>
+        <Button
+          size="lg"
+          className="w-full h-14 text-lg font-bold gap-2 focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 cursor-pointer"
+          onClick={onStart}
+>>>>>>> 0f63cee8b1113dbf06ba2550584aa8f4deb963e2
         >
           <Button
             size="lg"

@@ -72,6 +72,39 @@ export type QuizQuestion =
   | ReadingQuestion
 
 // ── NEW: QuizState for Game Logic ──
+export type PowerUpType = 'freeze' | 'eraser' | 'shield' | 'double';
+
+export interface PowerUpInventory {
+  freeze: number;
+  eraser: number;
+  shield: number;
+  double: number;
+}
+
+export interface PowerUpState {
+  inventory: PowerUpInventory;
+  active: {
+    freeze: boolean;
+    shield: boolean;
+    double: boolean;
+    eraser: boolean;
+  };
+}
+
+export interface LeaderboardParticipant {
+  id: string;
+  name: string;
+  avatar: string;
+  score: number;
+  streak: number;
+  isPlayer: boolean;
+}
+
+export interface AudioSettingsState {
+  music: boolean;
+  sfx: boolean;
+}
+
 export interface QuizState {
   profile_id: string
   quiz_id: string
@@ -83,6 +116,9 @@ export interface QuizState {
   status: 'idle' | 'ready' | 'playing' | 'finished'
   incorrect_questions: string[]
   currentSubQuestionIndex?: number
+  powerups?: PowerUpState
+  leaderboard?: LeaderboardParticipant[]
+  audioSettings?: AudioSettingsState
 }
 
 

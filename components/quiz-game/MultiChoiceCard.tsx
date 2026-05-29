@@ -20,11 +20,13 @@ import {
 interface MultiChoiceCardProps {
   question: MultipleChoiceQuestion;
   onAnswer: (isCorrect: boolean) => void;
+  eraserActive?: boolean;
 }
 
 export default function MultiChoiceCard({
   question,
   onAnswer,
+  eraserActive,
 }: MultiChoiceCardProps) {
   const isMulti = question.isMultiChoice === true;
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -35,6 +37,20 @@ export default function MultiChoiceCard({
     () => parseCorrectOptionIds(question.correctOptionId),
     [question.correctOptionId],
   );
+
+  const displayedOptions = useMemo(() => {
+    if (!eraserActive) return question.options;
+
+    // Filter to keep correct options
+    const correct = question.options.filter((o) => correctIds.includes(o.id));
+    // Keep only 1 incorrect option (so 50/50 removes the rest)
+    const incorrect = question.options.filter((o) => !correctIds.includes(o.id));
+    const randomIncorrect = incorrect.sort(() => 0.5 - Math.random()).slice(0, 1);
+
+    return [...correct, ...randomIncorrect].sort((a, b) =>
+      a.id.localeCompare(b.id),
+    );
+  }, [question.options, correctIds, eraserActive]);
 
   const handleSingleClick = (optionId: string) => {
     if (submitted || selectedSingle) return;
@@ -95,7 +111,7 @@ export default function MultiChoiceCard({
           initial="initial"
           animate="animate"
         >
-          {question.options.map((option) => {
+          {displayedOptions.map((option) => {
             const isSelected = isMulti
               ? selectedIds.includes(option.id)
               : selectedSingle === option.id;

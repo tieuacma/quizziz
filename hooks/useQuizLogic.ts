@@ -6,6 +6,9 @@ import type {
   QuizState,
   MultipleChoiceQuestion,
   ReadingQuestion,
+  PowerUpType,
+  LeaderboardParticipant,
+  AudioSettingsState,
 } from "@/types/quiz";
 import { gradeReadingSub } from "@/lib/quiz-game/grade";
 import { READING_SUB_ADVANCE_MS } from "@/components/quiz-game/motion";
@@ -89,7 +92,25 @@ export function useQuizLogic(
     status: initialQuestions.length > 0 ? "ready" : "idle",
     incorrect_questions: [],
     currentSubQuestionIndex: 0,
+<<<<<<< HEAD
     maxStreak: 0,
+=======
+    powerups: {
+      inventory: { freeze: 1, eraser: 1, shield: 1, double: 1 },
+      active: { freeze: false, shield: false, double: false, eraser: false }
+    },
+    leaderboard: [
+      { id: profileId, name: "Bạn (Người chơi) 👤", avatar: "👤", score: 0, streak: 0, isPlayer: true },
+      { id: "bot-1", name: "Minh Anh ⚡", avatar: "⚡", score: 0, streak: 0, isPlayer: false },
+      { id: "bot-2", name: "Ngọc Vy 🌸", avatar: "🌸", score: 0, streak: 0, isPlayer: false },
+      { id: "bot-3", name: "Quốc Bảo 🦈", avatar: "🦈", score: 0, streak: 0, isPlayer: false },
+      { id: "bot-4", name: "Hoàng Long 🐉", avatar: "🐉", score: 0, streak: 0, isPlayer: false }
+    ],
+    audioSettings: {
+      music: true,
+      sfx: true
+    }
+>>>>>>> 0f63cee8b1113dbf06ba2550584aa8f4deb963e2
   }));
 
   const [timeLeft, setTimeLeft] = useState(0);
@@ -159,14 +180,53 @@ export function useQuizLogic(
           return prev;
         }
 
-        const newStreak = isCorrect ? streakRef.current + 1 : 0;
+        const isShieldActive = prev.powerups?.active.shield;
+        const isDoubleActive = prev.powerups?.active.double;
+
+        const isActuallyCorrect = isCorrect || isShieldActive;
+
+        let newStreak = prev.streak;
+        if (isCorrect) {
+          newStreak = prev.streak + 1;
+        } else if (!isShieldActive) {
+          newStreak = 0;
+        }
         streakRef.current = newStreak;
 
+<<<<<<< HEAD
         const nextMaxStreak = Math.max(prev.maxStreak, newStreak);
 
         const incorrect = isCorrect
+=======
+        const incorrect = isActuallyCorrect
+>>>>>>> 0f63cee8b1113dbf06ba2550584aa8f4deb963e2
           ? prev.incorrect_questions
           : [...prev.incorrect_questions, currentQuestion.id];
+
+        const actualPoints = isDoubleActive && isCorrect ? points * 2 : points;
+        const nextScore = prev.score + actualPoints;
+
+        const nextActive = prev.powerups
+          ? {
+              ...prev.powerups.active,
+              shield: false,
+              double: false,
+              eraser: false,
+            }
+          : undefined;
+
+        const nextPowerups = prev.powerups
+          ? {
+              ...prev.powerups,
+              active: nextActive!,
+            }
+          : undefined;
+
+        const nextLeaderboard = (prev.leaderboard || [])
+          .map((p) =>
+            p.isPlayer ? { ...p, score: nextScore, streak: newStreak } : p,
+          )
+          .sort((a, b) => b.score - a.score);
 
         const nextIndex = prev.current_question_index + 1;
         const isFinished = nextIndex >= questions.length;
@@ -175,11 +235,13 @@ export function useQuizLogic(
           correct_count: isCorrect
             ? prev.correct_count + 1
             : prev.correct_count,
-          wrong_count: isCorrect ? prev.wrong_count : prev.wrong_count + 1,
-          score: prev.score + points,
+          wrong_count: isActuallyCorrect ? prev.wrong_count : prev.wrong_count + 1,
+          score: nextScore,
           streak: newStreak,
           maxStreak: nextMaxStreak,
           incorrect_questions: incorrect,
+          powerups: nextPowerups,
+          leaderboard: nextLeaderboard,
         };
 
         if (isFinished) {
@@ -308,6 +370,7 @@ export function useQuizLogic(
     timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {
         if (isTransitioningRef.current) return prev;
+        if (quizState.powerups?.active.freeze) return prev;
         if (prev <= 1) {
           clearTimer();
           handleTimeOut();
@@ -323,6 +386,7 @@ export function useQuizLogic(
   }, [
     quizState.status,
     quizState.current_question_index,
+    quizState.powerups?.active.freeze,
     questions.length,
     handleTimeOut,
     clearTimer,
@@ -353,11 +417,29 @@ export function useQuizLogic(
         status: "playing",
         incorrect_questions: [],
         currentSubQuestionIndex: 0,
+<<<<<<< HEAD
         maxStreak: 0,
+=======
+        powerups: {
+          inventory: { freeze: 1, eraser: 1, shield: 1, double: 1 },
+          active: { freeze: false, shield: false, double: false, eraser: false }
+        },
+        leaderboard: [
+          { id: profileId, name: "Bạn (Người chơi) 👤", avatar: "👤", score: 0, streak: 0, isPlayer: true },
+          { id: "bot-1", name: "Minh Anh ⚡", avatar: "⚡", score: 0, streak: 0, isPlayer: false },
+          { id: "bot-2", name: "Ngọc Vy 🌸", avatar: "🌸", score: 0, streak: 0, isPlayer: false },
+          { id: "bot-3", name: "Quốc Bảo 🦈", avatar: "🦈", score: 0, streak: 0, isPlayer: false },
+          { id: "bot-4", name: "Hoàng Long 🐉", avatar: "🐉", score: 0, streak: 0, isPlayer: false }
+        ],
+        audioSettings: quizState.audioSettings || {
+          music: true,
+          sfx: true
+        }
+>>>>>>> 0f63cee8b1113dbf06ba2550584aa8f4deb963e2
       });
       setReadingSubAnswers({});
     },
-    [sourceQuestions, profileId, quizId, clearTimer],
+    [sourceQuestions, profileId, quizId, clearTimer, quizState.audioSettings],
   );
 
   const restartQuiz = useCallback(() => {
@@ -379,9 +461,129 @@ export function useQuizLogic(
       status: "ready",
       incorrect_questions: [],
       currentSubQuestionIndex: 0,
+<<<<<<< HEAD
       maxStreak: 0,
+=======
+      powerups: {
+        inventory: { freeze: 1, eraser: 1, shield: 1, double: 1 },
+        active: { freeze: false, shield: false, double: false, eraser: false }
+      },
+      leaderboard: [
+        { id: profileId, name: "Bạn (Người chơi) 👤", avatar: "👤", score: 0, streak: 0, isPlayer: true },
+        { id: "bot-1", name: "Minh Anh ⚡", avatar: "⚡", score: 0, streak: 0, isPlayer: false },
+        { id: "bot-2", name: "Ngọc Vy 🌸", avatar: "🌸", score: 0, streak: 0, isPlayer: false },
+        { id: "bot-3", name: "Quốc Bảo 🦈", avatar: "🦈", score: 0, streak: 0, isPlayer: false },
+        { id: "bot-4", name: "Hoàng Long 🐉", avatar: "🐉", score: 0, streak: 0, isPlayer: false }
+      ],
+      audioSettings: quizState.audioSettings || {
+        music: true,
+        sfx: true
+      }
+>>>>>>> 0f63cee8b1113dbf06ba2550584aa8f4deb963e2
     });
-  }, [profileId, quizId, clearTimer]);
+  }, [profileId, quizId, clearTimer, quizState.audioSettings]);
+
+  const activatePowerUp = useCallback((type: PowerUpType) => {
+    setQuizState((prev) => {
+      if (!prev.powerups) return prev;
+      const inventory = prev.powerups.inventory;
+      const active = prev.powerups.active;
+
+      if (inventory[type] <= 0) return prev;
+
+      const newInventory = {
+        ...inventory,
+        [type]: inventory[type] - 1,
+      };
+
+      const newActive = {
+        ...active,
+        [type]: true,
+      };
+
+      if (type === "freeze") {
+        setTimeout(() => {
+          setQuizState((latest) => {
+            if (!latest.powerups) return latest;
+            return {
+              ...latest,
+              powerups: {
+                ...latest.powerups,
+                active: {
+                  ...latest.powerups.active,
+                  freeze: false,
+                },
+              },
+            };
+          });
+        }, 10000);
+      }
+
+      return {
+        ...prev,
+        powerups: {
+          inventory: newInventory,
+          active: newActive,
+        },
+      };
+    });
+  }, []);
+
+  const toggleAudioSetting = useCallback((setting: 'music' | 'sfx') => {
+    setQuizState((prev) => {
+      if (!prev.audioSettings) return prev;
+      return {
+        ...prev,
+        audioSettings: {
+          ...prev.audioSettings,
+          [setting]: !prev.audioSettings[setting],
+        },
+      };
+    });
+  }, []);
+
+  useEffect(() => {
+    if (quizState.status !== "playing") return;
+
+    const interval = setInterval(() => {
+      setQuizState((prev) => {
+        if (prev.status !== "playing") return prev;
+
+        const updatedLeaderboard = (prev.leaderboard || [])
+          .map((p) => {
+            if (p.isPlayer) return p;
+            if (Math.random() > 0.55) {
+              const isCorrect = Math.random() > 0.25;
+              if (isCorrect) {
+                const nextStreak = p.streak + 1;
+                const pointsGained = Math.round(
+                  500 + Math.random() * 400 + Math.min(nextStreak * 50, 200)
+                );
+                return {
+                  ...p,
+                  score: p.score + pointsGained,
+                  streak: nextStreak,
+                };
+              } else {
+                return {
+                  ...p,
+                  streak: 0,
+                };
+              }
+            }
+            return p;
+          })
+          .sort((a, b) => b.score - a.score);
+
+        return {
+          ...prev,
+          leaderboard: updatedLeaderboard,
+        };
+      });
+    }, 4500);
+
+    return () => clearInterval(interval);
+  }, [quizState.status]);
 
   const startPracticeWrong = useCallback(() => {
     const wrongIds = quizState.incorrect_questions;
@@ -416,5 +618,10 @@ export function useQuizLogic(
     isQuizFinished: quizState.status === "finished",
     isReady: quizState.status === "ready",
     isIdle: quizState.status === "idle",
+    activatePowerUp,
+    toggleAudioSetting,
+    powerups: quizState.powerups,
+    leaderboard: quizState.leaderboard,
+    audioSettings: quizState.audioSettings,
   };
 }
