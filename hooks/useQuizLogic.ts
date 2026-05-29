@@ -77,7 +77,7 @@ export function useQuizLogic(
   const questions = gameQuestions;
 
   const [quizState, setQuizState] = useState<
-    QuizState & { currentSubQuestionIndex: number }
+    QuizState & { currentSubQuestionIndex: number; maxStreak: number }
   >(() => ({
     profile_id: profileId,
     quiz_id: quizId,
@@ -89,6 +89,7 @@ export function useQuizLogic(
     status: initialQuestions.length > 0 ? "ready" : "idle",
     incorrect_questions: [],
     currentSubQuestionIndex: 0,
+    maxStreak: 0,
   }));
 
   const [timeLeft, setTimeLeft] = useState(0);
@@ -133,8 +134,10 @@ export function useQuizLogic(
       if (!isCorrect || !question) return 0;
       const baseScore =
         (timeLeftRef.current / question.timeLimit) * 1000 * ratio;
-      const bonusScore = Math.min((streakRef.current / 3) * 200, 1000);
-      return Math.round(baseScore + bonusScore);
+      // Streak Multiplier: 1.5x score if streak is 3 or more
+      const streakMultiplier = streakRef.current >= 3 ? 1.5 : 1;
+      const bonusScore = Math.min((streakRef.current / 3) * 300, 1500);
+      return Math.round((baseScore + bonusScore) * streakMultiplier);
     },
     [],
   );
@@ -159,6 +162,8 @@ export function useQuizLogic(
         const newStreak = isCorrect ? streakRef.current + 1 : 0;
         streakRef.current = newStreak;
 
+        const nextMaxStreak = Math.max(prev.maxStreak, newStreak);
+
         const incorrect = isCorrect
           ? prev.incorrect_questions
           : [...prev.incorrect_questions, currentQuestion.id];
@@ -173,6 +178,7 @@ export function useQuizLogic(
           wrong_count: isCorrect ? prev.wrong_count : prev.wrong_count + 1,
           score: prev.score + points,
           streak: newStreak,
+          maxStreak: nextMaxStreak,
           incorrect_questions: incorrect,
         };
 
@@ -347,6 +353,7 @@ export function useQuizLogic(
         status: "playing",
         incorrect_questions: [],
         currentSubQuestionIndex: 0,
+        maxStreak: 0,
       });
       setReadingSubAnswers({});
     },
@@ -372,6 +379,7 @@ export function useQuizLogic(
       status: "ready",
       incorrect_questions: [],
       currentSubQuestionIndex: 0,
+      maxStreak: 0,
     });
   }, [profileId, quizId, clearTimer]);
 

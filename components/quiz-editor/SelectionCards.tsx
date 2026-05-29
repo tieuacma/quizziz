@@ -89,7 +89,7 @@ export default function SelectionCards({
   return (
     <div className="space-y-4">
       {/* Choice Mode Toggle Switch */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/8 gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5 gap-4">
         <div>
           <h4 className="text-sm font-bold text-white flex items-center gap-2">
             <ClipboardCheck className="w-4 h-4 text-indigo-400" />
@@ -100,7 +100,7 @@ export default function SelectionCards({
           </p>
         </div>
 
-        <div className="flex items-center gap-1 bg-slate-900 border border-white/8 p-1 rounded-xl shrink-0">
+        <div className="flex items-center gap-1 bg-slate-900 border border-white/5 p-1 rounded-xl shrink-0">
           <button
             type="button"
             onClick={() => handleModeChange(false)}
@@ -130,121 +130,128 @@ export default function SelectionCards({
         </div>
       </div>
 
-      {/* Options Cards Grid */}
+      {/* Options Cards Grid with AnimatePresence */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {options.map((option, index) => {
-          const isCorrect = correctIds.includes(option.id);
-          const letter = String.fromCharCode(65 + index);
+        <AnimatePresence initial={false}>
+          {options.map((option, index) => {
+            const isCorrect = correctIds.includes(option.id);
+            const letter = String.fromCharCode(65 + index);
 
-          return (
-            <motion.div
-              key={option.id}
-              layout
-              className={cn(
-                "group rounded-2xl border p-4.5 transition-all duration-300 relative overflow-hidden flex flex-col justify-between gap-3",
-                isCorrect
-                  ? "border-emerald-500/50 bg-emerald-500/[0.04] shadow-[0_4px_24px_rgba(16,185,129,0.06)]"
-                  : "border-white/8 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/15"
-              )}
-            >
-              {/* Correct Ambient Light Backglow */}
-              {isCorrect && (
-                <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
-              )}
+            return (
+              <motion.div
+                key={option.id}
+                layout
+                initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -15, scale: 0.95 }}
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+                whileHover={{ y: -2, transition: { duration: 0.15 } }}
+                className={cn(
+                  "group rounded-2xl border p-4.5 transition-all duration-300 relative overflow-hidden flex flex-col justify-between gap-3",
+                  isCorrect
+                    ? "border-emerald-500/50 bg-emerald-500/[0.04] shadow-[0_4px_24px_rgba(16,185,129,0.08),0_0_15px_rgba(16,185,129,0.15)]"
+                    : "border-white/5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/10"
+                )}
+              >
+                {/* Correct Ambient Light Backglow */}
+                {isCorrect && (
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+                )}
 
-              {/* Upper Section: Index Tag and Select Action */}
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <span
-                    className={cn(
-                      "font-mono text-xs font-bold px-2 py-0.5 rounded-md border",
-                      isCorrect
-                        ? "text-emerald-300 bg-emerald-500/25 border-emerald-500/30"
-                        : "text-slate-400 bg-slate-800/40 border-white/8"
-                    )}
+                {/* Upper Section: Index Tag and Select Action */}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={cn(
+                        "font-mono text-xs font-bold px-2 py-0.5 rounded-md border",
+                        isCorrect
+                          ? "text-emerald-300 bg-emerald-500/25 border-emerald-500/30"
+                          : "text-slate-400 bg-slate-800/40 border-white/5"
+                      )}
+                    >
+                      {letter}
+                    </span>
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                      Lựa chọn {index + 1}
+                    </span>
+                  </div>
+
+                  {/* Selection Check Circle Trigger Area */}
+                  <button
+                    type="button"
+                    onClick={() => toggleOptionSelection(option.id)}
+                    className="cursor-pointer focus:outline-none"
                   >
-                    {letter}
-                  </span>
-                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                    Đáp án {index + 1}
-                  </span>
+                    <AnimatePresence mode="wait">
+                      {isCorrect ? (
+                        <motion.div
+                          key="selected"
+                          initial={{ scale: 0.7, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          exit={{ scale: 0.7, opacity: 0 }}
+                          transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                          className="text-emerald-400"
+                        >
+                          <CheckCircle2 className="w-5 h-5 fill-emerald-400/15" />
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="unselected"
+                          initial={{ scale: 0.8, opacity: 0.5 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          className="text-slate-500 group-hover:text-slate-300 transition-colors"
+                        >
+                          <Circle className="w-5 h-5" />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </button>
                 </div>
 
-                {/* Selection Check Circle Trigger Area */}
-                <button
-                  type="button"
-                  onClick={() => toggleOptionSelection(option.id)}
-                  className="cursor-pointer focus:outline-none"
-                >
-                  <AnimatePresence mode="wait">
-                    {isCorrect ? (
-                      <motion.div
-                        key="selected"
-                        initial={{ scale: 0.7, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0.7, opacity: 0 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                        className="text-emerald-400"
-                      >
-                        <CheckCircle2 className="w-5 h-5 fill-emerald-400/15" />
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        key="unselected"
-                        initial={{ scale: 0.8, opacity: 0.5 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        className="text-slate-500 group-hover:text-slate-300 transition-colors"
-                      >
-                        <Circle className="w-5 h-5" />
-                      </motion.div>
+                {/* Middle Section: Option Edit Input */}
+                <div className="relative">
+                  <Input
+                    value={option.text}
+                    onChange={(e) => updateOptionText(option.id, e.target.value)}
+                    placeholder={`Nhập nội dung lựa chọn ${letter}...`}
+                    className={cn(
+                      "w-full bg-slate-950/40 border-white/5 hover:border-white/10 focus:border-indigo-500 focus:bg-slate-900/50 text-xs px-3.5 py-2.5 rounded-xl transition-all placeholder:text-slate-600",
+                      isCorrect && "border-emerald-500/20 focus:border-emerald-500"
                     )}
-                  </AnimatePresence>
-                </button>
-              </div>
+                  />
+                </div>
 
-              {/* Middle Section: Option Edit Input */}
-              <div className="relative">
-                <Input
-                  value={option.text}
-                  onChange={(e) => updateOptionText(option.id, e.target.value)}
-                  placeholder={`Nhập nội dung lựa chọn ${letter}...`}
-                  className={cn(
-                    "w-full bg-slate-950/40 border-white/8 hover:border-white/12 focus:border-indigo-500 focus:bg-slate-900/50 text-xs px-3.5 py-2 rounded-xl transition-all placeholder:text-slate-600",
-                    isCorrect && "border-emerald-500/20 focus:border-emerald-500"
-                  )}
-                />
-              </div>
-
-              {/* Lower Section: Action Buttons */}
-              <div className="flex items-center justify-between border-t border-white/[0.04] pt-2.5 mt-1">
-                <button
-                  type="button"
-                  onClick={() => toggleOptionSelection(option.id)}
-                  className={cn(
-                    "text-[10px] font-bold uppercase tracking-wider cursor-pointer select-none",
-                    isCorrect
-                      ? "text-emerald-400 hover:text-emerald-300"
-                      : "text-slate-500 hover:text-slate-300 transition-colors"
-                  )}
-                >
-                  {isCorrect ? "Được chọn là đúng" : "Đánh dấu đáp án đúng"}
-                </button>
-
-                {options.length > 2 && (
-                  <Button
+                {/* Lower Section: Action Buttons */}
+                <div className="flex items-center justify-between border-t border-white/[0.04] pt-2.5 mt-1">
+                  <button
                     type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => removeOption(option.id)}
-                    className="h-7 w-7 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg p-0 transition-colors"
+                    onClick={() => toggleOptionSelection(option.id)}
+                    className={cn(
+                      "text-[10px] font-bold uppercase tracking-wider cursor-pointer select-none",
+                      isCorrect
+                        ? "text-emerald-400 hover:text-emerald-300"
+                        : "text-slate-500 hover:text-slate-300 transition-colors"
+                    )}
                   >
-                    <Trash2 className="h-3.5 h-3.5" />
-                  </Button>
-                )}
-              </div>
-            </motion.div>
-          );
-        })}
+                    {isCorrect ? "Đáp án chính xác" : "Chọn làm đáp án đúng"}
+                  </button>
+
+                  {options.length > 2 && (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => removeOption(option.id)}
+                      className="h-7 w-7 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg p-0 transition-colors cursor-pointer"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </Button>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
       </div>
 
       {/* Add Option Trigger button */}
@@ -252,7 +259,7 @@ export default function SelectionCards({
         type="button"
         variant="outline"
         onClick={addOption}
-        className="w-full sm:w-auto gap-2 bg-slate-950/20 border-white/8 hover:bg-indigo-500/10 hover:border-indigo-500/30 text-xs py-2 px-4 rounded-xl transition-all text-slate-300 hover:text-indigo-400 cursor-pointer"
+        className="w-full sm:w-auto gap-2 bg-slate-950/20 border-white/5 hover:bg-indigo-500/10 hover:border-indigo-500/30 text-xs py-2 px-4 rounded-xl transition-all text-slate-300 hover:text-indigo-400 cursor-pointer"
       >
         <Plus className="h-3.5 w-3.5" />
         Thêm lựa chọn mới

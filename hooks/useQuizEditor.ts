@@ -53,6 +53,135 @@ export function useQuizEditor(
 
   const markDirty = useCallback(() => setIsDirty(true), []);
 
+  // ── Undo / Redo History State ──
+  const [history, setHistory] = useState<{ metadata: QuizMetadata | null; questions: QuizQuestion[] }[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const isHistoryActionRef = useRef(false);
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const pushHistoryDebounced = useCallback((meta: QuizMetadata | null, quest: QuizQuestion[]) => {
+    if (isHistoryActionRef.current) {
+      isHistoryActionRef.current = false;
+      return;
+    }
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+    debounceTimerRef.current = setTimeout(() => {
+      setHistory((prev) => {
+        const cleanHistory = prev.slice(0, historyIndex + 1);
+        const currentItem = cleanHistory[historyIndex];
+        if (currentItem && JSON.stringify(currentItem) === JSON.stringify({ metadata: meta, questions: quest })) {
+          return prev;
+        }
+        const nextHistory = [...cleanHistory, { metadata: meta ? { ...meta } : null, questions: structuredClone(quest) }];
+        if (nextHistory.length > 50) {
+          nextHistory.shift();
+        }
+        return nextHistory;
+      });
+      setHistoryIndex((prev) => {
+        const nextIndex = prev + 1;
+        return nextIndex >= 50 ? 49 : nextIndex;
+      });
+    }, 400);
+  }, [historyIndex]);
+
+  useEffect(() => {
+    if (metadata === null && questions.length === 0) return;
+    if (historyIndex === -1) return;
+    pushHistoryDebounced(metadata, questions);
+  }, [metadata, questions, pushHistoryDebounced, historyIndex]);
+
+  const undo = useCallback(() => {
+    if (historyIndex > 0) {
+      const prevIndex = historyIndex - 1;
+      const snapshot = history[prevIndex];
+      if (snapshot) {
+        isHistoryActionRef.current = true;
+        setMetadata(snapshot.metadata);
+        setQuestions(snapshot.questions);
+        setHistoryIndex(prevIndex);
+        setIsDirty(true);
+        addToast("Đã hoàn tác thao tác", "info");
+      }
+    }
+  }, [history, historyIndex, addToast]);
+
+  const redo = useCallback(() => {
+    if (historyIndex < history.length - 1) {
+      const nextIndex = historyIndex + 1;
+      const snapshot = history[nextIndex];
+      if (snapshot) {
+        isHistoryActionRef.current = true;
+        setMetadata(snapshot.metadata);
+        setQuestions(snapshot.questions);
+        setHistoryIndex(nextIndex);
+        setIsDirty(true);
+        addToast("Đã khôi phục thao tác", "info");
+      }
+    }
+  }, [history, historyIndex, addToast]);
+
+  const canUndo = historyIndex > 0;
+  const canRedo = historyIndex < history.length - 1;
+
+  // ── Import / Export JSON ──
+  const exportToJSON = useCallback(() => {
+    if (!metadata) return;
+    const dataStr = JSON.stringify({ metadata, questions }, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+    
+    const exportFileDefaultName = `quiz-${metadata.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") || "editor"}.json`;
+    
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
+    addToast("Đã xuất tệp tin JSON thành công!", "success");
+  }, [metadata, questions, addToast]);
+
+  const importFromJSON = useCallback((jsonString: string) => {
+    try {
+      const parsed = JSON.parse(jsonString);
+      if (!parsed.questions || !Array.isArray(parsed.questions)) {
+        throw new Error("Tệp JSON không chứa danh sách câu hỏi hợp lệ");
+      }
+      
+      let newMetadata = metadata;
+      if (parsed.metadata) {
+        newMetadata = {
+          ...metadata,
+          ...parsed.metadata,
+          id: routeQuizId,
+          updatedAt: new Date().toISOString()
+        } as QuizMetadata;
+      }
+      
+      const newQuestions = parsed.questions.map((q: any) => {
+        if (!q.id) q.id = crypto.randomUUID();
+        if (!q.type) q.type = "multiple-choice";
+        if (typeof q.timeLimit !== "number") q.timeLimit = metadata?.defaultTime ?? 30;
+        if (!q.difficulty) q.difficulty = "medium";
+        return q as QuizQuestion;
+      });
+      
+      isHistoryActionRef.current = true;
+      setMetadata(newMetadata);
+      setQuestions(newQuestions);
+      setHistory((prev) => {
+        const cleanHistory = prev.slice(0, historyIndex + 1);
+        return [...cleanHistory, { metadata: newMetadata, questions: newQuestions }];
+      });
+      setHistoryIndex((prev) => prev + 1);
+      setIsDirty(true);
+      addToast(`Nhập dữ liệu thành công! Đã tải ${newQuestions.length} câu hỏi.`, "success");
+    } catch (err) {
+      console.error(err);
+      addToast(err instanceof Error ? err.message : "Tệp tin JSON không đúng định dạng cấu trúc Quiz", "error");
+    }
+  }, [metadata, routeQuizId, addToast, historyIndex]);
+
   useEffect(() => {
     let cancelled = false;
 
@@ -70,6 +199,9 @@ export function useQuizEditor(
             questions: result.data.questions ?? [],
           });
           setIsDirty(false);
+          // Initialize history
+          setHistory([{ metadata: result.data.metadata, questions: result.data.questions ?? [] }]);
+          setHistoryIndex(0);
         } else {
           const message =
             result.success === false ? result.error : "Không tìm thấy quiz";
@@ -108,28 +240,28 @@ export function useQuizEditor(
     return () => window.removeEventListener("beforeunload", onBeforeUnload);
   }, [isDirty]);
 
-  const addQuestion = (type: QuizQuestionType) => {
+  const addQuestion = useCallback((type: QuizQuestionType) => {
     const newQuestion = createEmptyQuestion(type, defaultTime);
     setQuestions((prev) => [...prev, newQuestion]);
     setExpandedQuestion(newQuestion.id);
     setSelectedQuestionId(newQuestion.id);
     markDirty();
     addToast(`Đã thêm câu hỏi ${QuestionTypeLabel[type]}`, "info");
-  };
+  }, [defaultTime, markDirty, addToast]);
 
-  const removeQuestion = (id: string) => {
+  const removeQuestion = useCallback((id: string) => {
     setQuestions((prev) => prev.filter((q) => q.id !== id));
     if (expandedQuestion === id) setExpandedQuestion(null);
     if (selectedQuestionId === id) setSelectedQuestionId(null);
     markDirty();
-  };
+  }, [expandedQuestion, selectedQuestionId, markDirty]);
 
-  const updateQuestion = (id: string, updates: QuizQuestion) => {
+  const updateQuestion = useCallback((id: string, updates: QuizQuestion) => {
     setQuestions((prev) =>
       prev.map((q) => (q.id === id ? updates : q)),
     );
     markDirty();
-  };
+  }, [markDirty]);
 
   const ensureDraftForQuestion = useCallback((question: QuizQuestion) => {
     setDraftQuestions((prev) => {
@@ -138,7 +270,7 @@ export function useQuizEditor(
     });
   }, []);
 
-  const toggleExpandQuestion = (qid: string) => {
+  const toggleExpandQuestion = useCallback((qid: string) => {
     setExpandedQuestion((prev) => {
       if (prev === qid) return null;
       const q = questions.find((item) => item.id === qid);
@@ -146,9 +278,9 @@ export function useQuizEditor(
       return qid;
     });
     setSelectedQuestionId(qid);
-  };
+  }, [questions, ensureDraftForQuestion]);
 
-  const cancelQuestionEdit = (qid: string) => {
+  const cancelQuestionEdit = useCallback((qid: string) => {
     const snapshot = draftQuestions[qid];
     if (!snapshot) {
       addToast("Chưa có bản lưu tạm để hủy", "error");
@@ -163,18 +295,18 @@ export function useQuizEditor(
       delete next[qid];
       return next;
     });
-  };
+  }, [draftQuestions, addToast]);
 
-  const closeQuestionEdit = (qid: string) => {
+  const closeQuestionEdit = useCallback((qid: string) => {
     setExpandedQuestion(null);
     setDraftQuestions((prev) => {
       const next = { ...prev };
       delete next[qid];
       return next;
     });
-  };
+  }, []);
 
-  const moveQuestion = (index: number, direction: "up" | "down") => {
+  const moveQuestion = useCallback((index: number, direction: "up" | "down") => {
     if (direction === "up" && index === 0) return;
     if (direction === "down" && index === questions.length - 1) return;
     const newQuestions = [...questions];
@@ -185,22 +317,22 @@ export function useQuizEditor(
     ];
     setQuestions(newQuestions);
     markDirty();
-  };
+  }, [questions, markDirty]);
 
-  const applyTimeToAll = () => {
+  const applyTimeToAll = useCallback(() => {
     setQuestions((prev) =>
       prev.map((q) => ({ ...q, timeLimit: defaultTime })),
     );
     markDirty();
     addToast(`Đã áp dụng ${defaultTime} giây cho tất cả câu hỏi`, "info");
-  };
+  }, [defaultTime, markDirty, addToast]);
 
-  const updateMetadata = (updates: Partial<QuizMetadata>) => {
+  const updateMetadata = useCallback((updates: Partial<QuizMetadata>) => {
     setMetadata((prev) => (prev ? { ...prev, ...updates } : prev));
     markDirty();
-  };
+  }, [markDirty]);
 
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     if (questions.length === 0) {
       addToast("Vui lòng thêm ít nhất một câu hỏi", "error");
       return;
@@ -260,7 +392,61 @@ export function useQuizEditor(
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [questions, metadata, defaultTime, routeQuizId, addToast]);
+
+  // ── Keyboard Shortcuts Listener ──
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't trigger shortcuts if editing inside text inputs (unless Ctrl combination)
+      const isInput = e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement;
+      
+      // Ctrl+S: Save Quiz
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s") {
+        e.preventDefault();
+        void handleSave();
+        return;
+      }
+
+      // Ctrl+Z: Undo
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") {
+        e.preventDefault();
+        undo();
+        return;
+      }
+
+      // Ctrl+Y: Redo
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "y") {
+        e.preventDefault();
+        redo();
+        return;
+      }
+
+      // If typing inside form elements, avoid other shortcuts
+      if (isInput) return;
+
+      // Alt+1 to Alt+4: Add Questions
+      if (e.altKey && e.key === "1") {
+        e.preventDefault();
+        addQuestion("multiple-choice");
+      } else if (e.altKey && e.key === "2") {
+        e.preventDefault();
+        addQuestion("fill-in-the-blank");
+      } else if (e.altKey && e.key === "3") {
+        e.preventDefault();
+        addQuestion("true-false");
+      } else if (e.altKey && e.key === "4") {
+        e.preventDefault();
+        addQuestion("reading");
+      } else if (e.altKey && e.key.toLowerCase() === "n") {
+        // Alt+N also adds multiple choice
+        e.preventDefault();
+        addQuestion("multiple-choice");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleSave, undo, redo, addQuestion]);
 
   return {
     isLoading,
@@ -283,5 +469,11 @@ export function useQuizEditor(
     applyTimeToAll,
     updateMetadata,
     handleSave,
+    undo,
+    redo,
+    canUndo,
+    canRedo,
+    exportToJSON,
+    importFromJSON,
   };
 }
