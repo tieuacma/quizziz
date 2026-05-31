@@ -44,8 +44,11 @@ export default function MultiChoiceCard({
     // Filter to keep correct options
     const correct = question.options.filter((o) => correctIds.includes(o.id));
     // Keep only 1 incorrect option (so 50/50 removes the rest)
-    const incorrect = question.options.filter((o) => !correctIds.includes(o.id));
-    const randomIncorrect = incorrect.sort(() => 0.5 - Math.random()).slice(0, 1);
+    const incorrect = question.options.filter(
+      (o) => !correctIds.includes(o.id),
+    );
+    // Avoid Math.random() during render (impure). Pick a deterministic incorrect option.
+    const randomIncorrect = incorrect.slice(0, 1);
 
     return [...correct, ...randomIncorrect].sort((a, b) =>
       a.id.localeCompare(b.id),

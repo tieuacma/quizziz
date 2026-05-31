@@ -10,10 +10,16 @@ import type {
   LeaderboardParticipant,
   AudioSettingsState,
 } from "@/types/quiz";
+
 import { gradeReadingSub } from "@/lib/quiz-game/grade";
 import { READING_SUB_ADVANCE_MS } from "@/components/quiz-game/motion";
 
 const DEFAULT_TIME_LIMIT = 180;
+
+type QuizStateWithExtras = QuizState & {
+  currentSubQuestionIndex: number;
+  maxStreak: number;
+};
 
 export function superShuffle<T extends QuizQuestion[]>(questions: T): T {
   const globalShuffled = [...questions];
@@ -56,19 +62,13 @@ export function superShuffle<T extends QuizQuestion[]>(questions: T): T {
 function normalizeTimeLimit(q: QuizQuestion): QuizQuestion {
   const raw =
     q.timeLimit ??
-    ("defaultTime" in q
-      ? (q as QuizQuestion & { defaultTime?: number }).defaultTime
-      : undefined);
-  const timeLimit =
-    typeof raw === "number" && raw > 0 ? raw : DEFAULT_TIME_LIMIT;
+    ("defaultTime" in q ? (q as QuizQuestion & { defaultTime?: number }).defaultTime : undefined);
+
+  const timeLimit = typeof raw === "number" && raw > 0 ? raw : DEFAULT_TIME_LIMIT;
   return { ...q, timeLimit };
 }
 
-export function useQuizLogic(
-  initialQuestions: QuizQuestion[],
-  profileId: string,
-  quizId: string,
-) {
+export function useQuizLogic(initialQuestions: QuizQuestion[], profileId: string, quizId: string) {
   const sourceQuestions = useMemo(
     () => initialQuestions.map(normalizeTimeLimit),
     [initialQuestions],
@@ -79,9 +79,9 @@ export function useQuizLogic(
 
   const questions = gameQuestions;
 
-  const [quizState, setQuizState] = useState<
-    QuizState & { currentSubQuestionIndex: number; maxStreak: number }
-  >(() => ({
+  const DEFAULT_AUDIO: AudioSettingsState = { music: true, sfx: true };
+
+  const [quizState, setQuizState] = useState<QuizStateWithExtras>(() => ({
     profile_id: profileId,
     quiz_id: quizId,
     correct_count: 0,
@@ -92,42 +92,30 @@ export function useQuizLogic(
     status: initialQuestions.length > 0 ? "ready" : "idle",
     incorrect_questions: [],
     currentSubQuestionIndex: 0,
-<<<<<<< HEAD
     maxStreak: 0,
-=======
     powerups: {
       inventory: { freeze: 1, eraser: 1, shield: 1, double: 1 },
-      active: { freeze: false, shield: false, double: false, eraser: false }
+      active: { freeze: false, shield: false, double: false, eraser: false },
     },
     leaderboard: [
       { id: profileId, name: "Bạn (Người chơi) 👤", avatar: "👤", score: 0, streak: 0, isPlayer: true },
       { id: "bot-1", name: "Minh Anh ⚡", avatar: "⚡", score: 0, streak: 0, isPlayer: false },
       { id: "bot-2", name: "Ngọc Vy 🌸", avatar: "🌸", score: 0, streak: 0, isPlayer: false },
       { id: "bot-3", name: "Quốc Bảo 🦈", avatar: "🦈", score: 0, streak: 0, isPlayer: false },
-      { id: "bot-4", name: "Hoàng Long 🐉", avatar: "🐉", score: 0, streak: 0, isPlayer: false }
+      { id: "bot-4", name: "Hoàng Long 🐉", avatar: "🐉", score: 0, streak: 0, isPlayer: false },
     ],
-    audioSettings: {
-      music: true,
-      sfx: true
-    }
->>>>>>> 0f63cee8b1113dbf06ba2550584aa8f4deb963e2
+    audioSettings: DEFAULT_AUDIO,
   }));
 
   const [timeLeft, setTimeLeft] = useState(0);
   const timeLeftRef = useRef(0);
-  const [readingSubAnswers, setReadingSubAnswers] = useState<
-    Record<string, string>
-  >({});
+  const [readingSubAnswers, setReadingSubAnswers] = useState<Record<string, string>>({});
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const streakRef = useRef(0);
   const isTransitioningRef = useRef(false);
 
   const estimatedSeconds = useMemo(
-    () =>
-      sourceQuestions.reduce(
-        (sum, q) => sum + (q.timeLimit ?? DEFAULT_TIME_LIMIT),
-        0,
-      ),
+    () => sourceQuestions.reduce((sum, q) => sum + (q.timeLimit ?? DEFAULT_TIME_LIMIT), 0),
     [sourceQuestions],
   );
 
@@ -153,9 +141,7 @@ export function useQuizLogic(
   const calculateScore = useCallback(
     (isCorrect: boolean, question?: QuizQuestion, ratio = 1) => {
       if (!isCorrect || !question) return 0;
-      const baseScore =
-        (timeLeftRef.current / question.timeLimit) * 1000 * ratio;
-      // Streak Multiplier: 1.5x score if streak is 3 or more
+      const baseScore = (timeLeftRef.current / question.timeLimit) * 1000 * ratio;
       const streakMultiplier = streakRef.current >= 3 ? 1.5 : 1;
       const bonusScore = Math.min((streakRef.current / 3) * 300, 1500);
       return Math.round((baseScore + bonusScore) * streakMultiplier);
@@ -182,7 +168,6 @@ export function useQuizLogic(
 
         const isShieldActive = prev.powerups?.active.shield;
         const isDoubleActive = prev.powerups?.active.double;
-
         const isActuallyCorrect = isCorrect || isShieldActive;
 
         let newStreak = prev.streak;
@@ -193,17 +178,13 @@ export function useQuizLogic(
         }
         streakRef.current = newStreak;
 
-<<<<<<< HEAD
         const nextMaxStreak = Math.max(prev.maxStreak, newStreak);
 
-        const incorrect = isCorrect
-=======
         const incorrect = isActuallyCorrect
->>>>>>> 0f63cee8b1113dbf06ba2550584aa8f4deb963e2
           ? prev.incorrect_questions
           : [...prev.incorrect_questions, currentQuestion.id];
 
-        const actualPoints = isDoubleActive && isCorrect ? points * 2 : points;
+        const actualPoints = isDoubleActive && isActuallyCorrect ? points * 2 : points;
         const nextScore = prev.score + actualPoints;
 
         const nextActive = prev.powerups
@@ -223,7 +204,7 @@ export function useQuizLogic(
           : undefined;
 
         const nextLeaderboard = (prev.leaderboard || [])
-          .map((p) =>
+          .map((p: LeaderboardParticipant) =>
             p.isPlayer ? { ...p, score: nextScore, streak: newStreak } : p,
           )
           .sort((a, b) => b.score - a.score);
@@ -231,10 +212,9 @@ export function useQuizLogic(
         const nextIndex = prev.current_question_index + 1;
         const isFinished = nextIndex >= questions.length;
 
-        const baseUpdate = {
-          correct_count: isCorrect
-            ? prev.correct_count + 1
-            : prev.correct_count,
+        const baseUpdate: QuizStateWithExtras = {
+          ...prev,
+          correct_count: isCorrect ? prev.correct_count + 1 : prev.correct_count,
           wrong_count: isActuallyCorrect ? prev.wrong_count : prev.wrong_count + 1,
           score: nextScore,
           streak: newStreak,
@@ -242,6 +222,8 @@ export function useQuizLogic(
           incorrect_questions: incorrect,
           powerups: nextPowerups,
           leaderboard: nextLeaderboard,
+          // keep other fields from prev; we'll override indexes/status below
+          currentSubQuestionIndex: prev.currentSubQuestionIndex,
         };
 
         if (isFinished) {
@@ -250,7 +232,7 @@ export function useQuizLogic(
             setReadingSubAnswers({});
             releaseTransition();
           });
-          return { ...prev, ...baseUpdate, status: "finished" as const };
+          return { ...baseUpdate, status: "finished" as const };
         }
 
         const nextTime = questions[nextIndex].timeLimit;
@@ -262,7 +244,6 @@ export function useQuizLogic(
         });
 
         return {
-          ...prev,
           ...baseUpdate,
           current_question_index: nextIndex,
           currentSubQuestionIndex: 0,
@@ -307,10 +288,7 @@ export function useQuizLogic(
       const readingQuestion = currentQuestion as ReadingQuestion;
       setTimeout(() => {
         setQuizState((prev) => {
-          if (
-            prev.currentSubQuestionIndex <
-            readingQuestion.questions.length - 1
-          ) {
+          if (prev.currentSubQuestionIndex < readingQuestion.questions.length - 1) {
             return {
               ...prev,
               currentSubQuestionIndex: prev.currentSubQuestionIndex + 1,
@@ -353,12 +331,7 @@ export function useQuizLogic(
 
       advanceAfterAnswer(isOverallCorrect, points);
     },
-    [
-      isReadingQuestionComplete,
-      readingSubAnswers,
-      calculateScore,
-      advanceAfterAnswer,
-    ],
+    [isReadingQuestionComplete, readingSubAnswers, calculateScore, advanceAfterAnswer],
   );
 
   useEffect(() => {
@@ -399,9 +372,11 @@ export function useQuizLogic(
 
       clearTimer();
       isTransitioningRef.current = false;
+
       const shuffled = superShuffle(pool.map(normalizeTimeLimit));
       setGameQuestions(shuffled);
       setIsPracticeMode(!!questionSet);
+
       const firstTime = shuffled[0].timeLimit;
       setTimeLeft(firstTime);
       timeLeftRef.current = firstTime;
@@ -417,29 +392,24 @@ export function useQuizLogic(
         status: "playing",
         incorrect_questions: [],
         currentSubQuestionIndex: 0,
-<<<<<<< HEAD
         maxStreak: 0,
-=======
         powerups: {
           inventory: { freeze: 1, eraser: 1, shield: 1, double: 1 },
-          active: { freeze: false, shield: false, double: false, eraser: false }
+          active: { freeze: false, shield: false, double: false, eraser: false },
         },
         leaderboard: [
           { id: profileId, name: "Bạn (Người chơi) 👤", avatar: "👤", score: 0, streak: 0, isPlayer: true },
           { id: "bot-1", name: "Minh Anh ⚡", avatar: "⚡", score: 0, streak: 0, isPlayer: false },
           { id: "bot-2", name: "Ngọc Vy 🌸", avatar: "🌸", score: 0, streak: 0, isPlayer: false },
           { id: "bot-3", name: "Quốc Bảo 🦈", avatar: "🦈", score: 0, streak: 0, isPlayer: false },
-          { id: "bot-4", name: "Hoàng Long 🐉", avatar: "🐉", score: 0, streak: 0, isPlayer: false }
+          { id: "bot-4", name: "Hoàng Long 🐉", avatar: "🐉", score: 0, streak: 0, isPlayer: false },
         ],
-        audioSettings: quizState.audioSettings || {
-          music: true,
-          sfx: true
-        }
->>>>>>> 0f63cee8b1113dbf06ba2550584aa8f4deb963e2
+        audioSettings: DEFAULT_AUDIO,
       });
+
       setReadingSubAnswers({});
     },
-    [sourceQuestions, profileId, quizId, clearTimer, quizState.audioSettings],
+    [sourceQuestions, profileId, quizId, clearTimer],
   );
 
   const restartQuiz = useCallback(() => {
@@ -450,6 +420,7 @@ export function useQuizLogic(
     setReadingSubAnswers({});
     setTimeLeft(0);
     timeLeftRef.current = 0;
+
     setQuizState({
       profile_id: profileId,
       quiz_id: quizId,
@@ -461,27 +432,21 @@ export function useQuizLogic(
       status: "ready",
       incorrect_questions: [],
       currentSubQuestionIndex: 0,
-<<<<<<< HEAD
       maxStreak: 0,
-=======
       powerups: {
         inventory: { freeze: 1, eraser: 1, shield: 1, double: 1 },
-        active: { freeze: false, shield: false, double: false, eraser: false }
+        active: { freeze: false, shield: false, double: false, eraser: false },
       },
       leaderboard: [
         { id: profileId, name: "Bạn (Người chơi) 👤", avatar: "👤", score: 0, streak: 0, isPlayer: true },
         { id: "bot-1", name: "Minh Anh ⚡", avatar: "⚡", score: 0, streak: 0, isPlayer: false },
         { id: "bot-2", name: "Ngọc Vy 🌸", avatar: "🌸", score: 0, streak: 0, isPlayer: false },
         { id: "bot-3", name: "Quốc Bảo 🦈", avatar: "🦈", score: 0, streak: 0, isPlayer: false },
-        { id: "bot-4", name: "Hoàng Long 🐉", avatar: "🐉", score: 0, streak: 0, isPlayer: false }
+        { id: "bot-4", name: "Hoàng Long 🐉", avatar: "🐉", score: 0, streak: 0, isPlayer: false },
       ],
-      audioSettings: quizState.audioSettings || {
-        music: true,
-        sfx: true
-      }
->>>>>>> 0f63cee8b1113dbf06ba2550584aa8f4deb963e2
+      audioSettings: DEFAULT_AUDIO,
     });
-  }, [profileId, quizId, clearTimer, quizState.audioSettings]);
+  }, [profileId, quizId, clearTimer]);
 
   const activatePowerUp = useCallback((type: PowerUpType) => {
     setQuizState((prev) => {
@@ -529,7 +494,7 @@ export function useQuizLogic(
     });
   }, []);
 
-  const toggleAudioSetting = useCallback((setting: 'music' | 'sfx') => {
+  const toggleAudioSetting = useCallback((setting: "music" | "sfx") => {
     setQuizState((prev) => {
       if (!prev.audioSettings) return prev;
       return {
@@ -557,19 +522,15 @@ export function useQuizLogic(
               if (isCorrect) {
                 const nextStreak = p.streak + 1;
                 const pointsGained = Math.round(
-                  500 + Math.random() * 400 + Math.min(nextStreak * 50, 200)
+                  500 + Math.random() * 400 + Math.min(nextStreak * 50, 200),
                 );
                 return {
                   ...p,
                   score: p.score + pointsGained,
                   streak: nextStreak,
                 };
-              } else {
-                return {
-                  ...p,
-                  streak: 0,
-                };
               }
+              return { ...p, streak: 0 };
             }
             return p;
           })
@@ -587,17 +548,13 @@ export function useQuizLogic(
 
   const startPracticeWrong = useCallback(() => {
     const wrongIds = quizState.incorrect_questions;
-    const wrongQuestions = sourceQuestions.filter((q) =>
-      wrongIds.includes(q.id),
-    );
+    const wrongQuestions = sourceQuestions.filter((q) => wrongIds.includes(q.id));
     if (wrongQuestions.length === 0) return;
     startQuiz(wrongQuestions);
   }, [quizState.incorrect_questions, sourceQuestions, startQuiz]);
 
   const currentQuestion =
-    quizState.status === "playing"
-      ? questions[quizState.current_question_index]
-      : undefined;
+    quizState.status === "playing" ? questions[quizState.current_question_index] : undefined;
 
   return {
     questions,
@@ -625,3 +582,4 @@ export function useQuizLogic(
     audioSettings: quizState.audioSettings,
   };
 }
+

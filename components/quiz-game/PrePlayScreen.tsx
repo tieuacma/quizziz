@@ -2,7 +2,15 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Play, BookOpen, Clock, Zap, Star, Trophy, Sparkles } from "lucide-react";
+import {
+  Play,
+  BookOpen,
+  Clock,
+  Zap,
+  Star,
+  Trophy,
+  Sparkles,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { quizGameCopy } from "./copy";
 import { cn } from "@/lib/utils";
@@ -30,7 +38,6 @@ export default function PrePlayScreen({
 
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-slate-950 text-white relative overflow-hidden select-none">
-      
       {/* Immersive Cosmic Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-950 to-purple-950" />
@@ -66,58 +73,11 @@ export default function PrePlayScreen({
             </>
           )}
         </h1>
-        
+
         <p className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-6">
           Chuẩn bị sẵn sàng cho bài thi trắc nghiệm tương tác
         </p>
-<<<<<<< HEAD
 
-        {/* Quick Stats Grid */}
-        <div className="grid grid-cols-2 gap-4 mb-8">
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col items-center">
-            <Trophy className="w-5 h-5 text-indigo-400 mb-1" />
-            <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">Tổng câu hỏi</span>
-            <span className="text-lg font-black text-white mt-0.5">{questionCount} câu</span>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col items-center">
-            <Clock className="w-5 h-5 text-indigo-400 mb-1" />
-            <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">Thời gian thi</span>
-            <span className="text-lg font-black text-white mt-0.5">~{minutes} phút</span>
-          </div>
-        </div>
-
-        {/* Arcade Rules Card */}
-        <div className="p-5 rounded-2xl bg-slate-950/60 border border-white/5 text-left mb-8 space-y-3.5">
-          <h3 className="text-xs font-bold text-indigo-300 uppercase tracking-widest flex items-center gap-1.5 mb-1">
-            <Star className="w-3.5 h-3.5 fill-indigo-400/20 text-indigo-400" />
-            Thể lệ cuộc đua điểm số
-          </h3>
-          <div className="space-y-2 text-xs text-slate-300 leading-relaxed">
-            <div className="flex items-start gap-2">
-              <span className="text-indigo-400 font-mono mt-0.5">1.</span>
-              <p>Trả lời càng nhanh, điểm thời gian cộng thêm càng lớn.</p>
-            </div>
-            <div className="flex items-start gap-2">
-              <span className="text-indigo-400 font-mono mt-0.5">2.</span>
-              <p>Chuỗi đúng liên tiếp từ <strong className="text-indigo-400">3 câu trở lên</strong> kích hoạt hệ số nhân điểm <strong className="text-amber-400">1.5x Combo Bonus!</strong></p>
-            </div>
-            <div className="flex items-start gap-2">
-              <span className="text-indigo-400 font-mono mt-0.5">3.</span>
-              <p>Khi hoàn thành, bạn có thể tự do xem lại chi tiết các câu trả lời chưa đúng.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Pulsating Glowing Action Button */}
-        <motion.div
-          animate={{ scale: [1, 1.02, 1] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-=======
-        <p className="text-slate-400 text-sm mb-4">
-          {quizGameCopy.prePlay.estimatedTime(estimatedSeconds)}
-        </p>
-        
         {/* Sound toggle switches */}
         <div className="flex justify-center gap-4 mb-6">
           <button
@@ -144,14 +104,18 @@ export default function PrePlayScreen({
           </button>
         </div>
 
+        <p className="text-slate-500 text-xs mb-4">
+          {quizGameCopy.prePlay.estimatedTime(estimatedSeconds)}
+        </p>
+
         <p className="text-slate-500 text-xs mb-8">
           Trả lời xong sẽ tự chuyển sang câu tiếp theo
         </p>
-        <Button
-          size="lg"
-          className="w-full h-14 text-lg font-bold gap-2 focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 cursor-pointer"
-          onClick={onStart}
->>>>>>> 0f63cee8b1113dbf06ba2550584aa8f4deb963e2
+
+        {/* Pulsating Glowing Action Button */}
+        <motion.div
+          animate={{ scale: [1, 1.02, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
           <Button
             size="lg"

@@ -4,7 +4,11 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, RotateCw, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { QuizQuestion, MultipleChoiceQuestion, TrueFalseQuestion } from "@/types/quiz";
+import type {
+  QuizQuestion,
+  MultipleChoiceQuestion,
+  TrueFalseQuestion,
+} from "@/types/quiz";
 
 interface FlashcardReviewProps {
   questions: QuizQuestion[];
@@ -28,14 +32,18 @@ export default function FlashcardReview({ questions }: FlashcardReviewProps) {
   const handlePrev = () => {
     setIsFlipped(false);
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev - 1 + questions.length) % questions.length);
+      setCurrentIndex(
+        (prev) => (prev - 1 + questions.length) % questions.length,
+      );
     }, 150);
   };
 
   const getCorrectAnswerText = (q: QuizQuestion): string => {
     if (q.type === "multiple-choice") {
       const mcq = q as MultipleChoiceQuestion;
-      const correctOption = mcq.options.find((o) => o.id === mcq.correctOptionId);
+      const correctOption = mcq.options.find(
+        (o) => o.id === mcq.correctOptionId,
+      );
       return correctOption ? correctOption.text : "Không rõ đáp án";
     }
     if (q.type === "true-false") {
@@ -43,17 +51,30 @@ export default function FlashcardReview({ questions }: FlashcardReviewProps) {
       return tfq.correctAnswer ? "Đúng" : "Sai";
     }
     if (q.type === "fill-in-the-blank") {
-      return (q as any).answers?.join(" hoặc ") || "Không rõ";
+      const fbq = q as QuizQuestion;
+      // answers exists only for fill-in-the-blank; we still avoid `any` by reading through the known shape.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const answers = (
+        fbq as unknown as { answers?: (string | null | undefined)[] }
+      ).answers;
+      return answers?.filter(Boolean).join(" hoặc ") || "Không rõ";
     }
+
     return "Đang tải...";
   };
 
   const getExplanation = (q: QuizQuestion): string => {
     if (q.type === "multiple-choice") {
-      return (q as MultipleChoiceQuestion).explanation || "Gợi ý: Hãy đọc kỹ câu hỏi và ghi nhớ đáp án chính xác này nhé!";
+      return (
+        (q as MultipleChoiceQuestion).explanation ||
+        "Gợi ý: Hãy đọc kỹ câu hỏi và ghi nhớ đáp án chính xác này nhé!"
+      );
     }
     if (q.type === "true-false") {
-      return (q as TrueFalseQuestion).explanation || "Gợi ý: Khẳng định này là chính xác/không chính xác như đã giải thích.";
+      return (
+        (q as TrueFalseQuestion).explanation ||
+        "Gợi ý: Khẳng định này là chính xác/không chính xác như đã giải thích."
+      );
     }
     return "Hãy tập trung ghi nhớ cách làm câu này để đạt điểm cao hơn lần sau!";
   };
@@ -73,9 +94,7 @@ export default function FlashcardReview({ questions }: FlashcardReviewProps) {
           transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
         >
           {/* FRONT SIDE (Question) */}
-          <div
-            className="absolute inset-0 w-full h-full rounded-3xl border border-emerald-200 bg-white shadow-xl p-8 flex flex-col justify-between backface-hidden"
-          >
+          <div className="absolute inset-0 w-full h-full rounded-3xl border border-emerald-200 bg-white shadow-xl p-8 flex flex-col justify-between backface-hidden">
             <div className="flex flex-col gap-4">
               <span className="self-start px-3 py-1 rounded-full bg-red-50 text-red-600 font-extrabold text-[10px] uppercase tracking-wide border border-red-100">
                 Câu Hỏi Sai
@@ -85,7 +104,12 @@ export default function FlashcardReview({ questions }: FlashcardReviewProps) {
               </h3>
             </div>
             <div className="flex items-center justify-between text-xs text-slate-400 font-medium">
-              <span>Độ khó: <strong className="text-slate-600 uppercase font-extrabold">{currentQuestion.difficulty}</strong></span>
+              <span>
+                Độ khó:{" "}
+                <strong className="text-slate-600 uppercase font-extrabold">
+                  {currentQuestion.difficulty}
+                </strong>
+              </span>
               <span className="flex items-center gap-1 text-emerald-600 font-extrabold">
                 <RotateCw className="w-3.5 h-3.5" /> Click để lật xem đáp án
               </span>
@@ -93,9 +117,7 @@ export default function FlashcardReview({ questions }: FlashcardReviewProps) {
           </div>
 
           {/* BACK SIDE (Answer & Explanation) */}
-          <div
-            className="absolute inset-0 w-full h-full rounded-3xl border border-emerald-300 bg-emerald-50 shadow-xl p-8 flex flex-col justify-between backface-hidden transform-rotateY-180"
-          >
+          <div className="absolute inset-0 w-full h-full rounded-3xl border border-emerald-300 bg-emerald-50 shadow-xl p-8 flex flex-col justify-between backface-hidden transform-rotateY-180">
             <div className="flex flex-col gap-4">
               <span className="self-start px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 font-extrabold text-[10px] uppercase tracking-wide border border-emerald-200">
                 Đáp Án Đúng

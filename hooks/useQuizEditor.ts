@@ -158,13 +158,42 @@ export function useQuizEditor(
         } as QuizMetadata;
       }
       
-      const newQuestions = parsed.questions.map((q: any) => {
-        if (!q.id) q.id = crypto.randomUUID();
-        if (!q.type) q.type = "multiple-choice";
-        if (typeof q.timeLimit !== "number") q.timeLimit = metadata?.defaultTime ?? 30;
-        if (!q.difficulty) q.difficulty = "medium";
-        return q as QuizQuestion;
+      const newQuestions = parsed.questions.map((q: unknown) => {
+        // Minimal runtime normalization without `any`
+        const obj = q as Partial<QuizQuestion> & { [k: string]: unknown };
+        if (obj == null || typeof obj !== "object") {
+          throw new Error("Một trong các câu hỏi có cấu trúc không hợp lệ");
+        }
+
+        // Note: we intentionally only guarantee a stable core shape here.
+        // The specific question-type structures (options/answers/etc.) are handled elsewhere in the app.
+        const type =
+          obj.type === "multiple-choice" ||
+          obj.type === "fill-in-the-blank" ||
+          obj.type === "true-false" ||
+          obj.type === "reading"
+            ? obj.type
+            : "multiple-choice";
+
+        const normalized: QuizQuestion = {
+          ...(obj as QuizQuestion),
+          id:
+            typeof obj.id === "string" && obj.id ? obj.id : crypto.randomUUID(),
+          type,
+          timeLimit:
+            typeof obj.timeLimit === "number"
+              ? obj.timeLimit
+              : metadata?.defaultTime ?? 30,
+          difficulty:
+            typeof obj.difficulty === "string" && obj.difficulty
+              ? obj.difficulty
+              : "medium",
+        } as QuizQuestion;
+
+
+        return normalized;
       });
+
       
       isHistoryActionRef.current = true;
       setMetadata(newMetadata);
