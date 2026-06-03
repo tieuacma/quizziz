@@ -89,7 +89,7 @@ export default function SelectionCards({
   return (
     <div className="space-y-4">
       {/* Choice Mode Toggle Switch */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5 gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between p-5 rounded-3xl bg-slate-900/40 border border-white/10 backdrop-blur-md gap-4 shadow-lg">
         <div>
           <h4 className="text-sm font-bold text-white flex items-center gap-2">
             <ClipboardCheck className="w-4 h-4 text-indigo-400" />
@@ -100,7 +100,7 @@ export default function SelectionCards({
           </p>
         </div>
 
-        <div className="flex items-center gap-1 bg-slate-900 border border-white/5 p-1 rounded-xl shrink-0">
+        <div className="flex items-center gap-1 bg-slate-950 border border-white/10 p-1 rounded-xl shrink-0">
           <button
             type="button"
             onClick={() => handleModeChange(false)}
@@ -147,10 +147,10 @@ export default function SelectionCards({
                 transition={{ duration: 0.25, ease: "easeInOut" }}
                 whileHover={{ y: -2, transition: { duration: 0.15 } }}
                 className={cn(
-                  "group rounded-2xl border p-4.5 transition-all duration-300 relative overflow-hidden flex flex-col justify-between gap-3",
+                  "group rounded-[24px] border p-5 transition-all duration-300 relative overflow-hidden flex flex-col justify-between gap-3 shadow-md",
                   isCorrect
-                    ? "border-emerald-500/50 bg-emerald-500/[0.04] shadow-[0_4px_24px_rgba(16,185,129,0.08),0_0_15px_rgba(16,185,129,0.15)]"
-                    : "border-white/5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/10"
+                    ? "border-emerald-500/50 bg-emerald-500/10 shadow-[0_4px_24px_rgba(16,185,129,0.08),0_0_15px_rgba(16,185,129,0.15)]"
+                    : "border-white/10 bg-slate-900/20 hover:bg-slate-900/40 hover:border-white/20"
                 )}
               >
                 {/* Correct Ambient Light Backglow */}

@@ -56,6 +56,6 @@ export function scrollToQuestion(questionId: string) {
   ) as HTMLElement | null;
   if (!el) return;
   el.scrollIntoView({ behavior: "smooth", block: "start" });
-  const err = el.querySelector(".text-red-400") as HTMLElement | null;
+  const err = el.querySelector("[data-question-error]") as HTMLElement | null;
   if (err) err.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }

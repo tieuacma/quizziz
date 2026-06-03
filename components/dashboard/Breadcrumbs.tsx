@@ -22,7 +22,7 @@ const PATH_MAP: Record<string, string> = {
   "my-courses": "Môn học",
   assignments: "Bài tập",
   "learning-results": "Kết quả học tập",
-  schedule: "Lịch học",
+  schedule: "Thời khoá biểu",
 };
 
 export default function Breadcrumbs() {

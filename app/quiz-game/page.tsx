@@ -1,28 +1,25 @@
 "use client";
 
+import Link from "next/link";
 import QuizGame from "@/components/quiz-game/QuizGame";
 import { sampleQuizData } from "@/components/quiz-game/sample-data";
 
 export default function QuizGamePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50">
-      <div className="container mx-auto py-12 px-4">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-indigo-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent mb-6">
-            Quiz Game
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
-            Test the fully functional Quizizz-style game with shuffle algorithm,
-            animations, scoring, streak system, and responsive design.
-          </p>
-        </div>
-
-        <QuizGame
-          profileId="demo-user-123"
-          quizId="demo-quiz-456"
-          initialQuestions={sampleQuizData.questions}
-        />
+    <div className="relative min-h-dvh w-full overflow-hidden bg-slate-950">
+      <div className="absolute left-4 top-4 z-50 pt-[env(safe-area-inset-top)]">
+        <Link
+          href="/"
+          className="rounded-xl border border-white/10 bg-black/40 px-3 py-1.5 text-xs font-semibold text-white/80 backdrop-blur-md transition-colors hover:bg-black/60 hover:text-white"
+        >
+          ← Trang chủ
+        </Link>
       </div>
-    </main>
+      <QuizGame
+        profileId="demo-user-123"
+        quizId="demo-quiz-456"
+        initialQuestions={sampleQuizData.questions}
+      />
+    </div>
   );
 }

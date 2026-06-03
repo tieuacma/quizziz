@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, RotateCw, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type {
@@ -51,11 +51,8 @@ export default function FlashcardReview({ questions }: FlashcardReviewProps) {
       return tfq.correctAnswer ? "Đúng" : "Sai";
     }
     if (q.type === "fill-in-the-blank") {
-      const fbq = q as QuizQuestion;
-      // answers exists only for fill-in-the-blank; we still avoid `any` by reading through the known shape.
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const answers = (
-        fbq as unknown as { answers?: (string | null | undefined)[] }
+        q as unknown as { answers?: (string | null | undefined)[] }
       ).answers;
       return answers?.filter(Boolean).join(" hoặc ") || "Không rõ";
     }
@@ -81,7 +78,7 @@ export default function FlashcardReview({ questions }: FlashcardReviewProps) {
 
   return (
     <div className="w-full max-w-2xl mx-auto flex flex-col items-center gap-6">
-      <div className="text-sm font-black uppercase text-emerald-800 tracking-wider">
+      <div className="text-sm font-black uppercase text-indigo-300 tracking-wider">
         Thẻ ghi nhớ câu sai ({currentIndex + 1} / {questions.length})
       </div>
 
@@ -94,44 +91,44 @@ export default function FlashcardReview({ questions }: FlashcardReviewProps) {
           transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
         >
           {/* FRONT SIDE (Question) */}
-          <div className="absolute inset-0 w-full h-full rounded-3xl border border-emerald-200 bg-white shadow-xl p-8 flex flex-col justify-between backface-hidden">
+          <div className="absolute inset-0 w-full h-full rounded-3xl border border-white/10 bg-slate-900/60 backdrop-blur-xl shadow-2xl p-8 flex flex-col justify-between backface-hidden">
             <div className="flex flex-col gap-4">
-              <span className="self-start px-3 py-1 rounded-full bg-red-50 text-red-600 font-extrabold text-[10px] uppercase tracking-wide border border-red-100">
+              <span className="self-start px-3 py-1 rounded-full bg-rose-500/10 text-rose-300 font-extrabold text-[10px] uppercase tracking-wide border border-rose-500/20">
                 Câu Hỏi Sai
               </span>
-              <h3 className="text-xl md:text-2xl font-black text-slate-800 leading-snug">
+              <h3 className="text-xl md:text-2xl font-black text-white leading-snug">
                 {currentQuestion.question}
               </h3>
             </div>
             <div className="flex items-center justify-between text-xs text-slate-400 font-medium">
               <span>
                 Độ khó:{" "}
-                <strong className="text-slate-600 uppercase font-extrabold">
+                <strong className="text-indigo-300 uppercase font-extrabold">
                   {currentQuestion.difficulty}
                 </strong>
               </span>
-              <span className="flex items-center gap-1 text-emerald-600 font-extrabold">
+              <span className="flex items-center gap-1 text-indigo-400 font-extrabold">
                 <RotateCw className="w-3.5 h-3.5" /> Click để lật xem đáp án
               </span>
             </div>
           </div>
 
           {/* BACK SIDE (Answer & Explanation) */}
-          <div className="absolute inset-0 w-full h-full rounded-3xl border border-emerald-300 bg-emerald-50 shadow-xl p-8 flex flex-col justify-between backface-hidden transform-rotateY-180">
+          <div className="absolute inset-0 w-full h-full rounded-3xl border border-emerald-500/20 bg-emerald-950/40 backdrop-blur-xl shadow-2xl p-8 flex flex-col justify-between backface-hidden transform-rotateY-180">
             <div className="flex flex-col gap-4">
-              <span className="self-start px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 font-extrabold text-[10px] uppercase tracking-wide border border-emerald-200">
+              <span className="self-start px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 font-extrabold text-[10px] uppercase tracking-wide border border-emerald-500/25">
                 Đáp Án Đúng
               </span>
               <div>
-                <div className="text-2xl font-black text-emerald-900 leading-snug mb-3">
+                <div className="text-2xl font-black text-emerald-300 leading-snug mb-3 drop-shadow-[0_0_8px_rgba(52,211,153,0.3)]">
                   {getCorrectAnswerText(currentQuestion)}
                 </div>
-                <p className="text-sm md:text-base text-emerald-800/80 leading-relaxed font-medium italic">
+                <p className="text-sm md:text-base text-slate-200 leading-relaxed font-medium italic">
                   {getExplanation(currentQuestion)}
                 </p>
               </div>
             </div>
-            <div className="flex items-center justify-between text-xs text-emerald-600 font-medium">
+            <div className="flex items-center justify-between text-xs text-emerald-400 font-medium">
               <span className="flex items-center gap-1 font-extrabold">
                 <Eye className="w-3.5 h-3.5" /> Ghi nhớ kiến thức
               </span>
@@ -150,11 +147,11 @@ export default function FlashcardReview({ questions }: FlashcardReviewProps) {
           size="icon"
           onClick={handlePrev}
           disabled={questions.length <= 1}
-          className="w-12 h-12 rounded-full border-emerald-200 bg-white hover:bg-emerald-50 text-emerald-700 cursor-pointer shadow-md"
+          className="w-12 h-12 rounded-full border-white/10 bg-white/5 hover:bg-white/10 text-indigo-300 cursor-pointer shadow-md"
         >
           <ChevronLeft className="w-6 h-6" />
         </Button>
-        <div className="font-bold text-sm text-emerald-800 bg-emerald-50 border border-emerald-100 px-4 py-2 rounded-full shadow-inner">
+        <div className="font-bold text-sm text-indigo-300 bg-indigo-950/30 border border-white/10 px-4 py-2 rounded-full shadow-inner">
           {currentIndex + 1} / {questions.length} thẻ
         </div>
         <Button
@@ -162,7 +159,7 @@ export default function FlashcardReview({ questions }: FlashcardReviewProps) {
           size="icon"
           onClick={handleNext}
           disabled={questions.length <= 1}
-          className="w-12 h-12 rounded-full border-emerald-200 bg-white hover:bg-emerald-50 text-emerald-700 cursor-pointer shadow-md"
+          className="w-12 h-12 rounded-full border-white/10 bg-white/5 hover:bg-white/10 text-indigo-300 cursor-pointer shadow-md"
         >
           <ChevronRight className="w-6 h-6" />
         </Button>

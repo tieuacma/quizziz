@@ -15,6 +15,7 @@ import { gradeReadingSub } from "@/lib/quiz-game/grade";
 import { READING_SUB_ADVANCE_MS } from "@/components/quiz-game/motion";
 
 const DEFAULT_TIME_LIMIT = 180;
+const DEFAULT_AUDIO: AudioSettingsState = { music: true, sfx: true };
 
 type QuizStateWithExtras = QuizState & {
   currentSubQuestionIndex: number;
@@ -78,8 +79,6 @@ export function useQuizLogic(initialQuestions: QuizQuestion[], profileId: string
   const [isPracticeMode, setIsPracticeMode] = useState(false);
 
   const questions = gameQuestions;
-
-  const DEFAULT_AUDIO: AudioSettingsState = { music: true, sfx: true };
 
   const [quizState, setQuizState] = useState<QuizStateWithExtras>(() => ({
     profile_id: profileId,

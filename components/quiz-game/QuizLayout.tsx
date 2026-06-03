@@ -8,7 +8,6 @@ import { Progress } from "@/components/ui/progress";
 import { Clock } from "lucide-react";
 import StreakAndRank from "./StreakAndRank";
 import ScoreBoard from "./ScoreBoard";
-import ProgressStats from "./ProgressStats";
 import QuestionEngine from "./QuestionEngine";
 import type { QuizQuestion, QuizState, PowerUpState, PowerUpType, LeaderboardParticipant, AudioSettingsState } from "@/types/quiz";
 import PowerUps from "./PowerUps";
@@ -56,11 +55,9 @@ export default function QuizLayout({
   const rawProgress = (currentIndex + 1) / totalQuestions;
   const progress = Number.isFinite(rawProgress) ? rawProgress * 100 : 0;
   const isLowTime = timeLeft <= 10 && timeLeft > 0;
-  const timeLimit = currentQuestion?.timeLimit ?? 1;
-  const timeRatio = Math.max(0, Math.min(100, (timeLeft / timeLimit) * 100));
 
   return (
-    <div className="relative h-screen w-screen flex flex-col overflow-hidden text-white pb-6">
+    <div className="relative h-dvh w-full flex flex-col overflow-hidden text-white">
       {/* Dynamic Animated Background */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-purple-950/80 to-slate-950" />
@@ -72,9 +69,9 @@ export default function QuizLayout({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.15),transparent_40%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.15),transparent_45%)]" />
       </div>
 
-      <div className="relative z-10 h-full w-full flex flex-col justify-between">
-        {/* Floating Glassmorphic Header */}
-        <header className="mx-4 md:mx-6 mt-4 shrink-0 backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl px-6 py-3.5 flex items-center justify-between z-50 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+      <div className="relative z-10 flex h-full min-h-0 w-full flex-col">
+        {/* Docked header */}
+        <header className="w-full shrink-0 border-b border-white/10 bg-black/40 px-4 py-2.5 backdrop-blur-xl md:px-6 md:py-3 flex items-center justify-between z-50 pt-[max(0.5rem,env(safe-area-inset-top))]">
           <div className="flex items-center gap-4">
             <StreakAndRank streak={quizState.streak} />
 
@@ -164,7 +161,7 @@ export default function QuizLayout({
         </header>
 
         {/* Full-width Question Area with absolute Leaderboard Drawer overlay */}
-        <main className="flex-1 flex flex-col justify-center relative min-h-0 w-full max-w-5xl mx-auto px-4 md:px-6 my-6 z-10">
+        <main className="flex-1 flex flex-col justify-center relative min-h-0 w-full max-w-5xl mx-auto px-4 md:px-6 py-2 md:py-4 z-10 overflow-hidden">
           <div className="flex-1 min-h-0 relative flex flex-col justify-center w-full">
             <QuestionEngine
               question={currentQuestion}
@@ -196,8 +193,8 @@ export default function QuizLayout({
           </AnimatePresence>
         </main>
 
-        {/* Floating Glassmorphic Footer: Status on left, Power-Ups on right */}
-        <footer className="mx-4 md:mx-6 mb-4 shrink-0 backdrop-blur-xl bg-black/40 border border-white/10 rounded-2xl py-2.5 px-6 flex flex-col sm:flex-row items-center justify-between z-50 gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+        {/* Docked footer: status + power-ups */}
+        <footer className="mt-auto w-full shrink-0 border-t border-white/10 bg-black/50 px-4 py-2 backdrop-blur-xl md:px-6 md:py-3 flex flex-col sm:flex-row items-center justify-between z-50 gap-3 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
           {/* Consolidated status badges */}
           <div className="flex flex-row items-center gap-3 shrink-0 select-none">
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-black shadow-[0_0_10px_rgba(16,185,129,0.1)]">

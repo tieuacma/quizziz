@@ -203,6 +203,12 @@ export default function DashboardShell({ children, user }: DashboardShellProps) 
     user.role === "teacher"
       ? [
           { label: "Overview", vietnamese: "Tổng quan", href: teacherBase, icon: Home },
+          {
+            label: "Schedule",
+            vietnamese: "Thời khoá biểu",
+            href: `${teacherBase}/schedule`,
+            icon: CalendarDays,
+          },
           { label: "Quizzes", vietnamese: "Trắc nghiệm", href: `${teacherBase}/quizzies`, icon: Puzzle },
           { label: "Students", vietnamese: "Học sinh", href: `${teacherBase}/students`, icon: Users },
           { label: "Analytics", vietnamese: "Báo cáo", href: `${teacherBase}/analytics`, icon: TrendingUp },

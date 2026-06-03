@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Clock,
   Phone,
   Wifi,
-  Battery,
   Sparkles,
   AlertCircle,
-  HelpCircle,
 } from "lucide-react";
 import {
   QuizQuestion,
@@ -55,7 +53,7 @@ export default function QuizLivePreview({
       </div>
 
       {/* iPhone-like Mockup Container */}
-      <div className="relative w-full max-w-[320px] aspect-[9/19] rounded-[42px] border-[10px] border-slate-900 bg-slate-950 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.05),0_0_40px_rgba(99,102,241,0.1)] overflow-hidden flex flex-col select-none">
+      <div className="relative w-full max-w-[320px] aspect-[9/19] rounded-[42px] border-[10px] border-slate-900 bg-slate-950 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.05),0_0_40px_rgba(99,102,241,0.15)] overflow-hidden flex flex-col select-none">
         {/* Notch / Dynamic Island Simulation */}
         <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-28 h-5.5 bg-black rounded-full z-50 flex items-center justify-between px-3">
           <div className="w-2.5 h-2.5 bg-slate-900 rounded-full border border-slate-800" />
@@ -75,7 +73,12 @@ export default function QuizLivePreview({
         </div>
 
         {/* Mobile Viewport Screen */}
-        <div className="flex-1 overflow-y-auto px-4 pb-6 pt-2 flex flex-col justify-between relative bg-gradient-to-b from-slate-950 via-slate-900 to-indigo-950/20">
+        <div className="flex-1 overflow-y-auto px-4 pb-6 pt-2 flex flex-col justify-between relative bg-gradient-to-br from-indigo-950 via-purple-950/80 to-slate-950">
+          <div className="pointer-events-none absolute inset-0 opacity-30">
+            <div className="absolute -top-12 -left-12 h-32 w-32 rounded-full bg-indigo-500/20 blur-2xl" />
+            <div className="absolute bottom-1/4 right-0 h-36 w-36 rounded-full bg-purple-500/15 blur-2xl" />
+          </div>
+          <div className="relative z-10 flex flex-1 flex-col justify-between min-h-0">
           {/* Top Info Bar (Timer & Points) */}
           <div className="space-y-2 mt-1">
             <div className="flex justify-between items-center text-[10px] font-bold text-slate-400">
@@ -106,7 +109,7 @@ export default function QuizLivePreview({
           {/* Main Question Card / Content Section */}
           <div className="my-auto py-4 space-y-4">
             {/* Question Text Box */}
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent p-4 shadow-xl">
+            <div className="rounded-2xl border border-white/10 bg-black/30 backdrop-blur-sm p-4 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
               <div className="text-center font-bold text-xs text-white leading-relaxed break-words">
                 {question.type === "reading"
                   ? "Đọc đoạn văn dưới đây và trả lời câu hỏi phụ:"
@@ -135,16 +138,16 @@ export default function QuizLivePreview({
                         className={cn(
                           "flex items-center gap-2 rounded-xl border p-2.5 transition-all text-left",
                           isCorrect
-                            ? "border-emerald-500/50 bg-emerald-500/10 shadow-[0_0_12px_rgba(16,185,129,0.2)]"
-                            : "border-white/5 bg-white/[0.03]",
+                            ? "border-emerald-400 bg-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.25)]"
+                            : "border-white/10 bg-white/5",
                         )}
                       >
                         <span
                           className={cn(
                             "font-mono text-[9px] font-bold px-1.5 py-0.5 rounded border shrink-0",
                             isCorrect
-                              ? "text-emerald-400 bg-emerald-500/20 border-emerald-500/25"
-                              : "text-slate-400 bg-slate-800/40 border-white/5",
+                              ? "text-emerald-300 bg-emerald-500/20 border-emerald-500/30"
+                              : "text-slate-400 bg-slate-800/40 border-white/10",
                           )}
                         >
                           {letter}
@@ -193,8 +196,8 @@ export default function QuizLivePreview({
                   className={cn(
                     "flex-1 py-3 rounded-xl border font-bold text-[10px] transition-all flex flex-col items-center gap-1",
                     (question as TrueFalseQuestion).correctAnswer
-                      ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.2)]"
-                      : "bg-slate-900 border-white/5 text-slate-400 opacity-60",
+                      ? "border-emerald-400 bg-emerald-500/20 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.25)]"
+                      : "border-white/10 bg-slate-900 text-slate-500 opacity-50",
                   )}
                 >
                   <span className="text-sm">✅</span>
@@ -205,8 +208,8 @@ export default function QuizLivePreview({
                   className={cn(
                     "flex-1 py-3 rounded-xl border font-bold text-[10px] transition-all flex flex-col items-center gap-1",
                     !(question as TrueFalseQuestion).correctAnswer
-                      ? "bg-rose-500/10 border-rose-500/40 text-rose-300 shadow-[0_0_12px_rgba(244,63,94,0.2)]"
-                      : "bg-slate-900 border-white/5 text-slate-400 opacity-60",
+                      ? "border-rose-400 bg-rose-500/20 text-rose-300 shadow-[0_0_12px_rgba(239,68,68,0.25)]"
+                      : "border-white/10 bg-slate-900 text-slate-500 opacity-50",
                   )}
                 >
                   <span className="text-sm">❌</span>
@@ -325,6 +328,7 @@ export default function QuizLivePreview({
 
           {/* Footer UI elements (Bottom Home Bar indicator) */}
           <div className="h-1 w-24 bg-white/20 rounded-full mx-auto shrink-0 mt-4 pointer-events-none" />
+          </div>
         </div>
       </div>
     </div>

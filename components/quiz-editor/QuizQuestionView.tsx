@@ -2,6 +2,7 @@
 
 import { QuizQuestion } from "@/types/quiz";
 import { QuestionTypeIcon } from "@/components/quiz-create/utils";
+import { parseCorrectOptionIds } from "@/lib/quiz-game/grade";
 
 import { Clock } from "lucide-react";
 
@@ -40,7 +41,8 @@ export default function QuizQuestionView({
       {question.type === "multiple-choice" && (
         <div className="grid grid-cols-1 gap-2">
           {(question.options || []).map((opt, idx) => {
-            const isCorrect = question.correctOptionId === opt.id;
+            const correctIds = parseCorrectOptionIds(question.correctOptionId);
+            const isCorrect = correctIds.includes(opt.id);
             const letter = OptionLetter(idx);
 
             return (
@@ -155,7 +157,10 @@ export default function QuizQuestionView({
                         {isMCQ && (
                           <div className="grid grid-cols-1 gap-2 mt-3">
                             {(sq.options || []).map((opt, j) => {
-                              const isCorrect = sq.correctOptionId === opt.id;
+                              const subCorrectIds = parseCorrectOptionIds(
+                                sq.correctOptionId || "",
+                              );
+                              const isCorrect = subCorrectIds.includes(opt.id);
                               const letter = OptionLetter(j);
                               return (
                                 <div

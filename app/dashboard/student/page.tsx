@@ -13,8 +13,8 @@ import StatCard from "@/components/dashboard/StatCard";
 import CourseCard from "@/components/dashboard/student/CourseCard";
 import AssignmentsPanel from "@/components/dashboard/student/AssignmentsPanel";
 import LearningResultsPanel from "@/components/dashboard/student/LearningResultsPanel";
-import SchedulePanel from "@/components/dashboard/student/SchedulePanel";
-import { ASSIGNMENTS, COURSES, LEARNING_RESULTS, SCHEDULE } from "./data";
+import StudentScheduleCheck from "@/components/dashboard/student/StudentScheduleCheck";
+import { ASSIGNMENTS, COURSES, LEARNING_RESULTS } from "./data";
 
 function SectionLink({ href, label }: { href: string; label: string }) {
   return (
@@ -143,7 +143,7 @@ export default async function StudentPage() {
             }
           />
           <div className="flex-1 min-h-[240px] lg:min-h-0">
-            <SchedulePanel schedule={SCHEDULE.slice(0, 3)} />
+            <StudentScheduleCheck />
           </div>
         </section>
       </div>

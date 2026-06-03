@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trash2, Plus, Sparkles, BookOpen, AlertCircle, HelpCircle, Layers, Check, X } from "lucide-react";
+import { Trash2, Plus, Sparkles, BookOpen } from "lucide-react";
 import {
   QuizQuestion,
   QuizDifficulty,
@@ -102,7 +102,7 @@ export default function QuestionEditor({
   return (
     <div className="space-y-6">
       {/* Upper Meta Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white/[0.02] border border-white/5 p-4 rounded-2xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white/[0.02] border border-white/10 p-5 rounded-3xl backdrop-blur-xl shadow-lg">
         <div className="flex flex-col justify-center">
           <Label className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">Loại câu hỏi</Label>
           <div className="flex items-center gap-2">
@@ -115,7 +115,7 @@ export default function QuestionEditor({
         {/* Modern Sliding Pill Selector for Difficulty */}
         <div>
           <Label className="text-xs font-bold text-slate-500 uppercase tracking-widest">Độ khó câu hỏi</Label>
-          <div className="mt-1.5 flex bg-slate-950 border border-white/5 p-1 rounded-xl relative overflow-hidden">
+          <div className="mt-1.5 flex bg-slate-950 border border-white/10 p-1 rounded-xl relative overflow-hidden">
             {(["easy", "medium", "hard"] as QuizDifficulty[]).map((diff) => {
               const isActive = question.difficulty === diff;
               const labels: Record<QuizDifficulty, string> = {
@@ -153,13 +153,13 @@ export default function QuestionEditor({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
           {/* Left Column: Passage Editor */}
-          <div className="lg:col-span-6 space-y-3 bg-white/[0.01] border border-white/5 p-4 rounded-2xl">
+          <div className="lg:col-span-6 space-y-3.5 bg-slate-900/20 border border-white/10 p-5 rounded-3xl backdrop-blur-md shadow-lg">
             <div className="flex justify-between items-center">
               <Label className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
                 <BookOpen className="w-3.5 h-3.5 text-indigo-400" />
                 Đoạn văn đọc hiểu
               </Label>
-              <span className="text-[10px] font-bold text-slate-500 bg-slate-900 border border-white/5 px-2 py-0.5 rounded-md font-mono">
+              <span className="text-[10px] font-bold text-slate-500 bg-slate-900 border border-white/10 px-2 py-0.5 rounded-md font-mono">
                 {((question as ReadingQuestion).passage || "").split(/\s+/).filter(Boolean).length} từ
               </span>
             </div>
@@ -167,13 +167,13 @@ export default function QuestionEditor({
               value={(question as ReadingQuestion).passage}
               onChange={(e) => updateQuestion({ passage: e.target.value })}
               placeholder="Nhập đoạn văn đọc hiểu dài tại đây để làm ngữ liệu cho các câu hỏi phụ bên phải..."
-              className="min-h-[400px] bg-slate-950/40 border-white/8 hover:border-white/12 focus:border-indigo-500 text-xs leading-relaxed focus:bg-slate-900/50 rounded-xl resize-y"
+              className="min-h-[400px] bg-slate-950/40 border-white/10 hover:border-white/20 focus:border-indigo-500 text-xs leading-relaxed focus:bg-slate-900/50 rounded-xl resize-y"
             />
           </div>
           
           {/* Right Column: Sub-Questions scroll container */}
           <div className="lg:col-span-6 space-y-3">
-            <div className="flex justify-between items-center bg-white/[0.01] border border-white/5 px-4 py-3 rounded-2xl">
+            <div className="flex justify-between items-center bg-slate-900/20 border border-white/10 px-4 py-3 rounded-2xl backdrop-blur-md">
               <Label className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
                 Câu hỏi phụ liên kết
@@ -188,10 +188,10 @@ export default function QuestionEditor({
               {((question as ReadingQuestion).questions || []).map((subQ, idx) => (
                 <div
                   key={subQ.id}
-                  className="p-4 bg-slate-900/40 border border-white/5 hover:border-white/10 rounded-2xl space-y-3.5 transition-all relative overflow-hidden group/sub"
+                  className="p-5 bg-slate-900/40 border border-white/10 hover:border-white/20 rounded-3xl space-y-4 transition-all relative overflow-hidden group/sub shadow-md"
                 >
                   {/* Subtle top indicator border */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500/40 to-purple-500/40" />
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 to-purple-500" />
 
                   {/* Header Row of Sub-question */}
                   <div className="flex items-center justify-between">
@@ -292,8 +292,8 @@ export default function QuestionEditor({
                           <div
                             key={opt.id}
                             className={cn(
-                              "flex items-center gap-2 p-2 bg-slate-950/20 border rounded-xl transition-all",
-                              subQ.correctOptionId === opt.id ? "border-emerald-500/30 bg-emerald-500/[0.02]" : "border-white/5"
+                              "flex items-center gap-2 p-2 bg-slate-950/30 border rounded-xl transition-all",
+                              subQ.correctOptionId === opt.id ? "border-emerald-500/30 bg-emerald-500/[0.03]" : "border-white/10"
                             )}
                           >
                             <span className="font-mono text-[10px] font-bold text-slate-500 shrink-0 w-4">
@@ -494,13 +494,13 @@ export default function QuestionEditor({
         /* NORMAL QUESTIONS: STANDARD ONE COLUMN LAYOUT */
         <div className="space-y-5">
           {/* Question main content */}
-          <div className="bg-white/[0.01] border border-white/5 p-4 rounded-2xl space-y-2">
+          <div className="bg-slate-900/20 border border-white/10 p-5 rounded-3xl space-y-3 shadow-md backdrop-blur-md">
             <Label className="text-xs font-bold text-slate-400 uppercase tracking-widest block">Nội dung câu hỏi</Label>
             <Textarea
               value={question.question}
               onChange={(e) => updateQuestion({ question: e.target.value })}
               placeholder="Nhập nội dung câu hỏi chính tại đây..."
-              className="min-h-[100px] bg-slate-950/40 border-white/8 hover:border-white/12 focus:border-indigo-500 text-xs leading-relaxed focus:bg-slate-900/50 rounded-xl"
+              className="min-h-[100px] bg-slate-950/40 border-white/10 hover:border-white/20 focus:border-indigo-500 text-xs leading-relaxed focus:bg-slate-900/50 rounded-xl py-3 px-4 transition-colors resize-y"
             />
           </div>
 

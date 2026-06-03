@@ -91,7 +91,7 @@ export default function MultiChoiceCard({
     <div className="w-full h-full flex flex-col overflow-hidden">
       <div className="h-1/2 flex items-center justify-center p-4 relative">
         <motion.h2
-          className="text-3xl md:text-5xl font-black text-white text-center leading-tight px-4 max-w-4xl"
+          className="text-3xl md:text-5xl font-black text-white text-center leading-tight px-4 max-w-4xl bg-gradient-to-r from-white via-indigo-100 to-purple-100 bg-clip-text text-transparent"
           initial={{ scale: 0.95, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -99,7 +99,7 @@ export default function MultiChoiceCard({
           {question.question}
         </motion.h2>
         {isMulti && !submitted && (
-          <p className="absolute bottom-4 text-sm text-slate-300">
+          <p className="absolute bottom-4 text-sm text-slate-400 font-bold uppercase tracking-wider">
             Chọn tất cả đáp án đúng
           </p>
         )}
@@ -114,7 +114,7 @@ export default function MultiChoiceCard({
           initial="initial"
           animate="animate"
         >
-          {displayedOptions.map((option) => {
+          {displayedOptions.map((option, index) => {
             const isSelected = isMulti
               ? selectedIds.includes(option.id)
               : selectedSingle === option.id;
@@ -133,27 +133,43 @@ export default function MultiChoiceCard({
                 }
                 disabled={submitted && !isMulti}
                 className={cn(
-                  "min-h-[88px] rounded-3xl border font-bold text-lg md:text-xl flex items-center justify-center p-4 transition-all duration-300 relative",
-                  "border-white/20 bg-white/5 hover:border-white/35",
+                  "min-h-[56px] md:min-h-[88px] rounded-3xl border font-bold text-lg md:text-xl flex items-center justify-center px-14 py-4 transition-all duration-300 relative",
+                  "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/[0.08]",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                   !submitted &&
                     isSelected &&
-                    "border-indigo-400/60 bg-indigo-500/20",
+                    "border-indigo-400 bg-indigo-500/20 shadow-[0_0_15px_rgba(99,102,241,0.15)]",
                   isCorrect &&
-                    "border-emerald-300/70 bg-emerald-500/20 shadow-[0_0_35px_rgba(16,185,129,0.35)]",
+                    "border-emerald-400 bg-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.25)]",
                   isWrong &&
-                    "border-red-300/70 bg-red-500/20 shadow-[0_0_35px_rgba(239,68,68,0.35)]",
+                    "border-rose-400 bg-rose-500/20 shadow-[0_0_20px_rgba(239,68,68,0.25)]",
                 )}
                 whileHover={submitted ? { scale: 1 } : { scale: 1.02 }}
                 whileTap={submitted ? { scale: 1 } : { scale: 0.98 }}
               >
-                <span className="text-center leading-relaxed z-10">
+                {/* Option Letter Indicator */}
+                <span className={cn(
+                  "font-mono text-xs font-black px-2.5 py-1 rounded-xl border absolute left-4 shrink-0 transition-colors",
+                  isCorrect
+                    ? "text-emerald-300 bg-emerald-500/20 border-emerald-500/30"
+                    : isWrong
+                    ? "text-red-300 bg-red-500/20 border-red-500/30"
+                    : isSelected
+                    ? "text-indigo-300 bg-indigo-500/20 border-indigo-500/30"
+                    : "text-slate-400 bg-slate-800/40 border-white/10"
+                )}>
+                  {String.fromCharCode(65 + index)}
+                </span>
+
+                <span className="text-center leading-relaxed z-10 text-slate-100">
                   {option.text}
                 </span>
+
                 {isCorrect && (
-                  <CheckCircle className="absolute top-3 right-3 w-8 h-8 text-emerald-400" />
+                  <CheckCircle className="absolute top-1/2 -translate-y-1/2 right-4 w-6 h-6 text-emerald-400" />
                 )}
                 {isWrong && (
-                  <XCircle className="absolute top-3 right-3 w-8 h-8 text-red-400" />
+                  <XCircle className="absolute top-1/2 -translate-y-1/2 right-4 w-6 h-6 text-red-400" />
                 )}
               </motion.button>
             );
@@ -163,7 +179,7 @@ export default function MultiChoiceCard({
         {isMulti && !submitted && (
           <Button
             size="lg"
-            className="mt-4 w-full max-w-md mx-auto h-14 text-lg font-bold"
+            className="mt-4 w-full max-w-md mx-auto min-h-11 h-14 text-lg font-bold rounded-2xl bg-indigo-600 hover:bg-indigo-500 shadow-[0_4px_24px_rgba(99,102,241,0.2)] focus-visible:ring-2 focus-visible:ring-indigo-400"
             disabled={selectedIds.length === 0}
             onClick={submitMulti}
           >

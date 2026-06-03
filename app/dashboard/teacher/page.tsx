@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { School, Users, BookText, Puzzle, PenLine, Plus } from "lucide-react";
+import { School, Users, BookText, Puzzle, PenLine, Plus, CalendarDays } from "lucide-react";
 
 const CLASSES = [
   {
@@ -97,7 +97,15 @@ export default async function TeacherPage() {
             Quản lý lớp học và tài nguyên giảng dạy của bạn.
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <Link href="/dashboard/teacher/schedule">
+            <Button
+              variant="outline"
+              className="border-white/10 hover:bg-white/8 text-white cursor-pointer"
+            >
+              <CalendarDays className="w-4 h-4 mr-2" /> Thời khoá biểu
+            </Button>
+          </Link>
           <Button
             id="create-lesson-btn"
             className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white shadow-lg shadow-purple-600/20"

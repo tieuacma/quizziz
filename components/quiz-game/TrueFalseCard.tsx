@@ -42,7 +42,7 @@ export default function TrueFalseCard({
     <div className="w-full h-full flex flex-col overflow-hidden">
       <div className="h-1/2 flex items-center justify-center p-4">
         <motion.h2
-          className="text-4xl md:text-5xl font-black text-white text-center leading-tight px-4 max-w-4xl"
+          className="text-4xl md:text-5xl font-black text-white text-center leading-tight px-4 max-w-4xl bg-gradient-to-r from-white via-indigo-100 to-purple-100 bg-clip-text text-transparent"
           initial={{ scale: 0.95, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -62,7 +62,7 @@ export default function TrueFalseCard({
           initial="initial"
           animate="animate"
         >
-          {options.map(({ value, label }) => {
+          {options.map(({ value, label }, index) => {
             const isSelected = selected === value;
             const isCorrect = submitted && value === question.correctAnswer;
             const isWrong = submitted && isSelected && !isCorrect;
@@ -75,22 +75,42 @@ export default function TrueFalseCard({
                 onClick={() => handleSelect(value)}
                 disabled={submitted}
                 className={cn(
-                  "h-full min-h-[120px] rounded-3xl border font-bold text-2xl flex items-center justify-center transition-all duration-300 relative",
-                  "border-white/20 bg-white/5 hover:border-white/35",
+                  "h-full min-h-[64px] sm:min-h-[120px] rounded-3xl border font-bold text-2xl flex items-center justify-center p-6 transition-all duration-300 relative",
+                  "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/[0.08]",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
+                  value === true && !submitted && "hover:border-emerald-500/30 hover:bg-emerald-500/[0.02]",
+                  value === false && !submitted && "hover:border-rose-500/30 hover:bg-rose-500/[0.02]",
                   isCorrect &&
-                    "border-emerald-300/70 bg-emerald-500/20 shadow-[0_0_35px_rgba(16,185,129,0.35)]",
+                    "border-emerald-400 bg-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.25)]",
                   isWrong &&
-                    "border-red-300/70 bg-red-500/20 shadow-[0_0_35px_rgba(239,68,68,0.35)]",
+                    "border-rose-400 bg-rose-500/20 shadow-[0_0_20px_rgba(239,68,68,0.25)]",
                 )}
                 whileHover={submitted ? { scale: 1 } : { scale: 1.02 }}
                 whileTap={submitted ? { scale: 1 } : { scale: 0.98 }}
               >
-                {label}
+                {/* Option Letter Indicator */}
+                <span className={cn(
+                  "font-mono text-xs font-black px-2.5 py-1 rounded-xl border absolute left-4 shrink-0 transition-colors",
+                  isCorrect
+                    ? "text-emerald-300 bg-emerald-500/20 border-emerald-500/30"
+                    : isWrong
+                    ? "text-red-300 bg-red-500/20 border-red-500/30"
+                    : isSelected
+                    ? "text-indigo-300 bg-indigo-500/20 border-indigo-500/30"
+                    : "text-slate-400 bg-slate-800/40 border-white/10"
+                )}>
+                  {index === 0 ? "A" : "B"}
+                </span>
+
+                <span className="text-center leading-relaxed z-10 flex items-center gap-2">
+                  <span>{value ? "✅" : "❌"}</span>
+                  <span>{label}</span>
+                </span>
                 {isCorrect && (
-                  <CheckCircle className="absolute top-3 right-3 w-10 h-10 text-emerald-400" />
+                  <CheckCircle className="absolute top-3 right-3 w-8 h-8 text-emerald-400" />
                 )}
                 {isWrong && (
-                  <XCircle className="absolute top-3 right-3 w-10 h-10 text-red-400" />
+                  <XCircle className="absolute top-3 right-3 w-8 h-8 text-red-400" />
                 )}
               </motion.button>
             );

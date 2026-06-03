@@ -43,7 +43,7 @@ export default function FillBlankCard({
     <div className="w-full h-full flex flex-col overflow-hidden">
       <div className="flex-1 flex flex-col items-center justify-center p-6 md:p-10 gap-8">
         <motion.h2
-          className="text-3xl md:text-5xl font-black text-white text-center leading-tight max-w-4xl"
+          className="text-3xl md:text-5xl font-black text-white text-center leading-tight max-w-4xl bg-gradient-to-r from-white via-indigo-100 to-purple-100 bg-clip-text text-transparent"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
@@ -56,23 +56,25 @@ export default function FillBlankCard({
             onChange={(e) => setUserAnswer(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && checkAnswer()}
             placeholder={quizGameCopy.fillBlank.placeholder}
-            className="w-full h-20 md:h-24 text-2xl md:text-3xl text-center rounded-3xl border-2 border-white/20 bg-white/10 text-white placeholder:text-slate-400"
+            className="w-full min-h-[72px] h-20 md:h-24 text-2xl md:text-3xl text-center rounded-[24px] border border-white/10 bg-white/5 text-white placeholder:text-slate-500 focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 transition-all"
             disabled={submitted}
             aria-label={quizGameCopy.fillBlank.placeholder}
           />
           {submitted && (
             <motion.div
               className={cn(
-                "absolute inset-0 flex items-center justify-center rounded-3xl z-10",
-                isCorrect ? "bg-emerald-500/90" : "bg-red-500/90",
+                "absolute inset-0 flex items-center justify-center rounded-[24px] z-10 border backdrop-blur-md",
+                isCorrect
+                  ? "border-emerald-400 bg-emerald-500/25 shadow-[0_0_20px_rgba(16,185,129,0.2)]"
+                  : "border-rose-400 bg-rose-500/25 shadow-[0_0_20px_rgba(239,68,68,0.2)]",
               )}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
             >
               {isCorrect ? (
-                <CheckCircle className="w-16 h-16 text-white" />
+                <CheckCircle className="w-16 h-16 text-emerald-400 drop-shadow-[0_0_12px_rgba(52,211,153,0.3)]" />
               ) : (
-                <XCircle className="w-16 h-16 text-white" />
+                <XCircle className="w-16 h-16 text-red-400 drop-shadow-[0_0_12px_rgba(248,113,113,0.3)]" />
               )}
             </motion.div>
           )}
@@ -81,14 +83,17 @@ export default function FillBlankCard({
         {!submitted ? (
           <Button
             size="lg"
-            className="h-14 px-12 text-xl font-bold"
+            className="min-h-11 h-14 px-12 text-xl font-bold rounded-2xl bg-indigo-600 hover:bg-indigo-500 shadow-[0_4px_24px_rgba(99,102,241,0.25)] focus-visible:ring-2 focus-visible:ring-indigo-400"
             onClick={checkAnswer}
             disabled={!userAnswer.trim()}
           >
             {quizGameCopy.fillBlank.submit}
           </Button>
         ) : (
-          <p className="text-2xl font-bold text-white">
+          <p className={cn(
+            "text-2xl font-black uppercase tracking-wider",
+            isCorrect ? "text-emerald-400 drop-shadow-[0_0_8px_rgba(52,211,153,0.3)]" : "text-rose-400 drop-shadow-[0_0_8px_rgba(244,63,94,0.3)]"
+          )}>
             {isCorrect
               ? quizGameCopy.fillBlank.correct
               : quizGameCopy.fillBlank.wrong}

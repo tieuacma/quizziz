@@ -436,6 +436,9 @@ export function useQuizEditor(
         return;
       }
 
+      // If typing inside form elements, avoid undo/redo and other shortcuts
+      if (isInput) return;
+
       // Ctrl+Z: Undo
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") {
         e.preventDefault();
@@ -449,9 +452,6 @@ export function useQuizEditor(
         redo();
         return;
       }
-
-      // If typing inside form elements, avoid other shortcuts
-      if (isInput) return;
 
       // Alt+1 to Alt+4: Add Questions
       if (e.altKey && e.key === "1") {

@@ -58,7 +58,7 @@ export default function QuizGame({
 
   if (isIdle) {
     return (
-      <div className="h-screen w-screen flex items-center justify-center bg-slate-950 text-slate-400">
+      <div className="flex h-dvh w-full items-center justify-center bg-slate-950 text-slate-400">
         Đang tải...
       </div>
     );
@@ -82,7 +82,7 @@ export default function QuizGame({
       <AnimatePresence mode="wait">
         <motion.div
           key="summary"
-          className="h-screen w-screen"
+          className="h-dvh w-full"
           variants={summaryVariants}
           initial="initial"
           animate="animate"

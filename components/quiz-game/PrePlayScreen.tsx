@@ -2,18 +2,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Play,
-  BookOpen,
-  Clock,
-  Zap,
-  Star,
-  Trophy,
-  Sparkles,
-} from "lucide-react";
+import { Play, BookOpen, Zap, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { quizGameCopy } from "./copy";
-import { cn } from "@/lib/utils";
 
 import { AudioSettingsState } from "@/types/quiz";
 
@@ -34,10 +25,8 @@ export default function PrePlayScreen({
   audioSettings,
   toggleAudioSetting,
 }: PrePlayScreenProps) {
-  const minutes = Math.ceil(estimatedSeconds / 60);
-
   return (
-    <div className="h-screen w-screen flex items-center justify-center bg-slate-950 text-white relative overflow-hidden select-none">
+    <div className="min-h-dvh w-full flex items-center justify-center bg-slate-950 text-white relative overflow-hidden select-none px-4 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(1.5rem,env(safe-area-inset-top))]">
       {/* Immersive Cosmic Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-950 to-purple-950" />
@@ -74,8 +63,11 @@ export default function PrePlayScreen({
           )}
         </h1>
 
-        <p className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-6">
+        <p className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">
           Chuẩn bị sẵn sàng cho bài thi trắc nghiệm tương tác
+        </p>
+        <p className="text-slate-500 text-xs mb-6">
+          {quizGameCopy.prePlay.questionCount(questionCount)}
         </p>
 
         {/* Sound toggle switches */}
@@ -119,7 +111,7 @@ export default function PrePlayScreen({
         >
           <Button
             size="lg"
-            className="w-full h-14 text-base font-bold gap-2 cursor-pointer bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-2xl shadow-[0_4px_24px_rgba(99,102,241,0.3)] focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+            className="w-full min-h-11 h-14 text-base font-bold gap-2 cursor-pointer bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-2xl shadow-[0_4px_24px_rgba(99,102,241,0.3)] focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
             onClick={onStart}
           >
             <Play className="w-4 h-4 fill-white" />

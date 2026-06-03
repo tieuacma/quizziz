@@ -112,7 +112,8 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
   } = useQuizEditor(routeQuizId, addToast);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 100);
+    const handleScroll = () => setScrolled(window.scrollY > 24);
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -171,9 +172,35 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
         <div className="absolute bottom-1/4 right-1/4 w-[380px] h-[380px] bg-purple-500/5 rounded-full blur-3xl" />
       </div>
 
-      {/* Sticky top action bar for scrolled view */}
+      {/* Mobile: always-visible compact action bar */}
+      <div className="fixed top-0 left-0 right-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-white/5 shadow-xl lg:hidden pt-[env(safe-area-inset-top)]">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between gap-2">
+          <span className="text-[10px] text-slate-300 truncate font-bold flex items-center gap-1.5 min-w-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
+            <span className="truncate">{metadata?.title || "Quiz"}</span>
+            {isDirty && (
+              <span className="text-amber-400 font-mono text-[9px] bg-amber-500/10 px-1 py-0.5 rounded border border-amber-500/20 shrink-0">•</span>
+            )}
+          </span>
+          <div className="flex gap-1.5 shrink-0">
+            <Button variant="ghost" size="icon" className="h-8 w-8 cursor-pointer" disabled={!canUndo} onClick={undo}>
+              <Undo2 className="w-3.5 h-3.5" />
+            </Button>
+            <Button
+              size="sm"
+              onClick={handleSave}
+              disabled={isSubmitting}
+              className="h-8 bg-indigo-600 hover:bg-indigo-500 cursor-pointer text-[11px] px-3"
+            >
+              {isSubmitting ? "..." : "Lưu"}
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop: sticky top action bar when scrolled */}
       {scrolled && (
-        <div className="fixed top-0 left-0 right-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-white/5 shadow-xl animate-in fade-in slide-in-from-top-2 duration-300">
+        <div className="hidden lg:block fixed top-0 left-0 right-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-white/5 shadow-xl animate-in fade-in slide-in-from-top-2 duration-300">
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
             <span className="text-xs text-slate-300 truncate font-bold flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-indigo-500" />
@@ -213,7 +240,7 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
       )}
 
       {/* Main Page Content */}
-      <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 py-8 pt-14 lg:pt-8 relative z-10">
         
         {/* Navigation & Header */}
         <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4 mb-6">
@@ -355,13 +382,13 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
         </div>
 
         {/* METADATA BLOCK: ELEGANT COLLAPSIBLE ACCORDION */}
-        <Card className="mb-6 bg-slate-900/40 border-white/5 shadow-lg overflow-hidden backdrop-blur-md rounded-2xl">
+        <Card className="mb-6 bg-slate-900/60 border-white/10 shadow-xl overflow-hidden backdrop-blur-xl rounded-3xl">
           <div 
             className="px-6 py-4 flex items-center justify-between cursor-pointer hover:bg-white/[0.02] transition-colors"
             onClick={() => setShowSettings(!showSettings)}
           >
             <div className="flex items-center gap-3">
-              <span className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400">
+              <span className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
                 <BookOpen className="w-4.5 h-4.5" />
               </span>
               <div>
@@ -378,14 +405,14 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
           </div>
           
           {showSettings && (
-            <CardContent className="pt-2 pb-6 px-6 border-t border-white/5 space-y-4 animate-in fade-in slide-in-from-top-3 duration-300">
+            <CardContent className="pt-2 pb-6 px-6 border-t border-white/10 space-y-4 animate-in fade-in slide-in-from-top-3 duration-300">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label className="text-slate-400 text-xs font-bold uppercase tracking-wider">Tiêu đề Quiz</Label>
                   <Input
                     value={metadata?.title ?? ""}
                     onChange={(e) => updateMetadata({ title: e.target.value })}
-                    className="bg-slate-950/40 border-white/5 focus:border-indigo-500 rounded-xl py-2"
+                    className="bg-slate-950/60 border-white/10 focus:border-indigo-500 rounded-xl py-2 transition-colors"
                   />
                 </div>
                 <div className="space-y-2">
@@ -395,7 +422,7 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
                     onChange={(e) =>
                       updateMetadata({ category: e.target.value })
                     }
-                    className="bg-slate-950/40 border-white/5 focus:border-indigo-500 rounded-xl py-2"
+                    className="bg-slate-950/60 border-white/10 focus:border-indigo-500 rounded-xl py-2 transition-colors"
                     placeholder="Ví dụ: Lịch sử, Tiếng Anh..."
                   />
                 </div>
@@ -408,7 +435,7 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
                   onChange={(e) =>
                     updateMetadata({ description: e.target.value })
                   }
-                  className="bg-slate-950/40 border-white/5 focus:border-indigo-500 rounded-xl py-2"
+                  className="bg-slate-950/60 border-white/10 focus:border-indigo-500 rounded-xl py-2 transition-colors"
                   placeholder="Mô tả nội dung học sinh ôn luyện..."
                 />
               </div>
@@ -496,6 +523,7 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
           {/* COLUMN 1: SIDEBAR QUESTIONS LIST */}
           <aside className={cn(
             "space-y-3 pr-1 transition-all duration-300",
+            "lg:sticky lg:top-24 lg:max-h-[calc(100dvh-7rem)] lg:flex lg:flex-col lg:min-h-0",
             showLivePreview ? "lg:col-span-3" : "lg:col-span-4"
           )}>
             
@@ -532,8 +560,8 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
             </div>
 
             {/* Questions Navigator list */}
-            <div className="max-h-[60vh] overflow-y-auto pr-1 space-y-2 scrollbar-thin">
-              {filteredQuestions.map((q, i) => {
+            <div className="max-h-[50vh] overflow-y-auto pr-1 space-y-2 scrollbar-thin lg:flex-1 lg:min-h-0 lg:max-h-none">
+              {filteredQuestions.map((q) => {
                 const originalIndex = questions.findIndex((org) => org.id === q.id);
                 const isSelected = selectedQuestionId === q.id;
                 const hasError = errorByQuestionId[q.id];
@@ -542,6 +570,7 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
                   <button
                     key={q.id}
                     type="button"
+                    data-question-id={q.id}
                     onClick={() => {
                       setSelectedQuestionId(q.id);
                       if (expandedQuestion !== q.id) toggleExpandQuestion(q.id);
@@ -549,14 +578,14 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
                     className={cn(
                       "w-full text-left rounded-2xl border p-3.5 transition-all relative overflow-hidden cursor-pointer",
                       isSelected
-                        ? "border-indigo-500/50 bg-indigo-500/10 shadow-[0_4px_16px_rgba(99,102,241,0.06)]"
-                        : "border-white/5 bg-slate-900/30 hover:bg-slate-900/60",
+                        ? "border-indigo-500/50 bg-indigo-500/10 shadow-[0_0_15px_rgba(99,102,241,0.12)]"
+                        : "border-white/10 bg-slate-900/40 hover:bg-slate-900/80 hover:border-white/20",
                       hasError && "border-rose-500/40 bg-rose-500/[0.02]",
                     )}
                   >
                     {/* Pulsing indicator for active selections */}
                     {isSelected && (
-                      <div className="absolute top-0 bottom-0 left-0 w-1 bg-indigo-500" />
+                      <div className="absolute top-0 bottom-0 left-0 w-1 bg-gradient-to-b from-indigo-400 to-purple-500 shadow-[2px_0_10px_rgba(99,102,241,0.4)]" />
                     )}
 
                     <div className="flex items-center justify-between gap-2 mb-1.5">
@@ -578,7 +607,10 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
                     </div>
 
                     {hasError && (
-                      <p className="text-[10px] font-semibold text-rose-400 mt-2 flex items-center gap-1">
+                      <p
+                        data-question-error
+                        className="text-[10px] font-semibold text-rose-400 mt-2 flex items-center gap-1"
+                      >
                         <AlertTriangle className="w-3 h-3 text-rose-400 shrink-0" />
                         {hasError}
                       </p>
@@ -598,20 +630,26 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
           {/* COLUMN 2: ACTIVE QUESTION EDITOR PANEL */}
           <div className={cn(
             "space-y-4 transition-all duration-300",
+            "lg:sticky lg:top-24 lg:max-h-[calc(100dvh-7rem)] lg:overflow-y-auto lg:min-h-0 pr-1",
             showLivePreview ? "lg:col-span-5" : "lg:col-span-8"
           )}>
             {selectedQuestion ? (
               <Card
                 data-question-id={selectedQuestion.id}
                 className={cn(
-                  "bg-slate-900/40 border-white/5 shadow-xl overflow-hidden rounded-3xl",
-                  errorByQuestionId[selectedQuestion.id] && "border-rose-500/20 shadow-rose-500/5"
+                  "bg-slate-900/60 border-white/10 shadow-xl overflow-hidden rounded-3xl backdrop-blur-xl",
+                  errorByQuestionId[selectedQuestion.id] && "border-rose-500/30 shadow-rose-500/5"
                 )}
               >
                 {/* Editor question header action panel */}
                 <CardHeader className="py-4 border-b border-white/5 bg-white/[0.01]">
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-sm font-black text-white">
+                        Câu #
+                        {questions.findIndex((q) => q.id === selectedQuestion.id) +
+                          1}
+                      </span>
                       <Badge className="bg-indigo-600 text-white font-bold text-[10px]">
                         {QuestionTypeLabel[selectedQuestion.type]}
                       </Badge>
@@ -689,7 +727,10 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
                 </CardHeader>
                 <CardContent className="pt-5 px-6 pb-6">
                   {errorByQuestionId[selectedQuestion.id] && (
-                    <div className="bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs px-3.5 py-2.5 rounded-xl mb-4 font-semibold flex items-start gap-2">
+                    <div
+                      data-question-error
+                      className="bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs px-3.5 py-2.5 rounded-xl mb-4 font-semibold flex items-start gap-2"
+                    >
                       <AlertTriangle className="w-4.5 h-4.5 text-rose-400 shrink-0 mt-0.5" />
                       {errorByQuestionId[selectedQuestion.id]}
                     </div>
@@ -771,11 +812,22 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
                 </CardContent>
               </Card>
             ) : (
-              <Card className="bg-slate-900/40 border-white/5 rounded-3xl">
-                <CardContent className="py-16 text-center text-slate-500 flex flex-col items-center justify-center gap-2">
+              <Card className="bg-slate-900/40 border-white/5 rounded-3xl border-dashed">
+                <CardContent className="py-16 text-center text-slate-500 flex flex-col items-center justify-center gap-4">
                   <AlertTriangle className="w-10 h-10 text-slate-600 stroke-[1.5]" />
-                  <p className="text-sm font-semibold">Quiz chưa có câu hỏi nào</p>
-                  <p className="text-xs text-slate-600 max-w-xs">Nhấn thêm câu hỏi từ thanh công cụ phía trên để bắt đầu soạn bài.</p>
+                  <div>
+                    <p className="text-sm font-semibold text-slate-300">Quiz chưa có câu hỏi nào</p>
+                    <p className="text-xs text-slate-600 max-w-xs mt-1">
+                      Thêm câu hỏi đầu tiên để bắt đầu biên soạn nội dung.
+                    </p>
+                  </div>
+                  <Button
+                    onClick={() => addQuestion("multiple-choice")}
+                    className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-xl cursor-pointer font-bold gap-2"
+                  >
+                    <Plus className="w-4 h-4" />
+                    Thêm câu đầu tiên
+                  </Button>
                 </CardContent>
               </Card>
             )}
@@ -783,7 +835,7 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
 
           {/* COLUMN 3: STUDENT DEVICE LIVE PREVIEW */}
           {showLivePreview && (
-            <div className="lg:col-span-4 bg-slate-900/20 border border-white/5 p-5 rounded-3xl backdrop-blur-md flex justify-center items-start animate-in fade-in slide-in-from-right-4 duration-300">
+            <div className="lg:col-span-4 lg:sticky lg:top-24 lg:max-h-[calc(100dvh-7rem)] lg:overflow-y-auto bg-slate-900/20 border border-white/5 p-5 rounded-3xl backdrop-blur-md flex justify-center items-start animate-in fade-in slide-in-from-right-4 duration-300">
               <QuizLivePreview question={selectedQuestion} defaultTime={defaultTime} />
             </div>
           )}

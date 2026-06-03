@@ -47,7 +47,8 @@ function SubQuestionInput({
               onClick={() => !answered && onAnswer(option.id)}
               disabled={answered}
               className={cn(
-                "w-full min-h-[72px] rounded-2xl border p-4 font-semibold text-lg text-left transition-all",
+                "w-full min-h-[44px] rounded-2xl border p-4 font-semibold text-lg text-left transition-all",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900",
                 answered
                   ? "cursor-default"
                   : "border-white/20 bg-white/10 hover:border-indigo-400",
@@ -71,7 +72,7 @@ function SubQuestionInput({
           onChange={(e) => setFillText(e.target.value)}
           disabled={answered}
           placeholder={quizGameCopy.fillBlank.placeholder}
-          className="h-16 text-xl text-center bg-white/10 border-white/20 text-white"
+          className="min-h-11 h-16 text-xl text-center bg-white/10 border-white/20 text-white focus-visible:ring-2 focus-visible:ring-indigo-400"
         />
         {!answered && (
           <Button
@@ -109,7 +110,7 @@ function SubQuestionInput({
               disabled={answered}
               onClick={() => !answered && onAnswer(value)}
               className={cn(
-                "h-20 text-xl font-bold",
+                "min-h-[44px] h-20 text-xl font-bold focus-visible:ring-2 focus-visible:ring-indigo-400",
                 isCorrect && "border-emerald-400 bg-emerald-500/30",
                 isWrong && "border-red-400 bg-red-500/30",
               )}
