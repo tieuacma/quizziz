@@ -26,98 +26,89 @@ export default function PrePlayScreen({
   toggleAudioSetting,
 }: PrePlayScreenProps) {
   return (
-    <div className="min-h-dvh w-full flex items-center justify-center bg-slate-950 text-white relative overflow-hidden select-none px-4 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(1.5rem,env(safe-area-inset-top))]">
-      {/* Immersive Cosmic Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-950 to-purple-950" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.12),transparent_50%)]" />
-      </div>
+    <div className="zenith-immersive min-h-dvh w-full flex items-center justify-center text-white relative overflow-hidden select-none px-4 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(1.5rem,env(safe-area-inset-top))]">
+      <div className="absolute inset-0 z-0 zenith-grid opacity-40 pointer-events-none" />
 
-      {/* Lobby Glassmorphic Card */}
       <motion.div
-        className="max-w-md w-full rounded-[32px] border border-white/10 bg-slate-900/40 backdrop-blur-2xl p-8 xl:p-10 text-center shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8),0_0_50px_rgba(99,102,241,0.15)] z-10"
+        className="max-w-md w-full zenith-card rounded-[32px] p-8 xl:p-10 text-center z-10"
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        {/* Glowing Lobby Icon */}
-        <div className="mx-auto mb-6 w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center relative shadow-[0_0_20px_rgba(99,102,241,0.2)]">
-          <BookOpen className="w-8 h-8 text-indigo-300" />
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-indigo-400 rounded-full animate-ping" />
+        <div className="relative z-10">
+          <div className="mx-auto mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500/20 to-fuchsia-600/20 border border-violet-500/30 flex items-center justify-center shadow-[0_0_24px_rgba(139,92,246,0.25)] ring-1 ring-white/10">
+            <BookOpen className="w-8 h-8 text-violet-300" />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-violet-400 rounded-full animate-ping" />
+          </div>
+
+          <h1 className="font-display text-2xl md:text-3xl font-extrabold text-white mb-2 tracking-tight flex items-center justify-center gap-2">
+            {isPracticeMode ? (
+              <>
+                <Zap className="w-6 h-6 text-amber-400 fill-amber-400/20" />
+                Chế Độ Ôn Tập
+              </>
+            ) : (
+              <>
+                <Sparkles className="w-6 h-6 text-violet-400" />
+                {quizGameCopy.prePlay.title}
+              </>
+            )}
+          </h1>
+
+          <p className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">
+            Chuẩn bị sẵn sàng cho bài thi trắc nghiệm tương tác
+          </p>
+          <p className="text-slate-500 text-xs mb-6">
+            {quizGameCopy.prePlay.questionCount(questionCount)}
+          </p>
+
+          <div className="flex justify-center gap-4 mb-6">
+            <button
+              type="button"
+              onClick={() => toggleAudioSetting?.("music")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-all cursor-pointer ${
+                audioSettings?.music
+                  ? "bg-violet-500/10 border-violet-400/50 text-violet-300 shadow-[0_0_12px_rgba(139,92,246,0.2)]"
+                  : "bg-white/[0.03] border-white/10 text-slate-500"
+              }`}
+            >
+              {audioSettings?.music ? "🎵 Nhạc nền: Bật" : "🔇 Nhạc nền: Tắt"}
+            </button>
+            <button
+              type="button"
+              onClick={() => toggleAudioSetting?.("sfx")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-all cursor-pointer ${
+                audioSettings?.sfx
+                  ? "bg-violet-500/10 border-violet-400/50 text-violet-300 shadow-[0_0_12px_rgba(139,92,246,0.2)]"
+                  : "bg-white/[0.03] border-white/10 text-slate-500"
+              }`}
+            >
+              {audioSettings?.sfx ? "⚡ Âm thanh: Bật" : "🔇 Âm thanh: Tắt"}
+            </button>
+          </div>
+
+          <p className="text-slate-500 text-xs mb-4">
+            {quizGameCopy.prePlay.estimatedTime(estimatedSeconds)}
+          </p>
+
+          <p className="text-slate-500 text-xs mb-8">
+            Trả lời xong sẽ tự chuyển sang câu tiếp theo
+          </p>
+
+          <motion.div
+            animate={{ scale: [1, 1.02, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Button
+              size="lg"
+              className="zenith-btn-glow w-full min-h-11 h-14 text-base font-bold gap-2 cursor-pointer rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 text-white border-0"
+              onClick={onStart}
+            >
+              <Play className="w-4 h-4 fill-white" />
+              {quizGameCopy.prePlay.start}
+            </Button>
+          </motion.div>
         </div>
-
-        {/* Title */}
-        <h1 className="text-2xl md:text-3xl font-black text-white mb-2 tracking-tight flex items-center justify-center gap-2">
-          {isPracticeMode ? (
-            <>
-              <Zap className="w-6 h-6 text-amber-400 fill-amber-400/20" />
-              Chế Độ Ôn Tập
-            </>
-          ) : (
-            <>
-              <Sparkles className="w-6 h-6 text-indigo-400" />
-              {quizGameCopy.prePlay.title}
-            </>
-          )}
-        </h1>
-
-        <p className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">
-          Chuẩn bị sẵn sàng cho bài thi trắc nghiệm tương tác
-        </p>
-        <p className="text-slate-500 text-xs mb-6">
-          {quizGameCopy.prePlay.questionCount(questionCount)}
-        </p>
-
-        {/* Sound toggle switches */}
-        <div className="flex justify-center gap-4 mb-6">
-          <button
-            type="button"
-            onClick={() => toggleAudioSetting?.("music")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-all cursor-pointer ${
-              audioSettings?.music
-                ? "bg-indigo-500/10 border-indigo-400/50 text-indigo-300 shadow-[0_0_12px_rgba(99,102,241,0.2)]"
-                : "bg-slate-900/40 border-slate-800 text-slate-500"
-            }`}
-          >
-            {audioSettings?.music ? "🎵 Nhạc nền: Bật" : "🔇 Nhạc nền: Tắt"}
-          </button>
-          <button
-            type="button"
-            onClick={() => toggleAudioSetting?.("sfx")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-all cursor-pointer ${
-              audioSettings?.sfx
-                ? "bg-indigo-500/10 border-indigo-400/50 text-indigo-300 shadow-[0_0_12px_rgba(99,102,241,0.2)]"
-                : "bg-slate-900/40 border-slate-800 text-slate-500"
-            }`}
-          >
-            {audioSettings?.sfx ? "⚡ Âm thanh: Bật" : "🔇 Âm thanh: Tắt"}
-          </button>
-        </div>
-
-        <p className="text-slate-500 text-xs mb-4">
-          {quizGameCopy.prePlay.estimatedTime(estimatedSeconds)}
-        </p>
-
-        <p className="text-slate-500 text-xs mb-8">
-          Trả lời xong sẽ tự chuyển sang câu tiếp theo
-        </p>
-
-        {/* Pulsating Glowing Action Button */}
-        <motion.div
-          animate={{ scale: [1, 1.02, 1] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <Button
-            size="lg"
-            className="w-full min-h-11 h-14 text-base font-bold gap-2 cursor-pointer bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-2xl shadow-[0_4px_24px_rgba(99,102,241,0.3)] focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
-            onClick={onStart}
-          >
-            <Play className="w-4 h-4 fill-white" />
-            {quizGameCopy.prePlay.start}
-          </Button>
-        </motion.div>
       </motion.div>
     </div>
   );

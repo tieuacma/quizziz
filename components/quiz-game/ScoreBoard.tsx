@@ -38,7 +38,7 @@ export default function ScoreBoard({ score }: ScoreBoardProps) {
     >
       <Badge
         variant="secondary"
-        className="text-lg font-bold px-4 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-lg hover:shadow-purple-500/50 transition-all"
+        className="text-lg font-bold px-4 py-2 bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 text-white shadow-lg shadow-violet-500/30 ring-1 ring-white/20 transition-all"
       >
         <motion.span
           className="text-2xl font-black"

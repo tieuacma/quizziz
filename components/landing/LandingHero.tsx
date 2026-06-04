@@ -13,7 +13,7 @@ import {
 
 function DashboardMockup() {
   return (
-    <div className="relative rounded-2xl border border-white/10 bg-[#0a0918]/90 shadow-2xl shadow-purple-900/20 overflow-hidden">
+    <div className="relative rounded-2xl zenith-glass shadow-2xl shadow-violet-900/30 overflow-hidden ring-1 ring-violet-500/20">
       <div className="flex h-[280px] sm:h-[320px]">
         <aside className="w-14 sm:w-16 border-r border-white/8 bg-[#07060f]/80 p-2 flex flex-col gap-2">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-purple-600 mx-auto" />
@@ -71,15 +71,17 @@ export default function LandingHero() {
 
   return (
     <section className="relative overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-24">
+      <div className="pointer-events-none absolute inset-0 zenith-grid opacity-60" />
       <div className="pointer-events-none absolute inset-0">
         <motion.div
           style={{ y: blobY1, opacity: blobOpacity }}
-          className="absolute -top-48 -right-48 w-[600px] h-[600px] rounded-full bg-purple-700/15 blur-[140px]"
+          className="absolute -top-48 -right-48 w-[600px] h-[600px] rounded-full bg-purple-600/20 blur-[140px]"
         />
         <motion.div
           style={{ y: blobY2, opacity: blobOpacity }}
-          className="absolute -bottom-48 -left-48 w-[600px] h-[600px] rounded-full bg-violet-700/15 blur-[140px]"
+          className="absolute -bottom-48 -left-48 w-[600px] h-[600px] rounded-full bg-cyan-500/10 blur-[140px]"
         />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[320px] h-[320px] rounded-full bg-fuchsia-600/10 blur-[100px] animate-[pulse-glow_6s_ease-in-out_infinite]" />
       </div>
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
@@ -93,19 +95,19 @@ export default function LandingHero() {
             <motion.div
               variants={reduced ? undefined : fadeUp}
               transition={defaultTransition}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-slate-300 mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full zenith-glass text-sm text-slate-200 mb-6 shadow-lg shadow-violet-900/20"
             >
-              <Sparkles className="w-4 h-4 text-violet-400" />
+              <Sparkles className="w-4 h-4 text-violet-300 animate-[shimmer_2.5s_ease-in-out_infinite]" />
               Hệ thống quản lý học tập thông minh
             </motion.div>
 
             <motion.h1
               variants={reduced ? undefined : fadeUp}
               transition={defaultTransition}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
+              className="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight mb-6 leading-[1.1]"
             >
               Nâng tầm{" "}
-              <span className="bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="zenith-gradient-text block sm:inline">
                 trải nghiệm học tập
               </span>
             </motion.h1>
@@ -127,7 +129,7 @@ export default function LandingHero() {
               <Link href="/signup">
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white shadow-lg shadow-purple-600/30 px-8 w-full sm:w-auto"
+                  className="zenith-btn-glow rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 text-white border-0 px-8 w-full sm:w-auto"
                 >
                   Bắt đầu ngay <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
@@ -136,7 +138,7 @@ export default function LandingHero() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-white/10 hover:bg-white/8 text-white px-8 w-full sm:w-auto"
+                  className="rounded-xl border-white/15 hover:bg-white/[0.08] hover:border-white/25 text-white px-8 w-full sm:w-auto backdrop-blur-sm"
                 >
                   Đăng nhập
                 </Button>

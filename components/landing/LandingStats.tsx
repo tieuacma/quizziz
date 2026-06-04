@@ -45,10 +45,10 @@ function AnimatedStat({
   return (
     <div ref={ref} className="text-center px-4">
       <div className="min-h-[3rem] flex items-end justify-center gap-0.5">
-        <span className="text-3xl sm:text-4xl font-bold text-white tabular-nums">
+        <span className="font-display text-3xl sm:text-4xl font-extrabold text-white tabular-nums">
           {shown}
         </span>
-        <span className="text-3xl sm:text-4xl font-bold text-violet-400">
+        <span className="font-display text-3xl sm:text-4xl font-extrabold zenith-gradient-text-static">
           {suffix}
         </span>
       </div>
@@ -63,7 +63,7 @@ export default function LandingStats() {
   return (
     <section
       id="stats"
-      className="border-y border-white/8 bg-white/[0.02] py-14 sm:py-16"
+      className="border-y border-white/10 zenith-glass py-14 sm:py-16"
       aria-labelledby="stats-heading"
     >
       <h2 id="stats-heading" className="sr-only">

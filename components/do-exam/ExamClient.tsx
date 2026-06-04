@@ -167,24 +167,25 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 
 	if (!current) {
 		return (
-			<div className={`${styles.examRoot} flex items-center justify-center text-slate-300`}>
+			<div className={`zenith-immersive ${styles.examRoot} flex items-center justify-center text-slate-300`}>
 				Đề thi chưa có câu hỏi.
 			</div>
 		);
 	}
 
 	return (
-		<div ref={rootRef} className={`${styles.examRoot} px-4 py-6`}>
-			<div className="max-w-7xl mx-auto">
+		<div ref={rootRef} className={`zenith-immersive ${styles.examRoot} px-4 py-6`}>
+			<div className="pointer-events-none absolute inset-0 zenith-grid opacity-35 z-0" />
+			<div className="relative z-10 max-w-7xl mx-auto">
 				<div className="grid lg:grid-cols-[320px_minmax(0,1fr)] gap-4">
 					<div ref={sidebarRef}>
 					<Card className={styles.glassCard}>
 						<CardHeader className="pb-3">
-							<h1 className="text-lg font-semibold text-white">{metadata.title}</h1>
+							<h1 className="font-display text-lg font-bold text-white tracking-tight">{metadata.title}</h1>
 							<p className="text-xs text-slate-400">
 								{answeredCount}/{questions.length} đã trả lời
 							</p>
-							<div ref={timerRef} className="flex items-center gap-2 text-cyan-300 font-semibold">
+							<div ref={timerRef} className="flex items-center gap-2 text-violet-300 font-semibold">
 								<Timer className="w-4 h-4" />
 								{toClock(remainingSeconds)}
 							</div>
@@ -202,10 +203,10 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 											onClick={() => setCurrentQuestion(index)}
 											className={`${styles.questionNavBtn} rounded-lg border px-2 py-2 text-xs ${
 												isCurrent
-													? "border-cyan-400 bg-cyan-400/20 text-white"
+													? styles.optionNavCurrent
 													: hasAnswer
 														? "border-emerald-500/40 bg-emerald-500/20 text-emerald-300"
-														: "border-white/10 bg-slate-900/50 text-slate-300"
+														: "border-white/10 bg-white/[0.04] text-slate-300"
 											}`}
 										>
 											{index + 1}
@@ -214,7 +215,7 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 									);
 								})}
 							</div>
-							<Button className="w-full mt-4" onClick={() => setConfirmSubmit(true)}>
+							<Button className="zenith-btn-glow w-full mt-4 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 border-0" onClick={() => setConfirmSubmit(true)}>
 								<Send className="w-4 h-4 mr-2" />
 								Nộp bài
 							</Button>
@@ -250,10 +251,10 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 											onClick={() =>
 												setAnswer({ questionId: current.id, answer: opt.id, flagged: flagged[current.id] })
 											}
-											className={`w-full text-left rounded-lg border px-3 py-2 ${
+											className={`w-full text-left rounded-xl border px-3 py-2 transition-all ${
 												answers[current.id]?.answer === opt.id
-													? "border-cyan-400 bg-cyan-500/20 text-white"
-													: "border-white/10 bg-slate-900/40 text-slate-300"
+													? styles.optionSelected
+													: "border-white/10 bg-white/[0.04] text-slate-300 hover:border-violet-500/30"
 											}`}
 										>
 											{opt.text}
@@ -279,7 +280,7 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 											}
 											className={
 												answers[current.id]?.answer === item.value
-													? "border-cyan-400 bg-cyan-500/20"
+													? "border-violet-400 bg-violet-500/20"
 													: ""
 											}
 										>
@@ -300,12 +301,12 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 										})
 									}
 									placeholder="Nhập đáp án..."
-									className="w-full rounded-lg border border-white/10 bg-slate-900/50 px-3 py-2 text-slate-100"
+									className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-slate-100 focus:border-violet-500/50 focus:ring-2 focus:ring-violet-500/20 focus:outline-none"
 								/>
 							) : null}
 							{current.type === "reading" ? (
 								<div className="space-y-4">
-									<div className="rounded-lg border border-white/10 bg-slate-900/40 p-3 text-slate-300 whitespace-pre-wrap">
+									<div className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-slate-300 whitespace-pre-wrap">
 										{current.passage}
 									</div>
 									<div className="space-y-3">
@@ -333,10 +334,10 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 																			flagged: flagged[current.id],
 																		})
 																	}
-																	className={`w-full text-left rounded border px-2 py-1 text-sm ${
+																	className={`w-full text-left rounded-lg border px-2 py-1 text-sm transition-all ${
 																		subAnswer === opt.id
-																			? "border-cyan-400 bg-cyan-500/20"
-																			: "border-white/10"
+																			? styles.optionSelected
+																			: "border-white/10 hover:border-violet-500/30"
 																	}`}
 																>
 																	{opt.text}
@@ -421,7 +422,7 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 							<Button variant="outline" className="flex-1" onClick={() => setConfirmSubmit(false)}>
 								Hủy
 							</Button>
-							<Button className="flex-1" disabled={submitting} onClick={() => void submit()}>
+							<Button className="zenith-btn-glow flex-1 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 border-0" disabled={submitting} onClick={() => void submit()}>
 								{submitting ? "Đang nộp..." : "Nộp ngay"}
 							</Button>
 						</div>
@@ -430,11 +431,11 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 			) : null}
 
 			{result?.success ? (
-				<div className="fixed inset-0 z-50 overflow-auto bg-slate-950/95 px-4 py-8">
+				<div className="fixed inset-0 z-50 overflow-auto zenith-immersive bg-[#030208]/95 px-4 py-8">
 					<div ref={resultRef} className="max-w-3xl mx-auto space-y-3">
 						<Card className={styles.glassCard}>
 							<CardHeader>
-								<h2 className="text-xl text-white font-semibold">Kết quả bài thi</h2>
+								<h2 className="font-display text-xl text-white font-bold">Kết quả bài thi</h2>
 								<p className="text-slate-300">
 									Điểm: {Math.round(result.score ?? 0)}% · Đúng {result.correctCount}/{result.totalQuestions}
 								</p>

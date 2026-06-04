@@ -58,7 +58,7 @@ export default function QuizGame({
 
   if (isIdle) {
     return (
-      <div className="flex h-dvh w-full items-center justify-center bg-slate-950 text-slate-400">
+      <div className="zenith-immersive flex h-dvh w-full items-center justify-center text-slate-400">
         Đang tải...
       </div>
     );

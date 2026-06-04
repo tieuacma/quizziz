@@ -6,11 +6,11 @@ import { sampleQuizData } from "@/components/quiz-game/sample-data";
 
 export default function QuizGamePage() {
   return (
-    <div className="relative min-h-dvh w-full overflow-hidden bg-slate-950">
+    <div className="zenith-immersive relative min-h-dvh w-full overflow-hidden">
       <div className="absolute left-4 top-4 z-50 pt-[env(safe-area-inset-top)]">
         <Link
           href="/"
-          className="rounded-xl border border-white/10 bg-black/40 px-3 py-1.5 text-xs font-semibold text-white/80 backdrop-blur-md transition-colors hover:bg-black/60 hover:text-white"
+          className="zenith-glass rounded-xl px-3 py-1.5 text-xs font-semibold text-white/90 transition-colors hover:text-white hover:border-violet-500/30"
         >
           ← Trang chủ
         </Link>

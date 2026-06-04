@@ -76,10 +76,10 @@ function DashboardSidebar({
   isPending,
 }: DashboardSidebarProps) {
   return (
-    <div className="flex flex-col h-full bg-[#07060f]/60 backdrop-blur-xl border-r border-white/8 relative">
+    <div className="flex flex-col h-full zenith-glass border-r border-white/10 relative">
       <div className="px-6 py-5 border-b border-white/8 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-600/35 relative overflow-hidden group">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 via-purple-600 to-fuchsia-600 flex items-center justify-center shadow-lg shadow-violet-600/40 ring-1 ring-white/20 relative overflow-hidden group">
             <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="text-base font-black text-white relative z-10">Z</span>
           </div>
@@ -87,7 +87,7 @@ function DashboardSidebar({
             <motion.span
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-white font-black text-lg tracking-wider bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent"
+              className="font-display text-white font-extrabold text-lg tracking-tight zenith-gradient-text-static"
             >
               Zenith EDU
             </motion.span>
@@ -308,10 +308,10 @@ export default function DashboardShell({ children, user }: DashboardShellProps) 
   };
 
   return (
-    <div className="min-h-screen bg-[#05040f] flex overflow-x-hidden relative text-slate-100 font-sans antialiased selection:bg-indigo-500/35 selection:text-white">
-      {/* Decorative Blur Backlights */}
-      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none z-0" />
-      <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[100px] pointer-events-none z-0" />
+    <div className="zenith-mesh min-h-screen flex overflow-x-hidden relative text-slate-100 font-sans antialiased selection:bg-violet-500/35 selection:text-white">
+      <div className="absolute inset-0 zenith-grid opacity-40 pointer-events-none z-0" />
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-violet-600/8 rounded-full blur-[120px] pointer-events-none z-0" />
+      <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-cyan-500/6 rounded-full blur-[100px] pointer-events-none z-0" />
 
       {/* Desktop Sidebar Layout */}
       <aside
@@ -325,7 +325,7 @@ export default function DashboardShell({ children, user }: DashboardShellProps) 
       {/* Primary Workspace Shell */}
       <div className="flex-1 flex flex-col min-h-screen z-10 relative overflow-hidden">
         {/* Topbar Header */}
-        <header className="h-16 border-b border-white/8 bg-[#05040f]/60 backdrop-blur-md flex items-center justify-between px-4 md:px-6 sticky top-0 z-30 shadow-sm shadow-[#000]/10 gap-4">
+        <header className="h-16 border-b border-white/10 zenith-glass flex items-center justify-between px-4 md:px-6 sticky top-0 z-30 gap-4">
           {/* Left Topbar Content: Mobile Toggle & Breadcrumbs */}
           <div className="flex items-center gap-3">
             <Sheet open={isMobileOpen} onOpenChange={setIsMobileOpen}>
@@ -361,7 +361,7 @@ export default function DashboardShell({ children, user }: DashboardShellProps) 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Tìm kiếm nhanh..."
-                className="w-full pl-9 pr-8 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:border-white/[0.15] focus:bg-slate-900/50 focus:border-indigo-500 focus:outline-none text-xs text-white transition-all placeholder:text-slate-500"
+                className="w-full pl-9 pr-8 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-violet-500/30 focus:bg-slate-900/50 focus:border-violet-500/60 focus:ring-2 focus:ring-violet-500/20 focus:outline-none text-xs text-white transition-all placeholder:text-slate-500"
               />
               <kbd className="absolute right-2.5 top-1/2 transform -translate-y-1/2 px-1.5 py-0.5 rounded bg-white/[0.06] text-[9px] font-mono text-slate-400 border border-white/[0.05] pointer-events-none select-none">
                 Ctrl K

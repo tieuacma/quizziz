@@ -30,20 +30,15 @@ export default function SignupPage() {
   >(signup, undefined);
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-4 bg-[#05040f]">
-      {/* Ambient blobs */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -top-48 -left-48 w-[500px] h-[500px] rounded-full bg-indigo-700/20 blur-[120px]" />
-        <div className="absolute -bottom-48 -right-48 w-[500px] h-[500px] rounded-full bg-purple-700/20 blur-[120px]" />
-      </div>
+    <main className="zenith-mesh min-h-screen flex items-center justify-center p-4">
+      <div className="pointer-events-none fixed inset-0 zenith-grid opacity-50" />
 
-      <div className="relative w-full max-w-md">
-        {/* Brand */}
+      <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 shadow-lg shadow-indigo-600/40 mb-4">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 via-purple-600 to-fuchsia-600 shadow-xl shadow-violet-600/40 ring-1 ring-white/20 mb-4">
             <GraduationCap className="w-7 h-7 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">
+          <h1 className="font-display text-3xl font-extrabold text-white tracking-tight">
             Zenith EDU
           </h1>
           <p className="text-slate-400 mt-1 text-sm">
@@ -52,7 +47,7 @@ export default function SignupPage() {
         </div>
 
         {/* Card */}
-        <Card className="bg-white/5 border-white/10 backdrop-blur-2xl shadow-2xl">
+        <Card className="rounded-3xl zenith-glass border-white/12 shadow-2xl shadow-violet-950/50">
           <CardHeader className="space-y-1">
             <CardTitle className="text-xl text-white">
               Tạo tài khoản mới ✨
@@ -142,7 +137,7 @@ export default function SignupPage() {
                 id="signup-submit-btn"
                 type="submit"
                 disabled={isPending}
-                className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 transition-all disabled:opacity-60"
+                className="zenith-btn-glow w-full h-11 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 text-white font-semibold border-0 transition-all disabled:opacity-60"
               >
                 {isPending ? "Đang tạo tài khoản…" : "Tạo tài khoản"}
               </Button>

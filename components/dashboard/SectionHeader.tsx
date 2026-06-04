@@ -13,7 +13,7 @@ export default function SectionHeader({
     <div className="flex items-center justify-between gap-4 mb-4">
       <div className="flex items-center gap-2">
         <Icon className="w-5 h-5 text-primary" />
-        <h2 className="text-lg font-semibold text-white">{title}</h2>
+        <h2 className="font-display text-lg font-bold text-white tracking-tight">{title}</h2>
       </div>
       {right}
     </div>

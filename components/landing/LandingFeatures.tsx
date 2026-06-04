@@ -20,8 +20,9 @@ export default function LandingFeatures() {
       aria-labelledby="features-heading"
     >
       <div className="text-center mb-16">
-        <h2 id="features-heading" className="text-3xl sm:text-4xl font-bold mb-4">
-          Tính năng nổi bật
+        <h2 id="features-heading" className="font-display text-3xl sm:text-4xl font-extrabold mb-4">
+          Tính năng{" "}
+          <span className="zenith-gradient-text-static">nổi bật</span>
         </h2>
         <p className="text-slate-400 max-w-xl mx-auto">
           Mọi thứ bạn cần để quản lý và nâng cao chất lượng giảng dạy, học
@@ -45,10 +46,10 @@ export default function LandingFeatures() {
               reduced ? undefined : { y: -4, transition: { duration: 0.2 } }
             }
           >
-            <Card className="h-full bg-white/[0.03] border-white/8 hover:border-violet-500/30 transition-colors group">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600/20 to-purple-600/20 flex items-center justify-center mb-4 group-hover:from-violet-600/30 group-hover:to-purple-600/30 transition-colors">
-                  <f.icon className="w-6 h-6 text-violet-400" />
+            <Card className="h-full zenith-card border-0 bg-transparent shadow-none group">
+              <CardContent className="p-6 relative z-10">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500/25 to-fuchsia-600/20 flex items-center justify-center mb-4 ring-1 ring-violet-500/20 group-hover:from-violet-500/35 group-hover:to-fuchsia-600/30 transition-all shadow-lg shadow-violet-900/20">
+                  <f.icon className="w-6 h-6 text-violet-300" />
                 </div>
                 <h3 className="text-white font-semibold mb-2">{f.title}</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">

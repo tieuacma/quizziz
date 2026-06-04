@@ -46,7 +46,7 @@ export default function LiveLeaderboard({ leaderboard }: LiveLeaderboardProps) {
                 }}
                 className={`flex items-center gap-3 p-3 rounded-2xl border transition-all duration-300 relative ${
                   participant.isPlayer
-                    ? "border-indigo-400/50 bg-indigo-500/15 shadow-[0_0_20px_rgba(99,102,241,0.25)]"
+                    ? "border-violet-400/50 bg-violet-500/15 shadow-[0_0_20px_rgba(99,102,241,0.25)]"
                     : "border-white/5 bg-white/5"
                 }`}
               >
@@ -75,7 +75,7 @@ export default function LiveLeaderboard({ leaderboard }: LiveLeaderboardProps) {
                   <div className="flex items-center gap-1.5">
                     <span
                       className={`text-sm truncate block font-bold leading-tight ${
-                        participant.isPlayer ? "text-indigo-200" : "text-white"
+                        participant.isPlayer ? "text-violet-200" : "text-white"
                       }`}
                     >
                       {participant.name}
@@ -95,7 +95,7 @@ export default function LiveLeaderboard({ leaderboard }: LiveLeaderboardProps) {
                 <div className="text-right shrink-0">
                   <div
                     className={`font-mono text-sm font-black tracking-wide ${
-                      participant.isPlayer ? "text-indigo-200" : "text-white/90"
+                      participant.isPlayer ? "text-violet-200" : "text-white/90"
                     }`}
                   >
                     {participant.score.toLocaleString()}
@@ -104,8 +104,8 @@ export default function LiveLeaderboard({ leaderboard }: LiveLeaderboardProps) {
 
                 {participant.isPlayer && (
                   <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-indigo-400"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-violet-400"></span>
                   </span>
                 )}
               </motion.div>

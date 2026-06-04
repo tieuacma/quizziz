@@ -42,7 +42,7 @@ export default function TrueFalseCard({
     <div className="w-full h-full flex flex-col overflow-hidden">
       <div className="h-1/2 flex items-center justify-center p-4">
         <motion.h2
-          className="text-4xl md:text-5xl font-black text-white text-center leading-tight px-4 max-w-4xl bg-gradient-to-r from-white via-indigo-100 to-purple-100 bg-clip-text text-transparent"
+          className="font-display text-4xl md:text-5xl font-extrabold text-center leading-tight px-4 max-w-4xl zenith-gradient-text-static"
           initial={{ scale: 0.95, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -52,7 +52,7 @@ export default function TrueFalseCard({
       </div>
 
       <div
-        className="h-1/2 bg-black/40 backdrop-blur-xl p-6"
+        className="h-1/2 zenith-panel p-6"
         role="group"
         aria-label="Đúng hoặc Sai"
       >
@@ -77,7 +77,7 @@ export default function TrueFalseCard({
                 className={cn(
                   "h-full min-h-[64px] sm:min-h-[120px] rounded-3xl border font-bold text-2xl flex items-center justify-center p-6 transition-all duration-300 relative",
                   "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/[0.08]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                   value === true && !submitted && "hover:border-emerald-500/30 hover:bg-emerald-500/[0.02]",
                   value === false && !submitted && "hover:border-rose-500/30 hover:bg-rose-500/[0.02]",
                   isCorrect &&
@@ -96,7 +96,7 @@ export default function TrueFalseCard({
                     : isWrong
                     ? "text-red-300 bg-red-500/20 border-red-500/30"
                     : isSelected
-                    ? "text-indigo-300 bg-indigo-500/20 border-indigo-500/30"
+                    ? "text-violet-300 bg-violet-500/20 border-violet-500/30"
                     : "text-slate-400 bg-slate-800/40 border-white/10"
                 )}>
                   {index === 0 ? "A" : "B"}

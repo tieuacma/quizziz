@@ -43,7 +43,7 @@ export default function FillBlankCard({
     <div className="w-full h-full flex flex-col overflow-hidden">
       <div className="flex-1 flex flex-col items-center justify-center p-6 md:p-10 gap-8">
         <motion.h2
-          className="text-3xl md:text-5xl font-black text-white text-center leading-tight max-w-4xl bg-gradient-to-r from-white via-indigo-100 to-purple-100 bg-clip-text text-transparent"
+          className="font-display text-3xl md:text-5xl font-extrabold text-center leading-tight max-w-4xl zenith-gradient-text-static"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
@@ -56,7 +56,7 @@ export default function FillBlankCard({
             onChange={(e) => setUserAnswer(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && checkAnswer()}
             placeholder={quizGameCopy.fillBlank.placeholder}
-            className="w-full min-h-[72px] h-20 md:h-24 text-2xl md:text-3xl text-center rounded-[24px] border border-white/10 bg-white/5 text-white placeholder:text-slate-500 focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 transition-all"
+            className="w-full min-h-[72px] h-20 md:h-24 text-2xl md:text-3xl text-center rounded-[24px] border border-white/10 bg-white/5 text-white placeholder:text-slate-500 focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 transition-all"
             disabled={submitted}
             aria-label={quizGameCopy.fillBlank.placeholder}
           />
@@ -83,7 +83,7 @@ export default function FillBlankCard({
         {!submitted ? (
           <Button
             size="lg"
-            className="min-h-11 h-14 px-12 text-xl font-bold rounded-2xl bg-indigo-600 hover:bg-indigo-500 shadow-[0_4px_24px_rgba(99,102,241,0.25)] focus-visible:ring-2 focus-visible:ring-indigo-400"
+            className="zenith-btn-glow min-h-11 h-14 px-12 text-xl font-bold rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 border-0"
             onClick={checkAnswer}
             disabled={!userAnswer.trim()}
           >

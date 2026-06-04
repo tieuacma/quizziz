@@ -91,7 +91,7 @@ export default function MultiChoiceCard({
     <div className="w-full h-full flex flex-col overflow-hidden">
       <div className="h-1/2 flex items-center justify-center p-4 relative">
         <motion.h2
-          className="text-3xl md:text-5xl font-black text-white text-center leading-tight px-4 max-w-4xl bg-gradient-to-r from-white via-indigo-100 to-purple-100 bg-clip-text text-transparent"
+          className="font-display text-3xl md:text-5xl font-extrabold text-center leading-tight px-4 max-w-4xl zenith-gradient-text-static"
           initial={{ scale: 0.95, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -105,7 +105,7 @@ export default function MultiChoiceCard({
         )}
       </div>
 
-      <div className="h-1/2 bg-black/40 backdrop-blur-xl p-4 md:p-6 flex flex-col min-h-0">
+      <div className="h-1/2 zenith-panel p-4 md:p-6 flex flex-col min-h-0">
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 max-w-5xl mx-auto w-full flex-1 min-h-0 overflow-y-auto"
           role="group"
@@ -135,10 +135,10 @@ export default function MultiChoiceCard({
                 className={cn(
                   "min-h-[56px] md:min-h-[88px] rounded-3xl border font-bold text-lg md:text-xl flex items-center justify-center px-14 py-4 transition-all duration-300 relative",
                   "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/[0.08]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030208]",
                   !submitted &&
                     isSelected &&
-                    "border-indigo-400 bg-indigo-500/20 shadow-[0_0_15px_rgba(99,102,241,0.15)]",
+                    "border-violet-400 bg-violet-500/20 shadow-[0_0_15px_rgba(139,92,246,0.2)]",
                   isCorrect &&
                     "border-emerald-400 bg-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.25)]",
                   isWrong &&
@@ -155,7 +155,7 @@ export default function MultiChoiceCard({
                     : isWrong
                     ? "text-red-300 bg-red-500/20 border-red-500/30"
                     : isSelected
-                    ? "text-indigo-300 bg-indigo-500/20 border-indigo-500/30"
+                    ? "text-violet-300 bg-violet-500/20 border-violet-500/30"
                     : "text-slate-400 bg-slate-800/40 border-white/10"
                 )}>
                   {String.fromCharCode(65 + index)}
@@ -179,7 +179,7 @@ export default function MultiChoiceCard({
         {isMulti && !submitted && (
           <Button
             size="lg"
-            className="mt-4 w-full max-w-md mx-auto min-h-11 h-14 text-lg font-bold rounded-2xl bg-indigo-600 hover:bg-indigo-500 shadow-[0_4px_24px_rgba(99,102,241,0.2)] focus-visible:ring-2 focus-visible:ring-indigo-400"
+            className="zenith-btn-glow mt-4 w-full max-w-md mx-auto min-h-11 h-14 text-lg font-bold rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 border-0"
             disabled={selectedIds.length === 0}
             onClick={submitMulti}
           >

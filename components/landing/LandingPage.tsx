@@ -13,19 +13,21 @@ import LandingFooter from "./LandingFooter";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#05040f] text-white">
-      <LandingNavbar />
-      <main>
-        <LandingHero />
-        <LandingStats />
-        <LandingRoles />
-        <LandingHowItWorks />
-        <LandingShowcase />
-        <LandingFeatures />
-        <LandingFAQ />
-        <LandingCTA />
-      </main>
-      <LandingFooter />
+    <div className="zenith-mesh min-h-screen text-white">
+      <div className="relative z-10">
+        <LandingNavbar />
+        <main>
+          <LandingHero />
+          <LandingStats />
+          <LandingRoles />
+          <LandingHowItWorks />
+          <LandingShowcase />
+          <LandingFeatures />
+          <LandingFAQ />
+          <LandingCTA />
+        </main>
+        <LandingFooter />
+      </div>
     </div>
   );
 }

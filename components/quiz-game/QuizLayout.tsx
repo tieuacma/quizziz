@@ -57,21 +57,16 @@ export default function QuizLayout({
   const isLowTime = timeLeft <= 10 && timeLeft > 0;
 
   return (
-    <div className="relative h-dvh w-full flex flex-col overflow-hidden text-white">
-      {/* Dynamic Animated Background */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-purple-950/80 to-slate-950" />
-        <div className="absolute inset-0 opacity-40 blur-3xl">
-          <div className="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-indigo-500/20 animate-[float1_12s_ease-in-out_infinite]" />
-          <div className="absolute top-1/4 -right-20 h-96 w-96 rounded-full bg-purple-500/20 animate-[float2_14s_ease-in-out_infinite]" />
-          <div className="absolute bottom-1/4 left-1/4 h-[400px] w-[400px] rounded-full bg-pink-500/15 animate-[float3_16s_ease-in-out_infinite]" />
-        </div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.15),transparent_40%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.15),transparent_45%)]" />
+    <div className="zenith-immersive relative h-dvh w-full flex flex-col overflow-hidden text-white">
+      <div className="pointer-events-none absolute inset-0 z-0 zenith-grid opacity-35" />
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-50 blur-3xl">
+        <div className="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-violet-500/20 animate-[float1_12s_ease-in-out_infinite]" />
+        <div className="absolute top-1/4 -right-20 h-96 w-96 rounded-full bg-fuchsia-500/15 animate-[float2_14s_ease-in-out_infinite]" />
+        <div className="absolute bottom-1/4 left-1/4 h-[400px] w-[400px] rounded-full bg-cyan-500/10 animate-[float3_16s_ease-in-out_infinite]" />
       </div>
 
       <div className="relative z-10 flex h-full min-h-0 w-full flex-col">
-        {/* Docked header */}
-        <header className="w-full shrink-0 border-b border-white/10 bg-black/40 px-4 py-2.5 backdrop-blur-xl md:px-6 md:py-3 flex items-center justify-between z-50 pt-[max(0.5rem,env(safe-area-inset-top))]">
+        <header className="zenith-glass w-full shrink-0 border-b border-white/10 px-4 py-2.5 md:px-6 md:py-3 flex items-center justify-between z-50 pt-[max(0.5rem,env(safe-area-inset-top))]">
           <div className="flex items-center gap-4">
             <StreakAndRank streak={quizState.streak} />
 
@@ -81,7 +76,7 @@ export default function QuizLayout({
               </span>
               <Progress
                 value={progress}
-                className="w-24 sm:w-36 h-2 bg-white/10 [&>div]:bg-gradient-to-r [&>div]:from-indigo-400 [&>div]:to-purple-400 [&>div]:transition-all [&>div]:duration-500"
+                className="w-24 sm:w-36 h-2 bg-white/10 [&>div]:bg-gradient-to-r [&>div]:from-violet-400 [&>div]:via-purple-400 [&>div]:to-fuchsia-400 [&>div]:transition-all [&>div]:duration-500"
               />
             </div>
           </div>
@@ -95,7 +90,7 @@ export default function QuizLayout({
                 onClick={() => toggleAudioSetting?.("music")}
                 className={`w-7 h-7 flex items-center justify-center rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   audioSettings?.music
-                    ? "bg-white/10 text-indigo-300 border border-white/10 shadow-[0_0_8px_rgba(99,102,241,0.2)]"
+                    ? "bg-white/10 text-violet-300 border border-white/10 shadow-[0_0_8px_rgba(139,92,246,0.25)]"
                     : "text-slate-500 hover:text-slate-400"
                 }`}
                 title={audioSettings?.music ? "Nhạc nền: Bật" : "Nhạc nền: Tắt"}
@@ -107,7 +102,7 @@ export default function QuizLayout({
                 onClick={() => toggleAudioSetting?.("sfx")}
                 className={`w-7 h-7 flex items-center justify-center rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   audioSettings?.sfx
-                    ? "bg-white/10 text-indigo-300 border border-white/10 shadow-[0_0_8px_rgba(99,102,241,0.2)]"
+                    ? "bg-white/10 text-violet-300 border border-white/10 shadow-[0_0_8px_rgba(139,92,246,0.25)]"
                     : "text-slate-500 hover:text-slate-400"
                 }`}
                 title={audioSettings?.sfx ? "Âm thanh: Bật" : "Âm thanh: Tắt"}
@@ -144,7 +139,7 @@ export default function QuizLayout({
               <Clock
                 className={cn(
                   "w-4 h-4",
-                  isLowTime ? "text-red-400" : "text-indigo-300",
+                  isLowTime ? "text-red-400" : "text-violet-300",
                 )}
               />
               <span
@@ -194,7 +189,7 @@ export default function QuizLayout({
         </main>
 
         {/* Docked footer: status + power-ups */}
-        <footer className="mt-auto w-full shrink-0 border-t border-white/10 bg-black/50 px-4 py-2 backdrop-blur-xl md:px-6 md:py-3 flex flex-col sm:flex-row items-center justify-between z-50 gap-3 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+        <footer className="zenith-glass mt-auto w-full shrink-0 border-t border-white/10 px-4 py-2 md:px-6 md:py-3 flex flex-col sm:flex-row items-center justify-between z-50 gap-3 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
           {/* Consolidated status badges */}
           <div className="flex flex-row items-center gap-3 shrink-0 select-none">
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-black shadow-[0_0_10px_rgba(16,185,129,0.1)]">
