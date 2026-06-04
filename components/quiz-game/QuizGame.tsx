@@ -7,6 +7,7 @@ import { QuizQuestion } from "@/types/quiz";
 import QuizLayout from "./QuizLayout";
 import QuizSummary from "./QuizSummary";
 import PrePlayScreen from "./PrePlayScreen";
+import ParticleSystem from "./ParticleSystem";
 import { sampleQuizData } from "./sample-data";
 import { useQuestionMotion } from "./motion";
 
@@ -59,6 +60,7 @@ export default function QuizGame({
   if (isIdle) {
     return (
       <div className="zenith-immersive flex h-dvh w-full items-center justify-center text-slate-400">
+        <ParticleSystem />
         Đang tải...
       </div>
     );
@@ -104,22 +106,25 @@ export default function QuizGame({
   }
 
   return (
-    <QuizLayout
-      quizState={quizState}
-      timeLeft={timeLeft}
-      currentQuestion={currentQuestion}
-      questions={questions}
-      questionKey={questionKey}
-      handleAnswer={handleAnswer}
-      handleSubQuestionAnswer={handleSubQuestionAnswer}
-      handleCompleteReading={handleCompleteReading}
-      readingSubAnswers={readingSubAnswers}
-      isReadingQuestionComplete={isReadingQuestionComplete}
-      activatePowerUp={activatePowerUp}
-      powerups={powerups}
-      leaderboard={leaderboard}
-      audioSettings={audioSettings}
-      toggleAudioSetting={toggleAudioSetting}
-    />
+    <>
+      <ParticleSystem />
+      <QuizLayout
+        quizState={quizState}
+        timeLeft={timeLeft}
+        currentQuestion={currentQuestion}
+        questions={questions}
+        questionKey={questionKey}
+        handleAnswer={handleAnswer}
+        handleSubQuestionAnswer={handleSubQuestionAnswer}
+        handleCompleteReading={handleCompleteReading}
+        readingSubAnswers={readingSubAnswers}
+        isReadingQuestionComplete={isReadingQuestionComplete}
+        activatePowerUp={activatePowerUp}
+        powerups={powerups}
+        leaderboard={leaderboard}
+        audioSettings={audioSettings}
+        toggleAudioSetting={toggleAudioSetting}
+      />
+    </>
   );
 }

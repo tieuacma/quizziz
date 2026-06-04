@@ -48,12 +48,12 @@ function SubQuestionInput({
               disabled={answered}
               className={cn(
                 "w-full min-h-[44px] rounded-2xl border p-4 font-semibold text-lg text-left transition-all",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900",
+                "focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-violet-400 focus-visible:ring-offset-slate-900",
                 answered
                   ? "cursor-default"
-                  : "border-white/20 bg-white/10 hover:border-indigo-400",
-                isCorrect && "border-emerald-400 bg-emerald-500/30",
-                isWrong && "border-red-400 bg-red-500/30",
+                  : "border-white/10 bg-white/5 hover:border-violet-500/50 hover:bg-violet-500/5 hover:shadow-[0_0_12px_rgba(167,139,250,0.15)]",
+                isCorrect && "neon-border-emerald bg-emerald-500/20 shadow-[0_0_20px_rgba(52,211,153,0.3)]",
+                isWrong && "neon-border-rose bg-rose-500/20 shadow-[0_0_20px_rgba(244,63,94,0.3)] card-shake",
               )}
             >
               {option.text}
@@ -72,11 +72,11 @@ function SubQuestionInput({
           onChange={(e) => setFillText(e.target.value)}
           disabled={answered}
           placeholder={quizGameCopy.fillBlank.placeholder}
-          className="min-h-11 h-16 text-xl text-center bg-white/10 border-white/20 text-white focus-visible:ring-2 focus-visible:ring-indigo-400"
+          className="min-h-11 h-16 text-xl text-center bg-white/5 border-white/10 text-white focus-visible:ring-0 focus-visible:border-violet-400 focus-visible:shadow-[0_0_15px_rgba(167,139,250,0.2)] focus-visible:ring-offset-0 transition-all duration-300"
         />
         {!answered && (
           <Button
-            className="w-full h-12"
+            className="w-full h-12 shadow-[0_0_15px_rgba(167,139,250,0.3)] bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500"
             disabled={!fillText.trim()}
             onClick={() => onAnswer(fillText.trim())}
           >
@@ -110,9 +110,12 @@ function SubQuestionInput({
               disabled={answered}
               onClick={() => !answered && onAnswer(value)}
               className={cn(
-                "min-h-[44px] h-20 text-xl font-bold focus-visible:ring-2 focus-visible:ring-indigo-400",
-                isCorrect && "border-emerald-400 bg-emerald-500/30",
-                isWrong && "border-red-400 bg-red-500/30",
+                "min-h-[44px] h-20 text-xl font-bold focus-visible:ring-0 transition-all duration-300",
+                answered
+                  ? "cursor-default"
+                  : "border-white/10 bg-white/5 hover:border-violet-500/50 hover:bg-violet-500/5 hover:shadow-[0_0_12px_rgba(167,139,250,0.15)]",
+                isCorrect && "neon-border-emerald bg-emerald-500/20 shadow-[0_0_20px_rgba(52,211,153,0.3)]",
+                isWrong && "neon-border-rose bg-rose-500/20 shadow-[0_0_20px_rgba(244,63,94,0.3)] card-shake",
               )}
             >
               {label}
@@ -156,7 +159,7 @@ export default function ReadingCard({
     <div className="w-full h-full flex flex-col overflow-hidden bg-black/10 min-h-0">
       <div className="flex-1 flex flex-col lg:flex-row border-b border-white/10 min-h-0">
         <div className="lg:w-1/2 h-[40vh] lg:h-auto overflow-y-auto p-4 md:p-6">
-          <div className="prose prose-invert max-w-none text-slate-200 leading-relaxed bg-white/5 rounded-2xl border border-white/20 p-6 whitespace-pre-wrap">
+          <div className="prose prose-invert max-w-none text-slate-200 leading-relaxed bg-black/35 rounded-2xl border border-white/10 p-6 whitespace-pre-wrap shadow-[0_0_20px_rgba(0,0,0,0.3)] backdrop-blur-md">
             {question.passage}
           </div>
         </div>
@@ -167,11 +170,11 @@ export default function ReadingCard({
               <span
                 key={sub.id}
                 className={cn(
-                  "h-2.5 w-2.5 rounded-full transition-colors",
+                  "h-2.5 w-2.5 rounded-full transition-all",
                   i < answeredCount
                     ? "bg-emerald-400"
                     : i === currentSubQuestionIndex
-                      ? "bg-indigo-400 ring-2 ring-indigo-300/50"
+                      ? "bg-violet-400 ring-2 ring-violet-300/50 shadow-[0_0_8px_rgba(167,139,250,0.6)]"
                       : "bg-white/25",
                 )}
                 aria-hidden
@@ -188,10 +191,10 @@ export default function ReadingCard({
               exit="exit"
               transition={subTransition}
             >
-              <h2 className="text-2xl md:text-3xl font-black text-white mb-2">
+              <h2 className="text-2xl md:text-3xl font-black text-white mb-2 text-neon-glow-violet">
                 {currentSub.question}
               </h2>
-              <p className="text-slate-400 mb-4">
+              <p className="text-slate-400 mb-4 font-semibold uppercase tracking-wider text-xs">
                 {quizGameCopy.reading.questionOf(
                   currentSubQuestionIndex + 1,
                   totalSubs,
@@ -214,10 +217,10 @@ export default function ReadingCard({
           disabled={!isComplete}
           size="lg"
           className={cn(
-            "w-full h-16 text-lg font-bold rounded-2xl",
+            "w-full h-16 text-lg font-extrabold rounded-2xl transition-all duration-300",
             isComplete
-              ? "bg-gradient-to-r from-emerald-500 to-teal-600"
-              : "opacity-50",
+              ? "bg-gradient-to-r from-emerald-500 to-teal-600 shadow-[0_0_15px_rgba(16,185,129,0.35)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] border-0 text-white cursor-pointer"
+              : "opacity-50 cursor-not-allowed",
           )}
         >
           <ChevronRight className="w-6 h-6 mr-2" />

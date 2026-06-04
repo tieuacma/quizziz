@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 
 import { motion } from "framer-motion";
 import { CheckCircle, XCircle } from "lucide-react";
@@ -12,6 +12,7 @@ import {
   optionItemVariants,
   optionStagger,
 } from "./motion";
+import { useParticleEffect } from "./ParticleSystem";
 
 interface TrueFalseCardProps {
   question: TrueFalseQuestion;
@@ -24,14 +25,29 @@ export default function TrueFalseCard({
 }: TrueFalseCardProps) {
   const [selected, setSelected] = useState<boolean | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const { triggerEffect } = useParticleEffect();
 
-  const handleSelect = (value: boolean) => {
-    if (submitted) return;
-    setSelected(value);
-    setSubmitted(true);
-    const isCorrect = value === question.correctAnswer;
-    setTimeout(() => onAnswer(isCorrect), QUESTION_FEEDBACK_MS);
-  };
+  const handleSelect = useCallback(
+    (value: boolean, index: number) => {
+      if (submitted) return;
+      setSelected(value);
+      setSubmitted(true);
+      const isCorrect = value === question.correctAnswer;
+
+      // Trigger particle effect at button position
+      const button = buttonRefs.current[index];
+      if (button) {
+        const rect = button.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        triggerEffect(isCorrect ? "correct" : "wrong", x, y);
+      }
+
+      setTimeout(() => onAnswer(isCorrect), QUESTION_FEEDBACK_MS);
+    },
+    [submitted, question.correctAnswer, triggerEffect, onAnswer],
+  );
 
   const options = [
     { value: true, label: quizGameCopy.trueFalse.true },
@@ -42,7 +58,7 @@ export default function TrueFalseCard({
     <div className="w-full h-full flex flex-col overflow-hidden">
       <div className="h-1/2 flex items-center justify-center p-4">
         <motion.h2
-          className="font-display text-4xl md:text-5xl font-extrabold text-center leading-tight px-4 max-w-4xl zenith-gradient-text-static"
+          className="font-display text-4xl md:text-5xl font-extrabold text-center leading-tight px-4 max-w-4xl zenith-gradient-text text-neon-glow-violet"
           initial={{ scale: 0.95, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -71,34 +87,58 @@ export default function TrueFalseCard({
               <motion.button
                 key={String(value)}
                 type="button"
+                ref={(el) => {
+                  buttonRefs.current[index] = el;
+                }}
                 variants={optionItemVariants}
-                onClick={() => handleSelect(value)}
+                onClick={() => handleSelect(value, index)}
                 disabled={submitted}
                 className={cn(
-                  "h-full min-h-[64px] sm:min-h-[120px] rounded-3xl border font-bold text-2xl flex items-center justify-center p-6 transition-all duration-300 relative",
-                  "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/[0.08]",
+                  "h-full min-h-[64px] sm:min-h-[120px] rounded-3xl border font-bold text-2xl flex items-center justify-center p-6 transition-all duration-300 relative overflow-hidden",
+                  "border-white/10 bg-white/5",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
-                  value === true && !submitted && "hover:border-emerald-500/30 hover:bg-emerald-500/[0.02]",
-                  value === false && !submitted && "hover:border-rose-500/30 hover:bg-rose-500/[0.02]",
+                  value === true &&
+                    !submitted &&
+                    !isSelected &&
+                    "hover:border-emerald-500/50 hover:bg-emerald-500/5 hover:shadow-[0_0_15px_rgba(52,211,153,0.15)]",
+                  value === false &&
+                    !submitted &&
+                    !isSelected &&
+                    "hover:border-rose-500/50 hover:bg-rose-500/5 hover:shadow-[0_0_15px_rgba(244,63,94,0.15)]",
+                  !submitted &&
+                    isSelected &&
+                    (value === true
+                      ? "neon-border-emerald bg-emerald-500/20 shadow-[0_0_20px_rgba(52,211,153,0.3)]"
+                      : "neon-border-rose bg-rose-500/20 shadow-[0_0_20px_rgba(244,63,94,0.3)]"),
                   isCorrect &&
-                    "border-emerald-400 bg-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.25)]",
+                    "neon-border-emerald bg-emerald-500/20 shadow-[0_0_25px_rgba(52,211,153,0.4)]",
                   isWrong &&
-                    "border-rose-400 bg-rose-500/20 shadow-[0_0_20px_rgba(239,68,68,0.25)]",
+                    "neon-border-rose bg-rose-500/20 shadow-[0_0_25px_rgba(244,63,94,0.4)] card-shake",
                 )}
                 whileHover={submitted ? { scale: 1 } : { scale: 1.02 }}
                 whileTap={submitted ? { scale: 1 } : { scale: 0.98 }}
               >
+                {/* Shimmer effect on hover */}
+                {!submitted && (
+                  <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-[shimmer-wave_1.5s_infinite]" />
+                  </div>
+                )}
                 {/* Option Letter Indicator */}
-                <span className={cn(
-                  "font-mono text-xs font-black px-2.5 py-1 rounded-xl border absolute left-4 shrink-0 transition-colors",
-                  isCorrect
-                    ? "text-emerald-300 bg-emerald-500/20 border-emerald-500/30"
-                    : isWrong
-                    ? "text-red-300 bg-red-500/20 border-red-500/30"
-                    : isSelected
-                    ? "text-violet-300 bg-violet-500/20 border-violet-500/30"
-                    : "text-slate-400 bg-slate-800/40 border-white/10"
-                )}>
+                <span
+                  className={cn(
+                    "font-mono text-xs font-black px-2.5 py-1 rounded-xl border absolute left-4 shrink-0 transition-colors",
+                    isCorrect
+                      ? "text-emerald-300 bg-emerald-500/20 border-emerald-500/40 text-neon-glow-emerald"
+                      : isWrong
+                        ? "text-rose-300 bg-rose-500/20 border-rose-500/40 text-neon-glow-rose"
+                        : isSelected
+                          ? (value === true
+                            ? "text-emerald-300 bg-emerald-500/20 border-emerald-500/40 text-neon-glow-emerald"
+                            : "text-rose-300 bg-rose-500/20 border-rose-500/40 text-neon-glow-rose")
+                          : "text-slate-400 bg-slate-800/40 border-white/10",
+                  )}
+                >
                   {index === 0 ? "A" : "B"}
                 </span>
 
@@ -107,10 +147,10 @@ export default function TrueFalseCard({
                   <span>{label}</span>
                 </span>
                 {isCorrect && (
-                  <CheckCircle className="absolute top-3 right-3 w-8 h-8 text-emerald-400" />
+                  <CheckCircle className="absolute top-3 right-3 w-8 h-8 text-emerald-400 drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]" />
                 )}
                 {isWrong && (
-                  <XCircle className="absolute top-3 right-3 w-8 h-8 text-red-400" />
+                  <XCircle className="absolute top-3 right-3 w-8 h-8 text-red-400 drop-shadow-[0_0_8px_rgba(244,63,94,0.5)]" />
                 )}
               </motion.button>
             );
