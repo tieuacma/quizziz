@@ -1,5 +1,5 @@
 .examRoot {
-  min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
 }
 
@@ -29,14 +29,37 @@
   box-shadow: 0 4px 16px rgba(139, 92, 246, 0.12);
 }
 
+.optionBtn {
+  transition:
+    transform 0.15s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.optionBtn:hover {
+  transform: translateX(2px);
+}
+
+.optionBtn:active {
+  transform: scale(0.99);
+}
+
 .optionSelected {
   border-color: rgba(167, 139, 250, 0.6) !important;
   background: rgba(139, 92, 246, 0.2) !important;
   color: #fff !important;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
 }
 
 .optionNavCurrent {
   border-color: rgba(167, 139, 250, 0.7) !important;
   background: rgba(139, 92, 246, 0.25) !important;
   color: #fff !important;
+  box-shadow: 0 0 16px rgba(139, 92, 246, 0.2);
+}
+
+.legendCurrent {
+  border-color: rgba(167, 139, 250, 0.7);
+  background: rgba(139, 92, 246, 0.25);
 }
