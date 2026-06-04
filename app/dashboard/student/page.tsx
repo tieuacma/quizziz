@@ -14,6 +14,7 @@ import CourseCard from "@/components/dashboard/student/CourseCard";
 import AssignmentsPanel from "@/components/dashboard/student/AssignmentsPanel";
 import LearningResultsPanel from "@/components/dashboard/student/LearningResultsPanel";
 import StudentScheduleCheck from "@/components/dashboard/student/StudentScheduleCheck";
+import NextLessonBanner from "@/components/dashboard/student/NextLessonBanner";
 import { ASSIGNMENTS, COURSES, LEARNING_RESULTS } from "./data";
 
 function SectionLink({ href, label }: { href: string; label: string }) {
@@ -36,14 +37,19 @@ export default async function StudentPage() {
 
   return (
     <div className="mx-auto w-full max-w-6xl space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold text-white">
-          Xin chào, {session.name} 👋
-        </h1>
-        <p className="text-slate-400 mt-1">
-          Tổng quan học tập và lịch học của bạn hôm nay.
-        </p>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-white tracking-tight">
+            Xin chào, {session.name} 👋
+          </h1>
+          <p className="text-slate-400 text-sm mt-1">
+            Tổng quan học tập và lịch học của bạn hôm nay.
+          </p>
+        </div>
       </div>
+
+      {/* Next Lesson Smart Alert Banner */}
+      <NextLessonBanner />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
