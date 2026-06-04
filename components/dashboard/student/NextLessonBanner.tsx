@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
 import { motion } from "framer-motion";
 import { CalendarDays, ArrowRight } from "lucide-react";
 import { SCHEDULE } from "@/app/dashboard/student/data";
@@ -30,14 +31,15 @@ function getNextLesson(): ScheduleItem {
     const targetDayIndex = DAY_MAP[item.day];
     const [hourStr, minStr] = item.time.split(":");
     const targetTimeVal = parseInt(hourStr, 10) * 60 + parseInt(minStr, 10);
-    
+
     // Calculate days until this item
     let daysDiff = targetDayIndex - currentDay;
     if (daysDiff < 0 || (daysDiff === 0 && targetTimeVal <= currentTimeVal)) {
       daysDiff += 7; // Wraps to next week
     }
 
-    const totalMinutesUntil = daysDiff * 24 * 60 + (targetTimeVal - currentTimeVal);
+    const totalMinutesUntil =
+      daysDiff * 24 * 60 + (targetTimeVal - currentTimeVal);
     return { item, totalMinutesUntil };
   });
 
@@ -48,15 +50,14 @@ function getNextLesson(): ScheduleItem {
 }
 
 export default function NextLessonBanner() {
-  const [nextLesson, setNextLesson] = useState<ScheduleItem | null>(null);
-
-  useEffect(() => {
-    setNextLesson(getNextLesson());
-  }, []);
+  const [nextLesson] = useState<ScheduleItem>(() => getNextLesson());
 
   if (!nextLesson) return null;
 
-  const dayLabel = (nextLesson.day as string) === "CN" ? "Chủ Nhật" : `Thứ ${nextLesson.day.replace("T", "")}`;
+  const dayLabel =
+    (nextLesson.day as string) === "CN"
+      ? "Chủ Nhật"
+      : `Thứ ${nextLesson.day.replace("T", "")}`;
 
   return (
     <motion.div
@@ -83,14 +84,15 @@ export default function NextLessonBanner() {
               </span>
             </div>
             <h3 className="text-white font-bold text-base md:text-lg mt-1 tracking-tight">
-              {nextLesson.course} — <span className="text-violet-300">{nextLesson.lesson}</span>
+              {nextLesson.course} —{" "}
+              <span className="text-violet-300">{nextLesson.lesson}</span>
             </h3>
             <p className="text-slate-400 text-xs mt-0.5">
               Hãy chuẩn bị bài đọc trước khi lớp học bắt đầu.
             </p>
           </div>
         </div>
-        
+
         <div className="flex items-center">
           <Button className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-400 hover:to-purple-500 text-white shadow-lg shadow-indigo-500/20 text-xs font-bold px-5 py-5 rounded-xl flex items-center gap-2 group cursor-pointer transition-all duration-300 hover:translate-x-1">
             Vào lớp học
