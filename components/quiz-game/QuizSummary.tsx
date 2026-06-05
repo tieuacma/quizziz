@@ -27,6 +27,7 @@ interface ConfettiPiece {
   vx: number;
   vy: number;
   delay: number;
+  duration: number;
 }
 
 interface QuizSummaryProps {
@@ -47,6 +48,7 @@ export default function QuizSummary({
   const [reviewMode, setReviewMode] = useState<"list" | "flashcard">(
     "flashcard",
   );
+  const confettiInitRef = React.useRef(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [confettiPieces, setConfettiPieces] = useState<ConfettiPiece[]>([]);
   const { triggerEffect } = useParticleEffect();
@@ -63,10 +65,8 @@ export default function QuizSummary({
   const isExcellent = accuracy >= 90;
   const isGood = accuracy >= 70;
 
-  // Generate confetti for excellent scores
-  const generateConfetti = useCallback(() => {
-    if (!isExcellent) return;
-
+  // Generate confetti for excellent scores using seeded random for purity
+  const generateConfettiPieces = useCallback(() => {
     const colors = [
       "#a78bfa",
       "#38bdf8",
@@ -79,35 +79,48 @@ export default function QuizSummary({
     const pieces: ConfettiPiece[] = [];
 
     for (let i = 0; i < 100; i++) {
+      // Use seeded random for consistent values
+      const seed = i * 1337;
+      const seededRand = (s: number) => {
+        const x = Math.sin(s * 9301 + 49297) * 233280;
+        return x - Math.floor(x);
+      };
+
       pieces.push({
         id: i,
-        x: Math.random() * 100, // percentage
-        y: -10 - Math.random() * 20, // start above viewport
-        rotation: Math.random() * 360,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        size: 8 + Math.random() * 8,
-        vx: (Math.random() - 0.5) * 2,
-        vy: 2 + Math.random() * 3,
-        delay: Math.random() * 2,
+        x: seededRand(seed) * 100, // percentage
+        y: -10 - seededRand(seed + 1) * 20, // start above viewport
+        rotation: seededRand(seed + 2) * 360,
+        color: colors[Math.floor(seededRand(seed + 3) * colors.length)],
+        size: 8 + seededRand(seed + 4) * 8,
+        vx: (seededRand(seed + 5) - 0.5) * 2,
+        vy: 2 + seededRand(seed + 6) * 3,
+        delay: seededRand(seed + 7) * 2,
+        duration: 3 + seededRand(seed + 8) * 2,
       });
     }
 
-    setConfettiPieces(pieces);
-    setShowConfetti(true);
+    return pieces;
+  }, []);
 
-    // Trigger celebration particles at center
-    setTimeout(() => {
-      triggerEffect(
-        "celebration",
-        window.innerWidth / 2,
-        window.innerHeight / 3,
-      );
-    }, 300);
-  }, [isExcellent, triggerEffect]);
-
+  // Initialize confetti when component mounts and isExcellent
   useEffect(() => {
-    generateConfetti();
-  }, [generateConfetti]);
+    if (isExcellent && !confettiInitRef.current) {
+      confettiInitRef.current = true;
+      const pieces = generateConfettiPieces();
+      setConfettiPieces(pieces);
+      setShowConfetti(true);
+
+      // Trigger celebration particles at center
+      setTimeout(() => {
+        triggerEffect(
+          "celebration",
+          window.innerWidth / 2,
+          window.innerHeight / 3,
+        );
+      }, 300);
+    }
+  }, [isExcellent, generateConfettiPieces, triggerEffect]);
 
   // Cleanup confetti after animation
   useEffect(() => {
@@ -151,7 +164,7 @@ export default function QuizSummary({
                   x: [0, piece.vx * 50, piece.vx * 100],
                 }}
                 transition={{
-                  duration: 3 + Math.random() * 2,
+                  duration: piece.duration,
                   delay: piece.delay,
                   ease: "linear",
                 }}

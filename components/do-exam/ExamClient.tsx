@@ -36,7 +36,6 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 	const questionRef = useRef<HTMLDivElement | null>(null);
 	const timerRef = useRef<HTMLDivElement | null>(null);
 
-	const [phase, setPhase] = useState<ExamPhase>("prestart");
 	const [confirmSubmit, setConfirmSubmit] = useState(false);
 	const [submitting, setSubmitting] = useState(false);
 	const [result, setResult] = useState<SubmitExamResult | null>(null);
@@ -61,6 +60,13 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 		reset,
 	} = useExamStore();
 
+	// Derive phase from store state to avoid setState in effects
+	const phase: ExamPhase = result
+		? "result"
+		: storedQuizId === quizId && startTime
+			? "exam"
+			: "prestart";
+
 	const examTimeLimit = metadata.examTimeLimit ?? 1800;
 	const current = questions[currentQuestion];
 	const answeredCount = useMemo(
@@ -73,15 +79,8 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 	);
 	const unansweredCount = questions.length - answeredCount;
 
-	useEffect(() => {
-		if (storedQuizId === quizId && startTime) {
-			setPhase("exam");
-		}
-	}, [quizId, storedQuizId, startTime]);
-
 	const handleStart = useCallback(() => {
 		setExam(quizId, Date.now());
-		setPhase("exam");
 	}, [quizId, setExam]);
 
 	const remainingSeconds = useMemo(() => {
@@ -106,7 +105,6 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 				setResult(response);
 				if (response.success) {
 					reset();
-					setPhase("result");
 				}
 				if (auto) setAutoSubmitted(true);
 				if (!auto) setConfirmSubmit(false);
@@ -198,7 +196,6 @@ export default function ExamClient({ quizId, metadata, questions }: Props) {
 		setResult(null);
 		setAutoSubmitted(false);
 		setConfirmSubmit(false);
-		setPhase("prestart");
 	}, []);
 
 	if (!current && phase === "exam") {

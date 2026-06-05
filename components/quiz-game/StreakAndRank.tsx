@@ -14,10 +14,14 @@ function FireParticle({
   delay,
   size,
   intensity,
+  xOffset,
+  duration,
 }: {
   delay: number;
   size: number;
   intensity: number;
+  xOffset: number;
+  duration: number;
 }) {
   return (
     <motion.div
@@ -33,10 +37,10 @@ function FireParticle({
         y: [-size * 2, -size * 4 - 10],
         opacity: [intensity, 0],
         scale: [0.5, 1.5, 0],
-        x: [0, (Math.random() - 0.5) * 10],
+        x: [0, xOffset],
       }}
       transition={{
-        duration: 1 + Math.random() * 0.5,
+        duration,
         repeat: Infinity,
         delay,
         ease: "easeOut",
@@ -45,19 +49,29 @@ function FireParticle({
   );
 }
 
+// Seeded random number generator for consistent values during render
+function seededRandom(seed: number) {
+  const x = Math.sin(seed * 9301 + 49297) * 233280;
+  return x - Math.floor(x);
+}
+
 export default function StreakAndRank({ streak }: StreakAndRankProps) {
   const flames = Array.from({ length: Math.min(streak, 5) }, (_, i) => i + 1);
 
-  // Generate fire particles for each flame
+  // Generate fire particles using seeded random for purity
   const fireParticles = useMemo(() => {
     if (streak === 0) return [];
-    const particles = [];
+    
+    const particles: Array<{ id: number; delay: number; size: number; intensity: number; xOffset: number; duration: number }> = [];
     for (let i = 0; i < streak * 3; i++) {
+      const seed = streak * 1000 + i;
       particles.push({
         id: i,
         delay: (i * 0.15) % 1.5,
-        size: 3 + Math.random() * 4,
-        intensity: 0.3 + Math.random() * 0.5,
+        size: 3 + seededRandom(seed) * 4,
+        intensity: 0.3 + seededRandom(seed + 1) * 0.5,
+        xOffset: (seededRandom(seed + 2) - 0.5) * 10,
+        duration: 1 + seededRandom(seed + 3) * 0.5,
       });
     }
     return particles;
@@ -101,12 +115,14 @@ export default function StreakAndRank({ streak }: StreakAndRankProps) {
       >
         {/* Fire particles */}
         <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-full h-6 overflow-visible">
-          {fireParticles.map((particle) => (
+        {fireParticles.map((particle) => (
             <FireParticle
               key={particle.id}
               delay={particle.delay}
               size={particle.size}
               intensity={particle.intensity * intensity}
+              xOffset={particle.xOffset}
+              duration={particle.duration}
             />
           ))}
         </div>

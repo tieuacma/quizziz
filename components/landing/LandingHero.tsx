@@ -13,52 +13,92 @@ import {
 
 function DashboardMockup() {
   return (
-    <div className="relative rounded-2xl zenith-glass shadow-2xl shadow-violet-900/30 overflow-hidden ring-1 ring-violet-500/20">
-      <div className="flex h-[280px] sm:h-[320px]">
-        <aside className="w-14 sm:w-16 border-r border-white/8 bg-[#07060f]/80 p-2 flex flex-col gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-purple-600 mx-auto" />
-          {[1, 2, 3, 4].map((i) => (
-            <div
-              key={i}
-              className={`h-7 rounded-md ${i === 1 ? "bg-violet-600/30" : "bg-white/5"}`}
-            />
-          ))}
-        </aside>
-        <div className="flex-1 p-3 sm:p-4 space-y-3">
-          <div className="flex items-center justify-between">
-            <div className="h-3 w-24 rounded bg-white/10" />
-            <div className="h-6 w-16 rounded-full bg-violet-600/20 border border-violet-500/30" />
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            <div className="rounded-xl bg-white/[0.04] border border-white/8 p-3">
-              <p className="text-[10px] text-slate-500 mb-1">Lớp học</p>
-              <p className="text-sm font-bold text-white">3</p>
-              <p className="text-[10px] text-emerald-400 mt-1">+1 tuần này</p>
-            </div>
-            <div className="rounded-xl bg-white/[0.04] border border-white/8 p-3">
-              <p className="text-[10px] text-slate-500 mb-1">Học sinh</p>
-              <p className="text-sm font-bold text-white">103</p>
-              <p className="text-[10px] text-violet-400 mt-1">K22A, K22B</p>
-            </div>
-          </div>
-          <div className="rounded-xl bg-white/[0.03] border border-white/8 p-2.5 space-y-2">
-            <p className="text-[10px] text-slate-500">Quiz gần đây</p>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-purple-600/20 flex items-center justify-center text-xs">
-                Q
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.1 }}
+      className="group relative"
+    >
+      {/* Glow background */}
+      <div className="absolute -inset-0.5 rounded-3xl bg-gradient-to-br from-violet-500/30 via-fuchsia-500/20 to-cyan-500/20 blur-2xl opacity-75 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+      
+      <div className="relative rounded-3xl zenith-glass shadow-2xl shadow-violet-900/50 overflow-hidden ring-1 ring-violet-500/30 backdrop-blur-xl">
+        <div className="flex h-[300px] sm:h-[360px]">
+          {/* Sidebar */}
+          <aside className="w-16 sm:w-20 border-r border-white/10 bg-gradient-to-b from-violet-950/40 to-purple-950/40 p-3 sm:p-4 flex flex-col gap-3 justify-between">
+            <div className="flex flex-col gap-3">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500 mx-auto shadow-lg shadow-violet-600/50 flex items-center justify-center">
+                <span className="text-lg font-black text-white">Z</span>
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium text-white truncate">
-                  HTTP Methods & Status
-                </p>
-                <p className="text-[10px] text-slate-500">32 bài nộp · TB 8.1</p>
+              {[1, 2, 3, 4].map((i) => (
+                <div
+                  key={i}
+                  className={`h-8 w-full rounded-lg transition-all ${
+                    i === 1 
+                      ? "bg-gradient-to-r from-violet-500 to-purple-500 shadow-lg shadow-violet-600/30" 
+                      : "bg-white/[0.06] hover:bg-white/[0.12]"
+                  }`}
+                />
+              ))}
+            </div>
+            <div className="h-8 w-full rounded-lg bg-white/[0.06]" />
+          </aside>
+
+          {/* Main content */}
+          <div className="flex-1 p-4 sm:p-6 space-y-4 overflow-hidden">
+            {/* Header */}
+            <div className="flex items-center justify-between">
+              <div className="space-y-1.5">
+                <div className="h-4 w-32 rounded bg-gradient-to-r from-violet-300 to-purple-300" />
+                <div className="h-3 w-24 rounded bg-white/10" />
+              </div>
+              <div className="h-8 w-20 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 shadow-lg shadow-emerald-600/30" />
+            </div>
+
+            {/* Stats grid */}
+            <div className="grid grid-cols-2 gap-3">
+              <motion.div 
+                whileHover={{ scale: 1.02 }}
+                className="rounded-xl bg-gradient-to-br from-violet-500/20 to-purple-500/10 border border-violet-400/30 p-4 hover:from-violet-500/30 hover:to-purple-500/20 transition-all"
+              >
+                <p className="text-[11px] text-slate-300 mb-2 font-medium">Lớp học</p>
+                <p className="text-xl font-black text-white">5</p>
+                <p className="text-[11px] text-emerald-300 mt-2 font-semibold">↑ 2 tuần này</p>
+              </motion.div>
+              <motion.div 
+                whileHover={{ scale: 1.02 }}
+                className="rounded-xl bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/10 border border-fuchsia-400/30 p-4 hover:from-fuchsia-500/30 hover:to-cyan-500/20 transition-all"
+              >
+                <p className="text-[11px] text-slate-300 mb-2 font-medium">Học sinh</p>
+                <p className="text-xl font-black text-white">156</p>
+                <p className="text-[11px] text-cyan-300 mt-2 font-semibold">Tất cả lớp</p>
+              </motion.div>
+            </div>
+
+            {/* Recent quiz card */}
+            <div className="rounded-xl bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/15 p-3 backdrop-blur-sm hover:from-white/[0.12] hover:to-white/[0.06] transition-all">
+              <p className="text-[11px] text-slate-400 mb-3 font-medium uppercase tracking-wider">Quiz Gần Đây</p>
+              <div className="space-y-2.5">
+                {[1, 2].map((i) => (
+                  <div key={i} className="flex items-center gap-3 group cursor-pointer">
+                    <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center text-xs font-black text-white shadow-lg shadow-violet-600/30 group-hover:shadow-violet-600/50 transition-shadow">
+                      {String.fromCharCode(64 + i)}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-white truncate group-hover:text-violet-200 transition-colors">
+                        {i === 1 ? "Web Development" : "Data Structure"}
+                      </p>
+                      <p className="text-[11px] text-slate-500">{24 + i * 8} bài · Tb {8 + i * 0.5}</p>
+                    </div>
+                    <div className="text-xs font-bold text-emerald-400">✓</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-violet-500/10 via-transparent to-purple-500/10 pointer-events-none" />
-    </div>
+    </motion.div>
   );
 }
 
@@ -70,57 +110,65 @@ export default function LandingHero() {
   const blobOpacity = useTransform(scrollY, [0, 300], [1, reduced ? 1 : 0.4]);
 
   return (
-    <section className="relative overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-24">
-      <div className="pointer-events-none absolute inset-0 zenith-grid opacity-60" />
+    <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-32">
+      {/* Enhanced background grid and blobs */}
+      <div className="pointer-events-none absolute inset-0 zenith-grid opacity-40" />
       <div className="pointer-events-none absolute inset-0">
+        {/* Animated gradient blobs */}
         <motion.div
           style={{ y: blobY1, opacity: blobOpacity }}
-          className="absolute -top-48 -right-48 w-[600px] h-[600px] rounded-full bg-purple-600/20 blur-[140px]"
+          className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full bg-gradient-to-b from-violet-600 via-purple-500 to-transparent blur-[150px] opacity-50"
         />
         <motion.div
           style={{ y: blobY2, opacity: blobOpacity }}
-          className="absolute -bottom-48 -left-48 w-[600px] h-[600px] rounded-full bg-cyan-500/10 blur-[140px]"
+          className="absolute -bottom-40 -left-40 w-[700px] h-[700px] rounded-full bg-gradient-to-t from-cyan-600 via-blue-500 to-transparent blur-[150px] opacity-30"
         />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[320px] h-[320px] rounded-full bg-fuchsia-600/10 blur-[100px] animate-[pulse-glow_6s_ease-in-out_infinite]" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-fuchsia-600 via-pink-600 to-transparent blur-[120px] animate-[pulse-glow_8s_ease-in-out_infinite] opacity-40" />
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left content */}
           <motion.div
             variants={reduced ? undefined : staggerContainer}
             initial={reduced ? false : "hidden"}
             animate="visible"
             className="text-center lg:text-left"
           >
+            {/* Badge */}
             <motion.div
               variants={reduced ? undefined : fadeUp}
               transition={defaultTransition}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full zenith-glass text-sm text-slate-200 mb-6 shadow-lg shadow-violet-900/20"
+              className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full zenith-glass text-sm font-medium text-slate-200 mb-8 shadow-lg shadow-violet-900/30 border border-violet-500/20 backdrop-blur-xl hover:border-violet-500/40 transition-all"
             >
-              <Sparkles className="w-4 h-4 text-violet-300 animate-[shimmer_2.5s_ease-in-out_infinite]" />
-              Hệ thống quản lý học tập thông minh
+              <div className="flex items-center justify-center">
+                <Sparkles className="w-4.5 h-4.5 text-violet-300 animate-[shimmer_2.5s_ease-in-out_infinite]" />
+              </div>
+              <span>Nền tảng quản lý học tập toàn diện</span>
             </motion.div>
 
+            {/* Main heading */}
             <motion.h1
               variants={reduced ? undefined : fadeUp}
               transition={defaultTransition}
-              className="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight mb-6 leading-[1.1]"
+              className="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-8 leading-[1.15]"
             >
               Nâng tầm{" "}
-              <span className="zenith-gradient-text block sm:inline">
+              <span className="zenith-gradient-text block">
                 trải nghiệm học tập
               </span>
             </motion.h1>
 
+            {/* Subheading */}
             <motion.p
               variants={reduced ? undefined : fadeUp}
               transition={defaultTransition}
-              className="text-lg text-slate-400 max-w-xl mx-auto lg:mx-0 mb-8"
+              className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed font-light"
             >
-              Zenith EDU giúp giáo viên và học sinh kết nối, quản lý khóa học và
-              theo dõi tiến độ một cách hiệu quả.
+              Công cụ tất cả trong một cho giáo viên và học sinh. Tạo quiz tương tác, quản lý lớp học và theo dõi tiến độ với analytics toàn diện.
             </motion.p>
 
+            {/* CTA Buttons */}
             <motion.div
               variants={reduced ? undefined : fadeUp}
               transition={defaultTransition}
@@ -129,42 +177,70 @@ export default function LandingHero() {
               <Link href="/signup">
                 <Button
                   size="lg"
-                  className="zenith-btn-glow rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 text-white border-0 px-8 w-full sm:w-auto"
+                  className="zenith-btn-glow rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 text-white border-0 px-8 py-6 text-base font-semibold shadow-xl shadow-violet-600/40 hover:shadow-violet-500/60 transition-all w-full sm:w-auto group relative overflow-hidden"
                 >
-                  Bắt đầu ngay <ArrowRight className="w-4 h-4 ml-2" />
+                  <span className="relative z-10 flex items-center gap-2">
+                    Bắt đầu miễn phí
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </Button>
               </Link>
               <Link href="/login">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="rounded-xl border-white/15 hover:bg-white/[0.08] hover:border-white/25 text-white px-8 w-full sm:w-auto backdrop-blur-sm"
+                  className="rounded-xl border-white/20 hover:bg-white/[0.1] hover:border-white/30 text-white px-8 py-6 text-base font-semibold backdrop-blur-sm w-full sm:w-auto transition-all"
                 >
                   Đăng nhập
                 </Button>
               </Link>
             </motion.div>
+
+            {/* Trust signals */}
+            <motion.div
+              variants={reduced ? undefined : fadeUp}
+              transition={defaultTransition}
+              className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 sm:gap-8"
+            >
+              <div className="text-center sm:text-left">
+                <p className="text-sm text-slate-400 mb-2">Tin tưởng bởi</p>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-purple-600" />
+                  <span className="text-sm font-semibold text-white">2,500+ người dùng</span>
+                </div>
+              </div>
+              <div className="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+              <div className="text-center sm:text-left">
+                <p className="text-sm text-slate-400 mb-2">Được đánh giá</p>
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">⭐</span>
+                  <span className="text-sm font-semibold text-white">4.8/5 sao</span>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
+          {/* Right side - Dashboard mockup */}
           <motion.div
             initial={reduced ? false : { opacity: 0, y: 32, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ ...defaultTransition, delay: reduced ? 0 : 0.2 }}
-            className="relative"
+            transition={{ ...defaultTransition, delay: reduced ? 0 : 0.3 }}
+            className="relative hidden lg:block"
           >
             <DashboardMockup />
           </motion.div>
         </div>
 
-        <a
+        {/* Scroll indicator */}
+        <motion.a
           href="#stats"
-          className="flex justify-center mt-12 text-slate-500 hover:text-violet-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500/50 rounded-full"
+          animate={reduced ? undefined : { y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="flex justify-center mt-16 text-slate-500 hover:text-violet-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500/50 rounded-full"
           aria-label="Cuộn xuống"
         >
-          <ChevronDown
-            className={`w-6 h-6 ${reduced ? "" : "animate-bounce"}`}
-          />
-        </a>
+          <ChevronDown className="w-6 h-6" />
+        </motion.a>
       </div>
     </section>
   );

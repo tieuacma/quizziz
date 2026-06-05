@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -91,9 +91,9 @@ export default function ParticleSystem() {
 
   // Expose triggerEffect globally for quiz components
   useEffect(() => {
-    (window as any).__triggerParticleEffect__ = triggerEffect;
+    (window as unknown as Record<string, unknown>).__triggerParticleEffect__ = triggerEffect;
     return () => {
-      delete (window as any).__triggerParticleEffect__;
+      delete (window as unknown as Record<string, unknown>).__triggerParticleEffect__;
     };
   }, [triggerEffect]);
 
@@ -120,9 +120,16 @@ function ParticleBurst({
   onDone: () => void;
 }) {
   const [items, setItems] = useState(particles);
-  const [startTime] = useState(Date.now());
+  const startTimeRef = useRef<number>(0);
+  const animationStartedRef = useRef(false);
 
   useEffect(() => {
+    // Only start animation once
+    if (animationStartedRef.current) return;
+    animationStartedRef.current = true;
+    
+    startTimeRef.current = Date.now();
+    
     let animationFrame: number;
     let lastTime = Date.now();
 
@@ -150,7 +157,7 @@ function ParticleBurst({
         return updated;
       });
 
-      if (Date.now() - startTime < 2000) {
+      if (Date.now() - startTimeRef.current < 2000) {
         animationFrame = requestAnimationFrame(animate);
       } else {
         onDone();
@@ -159,7 +166,7 @@ function ParticleBurst({
 
     animationFrame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrame);
-  }, [onDone, startTime]);
+  }, [onDone]);
 
   return (
     <>
@@ -193,8 +200,11 @@ export function useParticleEffect() {
     x: number,
     y: number,
   ) => {
-    if (typeof (window as any).__triggerParticleEffect__ === "function") {
-      (window as any).__triggerParticleEffect__(type, x, y);
+    const globalTrigger = (window as unknown as Record<string, unknown>).__triggerParticleEffect__ as
+      | ((type: "correct" | "wrong" | "celebration" | "streak", x: number, y: number) => void)
+      | undefined;
+    if (typeof globalTrigger === "function") {
+      globalTrigger(type, x, y);
     }
   };
 

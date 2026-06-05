@@ -56,14 +56,30 @@ function ShimmerProgressBar({
 
 // Floating particles background
 function LoadingParticles() {
-  const particles = Array.from({ length: 20 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: 2 + Math.random() * 4,
-    duration: 3 + Math.random() * 4,
-    delay: Math.random() * 2,
-  }));
+  const particles = React.useMemo(() => {
+    // Deterministic generation to keep render pure.
+    const rand = (() => {
+      let seed = 123456789;
+      return () => {
+        // Mulberry32
+        seed |= 0;
+        seed = (seed + 0x6d2b79f5) | 0;
+        let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    })();
+
+    return Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: rand() * 100,
+      y: rand() * 100,
+      size: 2 + rand() * 4,
+      duration: 3 + rand() * 4,
+      delay: rand() * 2,
+    }));
+  }, []);
+
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">

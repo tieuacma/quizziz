@@ -25,12 +25,10 @@ import {
   Grid3X3,
   List,
   SortAsc,
-  Copy,
   Archive,
   Trash2,
   MoreVertical,
   CheckSquare,
-  Square,
 } from "lucide-react";
 
 gsap.registerPlugin(useGSAP);
@@ -347,6 +345,8 @@ export default function AnimatedQuizzesPage({
       setSelectedQuizzes(new Set(filteredQuizzes.map((q) => q.id)));
     }
   };
+  // Note: toggleSelectAll is available for future bulk selection feature
+  void toggleSelectAll;
 
   useGSAP(
     () => {
@@ -544,7 +544,7 @@ export default function AnimatedQuizzesPage({
             {/* Status filter */}
             <Select
               value={statusFilter}
-              onValueChange={(v) => setStatusFilter(v as any)}
+              onValueChange={(v) => setStatusFilter(v as "all" | "active" | "closed" | "draft")}
             >
               <SelectTrigger className="w-[130px] border-white/10 bg-white/[0.02] text-sm">
                 <Filter className="w-3.5 h-3.5 mr-1.5 text-slate-400" />
@@ -574,7 +574,7 @@ export default function AnimatedQuizzesPage({
             </Select>
 
             {/* Sort */}
-            <Select value={sortBy} onValueChange={(v) => setSortBy(v as any)}>
+            <Select value={sortBy} onValueChange={(v) => setSortBy(v as "date" | "submissions" | "avg")}>
               <SelectTrigger className="w-[140px] border-white/10 bg-white/[0.02] text-sm">
                 <SortAsc className="w-3.5 h-3.5 mr-1.5 text-slate-400" />
                 <SelectValue placeholder="Sắp xếp" />
@@ -656,7 +656,7 @@ export default function AnimatedQuizzesPage({
           </div>
         ) : (
           <div className="space-y-3">
-            {filteredQuizzes.map((q, i) => {
+            {filteredQuizzes.map((q) => {
               const status = STATUS_LABEL[q.status];
               const isSelected = selectedQuizzes.has(q.id);
               return (

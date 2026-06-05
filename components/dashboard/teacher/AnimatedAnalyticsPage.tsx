@@ -17,20 +17,15 @@ import {
   Users,
   Puzzle,
   Target,
-  Calendar,
   Download,
   ArrowUpRight,
   ArrowDownRight,
   Award,
-  AlertTriangle,
   Clock,
-  ChevronDown,
   Star,
   Activity,
   FileText,
-  MoreHorizontal,
   RefreshCw,
-  Eye,
 } from "lucide-react";
 
 gsap.registerPlugin(useGSAP);
@@ -221,10 +216,9 @@ function EnhancedStatCard({
   );
 }
 
-// Original Animated Stat Card (kept for compatibility)
-function AnimatedStatCard({ s, index }: { s: StatData; index: number }) {
-  return <EnhancedStatCard s={s} index={index} />;
-}
+// Note: AnimatedStatCard is an alias for EnhancedStatCard for API compatibility
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const AnimatedStatCard = EnhancedStatCard;
 
 // Score Distribution Chart Component
 function ScoreDistributionChart({ data }: { data: AnalyticsData[] }) {
@@ -1309,8 +1303,8 @@ export default function AnimatedAnalyticsPage({
           <span className="text-xs text-slate-500">Thang điểm 10</span>
         </div>
         <Card className="bg-white/[0.03] border-white/8 overflow-hidden">
-          {analyticsWeekly.map((d, i) => (
-            <AnimatedProgressRow key={d.day} d={d} index={i} />
+          {analyticsWeekly.map((d, _idx) => (
+            <AnimatedProgressRow key={d.day} d={d} index={0} />
           ))}
         </Card>
       </section>
