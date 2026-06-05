@@ -45,11 +45,21 @@ export default function QuizCreatePage() {
 
       const result = await createQuizMongoAction(undefined, formData);
 
-      // If successful, redirect happens in server action
       // If error, result will have error field
       if (result && !result.success) {
         setError(result.error || "Lỗi không xác định");
         setIsSubmitting(false);
+        return;
+      }
+
+      // Success: go to quiz editor
+      if (result && result.success) {
+        setIsSubmitting(false);
+        if (result.id) {
+          router.push(`/quiz-editor/${result.id}`);
+        } else {
+          setError("Không lấy được ID quiz sau khi tạo.");
+        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Lỗi khi tạo quiz");

@@ -20,6 +20,11 @@ export type QuizLoadResult =
 	| { success: true; data: ClientQuiz }
 	| { success: false; error: string };
 
+export type QuizCreateResult =
+	| { success: true; message?: string; id?: string }
+	| { success: false; error: string; field?: string };
+
+
 const DEFAULT_EXAM_TIME_LIMIT_SECONDS = 1800;
 
 function parseExamTimeLimitSeconds(
@@ -33,7 +38,7 @@ function parseExamTimeLimitSeconds(
 export async function createQuizMongoAction(
 	_prev: QuizFormState,
 	formData: FormData,
-): Promise<QuizFormState> {
+): Promise<QuizCreateResult> {
 	try {
 		const title = (formData.get("title") as string)?.trim();
 		const description = (formData.get("description") as string)?.trim();
@@ -69,7 +74,13 @@ export async function createQuizMongoAction(
 		};
 
 		const res = await upsertQuiz(null, quizDoc);
-		redirect(`/quiz-editor/${res.id}`);
+		// Avoid throwing NEXT_REDIRECT from server actions during client submit.
+		// Instead return success and let the client navigate.
+		return {
+			success: true,
+			message: "Quiz tạo thành công",
+			id: newId,
+		};
 	} catch (e) {
 		console.error(e);
 		return {

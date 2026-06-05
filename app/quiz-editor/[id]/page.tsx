@@ -356,17 +356,27 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
             </Button>
 
             {/* Play/Exam tests */}
-            <Button variant="outline" asChild className="h-9 border-white/5 hover:bg-white/5 rounded-xl cursor-pointer text-xs">
-              <Link href={`/quiz-game/${routeQuizId}`} target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" className="h-9 border-white/5 hover:bg-white/5 rounded-xl cursor-pointer text-xs" asChild={false}>
+              <a
+                href={`/quiz-game/${routeQuizId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center"
+              >
                 <Play className="w-3.5 h-3.5 mr-1.5 text-emerald-400" />
                 Chơi thử
-              </Link>
+              </a>
             </Button>
-            <Button variant="outline" asChild className="h-9 border-white/5 hover:bg-white/5 rounded-xl cursor-pointer text-xs">
-              <Link href={`/do-exam/${routeQuizId}`} target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" className="h-9 border-white/5 hover:bg-white/5 rounded-xl cursor-pointer text-xs" asChild={false}>
+              <a
+                href={`/do-exam/${routeQuizId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center"
+              >
                 <ShieldCheck className="w-3.5 h-3.5 mr-1.5 text-emerald-400" />
                 Thi thử
-              </Link>
+              </a>
             </Button>
 
             {/* Save Button */}
