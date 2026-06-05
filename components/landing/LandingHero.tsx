@@ -163,10 +163,31 @@ export default function LandingHero() {
             <motion.p
               variants={reduced ? undefined : fadeUp}
               transition={defaultTransition}
-              className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed font-light"
+              className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0 mb-6 leading-relaxed font-light"
             >
-              Công cụ tất cả trong một cho giáo viên và học sinh. Tạo quiz tương tác, quản lý lớp học và theo dõi tiến độ với analytics toàn diện.
+              Công cụ tất cả trong một cho giáo viên và học sinh: tạo quiz tương tác, theo dõi tiến độ với analytics toàn diện — và mang trải nghiệm học tập theo phong cách game vào lớp học.
             </motion.p>
+
+            {/* Hero highlights */}
+            <motion.div
+              variants={reduced ? undefined : fadeUp}
+              transition={defaultTransition}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-10"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.05] backdrop-blur-sm hover:bg-white/[0.08] transition-colors">
+                <span className="text-violet-300">⚡</span>
+                <span className="text-sm font-semibold text-white">Quiz real-time &amp; điểm số cập nhật tức thì</span>
+              </div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.05] backdrop-blur-sm hover:bg-white/[0.08] transition-colors">
+                <span className="text-violet-300">📊</span>
+                <span className="text-sm font-semibold text-white">Analytics giúp giáo viên nắm kết quả nhanh</span>
+              </div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.05] backdrop-blur-sm hover:bg-white/[0.08] transition-colors">
+                <span className="text-violet-300">🎮</span>
+                <span className="text-sm font-semibold text-white">Trải nghiệm học tập theo kiểu game-based</span>
+              </div>
+            </motion.div>
+
 
             {/* CTA Buttons */}
             <motion.div
@@ -217,6 +238,37 @@ export default function LandingHero() {
                   <span className="text-sm font-semibold text-white">4.8/5 sao</span>
                 </div>
               </div>
+              <div className="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+              <div className="text-center sm:text-left">
+                <p className="text-sm text-slate-400 mb-2">Trường học</p>
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">🏫</span>
+                  <span className="text-sm font-semibold text-white">120+ đối tác</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Quick feature highlights */}
+            <motion.div
+              variants={reduced ? undefined : fadeUp}
+              transition={defaultTransition}
+              className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4"
+            >
+              {[
+                { icon: "⚡", label: "Real-time", desc: "Đồng bộ <50ms" },
+                { icon: "🔒", label: "Bảo mật", desc: "SSL & GDPR" },
+                { icon: "📱", label: "Responsive", desc: "Mọi thiết bị" },
+                { icon: "🎯", label: "Dễ dùng", desc: "Không cần đào tạo" },
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col items-center sm:items-start gap-1.5 p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-violet-500/20 hover:bg-white/[0.06] transition-all"
+                >
+                  <span className="text-xl">{item.icon}</span>
+                  <span className="text-xs font-semibold text-white">{item.label}</span>
+                  <span className="text-[10px] text-slate-500">{item.desc}</span>
+                </div>
+              ))}
             </motion.div>
           </motion.div>
 

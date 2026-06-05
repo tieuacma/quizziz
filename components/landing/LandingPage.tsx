@@ -5,8 +5,11 @@ import LandingHero from "./LandingHero";
 import LandingStats from "./LandingStats";
 import LandingRoles from "./LandingRoles";
 import LandingHowItWorks from "./LandingHowItWorks";
+import LandingPlayground from "./LandingPlayground";
 import LandingShowcase from "./LandingShowcase";
 import LandingFeatures from "./LandingFeatures";
+import LandingTestimonials from "./LandingTestimonials";
+import LandingPricing from "./LandingPricing";
 import LandingFAQ from "./LandingFAQ";
 import LandingCTA from "./LandingCTA";
 import LandingFooter from "./LandingFooter";
@@ -21,8 +24,11 @@ export default function LandingPage() {
           <LandingStats />
           <LandingRoles />
           <LandingHowItWorks />
+          <LandingPlayground />
           <LandingShowcase />
           <LandingFeatures />
+          <LandingTestimonials />
+          <LandingPricing />
           <LandingFAQ />
           <LandingCTA />
         </main>

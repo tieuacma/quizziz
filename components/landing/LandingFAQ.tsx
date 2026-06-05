@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import { FAQ_ITEMS } from "./landing-data";
 import { cn } from "@/lib/utils";
-import { usePrefersReducedMotion, defaultTransition, fadeUp, staggerContainer } from "./motion";
+import { usePrefersReducedMotion, defaultTransition } from "./motion";
 
 export default function LandingFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -51,19 +51,15 @@ export default function LandingFAQ() {
         </motion.div>
       </div>
 
-      <motion.div
-        className="max-w-3xl mx-auto space-y-4"
-        variants={reduced ? undefined : staggerContainer}
-        initial={reduced ? false : "hidden"}
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-      >
+      <div className="max-w-3xl mx-auto space-y-4">
         {FAQ_ITEMS.map((item, index) => {
           const isOpen = openIndex === index;
           return (
             <motion.div
               key={item.question}
-              variants={reduced ? undefined : fadeUp}
+              initial={reduced ? false : { opacity: 0, y: 20 }}
+              whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
               transition={defaultTransition}
               className="group"
             >
@@ -115,7 +111,7 @@ export default function LandingFAQ() {
             </motion.div>
           );
         })}
-      </motion.div>
+      </div>
 
       {/* Contact CTA */}
       <motion.div
