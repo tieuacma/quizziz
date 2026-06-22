@@ -144,7 +144,7 @@ export default function MultiChoiceCard({
 
       <div className="h-1/2 zenith-panel p-4 md:p-6 flex flex-col min-h-0">
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 max-w-5xl mx-auto w-full flex-1 min-h-0 overflow-y-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 w-full flex-1 min-h-0 overflow-y-auto"
           role="group"
           aria-label="Lựa chọn trắc nghiệm"
           variants={optionStagger}
@@ -227,7 +227,7 @@ export default function MultiChoiceCard({
         {isMulti && !submitted && (
           <Button
             size="lg"
-            className="zenith-btn-glow mt-4 w-full max-w-md mx-auto min-h-11 h-14 text-lg font-extrabold rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 border-0 shadow-[0_0_20px_rgba(167,139,250,0.35)]"
+            className="zenith-btn-glow mt-4 w-full min-h-11 h-14 text-lg font-extrabold rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 border-0 shadow-[0_0_20px_rgba(167,139,250,0.35)]"
             disabled={selectedIds.length === 0}
             onClick={submitMulti}
           >

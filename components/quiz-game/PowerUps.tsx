@@ -72,7 +72,11 @@ export default function PowerUps({
             <motion.button
               key={item.type}
               type="button"
-              onClick={() => isUsable && onActivate(item.type)}
+              onClick={() => {
+                if (!isUsable) return;
+                // Let parent update powerups.active; local button animation handled below.
+                onActivate(item.type);
+              }}
               disabled={!isUsable}
               className={`relative flex items-center justify-center p-2 rounded-xl border transition-all duration-300 cursor-pointer shrink-0 ${
                 item.active
@@ -83,6 +87,21 @@ export default function PowerUps({
               }`}
               whileHover={isUsable ? { scale: 1.05 } : {}}
               whileTap={isUsable ? { scale: 0.95 } : {}}
+              initial={false}
+              animate={
+                // animate on activation state transition
+                item.active
+                  ? {
+                      scale: [1, 1.18, 1],
+                      filter: [
+                        "brightness(1)",
+                        "brightness(1.25)",
+                        "brightness(1)",
+                      ],
+                    }
+                  : { scale: 1 }
+              }
+              transition={{ duration: 0.35, ease: "easeOut" }}
               title={`${item.name}: ${item.desc} (${count} khả dụng)`}
             >
               <div
@@ -138,7 +157,10 @@ export default function PowerUps({
             <motion.button
               key={item.type}
               type="button"
-              onClick={() => isUsable && onActivate(item.type)}
+              onClick={() => {
+                if (!isUsable) return;
+                onActivate(item.type);
+              }}
               disabled={!isUsable}
               className={`relative flex flex-col items-center justify-center p-3 rounded-2xl border transition-all duration-300 ${
                 item.active
@@ -149,13 +171,29 @@ export default function PowerUps({
               }`}
               whileHover={isUsable ? { scale: 1.05 } : {}}
               whileTap={isUsable ? { scale: 0.95 } : {}}
+              initial={false}
+              animate={
+                item.active
+                  ? {
+                      scale: [1, 1.14, 1],
+                      filter: [
+                        "brightness(1)",
+                        "brightness(1.28)",
+                        "brightness(1)",
+                      ],
+                    }
+                  : { scale: 1 }
+              }
+              transition={{ duration: 0.35, ease: "easeOut" }}
             >
               <div
                 className={`w-10 h-10 rounded-xl bg-gradient-to-r ${item.color} flex items-center justify-center text-white mb-2 relative ${
                   item.active ? "animate-pulse" : ""
                 }`}
                 style={{
-                  boxShadow: item.active ? `0 0 15px ${item.glowColor}` : "none",
+                  boxShadow: item.active
+                    ? `0 0 15px ${item.glowColor}`
+                    : "none",
                 }}
               >
                 <Icon className="w-5 h-5" />
@@ -178,7 +216,7 @@ export default function PowerUps({
               <span className="text-[10px] text-white/50 text-center mt-0.5 leading-tight hidden md:block">
                 {item.desc}
               </span>
-              
+
               {item.active && (
                 <span className="absolute bottom-1 right-2 flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>

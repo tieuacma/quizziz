@@ -22,7 +22,7 @@ export default function LiveLeaderboard({ leaderboard }: LiveLeaderboardProps) {
       </div>
 
       <div className="flex-1 overflow-y-auto space-y-2.5 pr-1.5 custom-scrollbar min-h-0">
-        <AnimatePresence initial={false}>
+        <AnimatePresence initial={false} mode="popLayout">
           {leaderboard.map((participant, index) => {
             const isTop3 = index < 3;
             const rankColors = [
@@ -49,6 +49,7 @@ export default function LiveLeaderboard({ leaderboard }: LiveLeaderboardProps) {
                     ? "border-violet-400/50 bg-violet-500/15 shadow-[0_0_20px_rgba(99,102,241,0.25)]"
                     : "border-white/5 bg-white/5"
                 }`}
+                style={{ willChange: "transform, opacity" }}
               >
                 {/* Position Badge */}
                 <div

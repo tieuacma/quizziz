@@ -168,7 +168,9 @@ export default function QuizLayout({
               <Clock
                 className={cn(
                   "w-4 h-4",
-                  isLowTime ? "text-red-400 animate-pulse drop-shadow-[0_0_6px_rgba(244,63,94,0.6)]" : "text-violet-300",
+                  isLowTime
+                    ? "text-red-400 animate-pulse drop-shadow-[0_0_6px_rgba(244,63,94,0.6)]"
+                    : "text-violet-300",
                 )}
               />
               <span
@@ -185,7 +187,7 @@ export default function QuizLayout({
         </header>
 
         {/* Full-width Question Area with absolute Leaderboard Drawer overlay */}
-        <main className="flex-1 flex flex-col justify-center relative min-h-0 w-full max-w-5xl mx-auto px-4 md:px-6 py-2 md:py-4 z-10 overflow-hidden">
+        <main className="flex-1 flex flex-col justify-center relative min-h-0 w-full mx-auto px-4 md:px-6 py-2 md:py-4 z-10 overflow-hidden">
           <div className="flex-1 min-h-0 relative flex flex-col justify-center w-full">
             <QuestionEngine
               question={currentQuestion}
@@ -204,15 +206,26 @@ export default function QuizLayout({
           {/* Overlay Live Leaderboard Drawer */}
           <AnimatePresence>
             {isLeaderboardOpen && (
-              <motion.div
-                initial={{ opacity: 0, x: 120, scale: 0.95 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: 120, scale: 0.95 }}
-                transition={{ type: "spring", damping: 25, stiffness: 220 }}
-                className="absolute right-0 top-0 bottom-0 w-80 z-40"
-              >
-                <LiveLeaderboard leaderboard={leaderboard} />
-              </motion.div>
+              <>
+                {/* Backdrop to prevent layout/scroll glitches */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="absolute inset-0 z-30 bg-black/30 backdrop-blur-[2px]"
+                />
+                <motion.div
+                  initial={{ opacity: 0, x: 120, scale: 0.97 }}
+                  animate={{ opacity: 1, x: 0, scale: 1 }}
+                  exit={{ opacity: 0, x: 120, scale: 0.97 }}
+                  transition={{ type: "spring", damping: 28, stiffness: 240 }}
+                  style={{ transformOrigin: "right center" }}
+                  className="absolute right-0 top-0 bottom-0 w-80 z-40"
+                >
+                  <LiveLeaderboard leaderboard={leaderboard} />
+                </motion.div>
+              </>
             )}
           </AnimatePresence>
         </main>

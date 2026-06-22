@@ -8,8 +8,9 @@ export default function WeeklySubmissionsChart() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   const data = ANALYTICS_WEEKLY;
-  const maxSubmissions = 20;
-  const maxAvg = 10;
+
+  const maxSubmissions = Math.max(...data.map((d) => d.submissions), 1) || 1;
+  const maxAvg = Math.max(...data.map((d) => d.avg), 1) || 1;
 
   // SVG dimensions
   const width = 500;
@@ -21,11 +22,15 @@ export default function WeeklySubmissionsChart() {
 
   const chartWidth = width - paddingLeft - paddingRight;
   const chartHeight = height - paddingTop - paddingBottom;
-  const stepX = chartWidth / (data.length - 1);
+  // Trục X: chia theo số cột để bar/label/point khớp nhau
+  const stepX = chartWidth / data.length;
+
+  // Tâm của từng cột/điểm theo trục X
+  const getX = (i: number) => paddingLeft + i * stepX + stepX / 2;
 
   // Compute coordinates for Line Chart (Average Score)
   const linePoints = data.map((d, i) => {
-    const x = paddingLeft + i * stepX;
+    const x = getX(i);
     const y = height - paddingBottom - (d.avg / maxAvg) * chartHeight;
     return { x, y, ...d };
   });
@@ -35,11 +40,14 @@ export default function WeeklySubmissionsChart() {
     .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`)
     .join(" ");
 
-  // Create SVG path string for the filled area under the line
+  // Create SVG path string for the filled area under the line.
+  // Use a single consistent baseline (the bottom of the plot area) so the area fill
+  // aligns correctly with the bars/axes.
+  const baselineY = height - paddingBottom;
   const areaPath = `
     ${linePath}
-    L ${linePoints[linePoints.length - 1].x} ${height - paddingBottom}
-    L ${linePoints[0].x} ${height - paddingBottom}
+    L ${linePoints[linePoints.length - 1].x} ${baselineY}
+    L ${linePoints[0].x} ${baselineY}
     Z
   `;
 
@@ -50,8 +58,12 @@ export default function WeeklySubmissionsChart() {
 
       <div className="flex items-center justify-between mb-6 relative z-10">
         <div>
-          <h3 className="text-white text-sm font-semibold">Hiệu suất bài kiểm tra</h3>
-          <p className="text-xs text-slate-400 mt-0.5">Số bài nộp & điểm trung bình hàng tuần</p>
+          <h3 className="text-white text-sm font-semibold">
+            Hiệu suất bài kiểm tra
+          </h3>
+          <p className="text-xs text-slate-400 mt-0.5">
+            Số bài nộp & điểm trung bình hàng tuần
+          </p>
         </div>
         <div className="flex gap-4 text-[10px] font-medium">
           <div className="flex items-center gap-1.5">
@@ -89,15 +101,16 @@ export default function WeeklySubmissionsChart() {
                   x={paddingLeft - 8}
                   y={y + 3}
                   textAnchor="end"
-                  className="fill-slate-500 text-[9px] font-medium"
+                  className="fill-slate-200 text-[9px] font-medium"
                 >
                   {Math.round(maxSubmissions * (1 - ratio))}
                 </text>
+
                 <text
                   x={width - paddingRight + 8}
                   y={y + 3}
                   textAnchor="start"
-                  className="fill-slate-500 text-[9px] font-medium"
+                  className="fill-slate-200 text-[9px] font-medium"
                 >
                   {((1 - ratio) * maxAvg).toFixed(1)}
                 </text>
@@ -108,7 +121,8 @@ export default function WeeklySubmissionsChart() {
           {/* Bar Chart (Submissions) */}
           {data.map((d, i) => {
             const barWidth = 20;
-            const x = paddingLeft + i * stepX - barWidth / 2;
+            const x = getX(i) - barWidth / 2;
+
             const barHeight = (d.submissions / maxSubmissions) * chartHeight;
             const y = height - paddingBottom - barHeight;
 
@@ -118,7 +132,11 @@ export default function WeeklySubmissionsChart() {
                 <motion.rect
                   initial={{ height: 0, y: height - paddingBottom }}
                   animate={{ height: barHeight, y }}
-                  transition={{ duration: 0.6, delay: i * 0.05, ease: "easeOut" }}
+                  transition={{
+                    duration: 0.6,
+                    delay: i * 0.05,
+                    ease: "easeOut",
+                  }}
                   x={x}
                   y={y}
                   width={barWidth}
@@ -126,7 +144,10 @@ export default function WeeklySubmissionsChart() {
                   rx="4"
                   className="fill-gradient-to-t fill-indigo-600/80 hover:fill-indigo-500 transition-colors"
                   style={{
-                    fill: hoveredIdx === i ? "url(#indigoGlow)" : "url(#indigoGrad)",
+                    fill:
+                      hoveredIdx === i
+                        ? "url(#indigoGlow)"
+                        : "url(#indigoGrad)",
                   }}
                 />
 
@@ -231,20 +252,24 @@ export default function WeeklySubmissionsChart() {
             className="absolute rounded-xl bg-[#090915] border border-white/10 p-3 shadow-xl pointer-events-none flex flex-col gap-1 z-20 text-[11px] leading-4"
             style={{
               left: `${Math.min(
-                Math.max((hoveredIdx * stepX) + paddingLeft - 60, 10),
-                width - 150
+                Math.max(getX(hoveredIdx) - 60, 10),
+                width - 150,
               )}px`,
+              // Tooltip neo theo điểm avg (đường), dễ hiểu hơn và khớp visual
               top: `${Math.max(
                 height -
                   paddingBottom -
-                  (data[hoveredIdx].submissions / maxSubmissions) * chartHeight -
+                  (data[hoveredIdx].avg / maxAvg) * chartHeight -
                   75,
-                10
+                10,
               )}px`,
             }}
           >
             <p className="text-white font-bold mb-1 border-b border-white/5 pb-1">
-              Thứ {data[hoveredIdx].day === "CN" ? "Nhật" : data[hoveredIdx].day.replace("T", "")}
+              Thứ{" "}
+              {data[hoveredIdx].day === "CN"
+                ? "Nhật"
+                : data[hoveredIdx].day.replace("T", "")}
             </p>
             <p className="text-indigo-400 font-semibold flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />

@@ -36,14 +36,12 @@ export default function LandingFAQ() {
           <p className="text-sm font-semibold text-violet-300 uppercase tracking-widest mb-4">
             Câu Hỏi Thường Gặp
           </p>
-          <h2 
-            id="faq-heading" 
+          <h2
+            id="faq-heading"
             className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight"
           >
             Những câu hỏi{" "}
-            <span className="zenith-gradient-text block">
-              bạn quan tâm
-            </span>
+            <span className="zenith-gradient-text block">bạn quan tâm</span>
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto text-lg">
             Tìm hiểu thêm về Zenith EDU và cách nó giúp giáo viên và học sinh.
@@ -54,6 +52,9 @@ export default function LandingFAQ() {
       <div className="max-w-3xl mx-auto space-y-4">
         {FAQ_ITEMS.map((item, index) => {
           const isOpen = openIndex === index;
+          const buttonId = `faq-button-${index}`;
+          const panelId = `faq-panel-${index}`;
+
           return (
             <motion.div
               key={item.question}
@@ -67,32 +68,38 @@ export default function LandingFAQ() {
                 className={cn(
                   "rounded-2xl border transition-all duration-300 overflow-hidden",
                   "bg-white/[0.02] hover:bg-white/[0.06]",
-                  isOpen 
-                    ? "border-violet-500/30 bg-white/[0.08] shadow-lg shadow-violet-600/10" 
-                    : "border-white/10 group-hover:border-violet-500/20"
+                  isOpen
+                    ? "border-violet-500/30 bg-white/[0.08] shadow-lg shadow-violet-600/10"
+                    : "border-white/10 group-hover:border-violet-500/20",
                 )}
               >
                 <button
+                  id={buttonId}
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   className={cn(
                     "w-full flex items-center justify-between gap-4 px-6 py-5 text-left",
                     "text-white font-semibold hover:text-violet-200 transition-colors",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500/50 focus-visible:ring-inset"
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500/50 focus-visible:ring-inset",
                   )}
                   aria-expanded={isOpen}
+                  aria-controls={panelId}
                 >
                   <span className="flex-grow">{item.question}</span>
                   <ChevronDown
                     className={cn(
                       "w-5 h-5 text-violet-400 shrink-0 transition-transform duration-300",
-                      isOpen && "rotate-180"
+                      isOpen && "rotate-180",
                     )}
                   />
                 </button>
+
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
+                      id={panelId}
+                      role="region"
+                      aria-labelledby={buttonId}
                       initial={reduced ? false : { height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={reduced ? undefined : { height: 0, opacity: 0 }}
@@ -121,16 +128,24 @@ export default function LandingFAQ() {
         transition={{ ...defaultTransition, delay: 0.4 }}
         className="mt-16 pt-12 border-t border-white/10 text-center"
       >
-        <p className="text-slate-400 mb-6">
-          Không tìm thấy câu trả lời? 
-        </p>
-        <a 
+        <p className="text-slate-400 mb-6">Không tìm thấy câu trả lời?</p>
+        <a
           href="mailto:support@zenith.edu"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-semibold shadow-lg shadow-violet-600/40 hover:shadow-violet-600/60 transition-all transform hover:scale-105"
         >
           Liên hệ với chúng tôi
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 7l5 5m0 0l-5 5m5-5H6"
+            />
           </svg>
         </a>
       </motion.div>
