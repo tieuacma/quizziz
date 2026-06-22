@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zenith EDU — Báo cáo Kiến trúc Phần mềm (Chi tiết)</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --surface-2: #243044;
+      --surface-3: #2d3f56;
+      --border: #3d4f66;
+      --text: #e8edf4;
+      --text-secondary: #b0bdcf;
+      --muted: #8b9cb3;
+      --accent: #6366f1;
+      --accent-light: #818cf8;
+      --accent-2: #8b5cf6;
+      --success: #10b981;
+      --success-light: #34d399;
+      --warning: #f59e0b;
+      --warning-light: #fbbf24;
+      --danger: #ef4444;
+      --danger-light: #f87171;
+      --info: #3b82f6;
+      --info-light: #60a5fa;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --font: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+      --mono: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      min-height: 100vh;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border); }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0f0a2e 0%, #1e1b4b 30%, #1a2332 70%, #0f1419 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 2rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .subtitle {
+      color: var(--muted);
+      font-size: 1.15rem;
+      max-width: 750px;
+      line-height: 1.7;
+    }
+
+    .meta-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
+      transition: all 0.2s ease;
+    }
+
+    .badge:hover {
+      background: rgba(99, 102, 241, 0.25);
+      border-color: rgba(99, 102, 241, 0.5);
+    }
+
+    /* Container */
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+    /* TOC */
+    nav.toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    nav.toc h2 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    nav.toc ol {
+      padding-left: 1.5rem;
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    nav.toc li { margin-bottom: 0; }
+
+    nav.toc a {
+      color: var(--accent-light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      font-size: 0.95rem;
+    }
+
+    nav.toc a:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+
+    nav.toc ol ol {
+      padding-left: 1.25rem;
+      margin-top: 0.35rem;
+      gap: 0.3rem;
+    }
+
+    nav.toc ol ol a {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Sections */
+    section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      transition: border-color 0.3s ease;
+    }
+
+    section:hover {
+      border-color: var(--surface-3);
+    }
+
+    section h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--border);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    section h2 .icon {
+      font-size: 1.3rem;
+    }
+
+    section h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+      color: #c7d2fe;
+    }
+
+    section h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 1rem 0 0.5rem;
+      color: #a5b4fc;
+    }
+
+    p { margin-bottom: 1rem; color: var(--text-secondary); }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol { margin: 0.75rem 0 1rem 1.5rem; }
+    li { margin-bottom: 0.4rem; color: var(--text-secondary); }
+
+    /* Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin: 1.25rem 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+      margin: 1.25rem 0;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.25rem 0;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem 1.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(99,102,241,0.3);
+    }
+
+    .card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: #e0e7ff;
+    }
+
+    .card p, .card ul { font-size: 0.88rem; color: var(--muted); margin: 0; }
+    .card ul { margin-top: 0.5rem; padding-left: 1rem; }
+    .card li { font-size: 0.85rem; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    thead {
+      background: var(--surface-2);
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    tbody tr:hover {
+      background: rgba(99,102,241,0.05);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Code */
+    code {
+      font-family: var(--mono);
+      font-size: 0.82em;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      color: #7dd3fc;
+    }
+
+    .path {
+      font-family: var(--mono);
+      font-size: 0.85em;
+      background: rgba(99,102,241,0.15);
+      padding: 0.2em 0.55em;
+      border-radius: 4px;
+      color: #fcd34d;
+      border: 1px solid rgba(252,211,77,0.2);
+    }
+
+    pre {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      border-radius: 0;
+      color: inherit;
+    }
+
+    /* Diagrams */
+    .diagram {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+
+    .diagram-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+
+    .mermaid {
+      text-align: center;
+    }
+
+    /* Tags */
+    .tag {
+      display: inline-block;
+      padding: 0.2em 0.6em;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-right: 0.3rem;
+    }
+
+    .tag-ssr { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+    .tag-csr { background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.3); }
+    .tag-static { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+    .tag-action { background: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+    .tag-dynamic { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+
+    /* Callouts */
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: rgba(99, 102, 241, 0.08);
+      padding: 1rem 1.25rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 1.25rem 0;
+      font-size: 0.92rem;
+    }
+
+    .callout-warn {
+      border-left-color: var(--warning);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .callout-success {
+      border-left-color: var(--success);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .callout-danger {
+      border-left-color: var(--danger);
+      background: rgba(239, 68, 68, 0.08);
+    }
+
+    .callout-info {
+      border-left-color: var(--info);
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    /* Architecture diagram specific */
+    .arch-layer {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem 1.5rem;
+      margin: 0.75rem 0;
+    }
+
+    .arch-layer h4 {
+      color: var(--accent-light);
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .arch-layer .items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .arch-layer .item {
+      background: var(--surface-3);
+      padding: 0.3rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      color: var(--text-secondary);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    /* Print */
+    @media print {
+      body { background: #fff; color: #111; }
+      .hero { background: #f1f5f9; }
+      .hero h1 { background: none; -webkit-text-fill-color: #111; color: #111; }
+      section, nav.toc { background: #f8fafc; border-color: #e2e8f0; }
+      .diagram { background: #f1f5f9; }
+      code, .path { background: #e2e8f0; color: #1e40af; }
+      .badge { background: #e0e7ff; color: #3730a3; border-color: #c7d2fe; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero { padding: 2.5rem 1.25rem 2rem; }
+      .hero h1 { font-size: 1.75rem; }
+      .container { padding: 1rem; }
+      section { padding: 1.5rem 1.25rem; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      nav.toc ol { font-size: 0.9rem; }
+    }
+
+    /* Animation for section entry */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    section {
+      animation: fadeInUp 0.5s ease-out both;
+    }
+
+    section:nth-child(2) { animation-delay: 0.1s; }
+    section:nth-child(3) { animation-delay: 0.2s; }
+    section:nth-child(4) { animation-delay: 0.3s; }
+    section:nth-child(5) { animation-delay: 0.4s; }
+    section:nth-child(6) { animation-delay: 0.5s; }
+    section:nth-child(7) { animation-delay: 0.6s; }
+    section:nth-child(8) { animation-delay: 0.7s; }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <h1>📘 Zenith EDU — Báo cáo Kiến trúc Phần mềm</h1>
+    <p class="subtitle">
+      Phân tích chi tiết mã nguồn dự án Next.js 16 (App Router) — nền tảng quản lý học tập toàn diện,
+      hỗ trợ biên soạn quiz, chơi trắc nghiệm gamified và thi thử có chấm điểm server-side bảo mật.
+    </p>
+    <div class="meta-badges">
+      <span class="badge">🚀 Next.js 16.2.4</span>
+      <span class="badge">⚛️ React 19.2.4</span>
+      <span class="badge">📘 TypeScript 5</span>
+      <span class="badge">🍃 MongoDB Driver 6.3</span>
+      <span class="badge">🎨 Tailwind CSS 4</span>
+      <span class="badge">🖥️ Server Actions</span>
+      <span class="badge">🎭 Zustand 5.0</span>
+      <span class="badge">✨ GSAP 3.13</span>
+      <span class="badge">🎬 Framer Motion 12</span>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="container">
+
+  <!-- TABLE OF CONTENTS -->
+  <nav class="toc">
+    <h2>📑 Mục lục</h2>
+    <ol>
+      <li><a href="#overview">Tổng quan kiến trúc</a></li>
+      <li><a href="#folders">Cấu trúc thư mục chi tiết</a></li>
+      <li><a href="#dataflow">Luồng hoạt động (Data Flow)</a>
+        <ol>
+          <li><a href="#dataflow-request">Request → Response</a></li>
+          <li><a href="#dataflow-mutation">Mutation qua Server Actions</a></li>
+          <li><a href="#dataflow-exam">Luồng thi & chấm điểm</a></li>
+          <li><a href="#dataflow-editor">Luồng biên soạn Quiz</a></li>
+        </ol>
+      </li>
+      <li><a href="#rendering">Cơ chế Rendering</a></li>
+      <li><a href="#api">Tương tác API & Dữ liệu</a>
+        <ol>
+          <li><a href="#api-mongodb">MongoDB Connection</a></li>
+          <li><a href="#api-actions">Server Actions</a></li>
+          <li><a href="#api-external">Bên thứ ba</a></li>
+        </ol>
+      </li>
+      <li><a href="#security">Bảo mật & Phiên đăng nhập</a></li>
+      <li><a href="#stack">Công nghệ phụ trợ</a></li>
+      <li><a href="#recommendations">Đánh giá & Khuyến nghị</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. OVERVIEW -->
+  <section id="overview">
+    <h2><span class="icon">🏗️</span> 1. Tổng quan kiến trúc</h2>
+    <p>
+      <strong>Zenith EDU</strong> là ứng dụng web monolith full-stack được xây dựng trên
+      <strong>Next.js 16 App Router</strong>, kết hợp giữa Server Components và Client Components
+      để tối ưu hiệu năng và trải nghiệm người dùng.
+    </p>
+    <p>
+      Kiến trúc được tổ chức theo mô hình <strong>3 tầng</strong> rõ ràng, tách biệt mối quan tâm
+      giữa presentation, business logic và data access:
+    </p>
+
+    <div class="grid-3">
+      <div class="card">
+        <h4>🎨 Tầng Presentation</h4>
+        <ul>
+          <li><span class="path">app/</span> — Định nghĩa routes, layouts, metadata</li>
+          <li><span class="path">components/</span> — UI components theo domain (landing, dashboard, quiz-game, exam, editor)</li>
+          <li><span class="path">public/</span> — Static assets (SVG, images)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>⚙️ Tầng Application</h4>
+        <ul>
+          <li><span class="path">app/actions/</span> — Server Actions (auth, quiz CRUD, exam submission)</li>
+          <li><span class="path">lib/</span> — Business logic (MongoDB, session, grading, normalization)</li>
+          <li><span class="path">hooks/</span> — Custom React hooks (useQuizEditor, useQuizLogic)</li>
+          <li><span class="path">stores/</span> — Zustand global state (exam-store với persist)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>💾 Tầng Data</h4>
+        <ul>
+          <li><strong>MongoDB</strong> — Collection <code>quizzes</code> (production data)</li>
+          <li><span class="path">data/quiz.json</span> — Fallback & seed data</li>
+          <li><strong>Mock data</strong> — Dashboard static data (development)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <pre class="mermaid">
+flowchart TB
+  subgraph Client["🖥️ Client (Browser)"]
+    RSC["React Server Components<br/>RSC Payload"]
+    CC["Client Components<br/>(useState, useEffect)<br/>+ Zustand Store"]
+  end
+
+  subgraph Edge["🔀 Edge Layer"]
+    PROXY["proxy.ts<br/>(Auth Gateway)"]
+  end
+
+  subgraph Next["🖧 Next.js Server"]
+    ROUTER["App Router<br/>(pages, layouts)"]
+    ACTIONS["Server Actions<br/>(use server)"]
+    LIB["lib/<br/>(MongoDB, session,<br/>grading, normalize)"]
+  end
+
+  subgraph Data["💾 Data Sources"]
+    MONGO[("MongoDB<br/>(quizzes)")]
+    JSON["data/quiz.json<br/>(fallback)"]
+    MOCK["Mock Data<br/>(dashboard)"]
+  end
+
+  Client -->|HTTP Request| PROXY
+  PROXY -->|next()| ROUTER
+  ROUTER -->|fetch| LIB
+  ROUTER -->|invoke| ACTIONS
+  ACTIONS -->|CRUD| LIB
+  LIB -->|read/write| MONGO
+  LIB -->|seed| MONGO
+  LIB -->|fallback| JSON
+  ROUTER -->|static| MOCK
+  CC -->|form submit| ACTIONS
+  ACTIONS -- Serialized Result --> CC
+
+  style Client fill:#1a2332,stroke:#6366f1,stroke-width:2px
+  style Next fill:#1e1b4b,stroke:#8b5cf6,stroke-width:2px
+  style Data fill:#0f1a14,stroke:#10b981,stroke-width:2px
+  style Edge fill:#1a1a2e,stroke:#f59e0b,stroke-width:2px
+      </pre>
+      <div class="diagram-caption">Sơ đồ kiến trúc tổng thể — luồng dữ liệu từ Client qua Edge → Server → Data</div>
+    </div>
+  </section>
+
+  <!-- 2. FOLDERS -->
+  <section id="folders">
+    <h2><span class="icon">📁</span> 2. Cấu trúc thư mục chi tiết</h2>
+    <p>
+      Dự án tuân theo cấu trúc chuẩn của Next.js App Router, với các thư mục được tổ chức
+      theo nguyên tắc <strong>feature-based</strong> (theo tính năng) thay vì technical layer.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:25%">Thư mục / File</th>
+          <th>Vai trò & Nội dung chính</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="path">app/</span></td>
+          <td>
+            <strong>App Router</strong> — định nghĩa tất cả routes của ứng dụng.<br/>
+            • <code>(auth)/</code> — Route group cho login/signup (không ảnh hưởng URL)<br/>
+            • <code>dashboard/</code> — Khu vực quản trị (teacher/student)<br/>
+            • <code>quiz-game/</code> — Chế độ chơi trắc nghiệm gamified<br/>
+            • <code>do-exam/</code> — Chế độ thi bảo mật<br/>
+            • <code>quiz-editor/</code> — Trình biên soạn quiz<br/>
+            • <code>quiz-create/</code> — Trang tạo quiz mới<br/>
+            • <code>actions/</code> — Server Actions (xem mục 5.2)
+          </td>
+        </tr>
+        <tr>
+          <td><span class="path">components/</span></td>
+          <td>
+            <strong>UI Components</strong> — tái sử dụng theo domain:<br/>
+            • <code>landing/</code> — Landing page với animations (GSAP, Framer)<br/>
+            • <code>dashboard/</code> — Dashboard shell, teacher analytics, quizzes list<br/>
+            • <code>quiz-game/</code> — Game UI (streak, rank, particles, summary)<br/>
+            • <code>do-exam/</code> — Exam client (secure test-taking)<br/>
+            • <code>quiz-editor/</code> — Form editor cho quiz questions<br/>
+            • <code>ui/</code> — Primitive components (Button, Card, Input từ Radix)
+          </td>
+        </tr>
+        <tr>
+          <td><span class="path">lib/</span></td>
+          <td>
+            <strong>Server-side Logic</strong> — không phải React components:<br/>
+            • <code>mongodb.ts</code> — Singleton connection pool<br/>
+            • <code>quiz-repository.ts</code> — Data access layer (find, upsert, delete)<br/>
+            • <code>normalize-quiz-doc.ts</code> — Chuyển đổi Mongo doc ↔ QuizData<br/>
+            • <code>exam-grading.ts</code> — Logic chấm điểm server-side<br/>
+            • <code>session.ts</code> — Cookie-based session management<br/>
+            • <code>getExamData.ts</code> — Sanitize quiz data cho exam mode
+          </td>
+        </tr>
+        <tr>
+          <td><span class="path">hooks/</span></td>
+          <td>
+            <strong>Custom React Hooks</strong> (client-side):<br/>
+            • <code>useQuizEditor.ts</code> — State management cho quiz editor<br/>
+            • <code>useQuizLogic.ts</code> — Game logic (score, streak, timer)<br/>
+            • <code>useTeachingSchedule.ts</code> — Lịch giảng dạy teacher
+          </td>
+        </tr>
+        <tr>
+          <td><span class="path">stores/</span></td>
+          <td>
+            <strong>Global State (Zustand)</strong>:<br/>
+            • <code>exam-store.ts</code> — Persisted state cho bài thi<br/>
+            &nbsp;&nbsp;→ Lưu: quizId, currentQuestion, answers, flagged, startTime<br/>
+            &nbsp;&nbsp;→ Persist: localStorage (tự động restore khi reload)
+          </td>
+        </tr>
+        <tr>
+          <td><span class="path">types/</span></td>
+          <td>
+            <strong>TypeScript Definitions</strong>:<br/>
+            • <code>quiz.ts</code> — Interfaces cho QuizQuestion, QuizData, QuizMetadata<br/>
+            &nbsp;&nbsp;→ Hỗ trợ: multiple-choice, true-false, fill-in-blank, reading
+          </td>
+        </tr>
+        <tr>
+          <td><span class="path">data/</span></td>
+          <td>
+            <strong>Static/Fallback Data</strong>:<br/>
+            • <code>quiz.json</code> — Dữ liệu quiz mẫu, tự động seed vào Mongo khi cần
+          </td>
+        </tr>
+        <tr>
+          <td><span class="path">scripts/</span></td>
+          <td>
+            <strong>CLI Utilities</strong>:<br/>
+            • <code>seed-quiz-json-to-mongo.mjs</code> — Seed JSON → MongoDB<br/>
+            • <code>migrate-mongo-quiz-flat.mjs</code> — Migrate schema phẳng<br/>
+            • <code>flatten-quiz-json.mjs</code> — Transform nested → flat
+          </td>
+        </tr>
+        <tr>
+          <td><span class="path">proxy.ts</span></td>
+          <td>
+            <strong>Auth Gateway</strong> — middleware-style routing:<br/>
+            • Bảo vệ <code>/dashboard/*</code> (yêu cầu session)<br/>
+            • Redirect user đã login khỏi /login, /signup
+          </td>
+        </tr>
+        <tr>
+          <td><span class="path">tests/</span></td>
+          <td>
+            <strong>Unit Tests</strong>:<br/>
+            • <code>exam-store.test.ts</code> — Test Zustand store<br/>
+            • <code>submit-exam-action.test.ts</code> — Test grading logic
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Sơ đồ module theo domain</h3>
+    <div class="diagram">
+      <pre class="mermaid">
+graph TB
+  subgraph Routes["🗺️ Routes (app/)"]
+    HOME["/ → LandingPage"]
+    AUTH1["/(auth)/login"]
+    AUTH2["/(auth)/signup"]
+    DASH["/dashboard/*"]
+    GAME["/quiz-game/[id]"]
+    EXAM["/do-exam/[id]"]
+    EDIT["/quiz-editor/[id]"]
+    CREATE["/quiz-create"]
+  end
+
+  subgraph Components["🧩 Components"]
+    LP["Landing<br/>(GSAP + Framer)"]
+    DS["DashboardShell<br/>(Sidebar + Header)"]
+    QG["QuizGame<br/>(Gamified UI)"]
+    EC["ExamClient<br/>(Secure Mode)"]
+    QE["QuizEditor<br/>(Form CRUD)"]
+    QC["QuizCreate<br/>(Quick Form)"]
+  end
+
+  HOME --> LP
+  DASH --> DS
+  GAME --> QG
+  EXAM --> EC
+  EDIT --> QE
+  CREATE --> QC
+
+  style Routes fill:#1e1b4b,stroke:#8b5cf6,stroke-width:2px
+  style Components fill:#1a2332,stroke:#6366f1,stroke-width:2px
+      </pre>
+    </div>
+  </section>
+
+  <!-- 3. DATA FLOW -->
+  <section id="dataflow">
+    <h2><span class="icon">🔄</span> 3. Luồng hoạt động (Data Flow)</h2>
+
+    <!-- 3.1 -->
+    <h3 id="dataflow-request">3.1. Request HTTP → Response HTML</h3>
+    <p>
+      Khi người dùng truy cập một trang (ví dụ <code>/do-exam/abc123</code>), luồng xử lý như sau:
+    </p>
+    <div class="diagram">
+      <pre class="mermaid">
+sequenceDiagram
+  participant User as 👤 Browser
+  participant Proxy as 🔀 proxy.ts
+  participant Router as 🖧 App Router
+  participant Page as 📄 Server Component
+  participant Lib as ⚙️ lib/
+  participant Mongo as 💾 MongoDB
+
+  User->>Proxy: GET /do-exam/abc123
+  Note over Proxy: Kiểm tra cookie session<br/>(chỉ với /dashboard)
+  Proxy->>Router: NextResponse.next()
+
+  Router->>Page: do-exam/[id]/page.tsx<br/>(async Server Component)
+  Page->>Lib: getExamData(id)
+  Lib->>Mongo: findQuizById(id)
+  Mongo-->>Lib: Quiz document (full)
+  Lib->>Lib: mongoDocToQuizData()
+  Lib->>Lib: sanitizeQuestion()<br/>(loại correctAnswer, explanation)
+  Lib-->>Page: ExamQuizData (safe)
+
+  Page->>Page: generateMetadata()
+  Page-->>User: HTML + RSC Payload<br/>+ ExamClient (hydrated)
+
+  Note over User: React hydrate → Zustand restore<br/>answers from localStorage
+      </pre>
+      <div class="diagram-caption">Luồng request cho trang thi — đáp án được strip trước khi gửi client</div>
+    </div>
+
+    <!-- 3.2 -->
+    <h3 id="dataflow-mutation">3.2. Mutation qua Server Actions</h3>
+    <div class="callout callout-info">
+      <strong>Lưu ý:</strong> Dự án <strong>không sử dụng</strong> <span class="path">app/api/</span> (Route Handlers).
+      Mọi thao tác ghi/đọc có xác thực đều đi qua Server Actions với directive <code>"use server"</code>.
+    </div>
+    <div class="diagram">
+      <pre class="mermaid">
+sequenceDiagram
+  participant Client as 🖥️ Client Component
+  participant Action as 🖧 Server Action
+  participant Session as 🔐 lib/session
+  participant Mongo as 💾 MongoDB
+  participant Grading as 📊 lib/exam-grading
+
+  Client->>Action: submitExamAction({<br/>quizId, answers,<br/>startedAt, finishedAt<br/>})
+
+  Action->>Session: getSession()
+  alt Không có session
+    Action-->>Client: { success: false,<br/>error: "Unauthorized" }
+  else Có session
+    Action->>Mongo: findQuizById(quizId)<br/>(lấy full quiz với đáp án)
+    Mongo-->>Action: Quiz document
+    Action->>Action: mongoDocToQuizData()
+    Action->>Grading: isQuestionCorrect()<br/>(so sánh từng câu)
+    Grading-->>Action: correctCount, items[]
+    Action->>Action: Tính score = (correct/total) × 100
+    Action-->>Client: { success: true,<br/>score, correctCount,<br/>totalQuestions, items }
+  end
+      </pre>
+      <div class="diagram-caption">Luồng nộp bài thi — toàn bộ chấm điểm diễn ra trên server</div>
+    </div>
+
+    <!-- 3.3 -->
+    <h3 id="dataflow-exam">3.3. Luồng thi & chấm điểm chi tiết</h3>
+    <div class="grid-2">
+      <div class="card">
+        <h4>📝 Trong lúc làm bài</h4>
+        <ul>
+          <li><strong>ExamClient</strong> (client) render câu hỏi từ data đã sanitize</li>
+          <li>Mỗi câu trả lời → <code>useExamStore.setAnswer()</code> → persist localStorage</li>
+          <li>Timer đếm ngược từ <code>examTimeLimit</code> (metadata)</li>
+          <li>Flag câu hỏi để xem lại sau</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>📤 Khi nộp bài</h4>
+        <ul>
+          <li><code>submitExamAction</code> nhận: quizId, answers[], startedAt, finishedAt</li>
+          <li>Server load <strong>full quiz</strong> (có correctAnswer) từ MongoDB</li>
+          <li><code>isQuestionCorrect()</code> so sánh từng loại câu hỏi</li>
+          <li>Trả về: score, correctCount, items (với explanation)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3.4 -->
+    <h3 id="dataflow-editor">3.4. Luồng biên soạn Quiz (Editor)</h3>
+    <div class="diagram">
+      <pre class="mermaid">
+sequenceDiagram
+  participant Editor as 📝 QuizEditor (Client)
+  participant Action as 🖧 Server Action
+  participant Repo as ⚙️ quiz-repository
+  participant Mongo as 💾 MongoDB
+  participant JSON as 📄 data/quiz.json
+
+  Note over Editor: 1. Mount component
+  Editor->>Action: getQuizMongoAction(id)
+  Action->>Repo: findQuizById(id)
+  Repo->>Mongo: findOne({id})
+
+  alt Tìm thấy trong Mongo
+    Mongo-->>Repo: Quiz document
+  else Không tìm thấy
+    Repo->>JSON: readQuizJsonById(id)
+    JSON-->>Repo: Raw JSON
+    Repo->>Mongo: seedQuizJsonToMongo(raw)
+    Repo->>Mongo: findQuizById(id)
+  end
+
+  Mongo-->>Action: Quiz document
+  Action->>Action: mongoDocToQuizData()
+  Action-->>Editor: QuizData (full)
+
+  Note over Editor: 2. User chỉnh sửa questions
+  Editor->>Action: updateQuizMongoAction(formData)
+  Action->>Repo: upsertQuiz(id, quizDoc)
+  Repo->>Mongo: updateOne(filter, {$set: merged})
+  Mongo-->>Repo: Acknowledged
+  Repo-->>Action: { id }
+  Action-->>Editor: { success: true }
+      </pre>
+      <div class="diagram-caption">Luồng editor — tự động seed từ JSON nếu quiz chưa có trong Mongo</div>
+    </div>
+  </section>
+
+  <!-- 4. RENDERING -->
+  <section id="rendering">
+    <h2><span class="icon">🎭</span> 4. Cơ chế Rendering</h2>
+
+    <div class="callout callout-warn">
+      <strong>⚠️ Kết luận:</strong> Dự án chủ yếu dùng <strong>Dynamic Server-Side Rendering</strong>
+      (mặc định App Router khi Server Component gọi DB/async). Không cấu hình <code>revalidate</code>,
+      ISR, hay <code>export const dynamic</code> tường minh. Không có SSG thực tế cho route động quiz.
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Route</th>
+          <th>Pattern</th>
+          <th>Mô tả chi tiết</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>/</code></td>
+          <td>
+            <span class="tag tag-ssr">SSR</span>
+            <span class="tag tag-csr">CSR</span>
+          </td>
+          <td>Server page render <code>LandingPage</code> (client component) — animation GSAP/Framer sau hydrate</td>
+        </tr>
+        <tr>
+          <td><code>/(auth)/login</code><br/><code>/(auth)/signup</code></td>
+          <td><span class="tag tag-csr">CSR</span></td>
+          <td>Client forms → Server Actions (auth.ts) → redirect</td>
+        </tr>
+        <tr>
+          <td><code>/dashboard/*</code></td>
+          <td><span class="tag tag-ssr">SSR</span></td>
+          <td>Layout async đọc <code>getSession()</code>; nhiều trang dùng mock data tĩnh import từ data.ts</td>
+        </tr>
+        <tr>
+          <td><code>/quiz-game/[id]</code></td>
+          <td><span class="tag tag-ssr">SSR</span></td>
+          <td><code>getQuizById</code> trên server → truyền <code>initialQuestions</code> (có đáp án) xuống QuizGame (client, chế độ luyện tập)</td>
+        </tr>
+        <tr>
+          <td><code>/do-exam/[id]</code></td>
+          <td><span class="tag tag-ssr">SSR</span></td>
+          <td><code>getExamData</code> strip đáp án đúng trước khi render client — chấm điểm chỉ trên server (bảo mật)</td>
+        </tr>
+        <tr>
+          <td><code>/quiz-editor/[id]</code></td>
+          <td><span class="tag tag-csr">CSR</span></td>
+          <td>Toàn bộ editor client-side; fetch data qua Server Action sau mount</td>
+        </tr>
+        <tr>
+          <td><code>/quiz-create</code></td>
+          <td><span class="tag tag-csr">CSR</span></td>
+          <td>Client form → <code>createQuizMongoAction</code> → redirect to editor</td>
+        </tr>
+        <tr>
+          <td><code>/quiz-game</code> (demo)</td>
+          <td><span class="tag tag-csr">CSR</span></td>
+          <td>Dữ liệu mẫu <code>sample-data</code> hard-coded, không gọi DB</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Phân tách Server / Client Component</h3>
+    <div class="diagram">
+      <pre class="mermaid">
+flowchart TD
+  subgraph Server["🖧 Server Components<br/>(Không 'use client')"]
+    P1["page.tsx<br/>async fetch DB"]
+    L1["layout.tsx<br/>getSession()"]
+    M1["generateMetadata()"]
+  end
+
+  subgraph Client["🖥️ Client Components<br/>'use client'"]
+    QG["QuizGame<br/>(game logic, timer)"]
+    EC["ExamClient<br/>(exam UI, submit)"]
+    ED["QuizEditor<br/>(form CRUD)"]
+    LP["LandingPage<br/>(animations)"]
+    DS["DashboardShell<br/>(navigation)"]
+    QC["QuizCreate<br/>(quick form)"]
+  end
+
+  P1 -->|passes data| QG
+  P1 -->|passes sanitized| EC
+  L1 -->|wraps| DS
+  P1 -->|renders| LP
+  P1 -->|renders| ED
+  P1 -->|renders| QC
+
+  style Server fill:#1e1b4b,stroke:#8b5cf6,stroke-width:2px
+  style Client fill:#1a2332,stroke:#6366f1,stroke-width:2px
+      </pre>
+      <div class="diagram-caption">Server Components fetch data → serialize → pass to Client Components</div>
+    </div>
+  </section>
+
+  <!-- 5. API -->
+  <section id="api">
+    <h2><span class="icon">🔌</span> 5. Tương tác API & Dữ liệu</h2>
+
+    <!-- 5.1 -->
+    <h3 id="api-mongodb">5.1. MongoDB Connection</h3>
+    <p>
+      Kết nối MongoDB được quản lý qua singleton pattern trong <span class="path">lib/mongodb.ts</span>,
+      sử dụng biến môi trường <code>MONGODB_URI</code> và <code>MONGODB_DB</code> (mặc định database: <code>quizzes</code>).
+    </p>
+
+    <div class="arch-layer">
+      <h4>📦 Connection Pool (Singleton)</h4>
+      <div class="items">
+        <span class="item">lib/mongodb.ts</span>
+        <span class="item">MongoClient</span>
+        <span class="item">getMongoDb()</span>
+        <span class="item">getQuizzesCollection()</span>
+      </div>
+    </div>
+
+    <div class="arch-layer">
+      <h4>📚 Repository Pattern</h4>
+      <div class="items">
+        <span class="item">lib/quiz-repository.ts</span>
+        <span class="item">findQuizById()</span>
+        <span class="item">upsertQuiz()</span>
+        <span class="item">deleteQuiz()</span>
+      </div>
+    </div>
+
+    <div class="arch-layer">
+      <h4>🔄 Normalization Layer</h4>
+      <div class="items">
+        <span class="item">lib/normalize-quiz-doc.ts</span>
+        <span class="item">mongoDocToQuizData()</span>
+        <span class="item">normalizeRawQuizDoc()</span>
+        <span class="item">buildQuizIdFilter()</span>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <pre class="mermaid">
+flowchart LR
+  SA["Server Actions<br/>/ Server Components"]
+  REPO["quiz-repository.ts<br/>(Data Access Layer)"]
+  NORM["normalize-quiz-doc.ts<br/>(Transformation)"]
+  MONGO_CONN["mongodb.ts<br/>(Connection Pool)"]
+  COL[("MongoDB Collection<br/>'quizzes'")]
+  JSON_FB["quiz-json-fallback.ts<br/>(Seed from JSON)"]
+
+  SA -->|CRUD operations| REPO
+  REPO -->|normalize| NORM
+  REPO -->|get connection| MONGO_CONN
+  MONGO_CONN -->|read/write| COL
+  JSON_FB -.->|seed if missing| COL
+
+  style SA fill:#1e1b4b,stroke:#8b5cf6
+  style COL fill:#0f1a14,stroke:#10b981
+      </pre>
+      <div class="diagram-caption">Kiến trúc data access — repository pattern với normalization layer</div>
+    </div>
+
+    <!-- 5.2 -->
+    <h3 id="api-actions">5.2. Server Actions</h3>
+    <p>
+      Tất cả mutations và authenticated reads đi qua Server Actions — không có REST API endpoints.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>File</th>
+          <th>Chức năng</th>
+          <th>Auth Required</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>login</code><br/><code>signup</code><br/><code>logout</code></td>
+          <td><span class="path">app/actions/auth.ts</span></td>
+          <td>
+            Demo users in-memory → create/delete session cookie<br/>
+            <small>(Production: replace with Supabase Auth)</small>
+          </td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>createQuizMongoAction</code></td>
+          <td><span class="path">app/actions/quiz-mongodb.ts</span></td>
+          <td>Tạo quiz mới → insert MongoDB → return ID</td>
+          <td>Teacher</td>
+        </tr>
+        <tr>
+          <td><code>getQuizMongoAction</code></td>
+          <td><span class="path">app/actions/quiz-mongodb.ts</span></td>
+          <td>Load quiz từ Mongo (fallback: seed từ JSON)</td>
+          <td>Teacher</td>
+        </tr>
+        <tr>
+          <td><code>updateQuizMongoAction</code></td>
+          <td><span class="path">app/actions/quiz-mongodb.ts</span></td>
+          <td>Update quiz (title, questions, settings)</td>
+          <td>Teacher</td>
+        </tr>
+        <tr>
+          <td><code>submitExamAction</code></td>
+          <td><span class="path">app/actions/submit-exam-action.ts</span></td>
+          <td>Chấm điểm server-side, trả về score + explanations</td>
+          <td>Student/Teacher</td>
+        </tr>
+        <tr>
+          <td><code>getQuizzes</code><br/><code>getQuizById</code>...</td>
+          <td><span class="path">lib/quiz-service.ts</span></td>
+          <td>Service layer cho game/preview (cũng là server actions)</td>
+          <td>Varies</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 5.3 -->
+    <h3 id="api-external">5.3. Bên thứ ba & Tích hợp</h3>
+    <div class="grid-3">
+      <div class="card">
+        <h4>🔤 Google Fonts</h4>
+        <p><code>next/font</code> tích hợp:<br/>• Geist (sans-serif)<br/>• Geist_Mono (monospace)<br/>• Plus_Jakarta_Sans (headings)</p>
+      </div>
+      <div class="card">
+        <h4>🔐 Supabase Auth (Planned)</h4>
+        <p>Được ghi chú trong code (<span class="path">lib/session.ts</span>, <span class="path">proxy.ts</span>) nhưng chưa tích hợp — hiện dùng cookie demo.</p>
+      </div>
+      <div class="card">
+        <h4>❌ No Public API</h4>
+        <p>Không có REST API public, GraphQL, hay webhook outbound trong codebase hiện tại.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <strong>📊 Dashboard Data Strategy:</strong> Phần lớn trang teacher/student dashboard hiển thị dữ liệu
+      <strong>mock tĩnh</strong> từ <span class="path">app/dashboard/teacher/data.ts</span> và
+      <span class="path">app/dashboard/student/data.ts</span> — chưa đồng bộ với MongoDB.
+      Chỉ luồng quiz/exam/editor kết nối database thật.
+    </div>
+  </section>
+
+  <!-- 6. SECURITY -->
+  <section id="security">
+    <h2><span class="icon">🔒</span> 6. Bảo mật & Phiên đăng nhập</h2>
+    <p>
+      Hệ thống áp dụng <strong>multi-layer security</strong> với kiểm tra ở cả Edge, Server layout, và Server Actions.
+    </p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>🔀 Lớp 1 — proxy.ts (Edge Gateway)</h4>
+        <ul>
+          <li>Chặn <code>/dashboard/*</code> nếu không có cookie <code>session</code></li>
+          <li>Redirect user đã login khỏi <code>/login</code>, <code>/signup</code></li>
+          <li>Hoạt động như middleware-style routing</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>🖧 Lớp 2 — Server Layout</h4>
+        <ul>
+          <li><code>dashboard/layout.tsx</code> gọi lại <code>getSession()</code> và redirect</li>
+          <li>Trang con kiểm tra <code>session.role</code> (teacher vs student)</li>
+          <li>Server-side rendering an toàn (không expose session cho client)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>📝 Lớp 3 — Thi thử (/do-exam)</h4>
+        <ul>
+          <li>Server strip đáp án đúng (<code>sanitizeQuestion()</code>) trước khi render</li>
+          <li><code>submitExamAction</code> load full quiz trên server để chấm</li>
+          <li>Client không bao giờ thấy correctAnswer trong exam mode</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>🎮 Lớp 4 — Quiz Game (/quiz-game)</h4>
+        <ul>
+          <li>Gửi full questions (có đáp án) — phù hợp luyện tập</li>
+          <li>Không phải chế độ thi bảo mật</li>
+          <li>Score tính client-side (có thể cheat — acceptable cho practice)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Session Management</h3>
+    <p>
+      Hiện tại dùng <strong>cookie-based session</strong> với base64-encoded JSON:
+    </p>
+    <ul>
+      <li><strong>Cookie name:</strong> <code>session</code></li>
+      <li><strong>Encoding:</strong> Base64(JSON({ userId, email, name, role }))</li>
+      <li><strong>HttpOnly:</strong> ✅ (không thể đọc từ JS)</li>
+      <li><strong>Secure:</strong> ✅ (chỉ gửi qua HTTPS trong production)</li>
+      <li><strong>SameSite:</strong> Lax (chống CSRF)</li>
+      <li><strong>MaxAge:</strong> 7 days</li>
+    </ul>
+
+    <div class="callout callout-danger">
+      <strong>⚠️ Lưu ý:</strong> Auth demo chưa production-ready. Cookie session không có signature/encryption —
+      người dùng có thể forge session. Production cần tích hợp Supabase Auth hoặc NextAuth.js với JWT signing.
+    </div>
+  </section>
+
+  <!-- 7. STACK -->
+  <section id="stack">
+    <h2><span class="icon">🛠️</span> 7. Công nghệ phụ trợ</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:25%">Công nghệ</th>
+          <th>Version</th>
+          <th>Mục đích trong dự án</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Next.js</strong></td>
+          <td>16.2.4</td>
+          <td>Full-stack framework, App Router, Server Components, Server Actions</td>
+        </tr>
+        <tr>
+          <td><strong>React</strong></td>
+          <td>19.2.4</td>
+          <td>UI library, hooks, concurrent features</td>
+        </tr>
+        <tr>
+          <td><strong>TypeScript</strong></td>
+          <td>5.x</td>
+          <td>Type safety, interfaces cho Quiz, Session, QuizQuestion</td>
+        </tr>
+        <tr>
+          <td><strong>Tailwind CSS</strong></td>
+          <td>4.x</td>
+          <td>Utility-first styling, dark theme, responsive design</td>
+        </tr>
+        <tr>
+          <td><strong>Radix UI</strong></td>
+          <td>1.4.3</td>
+          <td>Accessible primitives (Button, Card, Input, Label)</td>
+        </tr>
+        <tr>
+          <td><strong>Zustand</strong></td>
+          <td>5.0.8</td>
+          <td>Global state management (exam-store với persist middleware)</td>
+        </tr>
+        <tr>
+          <td><strong>GSAP</strong></td>
+          <td>3.13.0</td>
+          <td>High-performance animations (landing, quiz-game)</td>
+        </tr>
+        <tr>
+          <td><strong>Framer Motion</strong></td>
+          <td>12.38.0</td>
+          <td>Declarative animations (landing showcase, transitions)</td>
+        </tr>
+        <tr>
+          <td><strong>MongoDB Driver</strong></td>
+          <td>6.3.0</td>
+          <td>Direct database access (no ORM)</td>
+        </tr>
+        <tr>
+          <td><strong>Lucide React</strong></td>
+          <td>1.11.0</td>
+          <td>Icon set (consistent, SVG-based)</td>
+        </tr>
+        <tr>
+          <td><strong>Class Variance Authority</strong></td>
+          <td>0.7.1</td>
+          <td>Component variant management (shadcn-style)</td>
+        </tr>
+        <tr>
+          <td><strong>GitNexus</strong></td>
+          <td>1.6.5</td>
+          <td>Code intelligence, impact analysis, navigation</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>DevDependencies</h3>
+    <ul>
+      <li><strong>ESLint</strong> (9.x) — Code quality, Next.js recommended rules</li>
+      <li><strong>TypeScript</strong> (5.x) — Type checking</li>
+      <li><strong>Tailwind CSS</strong> (4.x) — CSS processing</li>
+      <li><strong>@tailwindcss/postcss</strong> — PostCSS plugin cho Tailwind v4</li>
+    </ul>
+  </section>
+
+  <!-- 8. RECOMMENDATIONS -->
+  <section id="recommendations">
+    <h2><span class="icon">💡</span> 8. Đánh giá & Khuyến nghị</h2>
+
+    <div class="grid-3">
+      <div class="card">
+        <h4>✅ Điểm mạnh</h4>
+        <ul>
+          <li>Tách rõ chế độ <strong>luyện tập</strong> (quiz-game) vs <strong>thi bảo mật</strong> (do-exam)</li>
+          <li><strong>Server Actions</strong> giảm boilerplate API routes</li>
+          <li><strong>Repository pattern</strong> cho MongoDB — dễ maintain</li>
+          <li><strong>Zustand persist</strong> — exam state survive page reload</li>
+          <li><strong>Sanitization layer</strong> — strip đáp án trước khi render exam</li>
+          <li><strong>JSON fallback</strong> — graceful degradation khi Mongo chưa có data</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>⚠️ Cần lưu ý</h4>
+        <ul>
+          <li><strong>Auth demo</strong> chưa production-ready (cookie không signature)</li>
+          <li><strong>Dashboard mock data</strong> chưa đồng bộ với MongoDB thật</li>
+          <li><strong>Trùng code</strong> giữa <span class="path">src/</span> và <span class="path">lib/</span></li>
+          <li><strong>Không có caching</strong> — mọi request đều query DB</li>
+          <li><strong>Không có rate limiting</strong> cho Server Actions</li>
+          <li><strong>Exam store persist</strong> có thể bị clear khi user clear localStorage</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>🚀 Gợi ý phát triển</h4>
+        <ul>
+          <li><strong>Tích hợp Supabase Auth</strong> — JWT signing, refresh tokens</li>
+          <li><strong>Thêm ISR/cache tags</strong> cho danh sách quiz public</li>
+          <li><strong>Persist kết quả thi</strong> vào MongoDB (hiện chỉ trả về client)</li>
+          <li><strong>Real-time leaderboard</strong> với WebSocket/Server-Sent Events</li>
+          <li><strong>Export quiz ra PDF/Word</strong> cho giáo viên</li>
+          <li><strong>Question bank</strong> — tái sử dụng câu hỏi giữa các quiz</li>
+          <li><strong>Analytics dashboard</strong> — thống kê performance học sinh</li>
+          <li><strong>Anti-cheat</strong> — detect tab switching trong exam mode</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Architecture Decision Records (ADRs)</h3>
+    <div class="callout callout-success">
+      <strong>✅ Server Actions over API Routes:</strong> Giảm complexity, type-safe end-to-end,
+      không cần serialize/deserialize qua HTTP boundary.
+    </div>
+    <div class="callout callout-success">
+      <strong>✅ MongoDB over SQL:</strong> Schema linh hoạt cho quiz questions (nested reading passages,
+      variable options per question), dễ evolve question types.
+    </div>
+    <div class="callout callout-warn">
+      <strong>⚠️ Cookie Session over JWT:</strong> Đơn giản cho demo nhưng không secure cho production —
+      cần migrate sang JWT với signature verification.
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    <strong>Zenith EDU — Báo cáo Kiến trúc Phần mềm</strong><br/>
+    Phân tích từ mã nguồn Next.js 16 (App Router) — Cập nhật:
+    <span id="gen-date"></span>
+  </p>
+  <p style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--muted);">
+    Generated with Mermaid.js diagrams • Total project: ~3,200+ symbols indexed
+  </p>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+  // Initialize Mermaid
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: "dark",
+    themeVariables: {
+      primaryColor: "#312e81",
+      primaryTextColor: "#e8edf4",
+      primaryBorderColor: "#6366f1",
+      lineColor: "#6b7280",
+      secondaryColor: "#1a2332",
+      tertiaryColor: "#243044",
+      fontSize: "14px"
+    },
+    flowchart: {
+      curve: "basis",
+      padding: 20,
+      nodeSpacing: 50,
+      rankSpacing: 50
+    },
+    sequence: {
+      actorMargin: 50,
+      boxMargin: 10,
+      boxTextMargin: 5,
+      noteMargin: 10,
+      messageMargin: 35,
+      messageAlign: "center"
+    }
+  });
+
+  // Set generation date
+  document.getElementById("gen-date").textContent =
+    new Date().toLocaleDateString("vi-VN", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+
+  // Smooth scroll for TOC links
+  document.querySelectorAll('nav.toc a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
