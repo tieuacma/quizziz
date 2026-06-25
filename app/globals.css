@@ -26,10 +26,77 @@
   --font-display: var(--font-plus-jakarta);
 }
 
+html.theme-dark {
+  --color-background: #030208;
+  --color-foreground: #f8fafc;
+  --color-card: #0c0b18;
+  --color-card-foreground: #f8fafc;
+  --color-popover: #0c0b18;
+  --color-popover-foreground: #f8fafc;
+  --color-primary: #a78bfa;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #16152a;
+  --color-secondary-foreground: #f8fafc;
+  --color-muted: #16152a;
+  --color-muted-foreground: #94a3b8;
+  --color-accent: #1a1830;
+  --color-accent-foreground: #f8fafc;
+  --color-destructive: #f43f5e;
+  --color-destructive-foreground: #ffffff;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-input: rgba(255, 255, 255, 0.08);
+  --color-ring: rgba(167, 139, 250, 0.55);
+}
+
+html.theme-light {
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #0f172a;
+  --color-primary: #7c3aed;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f1f5f9;
+  --color-secondary-foreground: #0f172a;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #475569;
+  --color-accent: #eef2ff;
+  --color-accent-foreground: #0f172a;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-border: rgba(15, 23, 42, 0.1);
+  --color-input: rgba(15, 23, 42, 0.08);
+  --color-ring: rgba(124, 58, 237, 0.5);
+}
+
+html.theme-galaxy {
+  --color-background: #05020f;
+  --color-foreground: #f8fafc;
+  --color-card: rgba(20, 16, 36, 0.75);
+  --color-card-foreground: #f8fafc;
+  --color-popover: rgba(18, 14, 32, 0.85);
+  --color-popover-foreground: #f8fafc;
+  --color-primary: #c4b5fd;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: rgba(99, 102, 241, 0.15);
+  --color-secondary-foreground: #e2e8f0;
+  --color-muted: rgba(99, 102, 241, 0.1);
+  --color-muted-foreground: #94a3b8;
+  --color-accent: rgba(168, 85, 247, 0.15);
+  --color-accent-foreground: #f8fafc;
+  --color-destructive: #fb7185;
+  --color-destructive-foreground: #ffffff;
+  --color-border: rgba(167, 139, 250, 0.18);
+  --color-input: rgba(167, 139, 250, 0.12);
+  --color-ring: rgba(192, 132, 252, 0.65);
+}
+
 body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .font-display {
@@ -38,13 +105,25 @@ body {
 }
 
 /* Ambient mesh background */
-.zenith-mesh {
+html.theme-dark .zenith-mesh {
   position: relative;
   background-color: #030208;
   isolation: isolate;
 }
 
-.zenith-mesh::before {
+html.theme-light .zenith-mesh {
+  position: relative;
+  background-color: #f8fafc;
+  isolation: isolate;
+}
+
+html.theme-galaxy .zenith-mesh {
+  position: relative;
+  background-color: #05020f;
+  isolation: isolate;
+}
+
+html.theme-dark .zenith-mesh::before {
   content: "";
   position: fixed;
   inset: 0;
@@ -57,70 +136,63 @@ body {
     linear-gradient(180deg, #030208 0%, #05040f 40%, #030208 100%);
 }
 
-/* Full-viewport immersive screens (quiz, exam) */
-.zenith-immersive {
-  position: relative;
-  background-color: #030208;
-  isolation: isolate;
-  min-height: 100dvh;
-}
-
-.zenith-immersive::before,
-.zenith-immersive::after {
+html.theme-light .zenith-mesh::before {
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-}
-
-.zenith-immersive::before {
   background:
-    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(139, 92, 246, 0.22), transparent 55%),
-    radial-gradient(ellipse 60% 45% at 90% 10%, rgba(56, 189, 248, 0.12), transparent 50%),
-    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(192, 132, 252, 0.14), transparent 55%),
-    linear-gradient(180deg, #030208 0%, #05040f 40%, #030208 100%);
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(124, 58, 237, 0.08), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 90% 10%, rgba(14, 165, 233, 0.06), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(168, 85, 247, 0.06), transparent 55%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 40%, #f8fafc 100%);
 }
 
-.zenith-immersive::after {
-  opacity: 0.28;
+html.theme-galaxy .zenith-mesh::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(139, 92, 246, 0.32), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 90% 10%, rgba(56, 189, 248, 0.22), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(232, 121, 249, 0.24), transparent 55%),
+    linear-gradient(180deg, #05020f 0%, #0a0520 40%, #05020f 100%);
+}
+
+html.theme-dark .zenith-mesh::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
   background-size: 180px 180px;
 }
 
-/* Galaxy: subtle starfield (lightweight SVG background) */
-.zenith-immersive .zenith-starfield {
+html.theme-light .zenith-mesh::after {
+  content: "";
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-repeat: repeat;
-  background-size: 420px 420px;
-  opacity: 0.18;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='white' fill-opacity='0.9'%3E%3Ccircle cx='42' cy='88' r='1'/%3E%3Ccircle cx='112' cy='170' r='1'/%3E%3Ccircle cx='268' cy='62' r='1'/%3E%3Ccircle cx='332' cy='210' r='1'/%3E%3Ccircle cx='190' cy='300' r='1'/%3E%3Ccircle cx='70' cy='320' r='1'/%3E%3Ccircle cx='400' cy='110' r='1'/%3E%3Ccircle cx='22' cy='220' r='1'/%3E%3Ccircle cx='240' cy='240' r='1'/%3E%3Ccircle cx='310' cy='350' r='1'/%3E%3C/g%3E%3Cg fill='white' fill-opacity='0.55'%3E%3Ccircle cx='160' cy='120' r='2'/%3E%3Ccircle cx='290' cy='140' r='2'/%3E%3Ccircle cx='90' cy='60' r='2'/%3E%3Ccircle cx='380' cy='300' r='2'/%3E%3C/g%3E%3C/svg%3E");
-  animation: zenith-star-drift 18s linear infinite;
+  opacity: 0.25;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
 
-@keyframes zenith-star-drift {
-  0% { background-position: 0px 0px; }
-  100% { background-position: 420px 420px; }
-}
-
-/* Galaxy: scanlines (very subtle) */
-.zenith-scanlines {
+html.theme-galaxy .zenith-mesh::after {
+  content: "";
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.12;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.06),
-    rgba(255, 255, 255, 0.06) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  mix-blend-mode: overlay;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
 
 /* Neon helpers (shared palette) */
@@ -874,5 +946,229 @@ html {
 
 .zenith-nebula-pulse {
   animation: cosmic-nebula-pulse 8s ease-in-out infinite;
+}
+
+/* ========================= */
+/* Theme-specific overrides   */
+/* ========================= */
+
+/* Light mode - glass surfaces */
+html.theme-light .zenith-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+    0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+html.theme-light .zenith-glass-nav {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+html.theme-light .zenith-glass-nav[data-scrolled="true"] {
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom-color: rgba(124, 58, 237, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+}
+
+html.theme-light .zenith-panel {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+html.theme-light .zenith-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+    0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+html.theme-light .zenith-card:hover {
+  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.08) inset,
+    0 8px 40px rgba(124, 58, 237, 0.08),
+    0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+html.theme-light .zenith-grid {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+}
+
+html.theme-light .zenith-cta-banner {
+  background: linear-gradient(
+    135deg,
+    rgba(124, 58, 237, 0.08) 0%,
+    rgba(79, 70, 229, 0.06) 40%,
+    rgba(99, 102, 241, 0.08) 100%
+  );
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  box-shadow:
+    0 0 60px rgba(124, 58, 237, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+}
+
+html.theme-light ::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.2);
+}
+
+html.theme-light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 58, 237, 0.35);
+}
+
+html.theme-light ::selection {
+  background: rgba(124, 58, 237, 0.2);
+  color: #1e1b4b;
+}
+
+html.theme-light *:focus-visible {
+  outline: 2px solid rgba(124, 58, 237, 0.5);
+  outline-offset: 2px;
+}
+
+html.theme-light button:focus-visible,
+html.theme-light a:focus-visible {
+  outline: 2px solid rgba(124, 58, 237, 0.6);
+  outline-offset: 3px;
+}
+
+/* Galaxy mode - enhanced effects */
+html.theme-galaxy .zenith-glass {
+  background: rgba(20, 16, 36, 0.7);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  border: 1px solid rgba(167, 139, 250, 0.15);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(139, 92, 246, 0.05);
+}
+
+html.theme-galaxy .zenith-panel {
+  background: rgba(15, 12, 30, 0.75);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  border-top: 1px solid rgba(167, 139, 250, 0.12);
+}
+
+html.theme-galaxy .zenith-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  border: 1px solid rgba(167, 139, 250, 0.15);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(139, 92, 246, 0.04);
+}
+
+html.theme-galaxy .zenith-card:hover {
+  border-color: rgba(192, 132, 252, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(192, 132, 252, 0.1) inset,
+    0 8px 40px rgba(139, 92, 246, 0.15),
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(139, 92, 246, 0.06);
+}
+
+html.theme-galaxy .zenith-cta-banner {
+  background: linear-gradient(
+    135deg,
+    rgba(76, 29, 149, 0.55) 0%,
+    rgba(49, 46, 129, 0.45) 40%,
+    rgba(30, 27, 75, 0.6) 100%
+  );
+  border: 1px solid rgba(192, 132, 252, 0.25);
+  box-shadow:
+    0 0 80px rgba(139, 92, 246, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+html.theme-galaxy ::-webkit-scrollbar-thumb {
+  background: rgba(192, 132, 252, 0.3);
+}
+
+html.theme-galaxy ::-webkit-scrollbar-thumb:hover {
+  background: rgba(192, 132, 252, 0.5);
+}
+
+html.theme-galaxy ::selection {
+  background: rgba(192, 132, 252, 0.4);
+  color: #fff;
+}
+
+/* Galaxy starfield (subtle, on immersive and mesh screens) */
+html.theme-galaxy .zenith-immersive .zenith-starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: repeat;
+  background-size: 420px 420px;
+  opacity: 0.22;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='white' fill-opacity='0.9'%3E%3Ccircle cx='42' cy='88' r='1'/%3E%3Ccircle cx='112' cy='170' r='1'/%3E%3Ccircle cx='268' cy='62' r='1'/%3E%3Ccircle cx='332' cy='210' r='1'/%3E%3Ccircle cx='190' cy='300' r='1'/%3E%3Ccircle cx='70' cy='320' r='1'/%3E%3Ccircle cx='400' cy='110' r='1'/%3E%3Ccircle cx='22' cy='220' r='1'/%3E%3Ccircle cx='240' cy='240' r='1'/%3E%3Ccircle cx='310' cy='350' r='1'/%3E%3C/g%3E%3Cg fill='white' fill-opacity='0.55'%3E%3Ccircle cx='160' cy='120' r='2'/%3E%3Ccircle cx='290' cy='140' r='2'/%3E%3Ccircle cx='90' cy='60' r='2'/%3E%3Ccircle cx='380' cy='300' r='2'/%3E%3C/g%3E%3C/svg%3E");
+  animation: zenith-star-drift 18s linear infinite;
+}
+
+html.theme-galaxy .zenith-mesh .zenith-starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: repeat;
+  background-size: 420px 420px;
+  opacity: 0.15;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='white' fill-opacity='0.9'%3E%3Ccircle cx='42' cy='88' r='1'/%3E%3Ccircle cx='112' cy='170' r='1'/%3E%3Ccircle cx='268' cy='62' r='1'/%3E%3Ccircle cx='332' cy='210' r='1'/%3E%3Ccircle cx='190' cy='300' r='1'/%3E%3Ccircle cx='70' cy='320' r='1'/%3E%3Ccircle cx='400' cy='110' r='1'/%3E%3Ccircle cx='22' cy='220' r='1'/%3E%3Ccircle cx='240' cy='240' r='1'/%3E%3Ccircle cx='310' cy='350' r='1'/%3E%3C/g%3E%3Cg fill='white' fill-opacity='0.55'%3E%3Ccircle cx='160' cy='120' r='2'/%3E%3Ccircle cx='290' cy='140' r='2'/%3E%3Ccircle cx='90' cy='60' r='2'/%3E%3Ccircle cx='380' cy='300' r='2'/%3E%3C/g%3E%3C/svg%3E");
+  animation: zenith-star-drift 18s linear infinite;
+}
+
+html.theme-galaxy .zenith-mesh .zenith-scanlines,
+html.theme-galaxy .zenith-immersive .zenith-scanlines {
+  opacity: 0.18;
+}
+
+html.theme-light .zenith-scanlines {
+  display: none;
+}
+
+/* Enhanced glass effect with noise - theme-aware */
+html.theme-light .zenith-glass-enhanced {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+    0 8px 32px rgba(0, 0, 0, 0.04),
+    0 0 60px rgba(124, 58, 237, 0.03);
+}
+
+html.theme-galaxy .zenith-glass-enhanced {
+  background: rgba(20, 16, 36, 0.65);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  border: 1px solid rgba(167, 139, 250, 0.15);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(139, 92, 246, 0.06);
 }
 

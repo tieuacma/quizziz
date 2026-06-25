@@ -1,6 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import type { QuizData, QuizFormState, QuizQuestion } from "@/types/quiz";
 import { findQuizById, upsertQuiz } from "@/lib/quiz-repository";
 import {
@@ -73,7 +72,7 @@ export async function createQuizMongoAction(
 			totalQuestions: 0,
 		};
 
-		const res = await upsertQuiz(null, quizDoc);
+		await upsertQuiz(null, quizDoc);
 		// Avoid throwing NEXT_REDIRECT from server actions during client submit.
 		// Instead return success and let the client navigate.
 		return {

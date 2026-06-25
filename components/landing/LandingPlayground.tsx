@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PLAYGROUND_QUESTIONS } from "./landing-data";
-import { Trophy, Zap, Award, RotateCcw, ChevronRight, Check, Sparkles } from "lucide-react";
+import { Trophy, Zap, RotateCcw, ChevronRight, Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface Particle {

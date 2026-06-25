@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PLAN_FORUM_TODO</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #111a2e;
+      --text: #e7eefc;
+      --muted: #a9b4d0;
+      --accent: #6ea8fe;
+      --border: rgba(255, 255, 255, .12)
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(180deg, #0b1220, #070b14);
+      color: var(--text)
+    }
+
+    header {
+      padding: 28px 20px 12px;
+      max-width: 1100px;
+      margin: 0 auto
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      letter-spacing: .2px
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 40px
+    }
+
+    .card {
+      background: rgba(17, 26, 46, .9);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin: 14px 0
+    }
+
+    h2 {
+      font-size: 16px;
+      margin: 0 0 10px
+    }
+
+    h3 {
+      font-size: 14px;
+      margin: 16px 0 8px
+    }
+
+    ul {
+      margin: 6px 0 0 18px
+    }
+
+    li {
+      margin: 6px 0;
+      color: var(--text)
+    }
+
+    .muted {
+      color: var(--muted)
+    }
+
+    .pill {
+      display: inline-block;
+      background: rgba(110, 168, 254, .15);
+      border: 1px solid rgba(110, 168, 254, .35);
+      color: var(--accent);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 12px
+    }
+
+    .check {
+      opacity: .9
+    }
+
+    code {
+      background: rgba(255, 255, 255, .06);
+      padding: 2px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, .08)
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 10px;
+      vertical-align: top
+    }
+
+    th {
+      background: rgba(110, 168, 254, .08);
+      text-align: left
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>PLAN_FORUM_TODO.html</h1>
+    <div class="sub">Tài liệu kế hoạch/roadmap chi tiết cho tính năng <b>“Diễn đàn học tập”</b> (Forum) gồm PRD,
+      Database schema, API, UI/UX, acceptance criteria và ghi chú triển khai.</div>
+    <div style="margin-top:10px"><span class="pill">Trạng thái: Đã hoàn thiện Sprint 1–2 (API route handlers + UI
+        skeleton + docs cơ bản); Sprint 3–5 đang tiếp tục</span></div>
+  </header>
+
+  <main>
+
+    <section class="card">
+      <h2>1) Mục tiêu</h2>
+      <div class="muted">Thiết kế đặc tả chức năng (PRD) + giải pháp thiết kế (Database / Backend API / UI-UX) cho tính
+        năng <b>Diễn đàn học tập</b> trên nền tảng giáo dục.</div>
+      <ul>
+        <li><b>User flow</b> rõ ràng cho đăng bài (có/không ẩn danh) và trạng thái bị kiểm duyệt.</li>
+        <li><b>Database schema</b> cho Users, Posts, Comments, Votes, Reports (dùng MongoDB driver, không ORM).</li>
+        <li><b>API</b> bao phủ: CRUD bài viết, threaded comments, vote, chọn “đáp án hữu ích/đúng”, report, moderation
+          (approve/reject/block), auto-moderation bằng AI/bộ lọc.</li>
+        <li><b>UI/UX component list</b> cho trang diễn đàn: list/filter/sort, composer editor, post detail + comment
+          tree, report modal, moderation queue.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>2) Thu thập ngữ cảnh dự án (Repo reconnaissance)</h2>
+      <h3>2.1 Các điểm cần kiểm tra</h3>
+      <ul>
+        <li class="check">[ ] Xem cấu trúc routes hiện có trong <code>app/</code> và pattern dashboard.</li>
+        <li class="check">[ ] Đọc phần auth/session: <code>lib/session.ts</code>, <code>app/actions/auth.ts</code> để
+          hiểu cách lấy user/role.</li>
+        <li class="check">[ ] Xác định cách truy cập MongoDB hiện tại: <code>lib/mongodb.ts</code>.</li>
+        <li class="check">[ ] Nhận diện style/UI component pattern đang dùng: <code>components/ui/*</code>,
+          <code>app/globals.css</code>.</li>
+      </ul>
+      <h3>2.2 Kết quả cần có</h3>
+      <ul>
+        <li>Ghi nhận cách app xử lý user/role (student/teacher/admin) và dùng session cookie.</li>
+        <li>Ghi nhận pattern để viết backend logic: Server Actions vs Route Handlers (API routes).</li>
+        <li>Ghi nhận pattern upload file (nếu repo có sẵn) hoặc quyết định hướng triển khai.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>3) Phân tích nghiệp vụ & phạm vi chức năng (Business analysis)</h2>
+      <h3>3.1 Actors & quyền hạn</h3>
+      <ul>
+        <li class="check">[ ] Xác định actors: học sinh, giáo viên, admin/moderator.</li>
+        <li class="check">[ ] Xác định các quyền theo role: xem/nộp bài, comment, vote, report, phê duyệt, xoá/cảnh cáo.
+        </li>
+        <li class="check">[ ] Xác định nguyên tắc ẩn danh: frontend che “Học sinh ẩn danh”, backend vẫn giữ
+          <code>userId</code>.</li>
+      </ul>
+
+      <h3>3.2 Use cases chính</h3>
+      <ul>
+        <li class="check">[ ] Đăng bài: text + images + file đính kèm (PDF/Word) + chèn công thức
+          (LaTeX/MathJax/KaTeX—chốt công nghệ).</li>
+        <li class="check">[ ] Threaded comments: comment đa cấp để theo dõi hội thoại.</li>
+        <li class="check">[ ] Vote/Emotion: like/dislike hoặc upvote/downvote cho bài và comment (chốt 1 trong 2).</li>
+        <li class="check">[ ] Đánh dấu “câu trả lời đúng/hữu ích nhất”: chỉ tác giả bài viết hoặc giáo viên được chọn
+          (chốt rule rõ).</li>
+        <li class="check">[ ] Report: người dùng flag bài/comment vi phạm, gửi lý do.</li>
+        <li class="check">[ ] Moderation: auto-moderation (AI/bộ lọc) → trạng thái bài/comment “Chờ duyệt/Bị chặn”;
+          admin approve/reject/block.</li>
+      </ul>
+
+      <h3>3.3 Invariant (quy tắc dữ liệu/role)</h3>
+      <ul>
+        <li class="check">[ ] Một user chỉ có thể vote một giá trị trong cùng scope (bài hoặc comment).</li>
+        <li class="check">[ ] Accepted/Best answer: tối đa 1 accepted cho mỗi post (hoặc định nghĩa rõ số lượng).</li>
+        <li class="check">[ ] Moderation state phải đồng bộ với hiển thị UI (không lộ nội dung khi bị chặn).</li>
+        <li class="check">[ ] Anonymous vẫn ghi <code>userId</code> cho audit/moderation nhưng che trên UI.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>4) Brainstorm & thiết kế kiến trúc giải pháp</h2>
+      <h3>4.1 PRD chi tiết</h3>
+      <ul>
+        <li class="check">[ ] User flow đăng bài: gồm luồng ẩn danh + luồng bị kiểm duyệt.</li>
+        <li class="check">[ ] Acceptance criteria cho từng tính năng nhỏ.</li>
+        <li class="check">[ ] Định nghĩa định dạng “content” bài viết/comment: text + rich media + math markup.</li>
+      </ul>
+
+      <h3>4.2 Database Schema (Mongo collections)</h3>
+      <div class="muted">Thiết kế cơ bản cho các collections: <b>Users</b>, <b>Posts</b>, <b>Comments</b>, <b>Votes</b>,
+        <b>Reports</b> (có thể thêm collection phụ như <b>ModerationEvents</b>, <b>AutoModerationLogs</b>).</div>
+      <ul>
+        <li class="check">[ ] Chuẩn hoá field: <code>createdAt</code>, <code>updatedAt</code>, <code>authorId</code>,
+          <code>visibility</code>, <code>moderationStatus</code>.</li>
+        <li class="check">[ ] Index gợi ý: theo <code>postId</code>, <code>createdAt</code>,
+          <code>moderationStatus</code>, <code>userId</code>, <code>parentCommentId</code>.</li>
+        <li class="check">[ ] Thiết kế hierarchical comments: store <code>parentCommentId</code> + optional
+          <code>path/thread</code> để query.</li>
+      </ul>
+
+      <h3>4.3 Backend API (Route Handlers / Server Actions)</h3>
+      <ul>
+        <li class="check">[ ] Posts: create, edit, delete (soft delete), list, get detail.</li>
+        <li class="check">[ ] Comments: create threaded comment, list by post, delete/edit theo quyền.</li>
+        <li class="check">[ ] Votes: vote/unvote, thống kê like/dislike/up/down, đảm bảo idempotent.</li>
+        <li class="check">[ ] Accepted answer: set/unset best/accepted (rule theo tác giả/teacher).</li>
+        <li class="check">[ ] Reports: create report for post/comment + deduplicate (user+target+reason window).</li>
+        <li class="check">[ ] Moderation: approve/reject/block + audit trail.</li>
+        <li class="check">[ ] Auto-moderation: AI/bộ lọc → score/labels → quyết định state (“Chờ duyệt” hoặc “Bị chặn”).
+        </li>
+      </ul>
+
+      <h3>4.4 UI/UX components</h3>
+      <ul>
+        <li class="check">[ ] Forum landing: search, filter theo lớp/trường, sort (hot/new/top), pagination.</li>
+        <li class="check">[ ] Post composer: toggle anonymous, nhập title/body, upload image/file, checkbox đính kèm
+          math.</li>
+        <li class="check">[ ] Post detail: render math, attachments, best answer badge, vote panel.</li>
+        <li class="check">[ ] Comment tree: reply button, show/hide deleted comments, nested indentation.</li>
+        <li class="check">[ ] Report modal: chọn reason, mô tả thêm, submit.</li>
+        <li class="check">[ ] Moderation queue (admin): list chờ duyệt, approve/reject/block, view evidence.</li>
+        <li class="check">[ ] Trạng thái bài bị kiểm duyệt: UI hiển thị “Chờ duyệt/Bị chặn”.</li>
+      </ul>
+
+      <h3>4.5 Mapping yêu cầu ↔ Database ↔ API ↔ UI</h3>
+      <ul>
+        <li class="check">[ ] Lập bảng mapping để đảm bảo mỗi requirement có ít nhất 1 collection field + 1 endpoint +
+          UI state tương ứng.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>5) Deliverables (Tài liệu đầu ra)</h2>
+      <ul>
+        <li class="check">[ ] PRD hoàn chỉnh theo các mục trong yêu cầu của người dùng.</li>
+        <li class="check">[ ] Database schema: mô tả field + kiểu dữ liệu + index.</li>
+        <li class="check">[ ] API spec: endpoint list + request/response shape (mức detail hợp lý).</li>
+        <li class="check">[ ] UI component list: tên component + props/state + behavior.</li>
+        <li class="check">[ ] Nêu rõ quyền truy cập theo role (auth guard).</li>
+        <li class="check">[ ] Ghi chú các quyết định kiến trúc quan trọng: index, consistency, moderation states, audit
+          logs.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>6) Rà soát tính khả thi & chuẩn dự án (Feasibility)</h2>
+      <ul>
+        <li class="check">[ ] Tương thích session/auth hiện tại (cookie-based demo; sau đó mapping sang production).
+        </li>
+        <li class="check">[ ] Phù hợp Mongo driver + patterns server actions trong repo.</li>
+        <li class="check">[ ] UX: loading/error/optimistic update cho vote, và trạng thái moderation cho composer/post
+          detail.</li>
+        <li class="check">[ ] Security: validate upload (type/size), rate limit tạo bài/comment, chống spam.</li>
+        <li class="check">[ ] AI moderation: mô tả pipeline, cách lưu log/score, xử lý false positive.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>7) Kiểm thử & Acceptance criteria (mức tài liệu)</h2>
+      <ul>
+        <li class="check">[ ] Đăng bài: ẩn danh hiển thị đúng; backend vẫn có audit.</li>
+        <li class="check">[ ] Moderation: nội dung bị lọc → đổi state hiển thị “Chờ duyệt/Bị chặn”.</li>
+        <li class="check">[ ] Threaded comments: tạo trả lời đa cấp; hiển thị đúng cây hội thoại.</li>
+        <li class="check">[ ] Vote: idempotent, không vote trùng scope; thống kê đúng.</li>
+        <li class="check">[ ] Accepted answer: rule áp dụng đúng role; chỉ 1 accepted (hoặc định nghĩa).</li>
+        <li class="check">[ ] Report: chống spam report trùng; admin xử lý report tương ứng target.</li>
+        <li class="check">[ ] Moderation actions: approve/reject/block đảm bảo không lộ nội dung.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>8) Mốc triển khai đề xuất (TODO breakdown chi tiết hơn)</h2>
+      <p class="muted">Phần này nhằm giúp triển khai theo từng sprint/commit. Đây là kế hoạch mở rộng để dễ giao việc.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:18%">Mục</th>
+            <th style="width:40%">Việc cần làm</th>
+            <th style="width:42%">Đầu ra</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Sprint 1</b></td>
+            <td>
+              Repo reconnaissance; chốt tech stack cho forum (math renderer, editor, upload strategy).
+              Xác định route layout cho student/teacher/admin.
+            </td>
+            <td>Doc “Architectural decisions” + PRD draft v1.</td>
+          </tr>
+          <tr>
+            <td><b>Sprint 2</b></td>
+            <td>
+              Thiết kế Database schema (Users/Posts/Comments/Votes/Reports + indices).
+              Viết API spec cho CRUD + threaded comments + vote + accepted answer.
+            </td>
+            <td>ERD/Schema doc + API contract.</td>
+          </tr>
+          <tr>
+            <td><b>Sprint 3</b></td>
+            <td>
+              Moderation design: auto-moderation pipeline + report + admin moderation actions.
+              Xử lý trạng thái hiển thị ở UI.
+            </td>
+            <td>Moderation spec + UI state matrix.</td>
+          </tr>
+          <tr>
+            <td><b>Sprint 4</b></td>
+            <td>
+              UI/UX components list chi tiết; render math + composer; comment tree; report modal; moderation queue.
+            </td>
+            <td>Component spec + wireframe mô tả (text-based).</td>
+          </tr>
+          <tr>
+            <td><b>Sprint 5</b></td>
+            <td>
+              Acceptance criteria/QA plan; security checklist; rate limit & abuse mitigation.
+            </td>
+            <td>Test cases + QA checklist.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>9) Thông tin liên quan (ghi chú)</h2>
+      <ul>
+        <li class="muted">Nếu repo cần dùng collection bổ sung (ví dụ ModerationEvents, AuditLogs, AttachmentFiles) thì
+          thêm vào schema ở Sprint 2/Sprint 3.</li>
+        <li class="muted">Nếu hệ thống hiện chưa có upload handling chuẩn, quyết định hướng lưu trữ (local dev / S3 /
+          Cloudinary) ở Sprint 1.</li>
+      </ul>
+    </section>
+
+  </main>
+</body>
+
+</html>

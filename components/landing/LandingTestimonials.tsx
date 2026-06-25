@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { TESTIMONIALS } from "./landing-data";
@@ -46,7 +47,8 @@ export default function LandingTestimonials() {
             </span>
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-            Khám phá trải nghiệm dạy và học thực tế của cộng đồng giáo dục khi ứng dụng giải pháp của Zenith EDU.
+            Khám phá trải nghiệm dạy và học thực tế của cộng đồng giáo dục khi
+            ứng dụng giải pháp của Zenith EDU.
           </p>
         </motion.div>
       </div>
@@ -58,7 +60,7 @@ export default function LandingTestimonials() {
         whileInView="visible"
         viewport={{ once: true, margin: "-60px" }}
       >
-        {TESTIMONIALS.map((t, idx) => (
+        {TESTIMONIALS.map((t) => (
           <motion.div
             key={t.name}
             variants={reduced ? undefined : fadeUp}
@@ -96,17 +98,20 @@ export default function LandingTestimonials() {
 
                   {/* Review Text */}
                   <p className="text-slate-300 italic leading-relaxed text-sm sm:text-base mb-8 group-hover:text-slate-200 transition-colors">
-                    "{t.quote}"
+                    &ldquo;{t.quote}&rdquo;
                   </p>
                 </div>
 
                 {/* Profile detail */}
                 <div className="flex items-center gap-4 border-t border-white/5 pt-6 mt-auto">
-                  <img
+                  <Image
                     src={t.avatar}
                     alt={t.name}
+                    width={48}
+                    height={48}
                     className="w-12 h-12 rounded-full object-cover ring-2 ring-violet-500/20 group-hover:ring-violet-500/40 transition-all shadow-md"
                     loading="lazy"
+                    unoptimized
                   />
                   <div className="min-w-0">
                     <h4 className="font-bold text-white text-sm sm:text-base truncate group-hover:text-violet-100 transition-colors">

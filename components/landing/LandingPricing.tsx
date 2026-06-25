@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PRICING_PLANS } from "./landing-data";
-import { Check, Sparkles, HelpCircle } from "lucide-react";
+import { Check, HelpCircle } from "lucide-react";
 import {
   defaultTransition,
   fadeUp,

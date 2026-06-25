@@ -7,7 +7,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **zenith** (1827 symbols, 3272 relationships, 114 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **quizziz** (2375 symbols, 3995 relationships, 125 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
 > If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
 
@@ -30,10 +30,10 @@ This project is indexed by GitNexus as **zenith** (1827 symbols, 3272 relationsh
 
 | Resource | Use for |
 |----------|---------|
-| `gitnexus://repo/zenith/context` | Codebase overview, check index freshness |
-| `gitnexus://repo/zenith/clusters` | All functional areas |
-| `gitnexus://repo/zenith/processes` | All execution flows |
-| `gitnexus://repo/zenith/process/{name}` | Step-by-step execution trace |
+| `gitnexus://repo/quizziz/context` | Codebase overview, check index freshness |
+| `gitnexus://repo/quizziz/clusters` | All functional areas |
+| `gitnexus://repo/quizziz/processes` | All execution flows |
+| `gitnexus://repo/quizziz/process/{name}` | Step-by-step execution trace |
 
 ## CLI
 

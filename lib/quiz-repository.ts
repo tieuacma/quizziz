@@ -15,7 +15,7 @@ export async function findQuizById(quizId: string): Promise<QuizDbDoc | null> {
     const col = await getQuizzesCollection()
     const doc = await col.findOne(buildQuizIdFilter(quizId))
     return doc as QuizDbDoc | null
-  } catch (error) {
+  } catch {
     // If MongoDB is not configured or connection fails, return null
     // This allows the build to succeed and the page to show 404
     console.warn(`Failed to connect to MongoDB for quiz lookup: ${quizId}`)

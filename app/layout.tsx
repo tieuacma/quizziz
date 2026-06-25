@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import ThemeToggle from "@/components/theme-toggle";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,13 +31,37 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="vi"
-      // suppressHydrationWarning cực kỳ quan trọng khi dùng dark mode hoặc thư viện theme
-      suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${plusJakarta.variable} h-full antialiased dark scroll-smooth`}
-    >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
-    </html>
+    <ThemeProvider>
+      <html
+        lang="vi"
+        suppressHydrationWarning
+        className={`${geistSans.variable} ${geistMono.variable} ${plusJakarta.variable} h-full antialiased scroll-smooth`}
+      >
+        <body className="min-h-full flex flex-col font-sans">
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function() {
+                  try {
+                    var t = localStorage.getItem('zenith-theme');
+                    if (t === 'light' || t === 'dark' || t === 'galaxy') {
+                      document.documentElement.classList.add('theme-' + t);
+                    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                      document.documentElement.classList.add('theme-light');
+                    } else {
+                      document.documentElement.classList.add('theme-dark');
+                    }
+                  } catch (e) {}
+                })();
+              `,
+            }}
+          />
+          <header className="fixed top-0 right-0 z-50 p-4">
+            <ThemeToggle />
+          </header>
+          {children}
+        </body>
+      </html>
+    </ThemeProvider>
   );
 }

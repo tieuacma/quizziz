@@ -24,6 +24,7 @@ import {
   School,
   CheckCircle,
   AlertCircle,
+  MessageSquare,
   type LucideIcon,
 } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -39,11 +40,13 @@ import {
 import Breadcrumbs from "./Breadcrumbs";
 import { logout } from "@/app/actions/auth";
 
+import type { UserRole } from "@/lib/types";
+
 interface DashboardShellProps {
   children: React.ReactNode;
   user: {
     name: string;
-    role: "student" | "teacher";
+    role: UserRole;
   };
 }
 
@@ -101,11 +104,13 @@ function DashboardSidebar({
         >
           <Avatar className="h-8 w-8 shrink-0 ring-2 ring-indigo-500/20">
             <AvatarFallback
-              className={
-                user.role === "student"
-                  ? "bg-gradient-to-br from-cyan-500 to-blue-500 text-white text-sm font-bold"
-                  : "bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-sm font-bold"
-              }
+className={
+                       user.role === "student"
+                         ? "bg-gradient-to-br from-cyan-500 to-blue-500 text-white text-sm font-bold"
+                         : user.role === "admin"
+                         ? "bg-gradient-to-br from-rose-500 to-red-600 text-white text-sm font-bold"
+                         : "bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-sm font-bold"
+                       }
             >
               {user.name.charAt(0)}
             </AvatarFallback>
@@ -194,7 +199,7 @@ export default function DashboardShell({ children, user }: DashboardShellProps) 
   const [searchQuery, setSearchQuery] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  const roleLabel = user.role === "student" ? "Học sinh" : "Giáo viên";
+  const roleLabel = user.role === "student" ? "Học sinh" : user.role === "admin" ? "Quản trị" : "Giáo viên";
 
   const teacherBase = "/dashboard/teacher";
   const studentBase = "/dashboard/student";
@@ -211,6 +216,7 @@ export default function DashboardShell({ children, user }: DashboardShellProps) 
           },
           { label: "Quizzes", vietnamese: "Trắc nghiệm", href: `${teacherBase}/quizzies`, icon: Puzzle },
           { label: "Students", vietnamese: "Học sinh", href: `${teacherBase}/students`, icon: Users },
+          { label: "Forum", vietnamese: "Diễn đàn", href: `${teacherBase}/forum`, icon: MessageSquare },
           { label: "Analytics", vietnamese: "Báo cáo", href: `${teacherBase}/analytics`, icon: TrendingUp },
           { label: "Settings", vietnamese: "Cài đặt", href: `${teacherBase}/settings`, icon: Settings },
         ]
@@ -239,6 +245,12 @@ export default function DashboardShell({ children, user }: DashboardShellProps) 
             vietnamese: "Lịch học",
             href: `${studentBase}/schedule`,
             icon: CalendarDays,
+          },
+          {
+            label: "Forum",
+            vietnamese: "Diễn đàn",
+            href: `${studentBase}/forum`,
+            icon: MessageSquare,
           },
         ];
 

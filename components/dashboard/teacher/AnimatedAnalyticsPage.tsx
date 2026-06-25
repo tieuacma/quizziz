@@ -383,7 +383,7 @@ function AnimatedBarChart({ data }: { data: AnalyticsData[] }) {
   );
 
   // Color gradient based on value intensity
-  const getBarColor = (value: number, index: number) => {
+  const getBarColor = (value: number) => {
     const ratio = maxSubmissions > 0 ? value / maxSubmissions : 0;
     if (ratio > 0.8) return "from-violet-600 to-purple-500";
     if (ratio > 0.6) return "from-indigo-600 to-violet-500";
@@ -469,7 +469,7 @@ function AnimatedBarChart({ data }: { data: AnalyticsData[] }) {
                 {/* Bar */}
                 <div
                   data-bar="true"
-                  className={`w-full max-w-[32px] rounded-t-md bg-gradient-to-t ${getBarColor(d.submissions, index)} transition-all duration-300 relative overflow-hidden ${
+                  className={`w-full max-w-[32px] rounded-t-md bg-gradient-to-t ${getBarColor(d.submissions)} transition-all duration-300 relative overflow-hidden ${
                     isHovered ? "scale-105 shadow-lg shadow-violet-500/30" : ""
                   }`}
                   style={{
@@ -1303,7 +1303,7 @@ export default function AnimatedAnalyticsPage({
           <span className="text-xs text-slate-500">Thang điểm 10</span>
         </div>
         <Card className="bg-white/[0.03] border-white/8 overflow-hidden">
-          {analyticsWeekly.map((d, _idx) => (
+          {analyticsWeekly.map((d) => (
             <AnimatedProgressRow key={d.day} d={d} index={0} />
           ))}
         </Card>
