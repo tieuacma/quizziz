@@ -1,11 +1,8 @@
-# TODO
+# TODO - Light theme readability
 
-## WeeklySubmissionsChart.tsx
+- [ ] Đọc hiện trạng CSS theme light trong `app/globals.css` để xác định nơi gây chữ nhạt
+- [x] Đổi/chuẩn hoá biến màu chữ light theme (đặc biệt `--color-foreground`, `--color-muted-foreground`, `--color-secondary-foreground`)
 
-- [ ] Thay fixed `maxSubmissions/maxAvg` bằng max động từ dữ liệu.
-- [ ] Chỉnh hệ trục X để bar/line/labels/tooltip căn khớp (giải quyết vị trí cột sai).
-- [ ] Tooltip neo theo điểm `avg` (đường) và canh left theo bar/point đúng.
-- [ ] Thêm màu sáng hơn cho các text trong chart để dễ nhìn.
-- [ ] Xử lý trường hợp `data.length < 2` để tránh chia cho 0.
+- [ ] Thêm override cho `html.theme-light` để bảo đảm các class text phổ biến (muted/secondary/foreground) có màu đủ tương phản
+- [ ] Chạy lint/build (nếu cần) và kiểm tra nhanh nhiều trang
 
-- [ ] Update code của `WeeklySubmissionsChart.tsx` theo các bullet trên.

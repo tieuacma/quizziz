@@ -39,6 +39,7 @@ import {
 } from "@/components/ui/sheet";
 import Breadcrumbs from "./Breadcrumbs";
 import { logout } from "@/app/actions/auth";
+import ThemeToggle from "@/components/theme-toggle";
 
 import type { UserRole } from "@/lib/types";
 
@@ -379,6 +380,9 @@ export default function DashboardShell({ children, user }: DashboardShellProps) 
                 Ctrl K
               </kbd>
             </div>
+
+            {/* Theme Toggle */}
+            <ThemeToggle />
 
             {/* Notification Center */}
             <div className="relative">

@@ -50,46 +50,46 @@ html.theme-dark {
 
 html.theme-light {
   --color-background: #f8fafc;
-  --color-foreground: #0f172a;
+  --color-foreground: #000000;
   --color-card: #ffffff;
-  --color-card-foreground: #0f172a;
+  --color-card-foreground: #000000;
   --color-popover: #ffffff;
-  --color-popover-foreground: #0f172a;
+  --color-popover-foreground: #000000;
   --color-primary: #7c3aed;
   --color-primary-foreground: #ffffff;
   --color-secondary: #f1f5f9;
-  --color-secondary-foreground: #0f172a;
+  --color-secondary-foreground: #000000;
   --color-muted: #f1f5f9;
-  --color-muted-foreground: #475569;
+  --color-muted-foreground: #334155;
   --color-accent: #eef2ff;
-  --color-accent-foreground: #0f172a;
+  --color-accent-foreground: #000000;
   --color-destructive: #ef4444;
   --color-destructive-foreground: #ffffff;
-  --color-border: rgba(15, 23, 42, 0.1);
-  --color-input: rgba(15, 23, 42, 0.08);
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-input: rgba(0, 0, 0, 0.08);
   --color-ring: rgba(124, 58, 237, 0.5);
 }
 
 html.theme-galaxy {
-  --color-background: #05020f;
+  --color-background: #09051d; /* Richer dark indigo space background */
   --color-foreground: #f8fafc;
-  --color-card: rgba(20, 16, 36, 0.75);
+  --color-card: rgba(16, 12, 38, 0.75); /* Deep purple-glass card */
   --color-card-foreground: #f8fafc;
-  --color-popover: rgba(18, 14, 32, 0.85);
+  --color-popover: rgba(12, 8, 30, 0.9);
   --color-popover-foreground: #f8fafc;
-  --color-primary: #c4b5fd;
+  --color-primary: #d8b4fe; /* Glowing neon purple */
   --color-primary-foreground: #ffffff;
-  --color-secondary: rgba(99, 102, 241, 0.15);
-  --color-secondary-foreground: #e2e8f0;
-  --color-muted: rgba(99, 102, 241, 0.1);
-  --color-muted-foreground: #94a3b8;
-  --color-accent: rgba(168, 85, 247, 0.15);
+  --color-secondary: rgba(139, 92, 246, 0.2);
+  --color-secondary-foreground: #f3e8ff;
+  --color-muted: rgba(139, 92, 246, 0.1);
+  --color-muted-foreground: #a78bfa;
+  --color-accent: rgba(236, 72, 153, 0.15); /* Glowing pink accent */
   --color-accent-foreground: #f8fafc;
   --color-destructive: #fb7185;
   --color-destructive-foreground: #ffffff;
-  --color-border: rgba(167, 139, 250, 0.18);
-  --color-input: rgba(167, 139, 250, 0.12);
-  --color-ring: rgba(192, 132, 252, 0.65);
+  --color-border: rgba(168, 85, 247, 0.25); /* More prominent purple border */
+  --color-input: rgba(168, 85, 247, 0.15);
+  --color-ring: rgba(232, 121, 249, 0.7);
 }
 
 body {
@@ -156,10 +156,11 @@ html.theme-galaxy .zenith-mesh::before {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(139, 92, 246, 0.32), transparent 55%),
-    radial-gradient(ellipse 60% 45% at 90% 10%, rgba(56, 189, 248, 0.22), transparent 50%),
-    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(232, 121, 249, 0.24), transparent 55%),
-    linear-gradient(180deg, #05020f 0%, #0a0520 40%, #05020f 100%);
+    radial-gradient(ellipse 80% 60% at 10% -10%, rgba(219, 39, 119, 0.38), transparent 55%), /* Glowing Hot Pink/Magenta Nebula */
+    radial-gradient(ellipse 70% 55% at 95% 15%, rgba(99, 102, 241, 0.35), transparent 50%), /* Cosmic Indigo/Blue Glow */
+    radial-gradient(ellipse 55% 50% at 0% 60%, rgba(6, 182, 212, 0.28), transparent 50%), /* Electric Cyan Nebula */
+    radial-gradient(ellipse 65% 55% at 50% 100%, rgba(168, 85, 247, 0.35), transparent 55%), /* Deep Neon Violet Glow */
+    linear-gradient(180deg, #09051d 0%, #050212 50%, #09051d 100%);
 }
 
 html.theme-dark .zenith-mesh::after {
@@ -1049,73 +1050,73 @@ html.theme-light a:focus-visible {
 
 /* Galaxy mode - enhanced effects */
 html.theme-galaxy .zenith-glass {
-  background: rgba(20, 16, 36, 0.7);
-  backdrop-filter: blur(24px) saturate(1.5);
-  -webkit-backdrop-filter: blur(24px) saturate(1.5);
-  border: 1px solid rgba(167, 139, 250, 0.15);
+  background: rgba(16, 12, 38, 0.7);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid rgba(168, 85, 247, 0.22);
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.03) inset,
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    0 0 60px rgba(139, 92, 246, 0.05);
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(168, 85, 247, 0.08); /* Soft purple nebula outer glow */
 }
 
 html.theme-galaxy .zenith-panel {
-  background: rgba(15, 12, 30, 0.75);
-  backdrop-filter: blur(24px) saturate(1.5);
-  -webkit-backdrop-filter: blur(24px) saturate(1.5);
-  border-top: 1px solid rgba(167, 139, 250, 0.12);
+  background: rgba(12, 8, 30, 0.75);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border-top: 1px solid rgba(168, 85, 247, 0.18);
 }
 
 html.theme-galaxy .zenith-card {
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.09) 0%,
     rgba(255, 255, 255, 0.03) 50%,
     rgba(255, 255, 255, 0.01) 100%
   );
-  border: 1px solid rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.2);
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.04) inset,
-    0 4px 24px rgba(0, 0, 0, 0.4),
-    0 0 40px rgba(139, 92, 246, 0.04);
+    0 4px 24px rgba(0, 0, 0, 0.45),
+    0 0 30px rgba(168, 85, 247, 0.06);
 }
 
 html.theme-galaxy .zenith-card:hover {
-  border-color: rgba(192, 132, 252, 0.45);
+  border-color: rgba(236, 72, 153, 0.45); /* Pink glow border on hover */
   box-shadow:
-    0 0 0 1px rgba(192, 132, 252, 0.1) inset,
-    0 8px 40px rgba(139, 92, 246, 0.15),
+    0 0 0 1px rgba(236, 72, 153, 0.1) inset,
+    0 8px 40px rgba(168, 85, 247, 0.2),
     0 4px 24px rgba(0, 0, 0, 0.5),
-    0 0 60px rgba(139, 92, 246, 0.06);
+    0 0 50px rgba(236, 72, 153, 0.12); /* Vibrant pink-purple glow on hover */
 }
 
 html.theme-galaxy .zenith-cta-banner {
   background: linear-gradient(
     135deg,
-    rgba(76, 29, 149, 0.55) 0%,
-    rgba(49, 46, 129, 0.45) 40%,
-    rgba(30, 27, 75, 0.6) 100%
+    rgba(76, 29, 149, 0.65) 0%,
+    rgba(49, 46, 129, 0.5) 40%,
+    rgba(30, 27, 75, 0.7) 100%
   );
-  border: 1px solid rgba(192, 132, 252, 0.25);
+  border: 1px solid rgba(232, 121, 249, 0.35);
   box-shadow:
-    0 0 80px rgba(139, 92, 246, 0.12),
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+    0 0 80px rgba(168, 85, 247, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
 }
 
 html.theme-galaxy ::-webkit-scrollbar-thumb {
-  background: rgba(192, 132, 252, 0.3);
+  background: rgba(232, 121, 249, 0.4);
 }
 
 html.theme-galaxy ::-webkit-scrollbar-thumb:hover {
-  background: rgba(192, 132, 252, 0.5);
+  background: rgba(232, 121, 249, 0.6);
 }
 
 html.theme-galaxy ::selection {
-  background: rgba(192, 132, 252, 0.4);
+  background: rgba(232, 121, 249, 0.4);
   color: #fff;
 }
 
-/* Galaxy starfield (subtle, on immersive and mesh screens) */
+/* Galaxy starfield (highly visible cosmic starfield) */
 html.theme-galaxy .zenith-immersive .zenith-starfield {
   position: fixed;
   inset: 0;
@@ -1123,8 +1124,8 @@ html.theme-galaxy .zenith-immersive .zenith-starfield {
   pointer-events: none;
   background-repeat: repeat;
   background-size: 420px 420px;
-  opacity: 0.22;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='white' fill-opacity='0.9'%3E%3Ccircle cx='42' cy='88' r='1'/%3E%3Ccircle cx='112' cy='170' r='1'/%3E%3Ccircle cx='268' cy='62' r='1'/%3E%3Ccircle cx='332' cy='210' r='1'/%3E%3Ccircle cx='190' cy='300' r='1'/%3E%3Ccircle cx='70' cy='320' r='1'/%3E%3Ccircle cx='400' cy='110' r='1'/%3E%3Ccircle cx='22' cy='220' r='1'/%3E%3Ccircle cx='240' cy='240' r='1'/%3E%3Ccircle cx='310' cy='350' r='1'/%3E%3C/g%3E%3Cg fill='white' fill-opacity='0.55'%3E%3Ccircle cx='160' cy='120' r='2'/%3E%3Ccircle cx='290' cy='140' r='2'/%3E%3Ccircle cx='90' cy='60' r='2'/%3E%3Ccircle cx='380' cy='300' r='2'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.55; /* Increased opacity for immersive stars */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='white' fill-opacity='0.95'%3E%3Ccircle cx='42' cy='88' r='1.2'/%3E%3Ccircle cx='112' cy='170' r='1'/%3E%3Ccircle cx='268' cy='62' r='1.5'/%3E%3Ccircle cx='332' cy='210' r='1'/%3E%3Ccircle cx='190' cy='300' r='1.2'/%3E%3Ccircle cx='70' cy='320' r='1'/%3E%3Ccircle cx='400' cy='110' r='1.5'/%3E%3Ccircle cx='22' cy='220' r='1'/%3E%3Ccircle cx='240' cy='240' r='1.2'/%3E%3Ccircle cx='310' cy='350' r='1.5'/%3E%3C/g%3E%3Cg fill='white' fill-opacity='0.65'%3E%3Ccircle cx='160' cy='120' r='2.2'/%3E%3Ccircle cx='290' cy='140' r='2'/%3E%3Ccircle cx='90' cy='60' r='2.5'/%3E%3Ccircle cx='380' cy='300' r='2'/%3E%3C/g%3E%3C/svg%3E");
   animation: zenith-star-drift 18s linear infinite;
 }
 
@@ -1135,14 +1136,14 @@ html.theme-galaxy .zenith-mesh .zenith-starfield {
   pointer-events: none;
   background-repeat: repeat;
   background-size: 420px 420px;
-  opacity: 0.15;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='white' fill-opacity='0.9'%3E%3Ccircle cx='42' cy='88' r='1'/%3E%3Ccircle cx='112' cy='170' r='1'/%3E%3Ccircle cx='268' cy='62' r='1'/%3E%3Ccircle cx='332' cy='210' r='1'/%3E%3Ccircle cx='190' cy='300' r='1'/%3E%3Ccircle cx='70' cy='320' r='1'/%3E%3Ccircle cx='400' cy='110' r='1'/%3E%3Ccircle cx='22' cy='220' r='1'/%3E%3Ccircle cx='240' cy='240' r='1'/%3E%3Ccircle cx='310' cy='350' r='1'/%3E%3C/g%3E%3Cg fill='white' fill-opacity='0.55'%3E%3Ccircle cx='160' cy='120' r='2'/%3E%3Ccircle cx='290' cy='140' r='2'/%3E%3Ccircle cx='90' cy='60' r='2'/%3E%3Ccircle cx='380' cy='300' r='2'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.45; /* Increased opacity for mesh background stars */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='white' fill-opacity='0.95'%3E%3Ccircle cx='42' cy='88' r='1.2'/%3E%3Ccircle cx='112' cy='170' r='1'/%3E%3Ccircle cx='268' cy='62' r='1.5'/%3E%3Ccircle cx='332' cy='210' r='1'/%3E%3Ccircle cx='190' cy='300' r='1.2'/%3E%3Ccircle cx='70' cy='320' r='1'/%3E%3Ccircle cx='400' cy='110' r='1.5'/%3E%3Ccircle cx='22' cy='220' r='1'/%3E%3Ccircle cx='240' cy='240' r='1.2'/%3E%3Ccircle cx='310' cy='350' r='1.5'/%3E%3C/g%3E%3Cg fill='white' fill-opacity='0.65'%3E%3Ccircle cx='160' cy='120' r='2.2'/%3E%3Ccircle cx='290' cy='140' r='2'/%3E%3Ccircle cx='90' cy='60' r='2.5'/%3E%3Ccircle cx='380' cy='300' r='2'/%3E%3C/g%3E%3C/svg%3E");
   animation: zenith-star-drift 18s linear infinite;
 }
 
 html.theme-galaxy .zenith-mesh .zenith-scanlines,
 html.theme-galaxy .zenith-immersive .zenith-scanlines {
-  opacity: 0.18;
+  opacity: 0.25;
 }
 
 html.theme-light .zenith-scanlines {
@@ -1170,5 +1171,135 @@ html.theme-galaxy .zenith-glass-enhanced {
     0 0 0 1px rgba(255, 255, 255, 0.05) inset,
     0 8px 32px rgba(0, 0, 0, 0.4),
     0 0 60px rgba(139, 92, 246, 0.06);
+}
+
+/* --- LIGHT THEME READABILITY & CONTRAST OVERRIDES --- */
+html.theme-light .text-slate-100 {
+  color: #0f172a !important;
+}
+
+html.theme-light .text-slate-200 {
+  color: #1e293b !important;
+}
+
+html.theme-light .text-slate-300 {
+  color: #334155 !important;
+}
+
+html.theme-light .text-slate-400 {
+  color: #475569 !important;
+}
+
+html.theme-light .text-slate-500 {
+  color: #64748b !important;
+}
+
+html.theme-light .text-slate-600 {
+  color: #475569 !important;
+}
+
+html.theme-light .text-slate-700 {
+  color: #334155 !important;
+}
+
+html.theme-light .text-slate-800 {
+  color: #1e293b !important;
+}
+
+/* Make all text-white dark in light mode, except on solid backgrounds or badges */
+html.theme-light .text-white {
+  color: #0f172a !important;
+}
+
+html.theme-light .text-white\/90 {
+  color: #0f172a !important;
+}
+
+html.theme-light .text-white\/80 {
+  color: #1e293b !important;
+}
+
+html.theme-light .text-white\/70 {
+  color: #334155 !important;
+}
+
+html.theme-light .text-white\/60 {
+  color: #475569 !important;
+}
+
+html.theme-light .text-white\/50 {
+  color: #64748b !important;
+}
+
+/* Restore white text for components that have solid colored backgrounds */
+html.theme-light .bg-gradient-to-br .text-white,
+html.theme-light .bg-gradient-to-r .text-white,
+html.theme-light .bg-violet-500 .text-white,
+html.theme-light .bg-violet-600 .text-white,
+html.theme-light .bg-indigo-500 .text-white,
+html.theme-light .bg-indigo-600 .text-white,
+html.theme-light .bg-purple-500 .text-white,
+html.theme-light .bg-purple-600 .text-white,
+html.theme-light .bg-rose-500 .text-white,
+html.theme-light .bg-rose-600 .text-white,
+html.theme-light .bg-emerald-500 .text-white,
+html.theme-light .bg-emerald-600 .text-white,
+html.theme-light .zenith-btn-glow .text-white,
+html.theme-light button[class*="bg-gradient"] .text-white,
+html.theme-light button[class*="bg-indigo"] .text-white,
+html.theme-light button[class*="bg-violet"] .text-white,
+html.theme-light button[class*="bg-purple"] .text-white,
+html.theme-light a[class*="bg-gradient"] .text-white,
+html.theme-light .badge .text-white,
+html.theme-light [class*="bg-gradient"] span,
+html.theme-light [class*="bg-gradient"] p {
+  color: #ffffff !important;
+}
+
+/* Overrides for text color changes on hover to prevent disappearing text */
+html.theme-light .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+
+html.theme-light .group:hover .group-hover\:text-white {
+  color: #0f172a !important;
+}
+
+html.theme-light .group:hover .group-hover\:text-indigo-300 {
+  color: #4338ca !important; /* Beautiful deep indigo for course title on card hover */
+}
+
+html.theme-light .hover\:text-indigo-300:hover {
+  color: #4338ca !important;
+}
+
+/* Fix active background state in light mode sidebar */
+html.theme-light nav a div.bg-gradient-to-r {
+  background: rgba(99, 102, 241, 0.08) !important; /* Soft indigo tint */
+  border-left-color: #4f46e5 !important;
+}
+
+/* Adjust light theme backgrounds and borders */
+html.theme-light .bg-white\/5,
+html.theme-light .bg-white\/10,
+html.theme-light .bg-white\/20,
+html.theme-light .bg-white\/\[0\.04\] {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+}
+
+html.theme-light .bg-white\/\[0\.03\] {
+  background-color: rgba(15, 23, 42, 0.03) !important;
+}
+
+html.theme-light .bg-white\/\[0\.02\] {
+  background-color: rgba(15, 23, 42, 0.02) !important;
+}
+
+html.theme-light .border-white\/10,
+html.theme-light .border-white\/8,
+html.theme-light .border-white\/\[0\.08\],
+html.theme-light .border-white\/\[0\.05\],
+html.theme-light .border-white\/\[0\.03\] {
+  border-color: rgba(15, 23, 42, 0.08) !important;
 }
 

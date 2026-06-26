@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/sheet";
 import { BRAND, NAV_LINKS } from "./landing-data";
 import { cn } from "@/lib/utils";
+import ThemeToggle from "@/components/theme-toggle";
 
 export default function LandingNavbar() {
   const [open, setOpen] = useState(false);
@@ -72,6 +73,7 @@ export default function LandingNavbar() {
 
         {/* Desktop Auth Buttons */}
         <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           <Link href="/login">
             <Button
               variant="outline"
@@ -114,11 +116,14 @@ export default function LandingNavbar() {
             className="zenith-glass border-white/10 w-[min(100vw,20rem)]"
           >
             <SheetHeader>
-              <SheetTitle className="text-white font-display flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
-                  <span className="text-sm font-black text-white">Z</span>
+              <SheetTitle className="text-white font-display flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
+                    <span className="text-sm font-black text-white">Z</span>
+                  </div>
+                  {BRAND.name}
                 </div>
-                {BRAND.name}
+                <ThemeToggle />
               </SheetTitle>
             </SheetHeader>
             <nav className="flex flex-col gap-2 mt-8" aria-label="Di động">

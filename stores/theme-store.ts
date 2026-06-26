@@ -25,7 +25,7 @@ const getInitialTheme = (): Theme => {
 };
 
 export const useThemeStore = create<ThemeState>((set) => ({
-  theme: getInitialTheme(),
+  theme: "dark", // Static default to avoid hydration mismatch
   setTheme: (theme: Theme) => {
     set({ theme });
     try {
