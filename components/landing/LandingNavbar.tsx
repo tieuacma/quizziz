@@ -32,9 +32,10 @@ export default function LandingNavbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "backdrop-blur-md bg-white/[0.05] border-b border-white/10 shadow-lg shadow-violet-900/10"
+          ? "backdrop-blur-md border-b shadow-lg shadow-violet-900/10"
           : "bg-transparent border-b border-transparent"
       )}
+      data-scrolled={scrolled}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-4">
         {/* Logo */}

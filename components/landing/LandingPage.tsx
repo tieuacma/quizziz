@@ -16,10 +16,10 @@ import LandingFooter from "./LandingFooter";
 
 export default function LandingPage() {
   return (
-    <div className="zenith-mesh min-h-screen text-white">
+    <div className="zenith-mesh min-h-screen">
       <div className="relative z-10">
         <LandingNavbar />
-        <main>
+        <main className="text-foreground">
           <LandingHero />
           <LandingStats />
           <LandingRoles />

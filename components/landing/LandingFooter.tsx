@@ -4,8 +4,7 @@ import { BRAND, FOOTER_LINKS } from "./landing-data";
 
 export default function LandingFooter() {
   return (
-    <footer className="relative border-t border-white/10 bg-gradient-to-b from-[#030208] to-[#010105]">
-      {/* Background decorative elements */}
+    <footer className="relative border-t border-white/10">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-violet-600/5 via-transparent to-transparent blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-gradient-to-tl from-cyan-600/5 via-transparent to-transparent blur-3xl" />

@@ -1175,60 +1175,60 @@ html.theme-galaxy .zenith-glass-enhanced {
 
 /* --- LIGHT THEME READABILITY & CONTRAST OVERRIDES --- */
 html.theme-light .text-slate-100 {
-  color: #0f172a !important;
+  color: #000000 !important;
 }
 
 html.theme-light .text-slate-200 {
-  color: #1e293b !important;
+  color: #000000 !important;
 }
 
 html.theme-light .text-slate-300 {
-  color: #334155 !important;
+  color: #000000 !important;
 }
 
 html.theme-light .text-slate-400 {
-  color: #475569 !important;
+  color: #000000 !important;
 }
 
 html.theme-light .text-slate-500 {
-  color: #64748b !important;
+  color: #1e293b !important;
 }
 
 html.theme-light .text-slate-600 {
-  color: #475569 !important;
-}
-
-html.theme-light .text-slate-700 {
   color: #334155 !important;
 }
 
+html.theme-light .text-slate-700 {
+  color: #475569 !important;
+}
+
 html.theme-light .text-slate-800 {
-  color: #1e293b !important;
+  color: #475569 !important;
 }
 
 /* Make all text-white dark in light mode, except on solid backgrounds or badges */
 html.theme-light .text-white {
-  color: #0f172a !important;
+  color: #000000 !important;
 }
 
 html.theme-light .text-white\/90 {
-  color: #0f172a !important;
+  color: #000000 !important;
 }
 
 html.theme-light .text-white\/80 {
-  color: #1e293b !important;
+  color: #000000 !important;
 }
 
 html.theme-light .text-white\/70 {
-  color: #334155 !important;
+  color: #1e293b !important;
 }
 
 html.theme-light .text-white\/60 {
-  color: #475569 !important;
+  color: #334155 !important;
 }
 
 html.theme-light .text-white\/50 {
-  color: #64748b !important;
+  color: #475569 !important;
 }
 
 /* Restore white text for components that have solid colored backgrounds */
@@ -1258,11 +1258,11 @@ html.theme-light [class*="bg-gradient"] p {
 
 /* Overrides for text color changes on hover to prevent disappearing text */
 html.theme-light .hover\:text-white:hover {
-  color: #0f172a !important;
+  color: #000000 !important;
 }
 
 html.theme-light .group:hover .group-hover\:text-white {
-  color: #0f172a !important;
+  color: #000000 !important;
 }
 
 html.theme-light .group:hover .group-hover\:text-indigo-300 {
