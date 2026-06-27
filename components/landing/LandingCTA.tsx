@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { defaultTransition, fadeUp, staggerContainer, usePrefersReducedMotion } from "./motion";
 
 export default function LandingCTA() {
-  const reduced = usePrefersReducedMotion();
+  const reduced = false;
 
   return (
     <section className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-32 overflow-hidden">

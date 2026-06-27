@@ -51,7 +51,7 @@ function AnimatedStat({
 }
 
 export default function LandingStats() {
-  const reduced = usePrefersReducedMotion();
+  const reduced = false;
 
   return (
     <section

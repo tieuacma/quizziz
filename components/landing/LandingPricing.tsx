@@ -15,7 +15,7 @@ import {
 
 export default function LandingPricing() {
   const [isAnnual, setIsAnnual] = useState(false);
-  const reduced = usePrefersReducedMotion();
+  const reduced = false;
 
   const formatPrice = (plan: typeof PRICING_PLANS[number]) => {
     const price = isAnnual ? plan.priceAnnually : plan.priceMonthly;

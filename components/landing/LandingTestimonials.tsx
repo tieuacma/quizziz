@@ -13,7 +13,7 @@ import {
 } from "./motion";
 
 export default function LandingTestimonials() {
-  const reduced = usePrefersReducedMotion();
+  const reduced = false;
 
   return (
     <section
