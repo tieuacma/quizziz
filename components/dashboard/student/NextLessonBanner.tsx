@@ -72,9 +72,11 @@ export default function NextLessonBanner() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
         <div className="flex items-start gap-4">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20">
-            <CalendarDays className="w-6 h-6 animate-pulse" />
+            <CalendarDays className="w-6 h-6 animate-pulse text-white" />
           </div>
+
           <div>
+
             <div className="flex items-center gap-2">
               <span className="text-[10px] uppercase font-extrabold tracking-widest text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full">
                 Lớp Học Tiếp Theo
@@ -83,13 +85,14 @@ export default function NextLessonBanner() {
                 {dayLabel} lúc {nextLesson.time}
               </span>
             </div>
-            <h3 className="text-white font-bold text-base md:text-lg mt-1 tracking-tight">
+            <h3 className="text-white dark:text-white font-bold text-base md:text-lg mt-1 tracking-tight">
               {nextLesson.course} —{" "}
-              <span className="text-violet-300">{nextLesson.lesson}</span>
+              <span className="text-violet-300 dark:text-violet-300">{nextLesson.lesson}</span>
             </h3>
-            <p className="text-slate-400 text-xs mt-0.5">
+            <p className="text-slate-400 dark:text-slate-400 text-xs mt-0.5">
               Hãy chuẩn bị bài đọc trước khi lớp học bắt đầu.
             </p>
+
           </div>
         </div>
 

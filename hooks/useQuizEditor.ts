@@ -278,6 +278,21 @@ export function useQuizEditor(
     addToast(`Đã thêm câu hỏi ${QuestionTypeLabel[type]}`, "info");
   }, [defaultTime, markDirty, addToast]);
 
+  const appendQuestions = useCallback(
+    (newQuestions: QuizQuestion[]) => {
+      if (newQuestions.length === 0) return;
+      setQuestions((prev) => [...prev, ...newQuestions]);
+      setSelectedQuestionId(newQuestions[0].id);
+      setExpandedQuestion(null);
+      markDirty();
+      addToast(
+        `Đã thêm ${newQuestions.length} câu hỏi từ AI`,
+        "success",
+      );
+    },
+    [markDirty, addToast],
+  );
+
   const removeQuestion = useCallback((id: string) => {
     setQuestions((prev) => prev.filter((q) => q.id !== id));
     if (expandedQuestion === id) setExpandedQuestion(null);
@@ -489,6 +504,7 @@ export function useQuizEditor(
     isDirty,
     defaultTime,
     addQuestion,
+    appendQuestions,
     removeQuestion,
     updateQuestion,
     toggleExpandQuestion,

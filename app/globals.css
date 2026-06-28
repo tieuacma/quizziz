@@ -50,24 +50,24 @@ html.theme-dark {
 
 html.theme-light {
   --color-background: #f8fafc;
-  --color-foreground: #000000;
+  --color-foreground: #1e293b;
   --color-card: #ffffff;
   --color-card-foreground: #000000;
   --color-popover: #ffffff;
   --color-popover-foreground: #000000;
-  --color-primary: #7c3aed;
+  --color-primary: #6366f1;
   --color-primary-foreground: #ffffff;
   --color-secondary: #f1f5f9;
-  --color-secondary-foreground: #000000;
-  --color-muted: #f1f5f9;
-  --color-muted-foreground: #334155;
-  --color-accent: #eef2ff;
-  --color-accent-foreground: #000000;
-  --color-destructive: #ef4444;
+  --color-secondary-foreground: #1e293b;
+  --color-muted: #e2e8f0;
+  --color-muted-foreground: #475569;
+  --color-accent: #dbeafe;
+  --color-accent-foreground: #1e1b4b;
+  --color-destructive: #dc2626;
   --color-destructive-foreground: #ffffff;
-  --color-border: rgba(0, 0, 0, 0.1);
-  --color-input: rgba(0, 0, 0, 0.08);
-  --color-ring: rgba(124, 58, 237, 0.5);
+  --color-border: rgba(15, 23, 42, 0.15);
+  --color-input: rgba(15, 23, 42, 0.1);
+  --color-ring: rgba(99, 102, 241, 0.6);
 }
 
 html.theme-galaxy {
@@ -955,54 +955,54 @@ html {
 
 /* Light mode - glass surfaces */
 html.theme-light .zenith-glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(15, 23, 42, 0.12);
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
-    0 8px 32px rgba(0, 0, 0, 0.08);
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+    0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
 html.theme-light .zenith-glass-nav {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(16px) saturate(1.5);
-  -webkit-backdrop-filter: blur(16px) saturate(1.5);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px) saturate(1.3);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 html.theme-light .zenith-glass-nav[data-scrolled="true"] {
-  background: rgba(255, 255, 255, 0.85);
-  border-bottom-color: rgba(124, 58, 237, 0.15);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom-color: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
 }
 
 html.theme-light .zenith-panel {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 html.theme-light .zenith-card {
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 255, 255, 0.4) 100%
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0.75) 100%
   );
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.12);
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.6) inset,
-    0 4px 24px rgba(0, 0, 0, 0.04);
+    0 0 0 1px rgba(255, 255, 255, 0.7) inset,
+    0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
 html.theme-light .zenith-card:hover {
-  border-color: rgba(124, 58, 237, 0.3);
+  border-color: rgba(99, 102, 241, 0.4);
   box-shadow:
-    0 0 0 1px rgba(124, 58, 237, 0.08) inset,
-    0 8px 40px rgba(124, 58, 237, 0.08),
-    0 4px 24px rgba(0, 0, 0, 0.06);
+    0 0 0 1px rgba(99, 102, 241, 0.12) inset,
+    0 8px 40px rgba(99, 102, 241, 0.12),
+    0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
 html.theme-light .zenith-grid {
@@ -1014,37 +1014,37 @@ html.theme-light .zenith-grid {
 html.theme-light .zenith-cta-banner {
   background: linear-gradient(
     135deg,
-    rgba(124, 58, 237, 0.08) 0%,
-    rgba(79, 70, 229, 0.06) 40%,
-    rgba(99, 102, 241, 0.08) 100%
+    rgba(99, 102, 241, 0.12) 0%,
+    rgba(124, 58, 237, 0.08) 40%,
+    rgba(79, 70, 229, 0.12) 100%
   );
-  border: 1px solid rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.25);
   box-shadow:
-    0 0 60px rgba(124, 58, 237, 0.06),
-    0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+    0 0 40px rgba(99, 102, 241, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
 }
 
 html.theme-light ::-webkit-scrollbar-thumb {
-  background: rgba(124, 58, 237, 0.2);
+  background: rgba(79, 70, 229, 0.35);
 }
 
 html.theme-light ::-webkit-scrollbar-thumb:hover {
-  background: rgba(124, 58, 237, 0.35);
+  background: rgba(67, 55, 201, 0.5);
 }
 
 html.theme-light ::selection {
-  background: rgba(124, 58, 237, 0.2);
+  background: rgba(99, 102, 241, 0.25);
   color: #1e1b4b;
 }
 
 html.theme-light *:focus-visible {
-  outline: 2px solid rgba(124, 58, 237, 0.5);
+  outline: 2px solid rgba(79, 70, 229, 0.6);
   outline-offset: 2px;
 }
 
 html.theme-light button:focus-visible,
 html.theme-light a:focus-visible {
-  outline: 2px solid rgba(124, 58, 237, 0.6);
+  outline: 2px solid rgba(67, 55, 201, 0.7);
   outline-offset: 3px;
 }
 
@@ -1152,14 +1152,14 @@ html.theme-light .zenith-scanlines {
 
 /* Enhanced glass effect with noise - theme-aware */
 html.theme-light .zenith-glass-enhanced {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(24px) saturate(1.5);
-  -webkit-backdrop-filter: blur(24px) saturate(1.5);
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(24px) saturate(1.3);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  border: 1px solid rgba(15, 23, 42, 0.1);
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
-    0 8px 32px rgba(0, 0, 0, 0.04),
-    0 0 60px rgba(124, 58, 237, 0.03);
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 0 40px rgba(99, 102, 241, 0.04);
 }
 
 html.theme-galaxy .zenith-glass-enhanced {
@@ -1183,15 +1183,15 @@ html.theme-light .text-slate-200 {
 }
 
 html.theme-light .text-slate-300 {
-  color: #000000 !important;
+  color: #475569 !important;
 }
 
 html.theme-light .text-slate-400 {
-  color: #000000 !important;
+  color: #64748b !important;
 }
 
 html.theme-light .text-slate-500 {
-  color: #1e293b !important;
+  color: #64748b !important;
 }
 
 html.theme-light .text-slate-600 {
@@ -1275,8 +1275,8 @@ html.theme-light .hover\:text-indigo-300:hover {
 
 /* Fix active background state in light mode sidebar */
 html.theme-light nav a div.bg-gradient-to-r {
-  background: rgba(99, 102, 241, 0.08) !important; /* Soft indigo tint */
-  border-left-color: #4f46e5 !important;
+  background: rgba(99, 102, 241, 0.12) !important;
+  border-left-color: #4338ca !important;
 }
 
 /* Adjust light theme backgrounds and borders */
@@ -1284,15 +1284,15 @@ html.theme-light .bg-white\/5,
 html.theme-light .bg-white\/10,
 html.theme-light .bg-white\/20,
 html.theme-light .bg-white\/\[0\.04\] {
-  background-color: rgba(15, 23, 42, 0.05) !important;
+  background-color: rgba(15, 23, 42, 0.06) !important;
 }
 
 html.theme-light .bg-white\/\[0\.03\] {
-  background-color: rgba(15, 23, 42, 0.03) !important;
+  background-color: rgba(15, 23, 42, 0.04) !important;
 }
 
 html.theme-light .bg-white\/\[0\.02\] {
-  background-color: rgba(15, 23, 42, 0.02) !important;
+  background-color: rgba(15, 23, 42, 0.03) !important;
 }
 
 html.theme-light .border-white\/10,
@@ -1300,6 +1300,102 @@ html.theme-light .border-white\/8,
 html.theme-light .border-white\/\[0\.08\],
 html.theme-light .border-white\/\[0\.05\],
 html.theme-light .border-white\/\[0\.03\] {
-  border-color: rgba(15, 23, 42, 0.08) !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+/* Light mode button glow - subtle contrast */
+html.theme-light .zenith-btn-glow {
+  box-shadow:
+    0 0 0 1px rgba(99, 102, 241, 0.25),
+    0 2px 12px rgba(99, 102, 241, 0.18),
+    0 0 18px rgba(147, 51, 234, 0.1);
+}
+
+html.theme-light .zenith-btn-glow::after {
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(15, 23, 42, 0.12) 50%,
+    transparent 60%
+  );
+}
+
+/* Light mode neon border overrides - subtle shadows */
+html.theme-light .neon-border-violet {
+  border-color: rgba(99, 102, 241, 0.6) !important;
+  box-shadow:
+    0 0 4px rgba(99, 102, 241, 0.25),
+    0 0 12px rgba(99, 102, 241, 0.15),
+    0 0 0 1px rgba(99, 102, 241, 0.2) inset !important;
+}
+
+html.theme-light .neon-border-emerald {
+  border-color: rgba(16, 185, 129, 0.6) !important;
+  box-shadow:
+    0 0 4px rgba(16, 185, 129, 0.25),
+    0 0 12px rgba(16, 185, 129, 0.15),
+    0 0 0 1px rgba(16, 185, 129, 0.2) inset !important;
+}
+
+/* Light mode card hover effect with better contrast */
+html.theme-light .zenith-card::before {
+  opacity: 0.7;
+}
+
+html.theme-light .zenith-card:hover::before {
+  opacity: 1;
+}
+
+/* Light mode input/textarea overrides */
+html.theme-light .bg-black\/20,
+html.theme-light .bg-black\/25,
+html.theme-light .bg-black\/30 {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+}
+
+html.theme-light .bg-white\/\[0\.01\] {
+  background-color: rgba(15, 23, 42, 0.04) !important;
+}
+
+/* Light mode badge & tag overrides */
+html.theme-light .text-indigo-300 {
+  color: #4338ca !important;
+}
+
+html.theme-light .text-emerald-300 {
+  color: #059669 !important;
+}
+
+html.theme-light .text-amber-300 {
+  color: #d97706 !important;
+}
+
+html.theme-light .text-rose-300 {
+  color: #dc2626 !important;
+}
+
+/* Light mode status badge backgrounds */
+html.theme-light .bg-indigo-500\/10 {
+  background-color: rgba(99, 102, 241, 0.12) !important;
+}
+
+html.theme-light .bg-emerald-500\/10 {
+  background-color: rgba(16, 185, 129, 0.12) !important;
+}
+
+html.theme-light .bg-amber-500\/10 {
+  background-color: rgba(245, 158, 11, 0.12) !important;
+}
+
+html.theme-light .bg-indigo-500\/20 {
+  background-color: rgba(99, 102, 241, 0.15) !important;
+}
+
+html.theme-light .bg-indigo-600\/20 {
+  background-color: rgba(79, 70, 229, 0.15) !important;
+}
+
+html.theme-light .bg-white\/5 {
+  background-color: rgba(15, 23, 42, 0.04) !important;
 }
 
