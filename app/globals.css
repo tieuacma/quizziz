@@ -1048,6 +1048,41 @@ html.theme-light a:focus-visible {
   outline-offset: 3px;
 }
 
+/* Light mode chart overrides */
+html.theme-light .fill-slate-200 {
+  fill: #475569 !important;
+}
+
+html.theme-light .fill-slate-500 {
+  fill: #64748b !important;
+}
+
+html.theme-light .stroke-slate-400 {
+  stroke: rgba(74, 85, 108, 0.25) !important;
+}
+
+html.theme-light .stroke-slate-200 {
+  stroke: #475569 !important;
+}
+
+/* Light mode chart tooltip text */
+html.theme-light .text-indigo-400 {
+  color: #4338ca !important;
+}
+
+html.theme-light .text-emerald-400 {
+  color: #059669 !important;
+}
+
+/* Light mode chart accent bullets */
+html.theme-light .bg-indigo-500 {
+  background-color: #6366f1 !important;
+}
+
+html.theme-light .bg-emerald-400 {
+  background-color: #10b981 !important;
+}
+
 /* Galaxy mode - enhanced effects */
 html.theme-galaxy .zenith-glass {
   background: rgba(16, 12, 38, 0.7);

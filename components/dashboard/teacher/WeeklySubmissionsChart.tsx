@@ -52,7 +52,7 @@ export default function WeeklySubmissionsChart() {
   `;
 
   return (
-    <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5 h-full flex flex-col relative overflow-hidden group">
+    <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5 h-full flex flex-col relative overflow-hidden group zenith-glass">
       {/* Glow highlight */}
       <div className="absolute -inset-px bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
@@ -93,7 +93,7 @@ export default function WeeklySubmissionsChart() {
                   y1={y}
                   x2={width - paddingRight}
                   y2={y}
-                  stroke="rgba(255, 255, 255, 0.05)"
+                  className="stroke-slate-400"
                   strokeWidth="1"
                   strokeDasharray="4 4"
                 />
@@ -101,7 +101,7 @@ export default function WeeklySubmissionsChart() {
                   x={paddingLeft - 8}
                   y={y + 3}
                   textAnchor="end"
-                  className="fill-slate-200 text-[9px] font-medium"
+                  className="fill-slate-500 text-[9px] font-medium"
                 >
                   {Math.round(maxSubmissions * (1 - ratio))}
                 </text>
@@ -110,7 +110,7 @@ export default function WeeklySubmissionsChart() {
                   x={width - paddingRight + 8}
                   y={y + 3}
                   textAnchor="start"
-                  className="fill-slate-200 text-[9px] font-medium"
+                  className="fill-slate-500 text-[9px] font-medium"
                 >
                   {((1 - ratio) * maxAvg).toFixed(1)}
                 </text>
@@ -122,7 +122,6 @@ export default function WeeklySubmissionsChart() {
           {data.map((d, i) => {
             const barWidth = 20;
             const x = getX(i) - barWidth / 2;
-
             const barHeight = (d.submissions / maxSubmissions) * chartHeight;
             const y = height - paddingBottom - barHeight;
 
@@ -130,8 +129,8 @@ export default function WeeklySubmissionsChart() {
               <g key={i} className="group/bar">
                 {/* Visual Bar */}
                 <motion.rect
-                  initial={{ height: 0, y: height - paddingBottom }}
-                  animate={{ height: barHeight, y }}
+                  initial={{ height: 0 }}
+                  animate={{ height: barHeight }}
                   transition={{
                     duration: 0.6,
                     delay: i * 0.05,
@@ -140,9 +139,8 @@ export default function WeeklySubmissionsChart() {
                   x={x}
                   y={y}
                   width={barWidth}
-                  height={barHeight}
                   rx="4"
-                  className="fill-gradient-to-t fill-indigo-600/80 hover:fill-indigo-500 transition-colors"
+                  className="fill-indigo-600 hover:fill-indigo-500 transition-colors"
                   style={{
                     fill:
                       hoveredIdx === i
@@ -154,9 +152,9 @@ export default function WeeklySubmissionsChart() {
                 {/* Invisible larger hover area */}
                 <rect
                   x={x - 15}
-                  y={paddingTop}
+                  y={height - paddingBottom - chartHeight}
                   width={barWidth + 30}
-                  height={chartHeight}
+                  height={chartHeight + paddingTop}
                   fill="transparent"
                   className="cursor-pointer"
                   onMouseEnter={() => setHoveredIdx(i)}
@@ -169,16 +167,16 @@ export default function WeeklySubmissionsChart() {
           {/* SVG Gradients definitions */}
           <defs>
             <linearGradient id="indigoGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#6366f1" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#4f46e5" stopOpacity="0.25" />
-            </linearGradient>
-            <linearGradient id="indigoGlow" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#818cf8" stopOpacity="0.95" />
+              <stop offset="0%" stopColor="#6366f1" stopOpacity="0.9" />
               <stop offset="100%" stopColor="#4f46e5" stopOpacity="0.4" />
             </linearGradient>
+            <linearGradient id="indigoGlow" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#818cf8" stopOpacity="1" />
+              <stop offset="100%" stopColor="#4f46e5" stopOpacity="0.5" />
+            </linearGradient>
             <linearGradient id="emeraldGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#34d399" stopOpacity="0.25" />
-              <stop offset="100%" stopColor="#34d399" stopOpacity="0" />
+              <stop offset="0%" stopColor="#34d399" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#34d399" stopOpacity="0.05" />
             </linearGradient>
           </defs>
 
@@ -231,7 +229,7 @@ export default function WeeklySubmissionsChart() {
 
           {/* X Axis Labels */}
           {data.map((d, i) => {
-            const x = paddingLeft + i * stepX;
+            const x = getX(i);
             return (
               <text
                 key={i}
@@ -249,7 +247,7 @@ export default function WeeklySubmissionsChart() {
         {/* Tooltip Overlay */}
         {hoveredIdx !== null && (
           <div
-            className="absolute rounded-xl bg-[#090915] border border-white/10 p-3 shadow-xl pointer-events-none flex flex-col gap-1 z-20 text-[11px] leading-4"
+            className="absolute rounded-xl bg-white/[0.08] dark:bg-[#090915] border border-slate-300 dark:border-white/10 p-3 shadow-xl pointer-events-none flex flex-col gap-1 z-20 text-[11px] leading-4 zenith-glass"
             style={{
               left: `${Math.min(
                 Math.max(getX(hoveredIdx) - 60, 10),
@@ -265,18 +263,18 @@ export default function WeeklySubmissionsChart() {
               )}px`,
             }}
           >
-            <p className="text-white font-bold mb-1 border-b border-white/5 pb-1">
+            <p className="text-slate-800 dark:text-white font-bold mb-1 border-b border-slate-300 dark:border-white/5 pb-1">
               Thứ{" "}
               {data[hoveredIdx].day === "CN"
                 ? "Nhật"
                 : data[hoveredIdx].day.replace("T", "")}
             </p>
-            <p className="text-indigo-400 font-semibold flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+            <p className="text-indigo-600 dark:text-indigo-400 font-semibold flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-500" />
               Bài nộp: {data[hoveredIdx].submissions} bài
             </p>
-            <p className="text-emerald-400 font-semibold flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <p className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400" />
               Điểm TB: {data[hoveredIdx].avg.toFixed(1)}/10
             </p>
           </div>
