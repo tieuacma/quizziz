@@ -35,11 +35,13 @@ import {
   Filter,
   Keyboard,
   BookOpen,
+  Wand2,
 } from "lucide-react";
 import { QuizQuestionType, ReadingQuestion } from "@/types/quiz";
 import QuestionEditor from "@/components/quiz-create/QuestionEditor";
 import QuizQuestionView from "@/components/quiz-editor/QuizQuestionView";
 import QuizLivePreview from "@/components/quiz-editor/QuizLivePreview";
+import AiGenerateQuestionsModal from "@/components/quiz-editor/AiGenerateQuestionsModal";
 import {
   QuestionTypeLabel,
   DifficultyBadge,
@@ -72,6 +74,7 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
   const [showSettings, setShowSettings] = useState(false);
   const [showLivePreview, setShowLivePreview] = useState(true);
   const [showShortcutsHelp, setShowShortcutsHelp] = useState(false);
+  const [showAiModal, setShowAiModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState<string>("all");
   
@@ -93,6 +96,7 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
     isDirty,
     defaultTime,
     addQuestion,
+    appendQuestions,
     removeQuestion,
     updateQuestion,
     toggleExpandQuestion,
@@ -512,6 +516,13 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
             Thêm nhanh câu hỏi mới
           </Label>
           <div className="flex flex-wrap gap-2">
+            <Button
+              onClick={() => setShowAiModal(true)}
+              className="gap-1.5 h-9 rounded-xl cursor-pointer text-xs font-bold bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-lg shadow-indigo-600/10"
+            >
+              <Wand2 className="w-4 h-4" />
+              Sinh câu hỏi bằng AI
+            </Button>
             {questionTypes.map((qt) => (
               <Button
                 key={qt}
@@ -850,6 +861,17 @@ function QuizEditorContent({ routeQuizId }: { routeQuizId: string }) {
           )}
         </div>
       </div>
+
+      {/* AI GENERATE QUESTIONS MODAL */}
+      <AiGenerateQuestionsModal
+        open={showAiModal}
+        onClose={() => setShowAiModal(false)}
+        defaultTime={defaultTime}
+        onGenerated={(qs) => {
+          appendQuestions(qs);
+          setShowAiModal(false);
+        }}
+      />
 
       {/* CONFIRM DELETE MODAL */}
       {deleteConfirm.show && (

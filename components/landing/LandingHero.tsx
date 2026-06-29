@@ -103,7 +103,7 @@ function DashboardMockup() {
 }
 
 export default function LandingHero() {
-  const reduced = usePrefersReducedMotion();
+  const reduced = false;
   const { scrollY } = useScroll();
   const blobY1 = useTransform(scrollY, [0, 400], [0, reduced ? 0 : 80]);
   const blobY2 = useTransform(scrollY, [0, 400], [0, reduced ? 0 : -60]);

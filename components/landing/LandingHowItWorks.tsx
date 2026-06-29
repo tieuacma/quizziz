@@ -10,7 +10,7 @@ import {
 } from "./motion";
 
 export default function LandingHowItWorks() {
-  const reduced = usePrefersReducedMotion();
+  const reduced = false;
 
   return (
     <section

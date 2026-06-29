@@ -105,7 +105,7 @@ function QuizPanel() {
 }
 
 export default function LandingShowcase() {
-  const reduced = usePrefersReducedMotion();
+  const reduced = false;
 
   return (
     <section

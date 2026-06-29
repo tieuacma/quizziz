@@ -10,7 +10,7 @@ type RoleKey = keyof typeof ROLES;
 
 export default function LandingRoles() {
   const [active, setActive] = useState<RoleKey>("teacher");
-  const reduced = usePrefersReducedMotion();
+  const reduced = false;
   const role = ROLES[active];
 
   return (

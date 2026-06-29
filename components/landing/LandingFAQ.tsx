@@ -9,7 +9,7 @@ import { usePrefersReducedMotion, defaultTransition } from "./motion";
 
 export default function LandingFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const reduced = usePrefersReducedMotion();
+  const reduced = false;
 
   return (
     <section

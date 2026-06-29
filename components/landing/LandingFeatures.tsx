@@ -11,7 +11,7 @@ import {
 } from "./motion";
 
 export default function LandingFeatures() {
-  const reduced = usePrefersReducedMotion();
+  const reduced = false;
 
   return (
     <section
