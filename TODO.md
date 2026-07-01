@@ -5,4 +5,3 @@
 
 - [ ] Thêm override cho `html.theme-light` để bảo đảm các class text phổ biến (muted/secondary/foreground) có màu đủ tương phản
 - [ ] Chạy lint/build (nếu cần) và kiểm tra nhanh nhiều trang
-

@@ -11,13 +11,13 @@ Mỗi khi nhận nhiệm vụ, Agent PHẢI thực hiện quy trình sau thông 
 
 1. **Query Index**: Sử dụng `gitnexus analyze` hoặc lệnh tương đương để cập nhật trạng thái mới nhất của 378 nodes và 659 edges trong project.
 2. **Context Verification**:
-   - Trước khi sửa bất kỳ file nào, hãy truy vấn các "Edges" liên quan để xem file đó đang được import ở đâu.
-   - Đảm bảo các thay đổi trong `quiz-service.ts` không làm gãy các "Flows" hiện có.
+    - Trước khi sửa bất kỳ file nào, hãy truy vấn các "Edges" liên quan để xem file đó đang được import ở đâu.
+    - Đảm bảo các thay đổi trong `quiz-service.ts` không làm gãy các "Flows" hiện có.
 3. **Smart Refactoring**:
-   - Khi di chuyển component (Phase 3), sử dụng GitNexus để tự động tìm và cập nhật toàn bộ đường dẫn import cũ sang `src/components/quiz-create/` hoặc `src/components/quiz-editor/`.
+    - Khi di chuyển component (Phase 3), sử dụng GitNexus để tự động tìm và cập nhật toàn bộ đường dẫn import cũ sang `src/components/quiz-create/` hoặc `src/components/quiz-editor/`.
 4. **Data Integrity**:
-   - Tuân thủ nghiêm ngặt cấu trúc `correctAnswerId` và `timeLimit` đã được thiết kế trong Phase 1.
-   - Kiểm tra tính đồng bộ giữa file `data/quiz.json` và các Server Actions.
+    - Tuân thủ nghiêm ngặt cấu trúc `correctAnswerId` và `timeLimit` đã được thiết kế trong Phase 1.
+    - Kiểm tra tính đồng bộ giữa file `data/quiz.json` và các Server Actions.
 
 ## Examples
 

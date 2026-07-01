@@ -12,119 +12,119 @@ import { sampleQuizData } from "./sample-data";
 import { useQuestionMotion } from "./motion";
 
 interface QuizGameProps {
-  profileId: string;
-  quizId: string;
-  initialQuestions?: QuizQuestion[];
+    profileId: string;
+    quizId: string;
+    initialQuestions?: QuizQuestion[];
 }
 
 export default function QuizGame({
-  profileId,
-  quizId,
-  initialQuestions,
+    profileId,
+    quizId,
+    initialQuestions,
 }: QuizGameProps) {
-  const pool = initialQuestions ?? sampleQuizData.questions;
+    const pool = initialQuestions ?? sampleQuizData.questions;
 
-  const {
-    questions,
-    sourceQuestions,
-    quizState,
-    timeLeft,
-    estimatedSeconds,
-    currentQuestion,
-    handleAnswer,
-    handleSubQuestionAnswer,
-    handleCompleteReading,
-    readingSubAnswers,
-    isReadingQuestionComplete,
-    startQuiz,
-    restartQuiz,
-    startPracticeWrong,
-    isPracticeMode,
-    isQuizFinished,
-    isReady,
-    isIdle,
-    activatePowerUp,
-    toggleAudioSetting,
-    powerups,
-    leaderboard,
-    audioSettings,
-  } = useQuizLogic(pool, profileId, quizId);
+    const {
+        questions,
+        sourceQuestions,
+        quizState,
+        timeLeft,
+        estimatedSeconds,
+        currentQuestion,
+        handleAnswer,
+        handleSubQuestionAnswer,
+        handleCompleteReading,
+        readingSubAnswers,
+        isReadingQuestionComplete,
+        startQuiz,
+        restartQuiz,
+        startPracticeWrong,
+        isPracticeMode,
+        isQuizFinished,
+        isReady,
+        isIdle,
+        activatePowerUp,
+        toggleAudioSetting,
+        powerups,
+        leaderboard,
+        audioSettings,
+    } = useQuizLogic(pool, profileId, quizId);
 
-  const { variants: summaryVariants, transition: summaryTransition } =
-    useQuestionMotion();
+    const { variants: summaryVariants, transition: summaryTransition } =
+        useQuestionMotion();
 
-  const questionKey = currentQuestion
-    ? `question-${quizState.current_question_index}-${currentQuestion.id}`
-    : "loading";
+    const questionKey = currentQuestion
+        ? `question-${quizState.current_question_index}-${currentQuestion.id}`
+        : "loading";
 
-  if (isIdle) {
+    if (isIdle) {
+        return (
+            <div className="zenith-immersive flex h-dvh w-full items-center justify-center text-slate-400">
+                <ParticleSystem />
+                Đang tải...
+            </div>
+        );
+    }
+
+    if (isReady) {
+        return (
+            <PrePlayScreen
+                questionCount={sourceQuestions.length}
+                estimatedSeconds={estimatedSeconds}
+                isPracticeMode={isPracticeMode}
+                onStart={() => startQuiz()}
+                audioSettings={audioSettings}
+                toggleAudioSetting={toggleAudioSetting}
+            />
+        );
+    }
+
+    if (isQuizFinished) {
+        return (
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key="summary"
+                    className="h-dvh w-full"
+                    variants={summaryVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={summaryTransition}
+                >
+                    <QuizSummary
+                        quizState={quizState}
+                        incorrectQuestions={sourceQuestions.filter((q) =>
+                            quizState.incorrect_questions.includes(q.id)
+                        )}
+                        onPlayAgain={restartQuiz}
+                        onPracticeWrong={startPracticeWrong}
+                        canPractice={quizState.incorrect_questions.length > 0}
+                    />
+                </motion.div>
+            </AnimatePresence>
+        );
+    }
+
     return (
-      <div className="zenith-immersive flex h-dvh w-full items-center justify-center text-slate-400">
-        <ParticleSystem />
-        Đang tải...
-      </div>
+        <>
+            <ParticleSystem />
+            <QuizLayout
+                quizState={quizState}
+                timeLeft={timeLeft}
+                currentQuestion={currentQuestion}
+                questions={questions}
+                questionKey={questionKey}
+                handleAnswer={handleAnswer}
+                handleSubQuestionAnswer={handleSubQuestionAnswer}
+                handleCompleteReading={handleCompleteReading}
+                readingSubAnswers={readingSubAnswers}
+                isReadingQuestionComplete={isReadingQuestionComplete}
+                activatePowerUp={activatePowerUp}
+                powerups={powerups}
+                leaderboard={leaderboard}
+                audioSettings={audioSettings}
+                toggleAudioSetting={toggleAudioSetting}
+            />
+        </>
     );
-  }
-
-  if (isReady) {
-    return (
-      <PrePlayScreen
-        questionCount={sourceQuestions.length}
-        estimatedSeconds={estimatedSeconds}
-        isPracticeMode={isPracticeMode}
-        onStart={() => startQuiz()}
-        audioSettings={audioSettings}
-        toggleAudioSetting={toggleAudioSetting}
-      />
-    );
-  }
-
-  if (isQuizFinished) {
-    return (
-      <AnimatePresence mode="wait">
-        <motion.div
-          key="summary"
-          className="h-dvh w-full"
-          variants={summaryVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          transition={summaryTransition}
-        >
-          <QuizSummary
-            quizState={quizState}
-            incorrectQuestions={sourceQuestions.filter((q) =>
-              quizState.incorrect_questions.includes(q.id),
-            )}
-            onPlayAgain={restartQuiz}
-            onPracticeWrong={startPracticeWrong}
-            canPractice={quizState.incorrect_questions.length > 0}
-          />
-        </motion.div>
-      </AnimatePresence>
-    );
-  }
-
-  return (
-    <>
-      <ParticleSystem />
-      <QuizLayout
-        quizState={quizState}
-        timeLeft={timeLeft}
-        currentQuestion={currentQuestion}
-        questions={questions}
-        questionKey={questionKey}
-        handleAnswer={handleAnswer}
-        handleSubQuestionAnswer={handleSubQuestionAnswer}
-        handleCompleteReading={handleCompleteReading}
-        readingSubAnswers={readingSubAnswers}
-        isReadingQuestionComplete={isReadingQuestionComplete}
-        activatePowerUp={activatePowerUp}
-        powerups={powerups}
-        leaderboard={leaderboard}
-        audioSettings={audioSettings}
-        toggleAudioSetting={toggleAudioSetting}
-      />
-    </>
-  );
 }

@@ -6,9 +6,9 @@ import { getSession } from "@/lib/session";
  * This is a Server Component so it can read the session cookie safely.
  */
 export default async function DashboardIndexPage() {
-  const session = await getSession();
-  if (!session) redirect("/login");
+    const session = await getSession();
+    if (!session) redirect("/login");
 
-  if (session.role === "teacher") redirect("/dashboard/teacher");
-  redirect("/dashboard/student");
+    if (session.role === "teacher") redirect("/dashboard/teacher");
+    redirect("/dashboard/student");
 }

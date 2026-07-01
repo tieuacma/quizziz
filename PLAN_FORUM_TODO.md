@@ -38,20 +38,20 @@ Thiết kế đặc tả chức năng (PRD) + giải pháp thiết kế (Databas
 - [x] Thiết kế PRD chi tiết (user flow, acceptance criteria).
 - [x] Thiết kế Database schema (Mongo collections) cho: Users, Posts, Comments, Votes, Reports.
 - [x] Thiết kế API endpoints (REST/route handlers hoặc server actions) gồm:
-  - CRUD posts
-  - create threaded comments
-  - vote/unvote
-  - mark accepted answer
-  - report content
-  - moderation actions (approve/reject/block)
-  - AI auto-moderation pipeline (mô tả luồng xử lý, store results)
+    - CRUD posts
+    - create threaded comments
+    - vote/unvote
+    - mark accepted answer
+    - report content
+    - moderation actions (approve/reject/block)
+    - AI auto-moderation pipeline (mô tả luồng xử lý, store results)
 - [x] Thiết kế UI/UX components cho trang diễn đàn:
-  - list/filter/sort posts
-  - composer editor (text + hình ảnh + file + công thức)
-  - post detail + comment tree
-  - report modal + feedback
-  - moderation queue (admin)
-  - trạng thái “Chờ duyệt/Bị chặn”
+    - list/filter/sort posts
+    - composer editor (text + hình ảnh + file + công thức)
+    - post detail + comment tree
+    - report modal + feedback
+    - moderation queue (admin)
+    - trạng thái “Chờ duyệt/Bị chặn”
 
 **Kết quả cần có:**
 
@@ -62,9 +62,9 @@ Thiết kế đặc tả chức năng (PRD) + giải pháp thiết kế (Databas
 ## 4) Viết tài liệu đầu ra (Deliverables)
 
 - [x] Viết **PRD** hoàn chỉnh theo các mục trong yêu cầu:
-  - [x] User flow đăng bài (ẩn danh + bị kiểm duyệt)
-  - [x] Database schema cơ bản cho Users/Posts/Comments/Votes/Reports
-  - [x] Gợi ý UI/UX components cần có trên trang diễn đàn
+    - [x] User flow đăng bài (ẩn danh + bị kiểm duyệt)
+    - [x] Database schema cơ bản cho Users/Posts/Comments/Votes/Reports
+    - [x] Gợi ý UI/UX components cần có trên trang diễn đàn
 - [x] Trình bày rõ quy tắc quyền truy cập theo role.
 - [x] Ghi chú các quyết định kiến trúc quan trọng (index, consistency, moderation states).
 

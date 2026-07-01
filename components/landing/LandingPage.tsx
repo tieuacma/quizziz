@@ -15,25 +15,25 @@ import LandingCTA from "./LandingCTA";
 import LandingFooter from "./LandingFooter";
 
 export default function LandingPage() {
-  return (
-    <div className="zenith-mesh min-h-screen">
-      <div className="relative z-10">
-        <LandingNavbar />
-        <main className="text-foreground">
-          <LandingHero />
-          <LandingStats />
-          <LandingRoles />
-          <LandingHowItWorks />
-          <LandingPlayground />
-          <LandingShowcase />
-          <LandingFeatures />
-          <LandingTestimonials />
-          <LandingPricing />
-          <LandingFAQ />
-          <LandingCTA />
-        </main>
-        <LandingFooter />
-      </div>
-    </div>
-  );
+    return (
+        <div className="zenith-mesh min-h-screen">
+            <div className="relative z-10">
+                <LandingNavbar />
+                <main className="text-foreground">
+                    <LandingHero />
+                    <LandingStats />
+                    <LandingRoles />
+                    <LandingHowItWorks />
+                    <LandingPlayground />
+                    <LandingShowcase />
+                    <LandingFeatures />
+                    <LandingTestimonials />
+                    <LandingPricing />
+                    <LandingFAQ />
+                    <LandingCTA />
+                </main>
+                <LandingFooter />
+            </div>
+        </div>
+    );
 }

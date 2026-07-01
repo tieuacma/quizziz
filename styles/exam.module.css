@@ -1,65 +1,68 @@
 .examRoot {
-  min-height: 100dvh;
-  position: relative;
+    min-height: 100dvh;
+    position: relative;
 }
 
 .glassCard {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0.02) 50%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border-radius: 1rem;
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
-    0 8px 32px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.06) 0%,
+        rgba(255, 255, 255, 0.02) 50%,
+        rgba(255, 255, 255, 0.01) 100%
+    );
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-radius: 1rem;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+        0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 .questionNavBtn {
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .questionNavBtn:hover {
-  transform: translateY(-1px);
-  border-color: rgba(167, 139, 250, 0.45);
-  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.12);
+    transform: translateY(-1px);
+    border-color: rgba(167, 139, 250, 0.45);
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.12);
 }
 
 .optionBtn {
-  transition:
-    transform 0.15s ease,
-    border-color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
+    transition:
+        transform 0.15s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .optionBtn:hover {
-  transform: translateX(2px);
+    transform: translateX(2px);
 }
 
 .optionBtn:active {
-  transform: scale(0.99);
+    transform: scale(0.99);
 }
 
 .optionSelected {
-  border-color: rgba(167, 139, 250, 0.6) !important;
-  background: rgba(139, 92, 246, 0.2) !important;
-  color: #fff !important;
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+    border-color: rgba(167, 139, 250, 0.6) !important;
+    background: rgba(139, 92, 246, 0.2) !important;
+    color: #fff !important;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
 }
 
 .optionNavCurrent {
-  border-color: rgba(167, 139, 250, 0.7) !important;
-  background: rgba(139, 92, 246, 0.25) !important;
-  color: #fff !important;
-  box-shadow: 0 0 16px rgba(139, 92, 246, 0.2);
+    border-color: rgba(167, 139, 250, 0.7) !important;
+    background: rgba(139, 92, 246, 0.25) !important;
+    color: #fff !important;
+    box-shadow: 0 0 16px rgba(139, 92, 246, 0.2);
 }
 
 .legendCurrent {
-  border-color: rgba(167, 139, 250, 0.7);
-  background: rgba(139, 92, 246, 0.25);
+    border-color: rgba(167, 139, 250, 0.7);
+    background: rgba(139, 92, 246, 0.25);
 }

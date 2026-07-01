@@ -27,15 +27,18 @@ forum-backend/
 ## API Endpoints
 
 ### Posts
+
 - **POST /api/posts** - Create a new post
 - **GET /api/posts** - Get all posts (query: page, limit, sortBy[latest|popular], tag)
 - **GET /api/posts/:id** - Get a specific post
 
 ### Comments
+
 - **POST /api/posts/:id/comments** - Add a comment to a post
 - **GET /api/posts/:id/comments** - Get all comments for a post (includes replies)
 
 ### Ratings
+
 - **POST /api/posts/:id/rate** - Rate a post (body: userId, value[1-5] OR reaction[upvote|downvote])
 - **POST /api/comments/:id/rate** - Rate a comment (same body format)
 

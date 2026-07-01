@@ -5,3086 +5,3086 @@
     "totalQuestions": 97,
     "defaultTime": 180,
     "updatedAt": "2026-05-20T07:31:23.424Z",
-  "questions": [
-    {
-      "id": "q1",
-      "question": "Ở Việt Nam, những nghề thủ công ra đời sớm và phát triển mạnh ở các dân tộc thiểu số là",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q1a",
-          "text": ""
-        },
-        {
-          "id": "q1b",
-          "text": "nghề rèn, đúc và nghề mộc."
-        },
-        {
-          "id": "q1c",
-          "text": "nghề gốm và nghề rèn đúc."
-        },
-        {
-          "id": "q1d",
-          "text": "nghề gốm và làm đồ trang sức."
-        }
-      ],
-      "correctOptionId": "q1a"
-    },
-    {
-      "id": "q2",
-      "question": "Ở Việt Nam, dân tộc thiểu số nào thường tổ chức các lễ hội liên quan đến chùa chiềng?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q2a",
-          "text": "Người Khơ-me."
-        },
-        {
-          "id": "q2b",
-          "text": "Người Kinh."
-        },
-        {
-          "id": "q2c",
-          "text": "Người Chăm."
-        },
-        {
-          "id": "q2d",
-          "text": "Người Mường."
-        }
-      ],
-      "correctOptionId": "q2a"
-    },
-    {
-      "id": "q3",
-      "question": "Ở Việt Nam, các lễ hội của dân tộc thiểu số chủ yếu được tổ chức với quy mô",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q3a",
-          "text": "từng làng/bản và tộc người."
-        },
-        {
-          "id": "q3b",
-          "text": "nhiều làng/bản hay cả khu vực."
-        },
-        {
-          "id": "q3c",
-          "text": "tập trung ở các đô thị lớn."
-        },
-        {
-          "id": "q3d",
-          "text": "diễn ra trên phạm vi cả nước."
-        }
-      ],
-      "correctOptionId": "q3a"
-    },
-    {
-      "id": "q4",
-      "question": "Tín ngưỡng, tôn giáo nào sau đây được người Việt tiếp thu từ bên ngoài?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q4a",
-          "text": "Thờ Phật."
-        },
-        {
-          "id": "q4b",
-          "text": "Thờ anh hùng dân tộc."
-        },
-        {
-          "id": "q4c",
-          "text": "Thờ Thành hoàng."
-        },
-        {
-          "id": "q4d",
-          "text": "Thờ cúng tổ tiên."
-        }
-      ],
-      "correctOptionId": "q4a"
-    },
-    {
-      "id": "q5",
-      "question": "Các dân tộc thiểu số ở Việt Nam dùng nguyên liệu nào để may trang phục?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q5a",
-          "text": "Vải lụa, vải thổ cẩm, vải lanh."
-        },
-        {
-          "id": "q5b",
-          "text": "Vải thổ cẩm, vải lụa, vải tơ tằm."
-        },
-        {
-          "id": "q5c",
-          "text": "Vải lanh, vải phi bóng, vải thổ cẩm."
-        },
-        {
-          "id": "q5d",
-          "text": "Vải bông, vải tơ tằm, vải lanh."
-        }
-      ],
-      "correctOptionId": "q5a"
-    },
-    {
-      "id": "q6",
-      "question": "Các dân tộc thiểu số ở Việt Nam phát triển đa dạng ngành nghề nào?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q6a",
-          "text": "Nghề nông trồng lúa."
-        },
-        {
-          "id": "q6b",
-          "text": "Nghề chăn nuôi."
-        },
-        {
-          "id": "q6c",
-          "text": "Ngành nghề thủ công."
-        },
-        {
-          "id": "q6d",
-          "text": "Nghề đánh bắt thủy, hải sản."
-        }
-      ],
-      "correctOptionId": "q6a"
-    },
-    {
-      "id": "q7",
-      "question": "Để có nước canh tác trên ruộng bậc thang, cư dân các dân tộc thiểu số đã làm gì?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q7a",
-          "text": "Dẫn nước từ các dòng suối trên cao xuống."
-        },
-        {
-          "id": "q7b",
-          "text": "Dẫn nước từ các đồng bằng lên các sườn núi."
-        },
-        {
-          "id": "q7c",
-          "text": "Cho khoan cây nước tại chỗ phục vụ tưới tiêu."
-        },
-        {
-          "id": "q7d",
-          "text": "Sử dụng máy bom nước đưa từ đồng bằng lên."
-        }
-      ],
-      "correctOptionId": "q7a"
-    },
-    {
-      "id": "q8",
-      "question": "Để có nước canh tác trên ruộng bậc thang, cư dân các dân tộc thiểu số đã làm gì?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q8a",
-          "text": "Cho khoan cây nước tại chỗ phục vụ tưới tiêu."
-        },
-        {
-          "id": "q8b",
-          "text": "Dẫn nước từ các đồng bằng lên các sườn núi."
-        },
-        {
-          "id": "q8c",
-          "text": "Tạo hồ hứng và chứa nước mưa trên đỉnh núi."
-        },
-        {
-          "id": "q8d",
-          "text": "Sử dụng máy bom nước đưa từ đồng bằng lên."
-        }
-      ],
-      "correctOptionId": "q8c"
-    },
-    {
-      "id": "q9",
-      "question": "Dựa trên cơ sở nào cư dân các dân tộc trên đất nước Việt Nam xây dựng mô hình nhà ở cho mình?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q9a",
-          "text": "Địa bàn sinh sống."
-        },
-        {
-          "id": "q9b",
-          "text": "Thành phần dân cư."
-        },
-        {
-          "id": "q9c",
-          "text": "Phân hóa xã hội."
-        },
-        {
-          "id": "q9d",
-          "text": "Yếu tố tâm lí."
-        }
-      ],
-      "correctOptionId": "q9a"
-    },
-    {
-      "id": "q10",
-      "question": "Dựa trên cơ sở nào cư dân các dân tộc trên đất nước Việt Nam xây dựng mô hình nhà ở cho mình?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q10a",
-          "text": "Điều kiện tự nhiên."
-        },
-        {
-          "id": "q10b",
-          "text": "Thành phần dân cư."
-        },
-        {
-          "id": "q10c",
-          "text": "Phân hóa xã hội."
-        },
-        {
-          "id": "q10d",
-          "text": "Yếu tố tâm lí."
-        }
-      ],
-      "correctOptionId": "q10a"
-    },
-    {
-      "id": "q11",
-      "question": "Dựa trên cơ sở nào cư dân các dân tộc trên đất nước Việt Nam xây dựng mô hình nhà ở cho mình?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q11a",
-          "text": "Hoạt động kinh tế, văn hóa."
-        },
-        {
-          "id": "q11b",
-          "text": "Thành phần dân cư."
-        },
-        {
-          "id": "q11c",
-          "text": "Phân hóa chính trị, xã hội."
-        },
-        {
-          "id": "q11d",
-          "text": "Yếu tố tâm lí xã hội."
-        }
-      ],
-      "correctOptionId": "q11a"
-    },
-    {
-      "id": "q12",
-      "question": "Địa bàn cư trú chủ yếu của người Kinh là",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q12a",
-          "text": "đồng bằng."
-        },
-        {
-          "id": "q12b",
-          "text": "ven biển."
-        },
-        {
-          "id": "q12c",
-          "text": "đồi núi."
-        },
-        {
-          "id": "q12d",
-          "text": "trung du."
-        }
-      ],
-      "correctOptionId": "q12a"
-    },
-    {
-      "id": "q13",
-      "question": "Nhà ở truyền thống của người Kinh là",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q13a",
-          "text": "nhà trệt xây bằng gạch hoặc đắp bằng đất."
-        },
-        {
-          "id": "q13b",
-          "text": "nhà sàn làm bằng gỗ, tre, nứa, lá."
-        },
-        {
-          "id": "q13c",
-          "text": "nhà nửa sàn, nửa trệt, xây tường."
-        },
-        {
-          "id": "q13d",
-          "text": "nhà nhiều tầng được dựng bằng gỗ."
-        }
-      ],
-      "correctOptionId": "q13a"
-    },
-    {
-      "id": "q14",
-      "question": "So với dân tộc Kinh, điểm khác trong trang phục của các dân tộc thiểu số là gì?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q14a",
-          "text": "Trang phục thường có hoa văn trang trí sặc sỡ."
-        },
-        {
-          "id": "q14b",
-          "text": "Được may bằng nhiều loại vải có chất liệu tự nhiên."
-        },
-        {
-          "id": "q14c",
-          "text": "Trang phục chủ yếu là áo và quần (hoặc váy)."
-        },
-        {
-          "id": "q14d",
-          "text": "Trang phục có sự thay đổi theo mùa."
-        }
-      ],
-      "correctOptionId": "q14a"
-    },
-    {
-      "id": "q15",
-      "question": "Hoạt động sản xuất nông nghiệp của các dân tộc thiểu số ở vùng cao (Việt Nam) có đặc điểm nổi bật nào sau đây?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q15a",
-          "text": "Lúa nước được trồng ở ruộng bậc thang."
-        },
-        {
-          "id": "q15b",
-          "text": "Phát triển nuôi trồng thủy - hải sản."
-        },
-        {
-          "id": "q15c",
-          "text": "Phải thường xuyên đắp đê ngăn lũ lụt."
-        },
-        {
-          "id": "q15d",
-          "text": "Phải thường xuyên thau chua rửa mặn."
-        }
-      ],
-      "correctOptionId": "q15a"
-    },
-    {
-      "id": "q16",
-      "question": "Trong sản xuất nông nghiệp của dân tộc Kinh, hoạt động kinh tế chính là",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q16a",
-          "text": "canh tác lúa nước."
-        },
-        {
-          "id": "q16b",
-          "text": "chăn nuôi gia súc."
-        },
-        {
-          "id": "q16c",
-          "text": "nuôi trồng thủy sản."
-        },
-        {
-          "id": "q16d",
-          "text": "trồng cây lúa nương."
-        }
-      ],
-      "correctOptionId": "q16a"
-    },
-    {
-      "id": "q17",
-      "question": "Về thủ công nghiệp, sản phẩm của người Kinh rất đa dạng và tinh xảo, không những đáp ứng nhu cầu trong nước mà còn",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q17a",
-          "text": "xuất khẩu."
-        },
-        {
-          "id": "q17b",
-          "text": "nhập khẩu."
-        },
-        {
-          "id": "q17c",
-          "text": "giao lưu."
-        },
-        {
-          "id": "q17d",
-          "text": "biếu, tặng."
-        }
-      ],
-      "correctOptionId": "q17a"
-    },
-    {
-      "id": "q18",
-      "question": "Bữa ăn của người Kinh có thể được bổ sung các món ăn chế biến từ",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q18a",
-          "text": "thịt gia cầm."
-        },
-        {
-          "id": "q18b",
-          "text": "tôm hùm."
-        },
-        {
-          "id": "q18c",
-          "text": "bào ngư."
-        },
-        {
-          "id": "q18d",
-          "text": "cua biển."
-        }
-      ],
-      "correctOptionId": "q18a"
-    },
-    {
-      "id": "q19",
-      "question": "Bữa ăn của người Kinh có thể được bổ sung các món ăn chế biến từ",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q19a",
-          "text": "thịt gia súc."
-        },
-        {
-          "id": "q19b",
-          "text": "tôm hùm."
-        },
-        {
-          "id": "q19c",
-          "text": "bào ngư."
-        },
-        {
-          "id": "q19d",
-          "text": "cua biển."
-        }
-      ],
-      "correctOptionId": "q19a"
-    },
-    {
-      "id": "q20",
-      "question": "Canh tác lúa nước là hoạt động kinh tế chính của",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q20a",
-          "text": "người Kinh."
-        },
-        {
-          "id": "q20b",
-          "text": "người Thái."
-        },
-        {
-          "id": "q20c",
-          "text": "người Nùng."
-        },
-        {
-          "id": "q20d",
-          "text": "người Mường."
-        }
-      ],
-      "correctOptionId": "q20a"
-    },
-    {
-      "id": "q21",
-      "question": "Nội dung nào dưới đây không phải là đặc điểm trong hoạt động sản xuất chủ yếu của tộc người Kinh ở Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q21a",
-          "text": "Trồng lúa nước phổ biến ở ruộng bậc thang."
-        },
-        {
-          "id": "q21b",
-          "text": "Phát triển ngành nuôi trồng thủy - hải sản."
-        },
-        {
-          "id": "q21c",
-          "text": "Phải thường xuyên đắp đê ngăn lũ lụt."
-        },
-        {
-          "id": "q21d",
-          "text": "Ngoài lúa nước còn trồng cây lương thực khác."
-        }
-      ],
-      "correctOptionId": "q21a"
-    },
-    {
-      "id": "q22",
-      "question": "Tín ngưỡng phổ biến mang tính kế thừa trong các gia đình của người Việt Nam ngày nay là tín ngưỡng",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q22a",
-          "text": "thờ cúng tổ tiên."
-        },
-        {
-          "id": "q22b",
-          "text": "sùng bái tự nhiên."
-        },
-        {
-          "id": "q22c",
-          "text": "phồn thực."
-        },
-        {
-          "id": "q22d",
-          "text": "đa thần."
-        }
-      ],
-      "correctOptionId": "q22a"
-    },
-    {
-      "id": "q23",
-      "question": "Nhận định nào dưới đây là không đúng về vai trò của các nghề thủ công trong đời sống, xã hội của cộng đồng dân tộc Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q23a",
-          "text": "Trở thành hoạt động kinh tế chính của người Kinh"
-        },
-        {
-          "id": "q23b",
-          "text": "Góp phần nâng cao đời sống kinh tế của người dân."
-        },
-        {
-          "id": "q23c",
-          "text": "Sản phẩm của nhiều ngành nghề rất đa dạng, tinh xảo."
-        },
-        {
-          "id": "q23d",
-          "text": "Ngoài đáp ứng nhu cầu trong nước còn được xuất khẩu."
-        }
-      ],
-      "correctOptionId": "q23a"
-    },
-    {
-      "id": "q24",
-      "question": "Nhận định nào dưới đây là đúng về vai trò của các nghề thủ công trong đời sống, xã hội của cộng đồng dân tộc Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q24a",
-          "text": "Sản phẩm chủ yếu phục vụ cho nhu cầu xuất khẩu."
-        },
-        {
-          "id": "q24b",
-          "text": "Trở thành hoạt động kinh tế chính của người Kinh."
-        },
-        {
-          "id": "q24c",
-          "text": "Góp phần quyết định nâng cao đời sống của người dân."
-        },
-        {
-          "id": "q24d",
-          "text": "Sản phẩm của nhiều ngành nghề rất đa dạng, tinh xảo."
-        }
-      ],
-      "correctOptionId": "q24d"
-    },
-    {
-      "id": "q25",
-      "question": "Nhận định nào dưới đây là không đúng về vai trò của các nghề thủ công trong đời sống, xã hội của cộng đồng dân tộc Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q25a",
-          "text": "Sản phẩm chủ yếu phục vụ cho nhu cầu xuất khẩu."
-        },
-        {
-          "id": "q25b",
-          "text": "Góp phần nâng cao đời sống kinh tế của người dân."
-        },
-        {
-          "id": "q25c",
-          "text": "Sản phẩm của nhiều ngành nghề rất đa dạng, tinh xảo."
-        },
-        {
-          "id": "q25d",
-          "text": "Ngoài đáp ứng nhu cầu trong nước còn được xuất khẩu."
-        }
-      ],
-      "correctOptionId": "q25a"
-    },
-    {
-      "id": "q26",
-      "question": "Thành phần dân tộc theo dân số ở Việt Nam hiện nay được chia thành hai nhóm là dân tộc đa số và",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q26a",
-          "text": "dân tộc phát triển"
-        },
-        {
-          "id": "q26b",
-          "text": "dân tộc đang phát triển"
-        },
-        {
-          "id": "q26c",
-          "text": "dân tộc thiểu số"
-        },
-        {
-          "id": "q26d",
-          "text": "dân tộc phổ biến"
-        }
-      ],
-      "correctOptionId": "q26c"
-    },
-    {
-      "id": "q27",
-      "question": "Thành phần dân tộc theo dân số ở Việt Nam hiện nay được chia thành mấy nhóm?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q27a",
-          "text": "Hai."
-        },
-        {
-          "id": "q27b",
-          "text": "Ba."
-        },
-        {
-          "id": "q27c",
-          "text": "Bốn."
-        },
-        {
-          "id": "q27d",
-          "text": "Năm."
-        }
-      ],
-      "correctOptionId": "q27a"
-    },
-    {
-      "id": "q28",
-      "question": "Dân tộc nào sau đây chiếm đa số ở Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q28a",
-          "text": "Kinh."
-        },
-        {
-          "id": "q28b",
-          "text": "Lô Lô."
-        },
-        {
-          "id": "q28c",
-          "text": "Mường."
-        },
-        {
-          "id": "q28d",
-          "text": "Tày."
-        }
-      ],
-      "correctOptionId": "q28a"
-    },
-    {
-      "id": "q29",
-      "question": "Việc phân chia các dân tộc Việt Nam thành hai nhóm là dân tộc đa số và dân tộc thiểu số dựa trên cơ sở nào sau đây?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q29a",
-          "text": "ngôn ngữ của từng dân tộc"
-        },
-        {
-          "id": "q29b",
-          "text": "số dân của từng dân tộc"
-        },
-        {
-          "id": "q29c",
-          "text": "chữ viết của từng dân tộc"
-        },
-        {
-          "id": "q29d",
-          "text": "trình độ phát triển của từng dân tộc"
-        }
-      ],
-      "correctOptionId": "q29b"
-    },
-    {
-      "id": "q30_1",
-      "question": "Ở Việt Nam hiện nay có bao nhiêu dân tộc thiểu số?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q30_1a",
-          "text": "54"
-        },
-        {
-          "id": "q30_1b",
-          "text": "53"
-        },
-        {
-          "id": "q30_1c",
-          "text": "1"
-        },
-        {
-          "id": "q30_1d",
-          "text": "11"
-        }
-      ],
-      "correctOptionId": "q30_1b"
-    },
-    {
-      "id": "q30_2",
-      "question": "Ở Việt Nam hiện nay có bao nhiêu dân tộc?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q30a_2",
-          "text": "60"
-        },
-        {
-          "id": "q30b_2",
-          "text": "63"
-        },
-        {
-          "id": "q30_2c",
-          "text": "54"
-        },
-        {
-          "id": "q30_2d",
-          "text": "53"
-        }
-      ],
-      "correctOptionId": "q30_2c"
-    },
-    {
-      "id": "q31",
-      "question": "Hiện nay, dân tộc nào sau đây ở Việt Nam chiếm hơn 85% tổng dân số cả nước?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q31a",
-          "text": "Mường"
-        },
-        {
-          "id": "q31b",
-          "text": "Nùng"
-        },
-        {
-          "id": "q31c",
-          "text": "Dao"
-        },
-        {
-          "id": "q31d",
-          "text": "Kinh"
-        }
-      ],
-      "correctOptionId": "q31d"
-    },
-    {
-      "id": "q32",
-      "question": "Dân tộc nào sau đây không phải là dân tộc thiểu số ở Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q32a",
-          "text": "Si La"
-        },
-        {
-          "id": "q32b",
-          "text": "La Ha"
-        },
-        {
-          "id": "q32c",
-          "text": "Kinh"
-        },
-        {
-          "id": "q32d",
-          "text": "Cơ Ho"
-        }
-      ],
-      "correctOptionId": "q32c"
-    },
-    {
-      "id": "q33",
-      "question": "Dưới tác động của nền kinh tế thị trường, hình thức cư trú nào sau đây giữa các dân tộc đang phát triển mạnh?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q33a",
-          "text": "Khép kín"
-        },
-        {
-          "id": "q33b",
-          "text": "Đan xen"
-        },
-        {
-          "id": "q33c",
-          "text": "Đối xứng"
-        },
-        {
-          "id": "q33d",
-          "text": "Tách biệt"
-        }
-      ],
-      "correctOptionId": "q33b"
-    },
-    {
-      "id": "q34",
-      "question": "Hiện nay, dân tộc Kinh chủ yếu sinh sống tập trung ở địa bàn nào sau đây?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q34a",
-          "text": "Đồng bằng"
-        },
-        {
-          "id": "q34b",
-          "text": "Miền núi"
-        },
-        {
-          "id": "q34c",
-          "text": "Cao nguyên"
-        },
-        {
-          "id": "q34d",
-          "text": "Thung lũng"
-        }
-      ],
-      "correctOptionId": "q34a"
-    },
-    {
-      "id": "q35",
-      "question": "Các dân tộc ở Việt Nam hiện nay được xếp vào mấy nhóm ngữ hệ?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q35a",
-          "text": "5 nhóm ngữ hệ"
-        },
-        {
-          "id": "q35b",
-          "text": "6 nhóm ngữ hệ"
-        },
-        {
-          "id": "q35c",
-          "text": "7 nhóm ngữ hệ"
-        },
-        {
-          "id": "q35d",
-          "text": "8 nhóm ngữ hệ"
-        }
-      ],
-      "correctOptionId": "q35a"
-    },
-    {
-      "id": "q36_1",
-      "question": "Các dân tộc Kinh, Mường, Thổ, Chứt thuộc nhóm ngôn ngữ nào dưới đây?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q36_1a",
-          "text": "Việt - Mường"
-        },
-        {
-          "id": "q36_1b",
-          "text": "Môn - Khơme"
-        },
-        {
-          "id": "q36_1c",
-          "text": "Mông, Dao"
-        },
-        {
-          "id": "q36_1d",
-          "text": "Tày - Thái"
-        }
-      ],
-      "correctOptionId": "q36_1a"
-    },
-    {
-      "id": "q36_2",
-      "question": "Các dân tộc Khơme, Ba Na, Xơ Đăng,… thuộc nhóm ngôn ngữ nào dưới đây?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q36_2a",
-          "text": "Việt - Mường"
-        },
-        {
-          "id": "q36_2b",
-          "text": "Môn - Khơme"
-        },
-        {
-          "id": "q36_2c",
-          "text": "Mông, Dao"
-        },
-        {
-          "id": "q36_2d",
-          "text": "Tày - Thái"
-        }
-      ],
-      "correctOptionId": "q36_2b"
-    },
-    {
-      "id": "q36_3",
-      "question": "Các dân tộc Dao, Pà Thẻn,… thuộc nhóm ngôn ngữ nào dưới đây?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q36_3a",
-          "text": "Việt - Mường"
-        },
-        {
-          "id": "q36_3b",
-          "text": "Môn - Khơme"
-        },
-        {
-          "id": "q36_3c",
-          "text": "Mông, Dao"
-        },
-        {
-          "id": "q36_3d",
-          "text": "Tày - Thái"
-        }
-      ],
-      "correctOptionId": "q36_3c"
-    },
-    {
-      "id": "q36_4",
-      "question": "Các dân tộc Thái, Nùng, Bố Y, Sán Chay,… thuộc nhóm ngôn ngữ nào dưới đây?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q36_4a",
-          "text": "Việt - Mường"
-        },
-        {
-          "id": "q36_4b",
-          "text": "Môn - Khơme"
-        },
-        {
-          "id": "q36_4c",
-          "text": "Mông, Dao"
-        },
-        {
-          "id": "q36_4d",
-          "text": "Tày - Thái"
-        }
-      ],
-      "correctOptionId": "q36_4d"
-    },
-    {
-      "id": "q36_5",
-      "question": "Dân tộc nào dưới đây thuộc nhóm ngôn ngữ Kađai?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q36_5a",
-          "text": "La Chí"
-        },
-        {
-          "id": "q36_5b",
-          "text": "Gia Rai"
-        },
-        {
-          "id": "q36_5c",
-          "text": "Hoa"
-        },
-        {
-          "id": "q36_5d",
-          "text": "Hà Nhì"
-        }
-      ],
-      "correctOptionId": "q36_5a"
-    },
-    {
-      "id": "q36_6",
-      "question": "Dân tộc nào dưới đây thuộc nhóm ngôn ngữ Mã Lai - Đa Đảo?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q36_6a",
-          "text": "La Chí"
-        },
-        {
-          "id": "q36_6b",
-          "text": "Gia Rai"
-        },
-        {
-          "id": "q36_6c",
-          "text": "Hoa"
-        },
-        {
-          "id": "q36_6d",
-          "text": "Hà Nhì"
-        }
-      ],
-      "correctOptionId": "q36_6b"
-    },
-    {
-      "id": "q36_7",
-      "question": "Dân tộc nào dưới đây thuộc nhóm ngôn ngữ Hán?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q36_7a",
-          "text": "La Chí"
-        },
-        {
-          "id": "q36_7b",
-          "text": "Gia Rai"
-        },
-        {
-          "id": "q36_7c",
-          "text": "Hoa"
-        },
-        {
-          "id": "q36_7d",
-          "text": "Hà Nhì"
-        }
-      ],
-      "correctOptionId": "q36_7c"
-    },
-    {
-      "id": "q36_8",
-      "question": "Dân tộc nào dưới đây thuộc nhóm ngôn ngữ Tạng - Miến?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q36_8a",
-          "text": "La Chí"
-        },
-        {
-          "id": "q36_8b",
-          "text": "Gia Rai"
-        },
-        {
-          "id": "q36_8c",
-          "text": "Hoa"
-        },
-        {
-          "id": "q36_8d",
-          "text": "Hà Nhì"
-        }
-      ],
-      "correctOptionId": "q36_8d"
-    },
-    {
-      "id": "q36_9",
-      "question": "Tiếng Việt thuộc ngữ hệ nào sau đây?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q36_9a",
-          "text": "Mông - Dao"
-        },
-        {
-          "id": "q36_9b",
-          "text": "Nam Á"
-        },
-        {
-          "id": "q36_9c",
-          "text": "Hán - Tạng"
-        },
-        {
-          "id": "q36_9d",
-          "text": "Thái - Ka-đai"
-        }
-      ],
-      "correctOptionId": "q36_9b"
-    },
-    {
-      "id": "q36_10",
-      "question": "Nhóm ngôn ngữ Việt - Mường thuộc ngữ hệ nào sau đây?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q36_10a",
-          "text": "Nam Á"
-        },
-        {
-          "id": "q36_10b",
-          "text": "Nam Đảo"
-        },
-        {
-          "id": "q36_10c",
-          "text": "Thái - Ka-đai"
-        },
-        {
-          "id": "q36_10d",
-          "text": "Hán - Tạng"
-        }
-      ],
-      "correctOptionId": "q36_10a"
-    },
-    {
-      "id": "q37",
-      "question": "Hiện nay, ngôn ngữ quốc gia của nước ta là",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q37a",
-          "text": "tiếng Hán"
-        },
-        {
-          "id": "q37b",
-          "text": "tiếng Việt"
-        },
-        {
-          "id": "q37c",
-          "text": "tiếng Khơ – me"
-        },
-        {
-          "id": "q37d",
-          "text": "tiếng Anh"
-        }
-      ],
-      "correctOptionId": "q37b"
-    },
-    {
-      "id": "q38",
-      "question": "Trước đây, các dân tộc thiểu số ở Việt Nam chủ yếu làm nương rẫy theo hình thức",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q38a",
-          "text": "xen canh"
-        },
-        {
-          "id": "q38b",
-          "text": "luân canh"
-        },
-        {
-          "id": "q38c",
-          "text": "du canh"
-        },
-        {
-          "id": "q38d",
-          "text": "định canh"
-        }
-      ],
-      "correctOptionId": "q38c"
-    },
-    {
-      "id": "q39",
-      "question": "“......là một nhóm các ngôn ngữ có cùng nguồn gốc, có những đặc điểm tương đồng về ngữ âm, thanh điệu, cú pháp và vốn từ vị cơ bản”.",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q39a",
-          "text": "Ngữ hệ"
-        },
-        {
-          "id": "q39b",
-          "text": "Tiếng nói"
-        },
-        {
-          "id": "q39c",
-          "text": "Chữ viết"
-        },
-        {
-          "id": "q39d",
-          "text": "Ngôn từ"
-        }
-      ],
-      "correctOptionId": "q39a"
-    },
-    {
-      "id": "q40",
-      "question": "Trong hoạt động sản xuất nông nghiệp ở vùng đồng bằng, người Kinh chủ yếu canh tác",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q40a",
-          "text": "lúa nước"
-        },
-        {
-          "id": "q40b",
-          "text": "nương rẫy"
-        },
-        {
-          "id": "q40c",
-          "text": "ruộng bậc thang"
-        },
-        {
-          "id": "q40d",
-          "text": "du canh"
-        }
-      ],
-      "correctOptionId": "q40a"
-    },
-    {
-      "id": "q41",
-      "question": "Nội dung nào sau đây không phản ánh đúng hoạt động sản xuất nông nghiệp của người Kinh ở khu vực đồng bằng, duyên hải?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q41a",
-          "text": "Hoạt động nông nghiệp trồng lúa nước phát triển mạnh"
-        },
-        {
-          "id": "q41b",
-          "text": "Hình thức canh tác chuyển dần từ định canh sang du canh"
-        },
-        {
-          "id": "q41c",
-          "text": "Áp dụng khoa học kĩ thuật tiến bộ vào sản xuất nông nghiệp"
-        },
-        {
-          "id": "q41d",
-          "text": "Sản phẩm nông nghiệp đáp ứng nhu cầu trong nước và xuất khẩu"
-        }
-      ],
-      "correctOptionId": "q41b"
-    },
-    {
-      "id": "q42",
-      "question": "Trong hoạt động sản xuất nông nghiệp, các dân tộc thiểu số ở miền núi, trung du chủ yếu phát triển hoạt động canh tác",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q42a",
-          "text": "lúa nước"
-        },
-        {
-          "id": "q42b",
-          "text": "nương rẫy"
-        },
-        {
-          "id": "q42c",
-          "text": "trang trại"
-        },
-        {
-          "id": "q42d",
-          "text": "đồn điền"
-        }
-      ],
-      "correctOptionId": "q42b"
-    },
-    {
-      "id": "q43",
-      "question": "Nội dung nào sau đây không phản ánh đúng hoạt động sản xuất nông nghiệp của các dân tộc thiểu số Việt Nam ở khu vực miền núi, trung du?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q43a",
-          "text": "Chủ yếu phát triển hoạt động canh tác theo nương rẫy"
-        },
-        {
-          "id": "q43b",
-          "text": "Hình thức canh tác chuyển dần từ du canh sang định canh"
-        },
-        {
-          "id": "q43c",
-          "text": "Không áp dụng khoa học kĩ thuật vào sản xuất nông nghiệp"
-        },
-        {
-          "id": "q43d",
-          "text": "Sản phẩm nông nghiệp chủ yếu đáp ứng nhu cầu tại chỗ"
-        }
-      ],
-      "correctOptionId": "q43c"
-    },
-    {
-      "id": "q44",
-      "question": "Nội dung nào sau đây là nguyên nhân dẫn đến sự khác biệt về hình thức sản xuất nông nghiệp giữa dân tộc Kinh với các dân tộc thiểu số ở Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q44a",
-          "text": "Địa bàn cư trú"
-        },
-        {
-          "id": "q44b",
-          "text": "Điều kiện khí hậu"
-        },
-        {
-          "id": "q44c",
-          "text": "Cơ cấu cây trồng"
-        },
-        {
-          "id": "q44d",
-          "text": "Chính sách nhà nước"
-        }
-      ],
-      "correctOptionId": "q44a"
-    },
-    {
-      "id": "q45",
-      "question": "Nội dung nào sau đây phản ánh điểm tương đồng về sản xuất nông nghiệp của người Kinh và các dân tộc thiểu số ở Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q45a",
-          "text": "Canh tác lúa và các cây lương thực"
-        },
-        {
-          "id": "q45b",
-          "text": "Chủ yếu canh tác ở nương rẫy"
-        },
-        {
-          "id": "q45c",
-          "text": "Canh tác lúa bằng ruộng bậc thang"
-        },
-        {
-          "id": "q45d",
-          "text": "Chủ yếu canh tác ở đồng bằng"
-        }
-      ],
-      "correctOptionId": "q45a"
-    },
-    {
-      "id": "q46",
-      "question": "Canh tác lúa nước là hoạt động kinh tế chính của dân tộc nào sau đây ở Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q46a",
-          "text": "Kinh"
-        },
-        {
-          "id": "q46b",
-          "text": "Thái"
-        },
-        {
-          "id": "q46c",
-          "text": "Chăm"
-        },
-        {
-          "id": "q46d",
-          "text": "Mường"
-        }
-      ],
-      "correctOptionId": "q46a"
-    },
-    {
-      "id": "q47",
-      "question": "Nội dung nào sau đây không phải là đặc điểm trong hoạt động sản xuất nông nghiệp của dân tộc Kinh?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q47a",
-          "text": "Trồng lúa trên ruộng bậc thang"
-        },
-        {
-          "id": "q47b",
-          "text": "Phát triển nuôi trồng thủy - hải sản"
-        },
-        {
-          "id": "q47c",
-          "text": "Thường xuyên đắp đê ngăn lũ lụt"
-        },
-        {
-          "id": "q47d",
-          "text": "Trồng lúa và cây lương thực khác"
-        }
-      ],
-      "correctOptionId": "q47a"
-    },
-    {
-      "id": "q48",
-      "question": "Nội dung nào sau đây không phản ánh đúng vai trò của các nghề thủ công đối với đời sống kinh tế - xã hội của người Kinh?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q48a",
-          "text": "Đáp ứng nhu cầu của người dân"
-        },
-        {
-          "id": "q48b",
-          "text": "Tạo ra nguồn hàng hóa xuất khẩu"
-        },
-        {
-          "id": "q48c",
-          "text": "Đem lại việc làm cho người dân"
-        },
-        {
-          "id": "q48d",
-          "text": "Là động lực chính phát triển kinh tế"
-        }
-      ],
-      "correctOptionId": "q48d"
-    },
-    {
-      "id": "q49",
-      "question": "Một trong những nghề thủ công truyền thống tiêu biểu của người Kinh là",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q49a",
-          "text": "làm rượu cần"
-        },
-        {
-          "id": "q49b",
-          "text": "làm gốm"
-        },
-        {
-          "id": "q49c",
-          "text": "dệt thổ cẩm"
-        },
-        {
-          "id": "q49d",
-          "text": "làm đồng hồ"
-        }
-      ],
-      "correctOptionId": "q49b"
-    },
-    {
-      "id": "q50",
-      "question": "Một trong những điểm khác biệt trong hoạt động sản xuất thủ công nghiệp của người Kinh so với các dân tộc thiểu số ở Việt Nam là",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q50a",
-          "text": "Không chỉ đáp ứng nhu cầu trong nước mà còn hướng tới xuất khẩu"
-        },
-        {
-          "id": "q50b",
-          "text": "Sản phẩm thủ công chủ yếu đáp ứng nhu cầu người dân địa phương"
-        },
-        {
-          "id": "q50c",
-          "text": "Các ngành thủ công phong phú nhưng ít hình thành các làng nghề"
-        },
-        {
-          "id": "q50d",
-          "text": "Không ưu tiên các nghề truyền thống để tập trung cho các nghề hiện đại"
-        }
-      ],
-      "correctOptionId": "q50a"
-    },
-    {
-      "id": "q51",
-      "question": "Chợ trên sông là hình thức họp chợ tồn tại chủ yếu ở khu vực",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q51a",
-          "text": "Bắc Bộ"
-        },
-        {
-          "id": "q51b",
-          "text": "Nam Bộ"
-        },
-        {
-          "id": "q51c",
-          "text": "Tây Nguyên"
-        },
-        {
-          "id": "q51d",
-          "text": "Trung Bộ"
-        }
-      ],
-      "correctOptionId": "q51b"
-    },
-    {
-      "id": "q52",
-      "question": "Các dân tộc ở vùng cao như Mông, Dao, Tày, Nùng chủ yếu trao đổi, buôn bán sản phẩm thông qua",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q52a",
-          "text": "chợ nổi"
-        },
-        {
-          "id": "q52b",
-          "text": "chợ trên sông"
-        },
-        {
-          "id": "q52c",
-          "text": "chợ phiên"
-        },
-        {
-          "id": "q52d",
-          "text": "siêu thị"
-        }
-      ],
-      "correctOptionId": "q52c"
-    },
-    {
-      "id": "q53",
-      "question": "Đồ ăn, thức uống cơ bản của người Kinh ở miền Bắc Việt Nam là",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q53a",
-          "text": "cơm tẻ, nước chè"
-        },
-        {
-          "id": "q53b",
-          "text": "mèn mén, rượu cần"
-        },
-        {
-          "id": "q53c",
-          "text": "cơm nếp, nước vối"
-        },
-        {
-          "id": "q53d",
-          "text": "xôi, ngô, rượu đoác"
-        }
-      ],
-      "correctOptionId": "q53a"
-    },
-    {
-      "id": "q54",
-      "question": "Nguồn lương thực chính của các dân tộc ở Việt Nam là",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q54a",
-          "text": "thịt, cá"
-        },
-        {
-          "id": "q54b",
-          "text": "rau, củ"
-        },
-        {
-          "id": "q54c",
-          "text": "cá, rau"
-        },
-        {
-          "id": "q54d",
-          "text": "lúa, ngô"
-        }
-      ],
-      "correctOptionId": "q54d"
-    },
-    {
-      "id": "q55",
-      "question": "Nội dung nào sau đây phản ánh không đúng đặc điểm ăn uống của dân tộc Kinh trên lãnh thổ Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q55a",
-          "text": "Gạo tẻ là nguồn lương thực chính hàng ngày"
-        },
-        {
-          "id": "q55b",
-          "text": "Tạo ra nhiều món ăn ngon nổi tiếng đặc trưng"
-        },
-        {
-          "id": "q55c",
-          "text": "Thường uống rượu cần vào các dịp lễ quan trọng"
-        },
-        {
-          "id": "q55d",
-          "text": "Các món ăn mang đậm bản sắc văn hóa vùng miền"
-        }
-      ],
-      "correctOptionId": "q55c"
-    },
-    {
-      "id": "q56",
-      "question": "Khăn Piêu là một sản phẩm thổ cẩm nổi tiếng của dân tộc nào sau đây?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q56a",
-          "text": "Kinh"
-        },
-        {
-          "id": "q56b",
-          "text": "Thái"
-        },
-        {
-          "id": "q56c",
-          "text": "Hoa"
-        },
-        {
-          "id": "q56d",
-          "text": "Sán Dìu"
-        }
-      ],
-      "correctOptionId": "q56b"
-    },
-    {
-      "id": "q57",
-      "question": "Nhận xét nào sau đây không đúng về trang phục của các dân tộc ở Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q57a",
-          "text": "Chủ yếu vay mượn từ bên ngoài"
-        },
-        {
-          "id": "q57b",
-          "text": "Phong phú về hoa văn trang trí"
-        },
-        {
-          "id": "q57c",
-          "text": "Đa dạng về kiểu dáng và màu sắc"
-        },
-        {
-          "id": "q57d",
-          "text": "Thể hiện tập quán của mỗi dân tộc"
-        }
-      ],
-      "correctOptionId": "q57a"
-    },
-    {
-      "id": "q58",
-      "question": "Kiểu nhà phổ biến của đồng bào các dân tộc thiểu số sống ở miền núi, trung du và cao nguyên của Việt Nam là",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q58a",
-          "text": "nhà sàn"
-        },
-        {
-          "id": "q58b",
-          "text": "nhà trệt"
-        },
-        {
-          "id": "q58c",
-          "text": "nhà tầng"
-        },
-        {
-          "id": "q58d",
-          "text": "chung cư"
-        }
-      ],
-      "correctOptionId": "q58a"
-    },
-    {
-      "id": "q59",
-      "question": "Kiểu nhà ở phổ biến của người Kinh, Hoa và Chăm ở khu vực đồng bằng là",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q59a",
-          "text": "nhà sàn"
-        },
-        {
-          "id": "q59b",
-          "text": "nhà thuyền"
-        },
-        {
-          "id": "q59c",
-          "text": "nhà rông"
-        },
-        {
-          "id": "q59d",
-          "text": "nhà trệt"
-        }
-      ],
-      "correctOptionId": "q59d"
-    },
-    {
-      "id": "q60",
-      "question": "Các dân tộc thiểu số ở nước ta trước đây chủ yếu đi bộ và vận chuyển đồ bằng gùi vì một trong những lý do nào sau đây?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q60a",
-          "text": "Sinh sống chủ yếu ở miền núi dốc, hẹp"
-        },
-        {
-          "id": "q60b",
-          "text": "Sinh sống ở vùng đồng bằng nhiều sông"
-        },
-        {
-          "id": "q60c",
-          "text": "Nhu cầu vận chuyển đồ đạc ngày càng cao"
-        },
-        {
-          "id": "q60d",
-          "text": "Nền kinh tế thị trường chưa phát triển"
-        }
-      ],
-      "correctOptionId": "q60a"
-    },
-    {
-      "id": "q61",
-      "question": "Tín ngưỡng quan trọng nhất của người Kinh là",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q61a",
-          "text": "tín ngưỡng phồn thực"
-        },
-        {
-          "id": "q61b",
-          "text": "thờ thần tự nhiên"
-        },
-        {
-          "id": "q61c",
-          "text": "thờ tổ nghề"
-        },
-        {
-          "id": "q61d",
-          "text": "thờ cúng tổ tiên"
-        }
-      ],
-      "correctOptionId": "q61d"
-    },
-    {
-      "id": "q62",
-      "question": "Hiện nay, phần lớn dân tộc Chăm cư trú ở Ninh Thuận và Bình Thuận theo",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q62a",
-          "text": "Hin-đu giáo"
-        },
-        {
-          "id": "q62b",
-          "text": "Phật giáo"
-        },
-        {
-          "id": "q62c",
-          "text": "Thiên Chúa giáo"
-        },
-        {
-          "id": "q62d",
-          "text": "Hồi giáo"
-        }
-      ],
-      "correctOptionId": "q62d"
-    },
-    {
-      "id": "q63",
-      "question": "Tín ngưỡng nào sau đây không phải là tín ngưỡng bản địa của người Kinh?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q63a",
-          "text": "Thờ tổ nghề"
-        },
-        {
-          "id": "q63b",
-          "text": "Thờ cúng tổ tiên"
-        },
-        {
-          "id": "q63c",
-          "text": "Thờ Mẫu"
-        },
-        {
-          "id": "q63d",
-          "text": "Thờ Chúa"
-        }
-      ],
-      "correctOptionId": "q63d"
-    },
-    {
-      "id": "q64",
-      "question": "Cộng đồng các dân tộc Việt Nam đều có chung tín ngưỡng nào sau đây?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q64a",
-          "text": "Thờ thần nông nghiệp"
-        },
-        {
-          "id": "q64b",
-          "text": "Thờ Mẫu"
-        },
-        {
-          "id": "q64c",
-          "text": "Thờ Chúa"
-        },
-        {
-          "id": "q64d",
-          "text": "Thờ cúng tổ tiên"
-        }
-      ],
-      "correctOptionId": "q64d"
-    },
-    {
-      "id": "q65",
-      "question": "Nội dung nào sau đây không phản ánh đúng điểm tương đồng trong hoạt động tín ngưỡng, tôn giáo của cộng đồng các dân tộc Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q65a",
-          "text": "Quan niệm vạn vật hữu linh"
-        },
-        {
-          "id": "q65b",
-          "text": "Thờ cúng tổ tiên"
-        },
-        {
-          "id": "q65c",
-          "text": "Tiếp thu nhiều tôn giáo lớn"
-        },
-        {
-          "id": "q65d",
-          "text": "Tôn giáo, tín ngưỡng phong phú"
-        }
-      ],
-      "correctOptionId": "q65a"
-    },
-    {
-      "id": "q66",
-      "question": "Nội dung nào sau đây không phản ánh đúng về lễ hội của người Kinh?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q66a",
-          "text": "Quy mô lễ hội khá đa dạng"
-        },
-        {
-          "id": "q66b",
-          "text": "Mang đậm tính truyền thống"
-        },
-        {
-          "id": "q66c",
-          "text": "Lễ hội chỉ diễn ra vào mùa xuân"
-        },
-        {
-          "id": "q66d",
-          "text": "Hệ thống lễ hội đa dạng và phong phú"
-        }
-      ],
-      "correctOptionId": "q66c"
-    },
-    {
-      "id": "q67",
-      "question": "Lễ hội của các dân tộc thiểu số ở Việt Nam chủ yếu được tổ chức với quy mô như thế nào?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q67a",
-          "text": "Làng/bản và tộc người"
-        },
-        {
-          "id": "q67b",
-          "text": "Quốc gia và quốc tế"
-        },
-        {
-          "id": "q67c",
-          "text": "Làng/bản và quốc tế"
-        },
-        {
-          "id": "q67d",
-          "text": "Tộc người và quốc tế"
-        }
-      ],
-      "correctOptionId": "q67a"
-    },
-    {
-      "id": "q68",
-      "question": "Nội dung nào sau đây không phản ánh đúng về đời sống tinh thần của cộng đồng các dân tộc ở Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q68a",
-          "text": "Chỉ tiếp thu văn hóa phương Đông"
-        },
-        {
-          "id": "q68b",
-          "text": "Mang đậm bản sắc dân tộc"
-        },
-        {
-          "id": "q68c",
-          "text": "Có tiếp thu văn hóa bên ngoài"
-        },
-        {
-          "id": "q68d",
-          "text": "Đời sống tinh thần phong phú"
-        }
-      ],
-      "correctOptionId": "q68a"
-    },
-    {
-      "id": "q69",
-      "question": "Nội dung nào sau đây không phản ánh đúng vai trò của lễ hội đối với đời sống văn hóa tinh thần của các dân tộc Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q69a",
-          "text": "Là dịp bày tỏ lòng biết ơn sự che chở, phù hộ của thần linh, tổ tiên"
-        },
-        {
-          "id": "q69b",
-          "text": "Là cơ sở vật chất tạo nên sự phát triển kinh tế - văn hóa - xã hội"
-        },
-        {
-          "id": "q69c",
-          "text": "Góp phần giữ gìn và phát huy bản sắc văn hóa qua các thế hệ"
-        },
-        {
-          "id": "q69d",
-          "text": "Là dịp các thành viên gặp gỡ, giao lưu và thắt chặt tình đoàn kết"
-        }
-      ],
-      "correctOptionId": "q69b"
-    },
-    {
-      "id": "q70",
-      "question": "Một trong những công trình kiến trúc tiêu biểu của nước ta dưới thời kì văn minh Đại Việt là",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q70a",
-          "text": "thành nhà Hồ"
-        },
-        {
-          "id": "q70b",
-          "text": "Thánh địa Mỹ Sơn"
-        },
-        {
-          "id": "q70c",
-          "text": "Thành Cổ Loa"
-        },
-        {
-          "id": "q70d",
-          "text": "dinh Độc lập"
-        }
-      ],
-      "correctOptionId": "q70a"
-    },
-    {
-      "id": "q71",
-      "question": "Nội dung nào sau đây phản ánh đúng đặc điểm về đời sống văn hóa của cộng đồng các dân tộc Việt Nam?",
-      "type": "multiple-choice",
-      "options": [
-        {
-          "id": "q71a",
-          "text": "Có tính thống nhất trong đa dạng"
-        },
-        {
-          "id": "q71b",
-          "text": "Không tiếp thu yếu tố bên ngoài"
-        },
-        {
-          "id": "q71c",
-          "text": "Không có sự giao thoa giữa các tộc người"
-        },
-        {
-          "id": "q71d",
-          "text": "Đều lấy Phật giáo là tôn giáo chủ đạo"
-        }
-      ],
-      "correctOptionId": "q71a"
-    },
-    {
-      "id": "r1",
-      "type": "reading",
-      "passage": "Sinh sống ở vùng địa hình cao, dốc, làm ruộng bậc thang là cách thích ứng với tự nhiên của các dân tộc thiểu số ở một số tỉnh miền núi phía bắc. Trên vùng núi cao ở Sa Pa (Lào Cai), Mù Cang Chải (Yên Bái), Hoàng Su Phì (Hà Giang), các dân tộc Nùng, Dao, Mông, La Chí,… đã tạo nên những cánh đồng ruộng bậc thang rộng hàng nghìn héc-ta.",
-      "questions": [
-        {
-          "id": "r1a",
-          "question": "Ruộng bậc thang xuất hiện phổ biến ở các tỉnh miền núi phía Bắc, chủ yếu trồng các loại cây lương thực như ngô, khoai, sắn.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r1a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r1a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r1a2"
-        },
-        {
-          "id": "r1b",
-          "question": "Ruộng bậc thang là hình thức canh tác của dân tộc Kinh và một số dân tộc thiểu số ở phía Bắc.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r1b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r1b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r1b2"
-        },
-        {
-          "id": "r1c",
-          "question": "Ruộng bậc thang chỉ xuất hiện ở các vùng có địa hình cao, dốc, không xuất hiện ở đồng bằng.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r1c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r1c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r1c1"
-        },
-        {
-          "id": "r1d",
-          "question": "Phát triển ruộng bậc thang vừa phục vụ sản xuất nông nghiệp, vừa phục vụ du lịch.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r1d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r1d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r1d1"
-        }
-      ]
-    },
-    {
-      "id": "r2",
-      "type": "reading",
-      "passage": "Người Kinh và các dân tộc thiểu số đều phát triển nhiều ngành nghề thủ công truyền thống. Sản phẩm của người Kinh đa dạng, tinh xảo và có thể xuất khẩu; trong khi sản phẩm của các dân tộc thiểu số chủ yếu phục vụ nhu cầu địa phương.",
-      "questions": [
-        {
-          "id": "r2a",
-          "question": "Cả người Kinh và các dân tộc thiểu số đều phát triển đa dạng nghề thủ công.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r2a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r2a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r2a1"
-        },
-        {
-          "id": "r2b",
-          "question": "Nghề dệt, đan, rèn sắt, đúc đồng là nghề truyền thống của cả hai nhóm.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r2b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r2b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r2b1"
-        },
-        {
-          "id": "r2c",
-          "question": "Nghề thủ công của dân tộc thiểu số mang bản sắc riêng và chủ yếu phục vụ tại chỗ.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r2c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r2c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r2c1"
-        },
-        {
-          "id": "r2d",
-          "question": "Sự khác biệt thể hiện ở mức độ phổ biến và phạm vi tiêu thụ sản phẩm.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r2d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r2d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r2d1"
-        }
-      ]
-    },
-    {
-      "id": "r3",
-      "type": "reading",
-      "passage": "Ngữ hệ là nhóm các ngôn ngữ có cùng nguồn gốc. Việt Nam có nhiều ngữ hệ khác nhau, trong đó tiếng Việt thuộc nhóm Việt - Mường của ngữ hệ Nam Á.",
-      "questions": [
-        {
-          "id": "r3a",
-          "question": "Ngữ hệ gồm các ngôn ngữ giống hệt nhau về vốn từ.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r3a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r3a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r3a2"
-        },
-        {
-          "id": "r3b",
-          "question": "Việt Nam là quốc gia đa dân tộc và đa ngữ hệ.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r3b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r3b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r3b1"
-        },
-        {
-          "id": "r3c",
-          "question": "Ngôn ngữ quốc gia thuộc ngữ hệ Nam Á.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r3c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r3c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r3c1"
-        },
-        {
-          "id": "r3d",
-          "question": "Hiến pháp 2013 tôn trọng tiếng nói và chữ viết của các dân tộc.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r3d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r3d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r3d1"
-        }
-      ]
-    },
-    {
-      "id": "r4",
-      "type": "reading",
-      "passage": "Việt Nam có 54 dân tộc, trong đó Kinh, Hoa, Chăm, Khmer sống chủ yếu ở đồng bằng; các dân tộc khác chủ yếu ở miền núi. Hiện tượng cư trú đan xen diễn ra phổ biến.",
-      "questions": [
-        {
-          "id": "r4a",
-          "question": "4 dân tộc Kinh, Hoa, Chăm, Khmer là dân tộc đa số.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r4a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r4a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r4a2"
-        },
-        {
-          "id": "r4b",
-          "question": "Địa bàn cư trú của nhóm này khác với các dân tộc còn lại.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r4b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r4b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r4b1"
-        },
-        {
-          "id": "r4c",
-          "question": "Cư trú đan xen chỉ mới xuất hiện trong những thập kỉ gần đây.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r4c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r4c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r4c2"
-        },
-        {
-          "id": "r4d",
-          "question": "Cư trú đan xen là sự hoán đổi hoàn toàn nơi sống giữa các dân tộc.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r4d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r4d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r4d2"
-        }
-      ]
-    },
-    {
-      "id": "r5",
-      "type": "reading",
-      "passage": "Các dân tộc trên đất nước Việt Nam đã hình thành và phát triển lâu dài trong lịch sử, hợp thành cộng đồng các dân tộc Việt Nam; văn hóa Việt Nam là sự tổng hòa các giá trị văn hóa của 54 dân tộc anh em trên cùng lãnh thổ...",
-      "questions": [
-        {
-          "id": "r5a",
-          "question": "Văn hóa Việt Nam là sự tổng hòa văn hóa của tất cả các dân tộc sinh sống trên lãnh thổ Việt Nam.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r5a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r5a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r5a1"
-        },
-        {
-          "id": "r5b",
-          "question": "Các dân tộc sống trên lãnh thổ Việt Nam có sự khác biệt nhau hoàn toàn về ngôn ngữ, phong tục tập quán, hoạt động kinh tế.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r5b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r5b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r5b2"
-        },
-        {
-          "id": "r5c",
-          "question": "Đời sống văn hóa, tinh thần của các dân tộc hoàn toàn tương đồng.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r5c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r5c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r5c2"
-        },
-        {
-          "id": "r5d",
-          "question": "Thống nhất trong đa dạng là đặc điểm nổi bật của văn hóa Việt Nam.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r5d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r5d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r5d1"
-        }
-      ]
-    },
-    {
-      "id": "r6",
-      "type": "reading",
-      "passage": "Người Kinh tập trung chủ yếu ở vùng đồng bằng, trung du và duyên hải... Các dân tộc thiểu số trước đây chủ yếu du canh, hiện nay chuyển sang định canh...",
-      "questions": [
-        {
-          "id": "r6a",
-          "question": "Đoạn tư liệu phản ánh về cả nông nghiệp và thủ công nghiệp.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r6a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r6a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r6a2"
-        },
-        {
-          "id": "r6b",
-          "question": "Hoạt động nông nghiệp gồm trồng trọt và chăn nuôi, nhưng có sự khác nhau giữa các dân tộc.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r6b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r6b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r6b1"
-        },
-        {
-          "id": "r6c",
-          "question": "Trồng lúa nước chỉ do người Kinh thực hiện.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r6c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r6c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r6c2"
-        },
-        {
-          "id": "r6d",
-          "question": "Hình thức canh tác của các dân tộc thiểu số đang chuyển biến tích cực.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r6d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r6d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r6d1"
-        }
-      ]
-    },
-    {
-      "id": "r7",
-      "type": "reading",
-      "passage": "Bữa ăn truyền thống của người Kinh thường gồm cơm, rau, cá... Các dân tộc thiểu số có sự khác biệt trong chế biến và sử dụng thực phẩm...",
-      "questions": [
-        {
-          "id": "r7a",
-          "question": "Nguồn lương thực chính là lúa gạo.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r7a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r7a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r7a1"
-        },
-        {
-          "id": "r7b",
-          "question": "Bữa ăn bao gồm sản phẩm từ trồng trọt, chăn nuôi và thủy sản.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r7b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r7b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r7b1"
-        },
-        {
-          "id": "r7c",
-          "question": "Cách chế biến có sự khác biệt và mang bản sắc vùng miền.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r7c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r7c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r7c1"
-        },
-        {
-          "id": "r7d",
-          "question": "Các món thịt chỉ dùng trong lễ hội, cúng tế.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r7d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r7d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r7d2"
-        }
-      ]
-    },
-    {
-      "id": "r8",
-      "type": "reading",
-      "passage": "Người Kinh tiếp thu nhiều tôn giáo như Phật giáo, Công giáo... Các dân tộc thiểu số theo tín ngưỡng đa thần và cũng chịu ảnh hưởng tôn giáo lớn...",
-      "questions": [
-        {
-          "id": "r8a",
-          "question": "Đoạn tư liệu phản ánh đời sống tín ngưỡng, tôn giáo.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r8a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r8a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r8a1"
-        },
-        {
-          "id": "r8b",
-          "question": "Cả người Kinh và dân tộc thiểu số đều tiếp thu tôn giáo lớn.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r8b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r8b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r8b1"
-        },
-        {
-          "id": "r8c",
-          "question": "Chỉ người Kinh mới có công trình và lễ hội tôn giáo.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r8c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r8c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r8c2"
-        },
-        {
-          "id": "r8d",
-          "question": "Tín ngưỡng đa thần và thờ cúng tổ tiên chỉ có ở dân tộc thiểu số.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r8d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r8d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r8d2"
-        }
-      ]
-    },
-    {
-      "id": "r9",
-      "type": "reading",
-      "passage": "Trong Chiếu dời đô, vua Lý Thái Tổ đã nói rõ dời chuyển kinh đô là một việc trọng đại “không thể theo ý riêng tự dời” mà để “mưu nghiệp lớn”, “làm kế cho con cháu muôn vạn đời, trên kính mệnh trời, dưới theo ý dân”. Vua Lý Thái Tổ lúc này đã có một tầm nhìn chiến lược quan trọng đối với vận mệnh lâu dài của dân tộc là chọn thành Đại La – nơi hội tụ đầy đủ mọi điều kiện về kinh tế, chính trị và xã hội làm kinh đô của một quốc gia thống nhất và thịnh vượng.",
-      "questions": [
-        {
-          "id": "r9a",
-          "question": "Khi lên ngôi, vua Lý Thái Tổ đã quyết định cho dời đô từ vùng núi non hiểm trở về trung tâm đồng bằng.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r9a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r9a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r9a1"
-        },
-        {
-          "id": "r9b",
-          "question": "Thành Đại La từng là kinh đô của một số triều đại phong kiến độc lập của Việt Nam trước đó.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r9b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r9b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r9b2"
-        },
-        {
-          "id": "r9c",
-          "question": "Việc dời đô của Lý Thái Tổ chủ yếu xuất phát từ nhu cầu phòng thủ, bảo vệ đất nước.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r9c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r9c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r9c2"
-        },
-        {
-          "id": "r9d",
-          "question": "Việc dời đô ra Đại La đã mở ra thời kì phát triển rực rỡ của văn minh Đại Việt.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r9d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r9d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r9d1"
-        }
-      ]
-    },
-    {
-      "id": "r10",
-      "type": "reading",
-      "passage": "Bộ Quốc triều hình luật (gồm 722 điều) là bộ luật hoàn chỉnh nhất được thực thi từ thời Lê sơ đến thời Lê Trung hưng. Bộ luật này có nhiều điều tiến bộ, đặc biệt bảo vệ quyền lợi của phụ nữ như: con gái được chia tài sản như con trai; có quyền thừa kế nếu không có con trai; tài sản được chia cho cả vợ và chồng.",
-      "questions": [
-        {
-          "id": "r10a",
-          "question": "Quốc triều hình luật là một bộ luật hoàn chỉnh và tiến bộ của nước ta.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r10a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r10a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r10a1"
-        },
-        {
-          "id": "r10b",
-          "question": "Đây là bộ luật thành văn đầu tiên của nước ta.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r10b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r10b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r10b2"
-        },
-        {
-          "id": "r10c",
-          "question": "Các điều luật nêu trên nhằm bảo vệ quyền lợi của phụ nữ và người yếu thế.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r10c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r10c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r10c2"
-        },
-        {
-          "id": "r10d",
-          "question": "Con gái có quyền thừa kế tài sản cùng với con trai.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r10d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r10d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r10d2"
-        }
-      ]
-    },
-    {
-      "id": "r11",
-      "type": "reading",
-      "passage": "Theo Nghị định 05/2011/NĐ-CP: dân tộc đa số là dân tộc chiếm trên 50% dân số; dân tộc thiểu số là các dân tộc có số dân ít hơn so với dân tộc đa số.",
-      "questions": [
-        {
-          "id": "r11a",
-          "question": "Thành phần dân tộc nước ta được chia thành dân tộc đa số và dân tộc thiểu số.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r11a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r11a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r11a1"
-        },
-        {
-          "id": "r11b",
-          "question": "Việc phân chia còn dựa vào trình độ phát triển của từng dân tộc.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r11b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r11b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r11b2"
-        },
-        {
-          "id": "r11c",
-          "question": "Dân tộc đa số là dân tộc chiếm hơn một nửa dân số.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r11c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r11c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r11c1"
-        },
-        {
-          "id": "r11d",
-          "question": "Dân tộc Tày thuộc nhóm dân tộc thiểu số.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r11d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r11d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r11d1"
-        }
-      ]
-    },
-    {
-      "id": "r12",
-      "type": "reading",
-      "passage": "Ngữ hệ là nhóm các ngôn ngữ có cùng nguồn gốc và đặc điểm tương đồng. Việt Nam có 5 ngữ hệ lớn. Tiếng Việt thuộc nhóm Việt - Mường, ngữ hệ Nam Á. Hiến pháp 2013 quy định tiếng Việt là ngôn ngữ quốc gia và tôn trọng tiếng nói, chữ viết các dân tộc.",
-      "questions": [
-        {
-          "id": "r12a",
-          "question": "Các ngôn ngữ trong cùng ngữ hệ giống hệt nhau về từ vựng.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r12a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r12a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r12a2"
-        },
-        {
-          "id": "r12b",
-          "question": "Việt Nam là quốc gia đa dân tộc và đa ngữ hệ.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r12b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r12b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r12b1"
-        },
-        {
-          "id": "r12c",
-          "question": "Ngôn ngữ quốc gia thuộc ngữ hệ Nam Á.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r12c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r12c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r12c1"
-        },
-        {
-          "id": "r12d",
-          "question": "Hiến pháp tôn trọng tiếng nói, chữ viết của các dân tộc.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r12d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r12d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r12d1"
-        }
-      ]
-    },
-    {
-      "id": "r13",
-      "type": "reading",
-      "passage": "Người Kinh sáng tạo, duy trì và phát triển hệ thống lễ hội đa dạng và phong phú, gồm lễ hội liên quan đến các tín ngưỡng dân gian, lễ hội tôn giáo, lễ hội tưởng nhớ các anh hùng dân tộc,… Về quy mô, lễ hội của người Kinh cũng khá đa dạng, từ các lễ hội của cộng đồng làng đến lễ hội của vùng, quốc gia, quốc tế…. Lễ hội của các dân tộc thiểu số Việt Nam chủ yếu được tổ chức với quy mô làng/bản và tộc người. Một số lễ hội liên quan đến cộng đồng cư dân – dân tộc cư trú tại một vài làng/bản trong một khu vực. Các lễ hội phổ biến như: lễ tế thần, lễ hội cơm mới, đưa thóc vào kho,…, lễ hội liên quan đến chùa (người Khơ-me), đền, tháp (người Chăm, người Hoa),…",
-      "questions": [
-        {
-          "id": "r13a",
-          "question": "Hệ thống lễ hội của các dân tộc ở Việt Nam đều rất đa dạng, phong phú.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r13a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r13a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r13a1"
-        },
-        {
-          "id": "r13b",
-          "question": "Lễ hội cơm mới, đưa thóc vào kho gắn với hoạt động sản xuất nông nghiệp của các dân tộc thiểu số.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r13b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r13b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r13b1"
-        },
-        {
-          "id": "r13c",
-          "question": "Lễ hội của người Kinh và các dân tộc thiểu số không có sự khác biệt về quy mô và tầm ảnh hưởng.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r13c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r13c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r13c2"
-        },
-        {
-          "id": "r13d",
-          "question": "Các dân tộc ở Việt Nam ít duy trì lễ hội liên quan đến tín ngưỡng, tôn giáo.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r13d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r13d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r13d2"
-        }
-      ]
-    },
-    {
-      "id": "r14",
-      "type": "reading",
-      "passage": "Về chữ viết, trên cơ sở tiếp thu chữ Hán, người Việt đã sáng tạo ra chữ Nôm để ghi lại tiếng nói dân tộc. Bên cạnh chữ Hán là văn tự chính thống, một số triều đại đã khuyến khích chữ Nôm. Đến thế kỉ XVII, chữ Quốc ngữ hình thành từ bảng chữ cái La-tinh và dần trở thành chữ viết chính thức.",
-      "questions": [
-        {
-          "id": "r14a",
-          "question": "Chữ Nôm xuất hiện trước chữ Hán.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r14a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r14a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r14a2"
-        },
-        {
-          "id": "r14b",
-          "question": "Chữ viết chính thức hiện nay của người Việt ra đời từ thế kỉ XVII.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r14b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r14b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r14b1"
-        },
-        {
-          "id": "r14c",
-          "question": "Một số triều đại đã khuyến khích sử dụng chữ Nôm để đề cao tinh thần dân tộc.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r14c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r14c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r14c1"
-        },
-        {
-          "id": "r14d",
-          "question": "Chữ Nôm và chữ Quốc ngữ đều được sáng tạo trên cơ sở tiếp thu yếu tố bên ngoài.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r14d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r14d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r14d1"
-        }
-      ]
-    },
-    {
-      "id": "r15",
-      "type": "reading",
-      "passage": "Văn hóa Lý – Trần – Hồ là giai đoạn phát triển thịnh đạt của văn hóa Đại Việt. Nền văn hóa này vừa khôi phục yếu tố truyền thống, vừa tiếp thu yếu tố ngoại sinh, tạo nên bản sắc riêng, mang đậm tính dân tộc. Đồng thời, có sự hòa trộn giữa văn hóa dân gian và cung đình, giữa Phật – Đạo – Nho, trong đó yếu tố dân gian chiếm ưu thế.",
-      "questions": [
-        {
-          "id": "r15a",
-          "question": "Văn hóa thời Lý – Trần – Hồ mang đậm tính dân tộc và dân gian.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r15a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r15a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r15a1"
-        },
-        {
-          "id": "r15b",
-          "question": "“Tam giáo đồng nguyên” là đặc điểm nổi bật trong đời sống tôn giáo thời kì này.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r15b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r15b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r15b1"
-        },
-        {
-          "id": "r15c",
-          "question": "Văn hóa thời kì này phát triển hoàn toàn dựa trên yếu tố truyền thống.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r15c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r15c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r15c2"
-        },
-        {
-          "id": "r15d",
-          "question": "Văn hóa dân gian và cung đình có sự hòa hợp, trong đó văn hóa dân gian chiếm ưu thế.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r15d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r15d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r15d1"
-        }
-      ]
-    },
-    {
-      "id": "r16",
-      "type": "reading",
-      "passage": "Bữa ăn truyền thống của người Kinh gồm cơm, canh, rau và thường dùng nước mắm. Các dân tộc ở Tây Bắc ăn xôi, ngô và uống rượu cần trong dịp lễ. Trang phục dân tộc thiểu số đa dạng về hoa văn, màu sắc; vùng Tây Bắc thường có họa tiết đa sắc, còn vùng đồng bằng sông Cửu Long đơn giản hơn.",
-      "questions": [
-        {
-          "id": "r16a",
-          "question": "Bữa ăn của người Kinh và dân tộc Tây Bắc hoàn toàn giống nhau.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r16a1",
-              "text": "Đ"
-            },
-            {
-              "id": "r16a2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r16a2"
-        },
-        {
-          "id": "r16b",
-          "question": "Nước mắm là gia vị đặc trưng của người Kinh.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r16b1",
-              "text": "Đ"
-            },
-            {
-              "id": "r16b2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r16b1"
-        },
-        {
-          "id": "r16c",
-          "question": "Khăn Piêu thể hiện sự khéo léo của phụ nữ dân tộc Thái.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r16c1",
-              "text": "Đ"
-            },
-            {
-              "id": "r16c2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r16c1"
-        },
-        {
-          "id": "r16d",
-          "question": "Trang phục vùng đồng bằng sông Cửu Long cầu kỳ và đa sắc hơn Tây Bắc.",
-          "type": "multiple-choice",
-          "options": [
-            {
-              "id": "r16d1",
-              "text": "Đ"
-            },
-            {
-              "id": "r16d2",
-              "text": "S"
-            }
-          ],
-          "correctOptionId": "r16d2"
-        }
-      ]
-    }
-  ]
+    "questions": [
+        {
+            "id": "q1",
+            "question": "Ở Việt Nam, những nghề thủ công ra đời sớm và phát triển mạnh ở các dân tộc thiểu số là",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q1a",
+                    "text": ""
+                },
+                {
+                    "id": "q1b",
+                    "text": "nghề rèn, đúc và nghề mộc."
+                },
+                {
+                    "id": "q1c",
+                    "text": "nghề gốm và nghề rèn đúc."
+                },
+                {
+                    "id": "q1d",
+                    "text": "nghề gốm và làm đồ trang sức."
+                }
+            ],
+            "correctOptionId": "q1a"
+        },
+        {
+            "id": "q2",
+            "question": "Ở Việt Nam, dân tộc thiểu số nào thường tổ chức các lễ hội liên quan đến chùa chiềng?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q2a",
+                    "text": "Người Khơ-me."
+                },
+                {
+                    "id": "q2b",
+                    "text": "Người Kinh."
+                },
+                {
+                    "id": "q2c",
+                    "text": "Người Chăm."
+                },
+                {
+                    "id": "q2d",
+                    "text": "Người Mường."
+                }
+            ],
+            "correctOptionId": "q2a"
+        },
+        {
+            "id": "q3",
+            "question": "Ở Việt Nam, các lễ hội của dân tộc thiểu số chủ yếu được tổ chức với quy mô",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q3a",
+                    "text": "từng làng/bản và tộc người."
+                },
+                {
+                    "id": "q3b",
+                    "text": "nhiều làng/bản hay cả khu vực."
+                },
+                {
+                    "id": "q3c",
+                    "text": "tập trung ở các đô thị lớn."
+                },
+                {
+                    "id": "q3d",
+                    "text": "diễn ra trên phạm vi cả nước."
+                }
+            ],
+            "correctOptionId": "q3a"
+        },
+        {
+            "id": "q4",
+            "question": "Tín ngưỡng, tôn giáo nào sau đây được người Việt tiếp thu từ bên ngoài?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q4a",
+                    "text": "Thờ Phật."
+                },
+                {
+                    "id": "q4b",
+                    "text": "Thờ anh hùng dân tộc."
+                },
+                {
+                    "id": "q4c",
+                    "text": "Thờ Thành hoàng."
+                },
+                {
+                    "id": "q4d",
+                    "text": "Thờ cúng tổ tiên."
+                }
+            ],
+            "correctOptionId": "q4a"
+        },
+        {
+            "id": "q5",
+            "question": "Các dân tộc thiểu số ở Việt Nam dùng nguyên liệu nào để may trang phục?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q5a",
+                    "text": "Vải lụa, vải thổ cẩm, vải lanh."
+                },
+                {
+                    "id": "q5b",
+                    "text": "Vải thổ cẩm, vải lụa, vải tơ tằm."
+                },
+                {
+                    "id": "q5c",
+                    "text": "Vải lanh, vải phi bóng, vải thổ cẩm."
+                },
+                {
+                    "id": "q5d",
+                    "text": "Vải bông, vải tơ tằm, vải lanh."
+                }
+            ],
+            "correctOptionId": "q5a"
+        },
+        {
+            "id": "q6",
+            "question": "Các dân tộc thiểu số ở Việt Nam phát triển đa dạng ngành nghề nào?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q6a",
+                    "text": "Nghề nông trồng lúa."
+                },
+                {
+                    "id": "q6b",
+                    "text": "Nghề chăn nuôi."
+                },
+                {
+                    "id": "q6c",
+                    "text": "Ngành nghề thủ công."
+                },
+                {
+                    "id": "q6d",
+                    "text": "Nghề đánh bắt thủy, hải sản."
+                }
+            ],
+            "correctOptionId": "q6a"
+        },
+        {
+            "id": "q7",
+            "question": "Để có nước canh tác trên ruộng bậc thang, cư dân các dân tộc thiểu số đã làm gì?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q7a",
+                    "text": "Dẫn nước từ các dòng suối trên cao xuống."
+                },
+                {
+                    "id": "q7b",
+                    "text": "Dẫn nước từ các đồng bằng lên các sườn núi."
+                },
+                {
+                    "id": "q7c",
+                    "text": "Cho khoan cây nước tại chỗ phục vụ tưới tiêu."
+                },
+                {
+                    "id": "q7d",
+                    "text": "Sử dụng máy bom nước đưa từ đồng bằng lên."
+                }
+            ],
+            "correctOptionId": "q7a"
+        },
+        {
+            "id": "q8",
+            "question": "Để có nước canh tác trên ruộng bậc thang, cư dân các dân tộc thiểu số đã làm gì?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q8a",
+                    "text": "Cho khoan cây nước tại chỗ phục vụ tưới tiêu."
+                },
+                {
+                    "id": "q8b",
+                    "text": "Dẫn nước từ các đồng bằng lên các sườn núi."
+                },
+                {
+                    "id": "q8c",
+                    "text": "Tạo hồ hứng và chứa nước mưa trên đỉnh núi."
+                },
+                {
+                    "id": "q8d",
+                    "text": "Sử dụng máy bom nước đưa từ đồng bằng lên."
+                }
+            ],
+            "correctOptionId": "q8c"
+        },
+        {
+            "id": "q9",
+            "question": "Dựa trên cơ sở nào cư dân các dân tộc trên đất nước Việt Nam xây dựng mô hình nhà ở cho mình?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q9a",
+                    "text": "Địa bàn sinh sống."
+                },
+                {
+                    "id": "q9b",
+                    "text": "Thành phần dân cư."
+                },
+                {
+                    "id": "q9c",
+                    "text": "Phân hóa xã hội."
+                },
+                {
+                    "id": "q9d",
+                    "text": "Yếu tố tâm lí."
+                }
+            ],
+            "correctOptionId": "q9a"
+        },
+        {
+            "id": "q10",
+            "question": "Dựa trên cơ sở nào cư dân các dân tộc trên đất nước Việt Nam xây dựng mô hình nhà ở cho mình?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q10a",
+                    "text": "Điều kiện tự nhiên."
+                },
+                {
+                    "id": "q10b",
+                    "text": "Thành phần dân cư."
+                },
+                {
+                    "id": "q10c",
+                    "text": "Phân hóa xã hội."
+                },
+                {
+                    "id": "q10d",
+                    "text": "Yếu tố tâm lí."
+                }
+            ],
+            "correctOptionId": "q10a"
+        },
+        {
+            "id": "q11",
+            "question": "Dựa trên cơ sở nào cư dân các dân tộc trên đất nước Việt Nam xây dựng mô hình nhà ở cho mình?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q11a",
+                    "text": "Hoạt động kinh tế, văn hóa."
+                },
+                {
+                    "id": "q11b",
+                    "text": "Thành phần dân cư."
+                },
+                {
+                    "id": "q11c",
+                    "text": "Phân hóa chính trị, xã hội."
+                },
+                {
+                    "id": "q11d",
+                    "text": "Yếu tố tâm lí xã hội."
+                }
+            ],
+            "correctOptionId": "q11a"
+        },
+        {
+            "id": "q12",
+            "question": "Địa bàn cư trú chủ yếu của người Kinh là",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q12a",
+                    "text": "đồng bằng."
+                },
+                {
+                    "id": "q12b",
+                    "text": "ven biển."
+                },
+                {
+                    "id": "q12c",
+                    "text": "đồi núi."
+                },
+                {
+                    "id": "q12d",
+                    "text": "trung du."
+                }
+            ],
+            "correctOptionId": "q12a"
+        },
+        {
+            "id": "q13",
+            "question": "Nhà ở truyền thống của người Kinh là",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q13a",
+                    "text": "nhà trệt xây bằng gạch hoặc đắp bằng đất."
+                },
+                {
+                    "id": "q13b",
+                    "text": "nhà sàn làm bằng gỗ, tre, nứa, lá."
+                },
+                {
+                    "id": "q13c",
+                    "text": "nhà nửa sàn, nửa trệt, xây tường."
+                },
+                {
+                    "id": "q13d",
+                    "text": "nhà nhiều tầng được dựng bằng gỗ."
+                }
+            ],
+            "correctOptionId": "q13a"
+        },
+        {
+            "id": "q14",
+            "question": "So với dân tộc Kinh, điểm khác trong trang phục của các dân tộc thiểu số là gì?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q14a",
+                    "text": "Trang phục thường có hoa văn trang trí sặc sỡ."
+                },
+                {
+                    "id": "q14b",
+                    "text": "Được may bằng nhiều loại vải có chất liệu tự nhiên."
+                },
+                {
+                    "id": "q14c",
+                    "text": "Trang phục chủ yếu là áo và quần (hoặc váy)."
+                },
+                {
+                    "id": "q14d",
+                    "text": "Trang phục có sự thay đổi theo mùa."
+                }
+            ],
+            "correctOptionId": "q14a"
+        },
+        {
+            "id": "q15",
+            "question": "Hoạt động sản xuất nông nghiệp của các dân tộc thiểu số ở vùng cao (Việt Nam) có đặc điểm nổi bật nào sau đây?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q15a",
+                    "text": "Lúa nước được trồng ở ruộng bậc thang."
+                },
+                {
+                    "id": "q15b",
+                    "text": "Phát triển nuôi trồng thủy - hải sản."
+                },
+                {
+                    "id": "q15c",
+                    "text": "Phải thường xuyên đắp đê ngăn lũ lụt."
+                },
+                {
+                    "id": "q15d",
+                    "text": "Phải thường xuyên thau chua rửa mặn."
+                }
+            ],
+            "correctOptionId": "q15a"
+        },
+        {
+            "id": "q16",
+            "question": "Trong sản xuất nông nghiệp của dân tộc Kinh, hoạt động kinh tế chính là",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q16a",
+                    "text": "canh tác lúa nước."
+                },
+                {
+                    "id": "q16b",
+                    "text": "chăn nuôi gia súc."
+                },
+                {
+                    "id": "q16c",
+                    "text": "nuôi trồng thủy sản."
+                },
+                {
+                    "id": "q16d",
+                    "text": "trồng cây lúa nương."
+                }
+            ],
+            "correctOptionId": "q16a"
+        },
+        {
+            "id": "q17",
+            "question": "Về thủ công nghiệp, sản phẩm của người Kinh rất đa dạng và tinh xảo, không những đáp ứng nhu cầu trong nước mà còn",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q17a",
+                    "text": "xuất khẩu."
+                },
+                {
+                    "id": "q17b",
+                    "text": "nhập khẩu."
+                },
+                {
+                    "id": "q17c",
+                    "text": "giao lưu."
+                },
+                {
+                    "id": "q17d",
+                    "text": "biếu, tặng."
+                }
+            ],
+            "correctOptionId": "q17a"
+        },
+        {
+            "id": "q18",
+            "question": "Bữa ăn của người Kinh có thể được bổ sung các món ăn chế biến từ",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q18a",
+                    "text": "thịt gia cầm."
+                },
+                {
+                    "id": "q18b",
+                    "text": "tôm hùm."
+                },
+                {
+                    "id": "q18c",
+                    "text": "bào ngư."
+                },
+                {
+                    "id": "q18d",
+                    "text": "cua biển."
+                }
+            ],
+            "correctOptionId": "q18a"
+        },
+        {
+            "id": "q19",
+            "question": "Bữa ăn của người Kinh có thể được bổ sung các món ăn chế biến từ",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q19a",
+                    "text": "thịt gia súc."
+                },
+                {
+                    "id": "q19b",
+                    "text": "tôm hùm."
+                },
+                {
+                    "id": "q19c",
+                    "text": "bào ngư."
+                },
+                {
+                    "id": "q19d",
+                    "text": "cua biển."
+                }
+            ],
+            "correctOptionId": "q19a"
+        },
+        {
+            "id": "q20",
+            "question": "Canh tác lúa nước là hoạt động kinh tế chính của",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q20a",
+                    "text": "người Kinh."
+                },
+                {
+                    "id": "q20b",
+                    "text": "người Thái."
+                },
+                {
+                    "id": "q20c",
+                    "text": "người Nùng."
+                },
+                {
+                    "id": "q20d",
+                    "text": "người Mường."
+                }
+            ],
+            "correctOptionId": "q20a"
+        },
+        {
+            "id": "q21",
+            "question": "Nội dung nào dưới đây không phải là đặc điểm trong hoạt động sản xuất chủ yếu của tộc người Kinh ở Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q21a",
+                    "text": "Trồng lúa nước phổ biến ở ruộng bậc thang."
+                },
+                {
+                    "id": "q21b",
+                    "text": "Phát triển ngành nuôi trồng thủy - hải sản."
+                },
+                {
+                    "id": "q21c",
+                    "text": "Phải thường xuyên đắp đê ngăn lũ lụt."
+                },
+                {
+                    "id": "q21d",
+                    "text": "Ngoài lúa nước còn trồng cây lương thực khác."
+                }
+            ],
+            "correctOptionId": "q21a"
+        },
+        {
+            "id": "q22",
+            "question": "Tín ngưỡng phổ biến mang tính kế thừa trong các gia đình của người Việt Nam ngày nay là tín ngưỡng",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q22a",
+                    "text": "thờ cúng tổ tiên."
+                },
+                {
+                    "id": "q22b",
+                    "text": "sùng bái tự nhiên."
+                },
+                {
+                    "id": "q22c",
+                    "text": "phồn thực."
+                },
+                {
+                    "id": "q22d",
+                    "text": "đa thần."
+                }
+            ],
+            "correctOptionId": "q22a"
+        },
+        {
+            "id": "q23",
+            "question": "Nhận định nào dưới đây là không đúng về vai trò của các nghề thủ công trong đời sống, xã hội của cộng đồng dân tộc Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q23a",
+                    "text": "Trở thành hoạt động kinh tế chính của người Kinh"
+                },
+                {
+                    "id": "q23b",
+                    "text": "Góp phần nâng cao đời sống kinh tế của người dân."
+                },
+                {
+                    "id": "q23c",
+                    "text": "Sản phẩm của nhiều ngành nghề rất đa dạng, tinh xảo."
+                },
+                {
+                    "id": "q23d",
+                    "text": "Ngoài đáp ứng nhu cầu trong nước còn được xuất khẩu."
+                }
+            ],
+            "correctOptionId": "q23a"
+        },
+        {
+            "id": "q24",
+            "question": "Nhận định nào dưới đây là đúng về vai trò của các nghề thủ công trong đời sống, xã hội của cộng đồng dân tộc Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q24a",
+                    "text": "Sản phẩm chủ yếu phục vụ cho nhu cầu xuất khẩu."
+                },
+                {
+                    "id": "q24b",
+                    "text": "Trở thành hoạt động kinh tế chính của người Kinh."
+                },
+                {
+                    "id": "q24c",
+                    "text": "Góp phần quyết định nâng cao đời sống của người dân."
+                },
+                {
+                    "id": "q24d",
+                    "text": "Sản phẩm của nhiều ngành nghề rất đa dạng, tinh xảo."
+                }
+            ],
+            "correctOptionId": "q24d"
+        },
+        {
+            "id": "q25",
+            "question": "Nhận định nào dưới đây là không đúng về vai trò của các nghề thủ công trong đời sống, xã hội của cộng đồng dân tộc Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q25a",
+                    "text": "Sản phẩm chủ yếu phục vụ cho nhu cầu xuất khẩu."
+                },
+                {
+                    "id": "q25b",
+                    "text": "Góp phần nâng cao đời sống kinh tế của người dân."
+                },
+                {
+                    "id": "q25c",
+                    "text": "Sản phẩm của nhiều ngành nghề rất đa dạng, tinh xảo."
+                },
+                {
+                    "id": "q25d",
+                    "text": "Ngoài đáp ứng nhu cầu trong nước còn được xuất khẩu."
+                }
+            ],
+            "correctOptionId": "q25a"
+        },
+        {
+            "id": "q26",
+            "question": "Thành phần dân tộc theo dân số ở Việt Nam hiện nay được chia thành hai nhóm là dân tộc đa số và",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q26a",
+                    "text": "dân tộc phát triển"
+                },
+                {
+                    "id": "q26b",
+                    "text": "dân tộc đang phát triển"
+                },
+                {
+                    "id": "q26c",
+                    "text": "dân tộc thiểu số"
+                },
+                {
+                    "id": "q26d",
+                    "text": "dân tộc phổ biến"
+                }
+            ],
+            "correctOptionId": "q26c"
+        },
+        {
+            "id": "q27",
+            "question": "Thành phần dân tộc theo dân số ở Việt Nam hiện nay được chia thành mấy nhóm?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q27a",
+                    "text": "Hai."
+                },
+                {
+                    "id": "q27b",
+                    "text": "Ba."
+                },
+                {
+                    "id": "q27c",
+                    "text": "Bốn."
+                },
+                {
+                    "id": "q27d",
+                    "text": "Năm."
+                }
+            ],
+            "correctOptionId": "q27a"
+        },
+        {
+            "id": "q28",
+            "question": "Dân tộc nào sau đây chiếm đa số ở Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q28a",
+                    "text": "Kinh."
+                },
+                {
+                    "id": "q28b",
+                    "text": "Lô Lô."
+                },
+                {
+                    "id": "q28c",
+                    "text": "Mường."
+                },
+                {
+                    "id": "q28d",
+                    "text": "Tày."
+                }
+            ],
+            "correctOptionId": "q28a"
+        },
+        {
+            "id": "q29",
+            "question": "Việc phân chia các dân tộc Việt Nam thành hai nhóm là dân tộc đa số và dân tộc thiểu số dựa trên cơ sở nào sau đây?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q29a",
+                    "text": "ngôn ngữ của từng dân tộc"
+                },
+                {
+                    "id": "q29b",
+                    "text": "số dân của từng dân tộc"
+                },
+                {
+                    "id": "q29c",
+                    "text": "chữ viết của từng dân tộc"
+                },
+                {
+                    "id": "q29d",
+                    "text": "trình độ phát triển của từng dân tộc"
+                }
+            ],
+            "correctOptionId": "q29b"
+        },
+        {
+            "id": "q30_1",
+            "question": "Ở Việt Nam hiện nay có bao nhiêu dân tộc thiểu số?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q30_1a",
+                    "text": "54"
+                },
+                {
+                    "id": "q30_1b",
+                    "text": "53"
+                },
+                {
+                    "id": "q30_1c",
+                    "text": "1"
+                },
+                {
+                    "id": "q30_1d",
+                    "text": "11"
+                }
+            ],
+            "correctOptionId": "q30_1b"
+        },
+        {
+            "id": "q30_2",
+            "question": "Ở Việt Nam hiện nay có bao nhiêu dân tộc?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q30a_2",
+                    "text": "60"
+                },
+                {
+                    "id": "q30b_2",
+                    "text": "63"
+                },
+                {
+                    "id": "q30_2c",
+                    "text": "54"
+                },
+                {
+                    "id": "q30_2d",
+                    "text": "53"
+                }
+            ],
+            "correctOptionId": "q30_2c"
+        },
+        {
+            "id": "q31",
+            "question": "Hiện nay, dân tộc nào sau đây ở Việt Nam chiếm hơn 85% tổng dân số cả nước?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q31a",
+                    "text": "Mường"
+                },
+                {
+                    "id": "q31b",
+                    "text": "Nùng"
+                },
+                {
+                    "id": "q31c",
+                    "text": "Dao"
+                },
+                {
+                    "id": "q31d",
+                    "text": "Kinh"
+                }
+            ],
+            "correctOptionId": "q31d"
+        },
+        {
+            "id": "q32",
+            "question": "Dân tộc nào sau đây không phải là dân tộc thiểu số ở Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q32a",
+                    "text": "Si La"
+                },
+                {
+                    "id": "q32b",
+                    "text": "La Ha"
+                },
+                {
+                    "id": "q32c",
+                    "text": "Kinh"
+                },
+                {
+                    "id": "q32d",
+                    "text": "Cơ Ho"
+                }
+            ],
+            "correctOptionId": "q32c"
+        },
+        {
+            "id": "q33",
+            "question": "Dưới tác động của nền kinh tế thị trường, hình thức cư trú nào sau đây giữa các dân tộc đang phát triển mạnh?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q33a",
+                    "text": "Khép kín"
+                },
+                {
+                    "id": "q33b",
+                    "text": "Đan xen"
+                },
+                {
+                    "id": "q33c",
+                    "text": "Đối xứng"
+                },
+                {
+                    "id": "q33d",
+                    "text": "Tách biệt"
+                }
+            ],
+            "correctOptionId": "q33b"
+        },
+        {
+            "id": "q34",
+            "question": "Hiện nay, dân tộc Kinh chủ yếu sinh sống tập trung ở địa bàn nào sau đây?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q34a",
+                    "text": "Đồng bằng"
+                },
+                {
+                    "id": "q34b",
+                    "text": "Miền núi"
+                },
+                {
+                    "id": "q34c",
+                    "text": "Cao nguyên"
+                },
+                {
+                    "id": "q34d",
+                    "text": "Thung lũng"
+                }
+            ],
+            "correctOptionId": "q34a"
+        },
+        {
+            "id": "q35",
+            "question": "Các dân tộc ở Việt Nam hiện nay được xếp vào mấy nhóm ngữ hệ?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q35a",
+                    "text": "5 nhóm ngữ hệ"
+                },
+                {
+                    "id": "q35b",
+                    "text": "6 nhóm ngữ hệ"
+                },
+                {
+                    "id": "q35c",
+                    "text": "7 nhóm ngữ hệ"
+                },
+                {
+                    "id": "q35d",
+                    "text": "8 nhóm ngữ hệ"
+                }
+            ],
+            "correctOptionId": "q35a"
+        },
+        {
+            "id": "q36_1",
+            "question": "Các dân tộc Kinh, Mường, Thổ, Chứt thuộc nhóm ngôn ngữ nào dưới đây?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q36_1a",
+                    "text": "Việt - Mường"
+                },
+                {
+                    "id": "q36_1b",
+                    "text": "Môn - Khơme"
+                },
+                {
+                    "id": "q36_1c",
+                    "text": "Mông, Dao"
+                },
+                {
+                    "id": "q36_1d",
+                    "text": "Tày - Thái"
+                }
+            ],
+            "correctOptionId": "q36_1a"
+        },
+        {
+            "id": "q36_2",
+            "question": "Các dân tộc Khơme, Ba Na, Xơ Đăng,… thuộc nhóm ngôn ngữ nào dưới đây?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q36_2a",
+                    "text": "Việt - Mường"
+                },
+                {
+                    "id": "q36_2b",
+                    "text": "Môn - Khơme"
+                },
+                {
+                    "id": "q36_2c",
+                    "text": "Mông, Dao"
+                },
+                {
+                    "id": "q36_2d",
+                    "text": "Tày - Thái"
+                }
+            ],
+            "correctOptionId": "q36_2b"
+        },
+        {
+            "id": "q36_3",
+            "question": "Các dân tộc Dao, Pà Thẻn,… thuộc nhóm ngôn ngữ nào dưới đây?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q36_3a",
+                    "text": "Việt - Mường"
+                },
+                {
+                    "id": "q36_3b",
+                    "text": "Môn - Khơme"
+                },
+                {
+                    "id": "q36_3c",
+                    "text": "Mông, Dao"
+                },
+                {
+                    "id": "q36_3d",
+                    "text": "Tày - Thái"
+                }
+            ],
+            "correctOptionId": "q36_3c"
+        },
+        {
+            "id": "q36_4",
+            "question": "Các dân tộc Thái, Nùng, Bố Y, Sán Chay,… thuộc nhóm ngôn ngữ nào dưới đây?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q36_4a",
+                    "text": "Việt - Mường"
+                },
+                {
+                    "id": "q36_4b",
+                    "text": "Môn - Khơme"
+                },
+                {
+                    "id": "q36_4c",
+                    "text": "Mông, Dao"
+                },
+                {
+                    "id": "q36_4d",
+                    "text": "Tày - Thái"
+                }
+            ],
+            "correctOptionId": "q36_4d"
+        },
+        {
+            "id": "q36_5",
+            "question": "Dân tộc nào dưới đây thuộc nhóm ngôn ngữ Kađai?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q36_5a",
+                    "text": "La Chí"
+                },
+                {
+                    "id": "q36_5b",
+                    "text": "Gia Rai"
+                },
+                {
+                    "id": "q36_5c",
+                    "text": "Hoa"
+                },
+                {
+                    "id": "q36_5d",
+                    "text": "Hà Nhì"
+                }
+            ],
+            "correctOptionId": "q36_5a"
+        },
+        {
+            "id": "q36_6",
+            "question": "Dân tộc nào dưới đây thuộc nhóm ngôn ngữ Mã Lai - Đa Đảo?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q36_6a",
+                    "text": "La Chí"
+                },
+                {
+                    "id": "q36_6b",
+                    "text": "Gia Rai"
+                },
+                {
+                    "id": "q36_6c",
+                    "text": "Hoa"
+                },
+                {
+                    "id": "q36_6d",
+                    "text": "Hà Nhì"
+                }
+            ],
+            "correctOptionId": "q36_6b"
+        },
+        {
+            "id": "q36_7",
+            "question": "Dân tộc nào dưới đây thuộc nhóm ngôn ngữ Hán?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q36_7a",
+                    "text": "La Chí"
+                },
+                {
+                    "id": "q36_7b",
+                    "text": "Gia Rai"
+                },
+                {
+                    "id": "q36_7c",
+                    "text": "Hoa"
+                },
+                {
+                    "id": "q36_7d",
+                    "text": "Hà Nhì"
+                }
+            ],
+            "correctOptionId": "q36_7c"
+        },
+        {
+            "id": "q36_8",
+            "question": "Dân tộc nào dưới đây thuộc nhóm ngôn ngữ Tạng - Miến?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q36_8a",
+                    "text": "La Chí"
+                },
+                {
+                    "id": "q36_8b",
+                    "text": "Gia Rai"
+                },
+                {
+                    "id": "q36_8c",
+                    "text": "Hoa"
+                },
+                {
+                    "id": "q36_8d",
+                    "text": "Hà Nhì"
+                }
+            ],
+            "correctOptionId": "q36_8d"
+        },
+        {
+            "id": "q36_9",
+            "question": "Tiếng Việt thuộc ngữ hệ nào sau đây?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q36_9a",
+                    "text": "Mông - Dao"
+                },
+                {
+                    "id": "q36_9b",
+                    "text": "Nam Á"
+                },
+                {
+                    "id": "q36_9c",
+                    "text": "Hán - Tạng"
+                },
+                {
+                    "id": "q36_9d",
+                    "text": "Thái - Ka-đai"
+                }
+            ],
+            "correctOptionId": "q36_9b"
+        },
+        {
+            "id": "q36_10",
+            "question": "Nhóm ngôn ngữ Việt - Mường thuộc ngữ hệ nào sau đây?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q36_10a",
+                    "text": "Nam Á"
+                },
+                {
+                    "id": "q36_10b",
+                    "text": "Nam Đảo"
+                },
+                {
+                    "id": "q36_10c",
+                    "text": "Thái - Ka-đai"
+                },
+                {
+                    "id": "q36_10d",
+                    "text": "Hán - Tạng"
+                }
+            ],
+            "correctOptionId": "q36_10a"
+        },
+        {
+            "id": "q37",
+            "question": "Hiện nay, ngôn ngữ quốc gia của nước ta là",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q37a",
+                    "text": "tiếng Hán"
+                },
+                {
+                    "id": "q37b",
+                    "text": "tiếng Việt"
+                },
+                {
+                    "id": "q37c",
+                    "text": "tiếng Khơ – me"
+                },
+                {
+                    "id": "q37d",
+                    "text": "tiếng Anh"
+                }
+            ],
+            "correctOptionId": "q37b"
+        },
+        {
+            "id": "q38",
+            "question": "Trước đây, các dân tộc thiểu số ở Việt Nam chủ yếu làm nương rẫy theo hình thức",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q38a",
+                    "text": "xen canh"
+                },
+                {
+                    "id": "q38b",
+                    "text": "luân canh"
+                },
+                {
+                    "id": "q38c",
+                    "text": "du canh"
+                },
+                {
+                    "id": "q38d",
+                    "text": "định canh"
+                }
+            ],
+            "correctOptionId": "q38c"
+        },
+        {
+            "id": "q39",
+            "question": "“......là một nhóm các ngôn ngữ có cùng nguồn gốc, có những đặc điểm tương đồng về ngữ âm, thanh điệu, cú pháp và vốn từ vị cơ bản”.",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q39a",
+                    "text": "Ngữ hệ"
+                },
+                {
+                    "id": "q39b",
+                    "text": "Tiếng nói"
+                },
+                {
+                    "id": "q39c",
+                    "text": "Chữ viết"
+                },
+                {
+                    "id": "q39d",
+                    "text": "Ngôn từ"
+                }
+            ],
+            "correctOptionId": "q39a"
+        },
+        {
+            "id": "q40",
+            "question": "Trong hoạt động sản xuất nông nghiệp ở vùng đồng bằng, người Kinh chủ yếu canh tác",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q40a",
+                    "text": "lúa nước"
+                },
+                {
+                    "id": "q40b",
+                    "text": "nương rẫy"
+                },
+                {
+                    "id": "q40c",
+                    "text": "ruộng bậc thang"
+                },
+                {
+                    "id": "q40d",
+                    "text": "du canh"
+                }
+            ],
+            "correctOptionId": "q40a"
+        },
+        {
+            "id": "q41",
+            "question": "Nội dung nào sau đây không phản ánh đúng hoạt động sản xuất nông nghiệp của người Kinh ở khu vực đồng bằng, duyên hải?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q41a",
+                    "text": "Hoạt động nông nghiệp trồng lúa nước phát triển mạnh"
+                },
+                {
+                    "id": "q41b",
+                    "text": "Hình thức canh tác chuyển dần từ định canh sang du canh"
+                },
+                {
+                    "id": "q41c",
+                    "text": "Áp dụng khoa học kĩ thuật tiến bộ vào sản xuất nông nghiệp"
+                },
+                {
+                    "id": "q41d",
+                    "text": "Sản phẩm nông nghiệp đáp ứng nhu cầu trong nước và xuất khẩu"
+                }
+            ],
+            "correctOptionId": "q41b"
+        },
+        {
+            "id": "q42",
+            "question": "Trong hoạt động sản xuất nông nghiệp, các dân tộc thiểu số ở miền núi, trung du chủ yếu phát triển hoạt động canh tác",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q42a",
+                    "text": "lúa nước"
+                },
+                {
+                    "id": "q42b",
+                    "text": "nương rẫy"
+                },
+                {
+                    "id": "q42c",
+                    "text": "trang trại"
+                },
+                {
+                    "id": "q42d",
+                    "text": "đồn điền"
+                }
+            ],
+            "correctOptionId": "q42b"
+        },
+        {
+            "id": "q43",
+            "question": "Nội dung nào sau đây không phản ánh đúng hoạt động sản xuất nông nghiệp của các dân tộc thiểu số Việt Nam ở khu vực miền núi, trung du?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q43a",
+                    "text": "Chủ yếu phát triển hoạt động canh tác theo nương rẫy"
+                },
+                {
+                    "id": "q43b",
+                    "text": "Hình thức canh tác chuyển dần từ du canh sang định canh"
+                },
+                {
+                    "id": "q43c",
+                    "text": "Không áp dụng khoa học kĩ thuật vào sản xuất nông nghiệp"
+                },
+                {
+                    "id": "q43d",
+                    "text": "Sản phẩm nông nghiệp chủ yếu đáp ứng nhu cầu tại chỗ"
+                }
+            ],
+            "correctOptionId": "q43c"
+        },
+        {
+            "id": "q44",
+            "question": "Nội dung nào sau đây là nguyên nhân dẫn đến sự khác biệt về hình thức sản xuất nông nghiệp giữa dân tộc Kinh với các dân tộc thiểu số ở Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q44a",
+                    "text": "Địa bàn cư trú"
+                },
+                {
+                    "id": "q44b",
+                    "text": "Điều kiện khí hậu"
+                },
+                {
+                    "id": "q44c",
+                    "text": "Cơ cấu cây trồng"
+                },
+                {
+                    "id": "q44d",
+                    "text": "Chính sách nhà nước"
+                }
+            ],
+            "correctOptionId": "q44a"
+        },
+        {
+            "id": "q45",
+            "question": "Nội dung nào sau đây phản ánh điểm tương đồng về sản xuất nông nghiệp của người Kinh và các dân tộc thiểu số ở Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q45a",
+                    "text": "Canh tác lúa và các cây lương thực"
+                },
+                {
+                    "id": "q45b",
+                    "text": "Chủ yếu canh tác ở nương rẫy"
+                },
+                {
+                    "id": "q45c",
+                    "text": "Canh tác lúa bằng ruộng bậc thang"
+                },
+                {
+                    "id": "q45d",
+                    "text": "Chủ yếu canh tác ở đồng bằng"
+                }
+            ],
+            "correctOptionId": "q45a"
+        },
+        {
+            "id": "q46",
+            "question": "Canh tác lúa nước là hoạt động kinh tế chính của dân tộc nào sau đây ở Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q46a",
+                    "text": "Kinh"
+                },
+                {
+                    "id": "q46b",
+                    "text": "Thái"
+                },
+                {
+                    "id": "q46c",
+                    "text": "Chăm"
+                },
+                {
+                    "id": "q46d",
+                    "text": "Mường"
+                }
+            ],
+            "correctOptionId": "q46a"
+        },
+        {
+            "id": "q47",
+            "question": "Nội dung nào sau đây không phải là đặc điểm trong hoạt động sản xuất nông nghiệp của dân tộc Kinh?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q47a",
+                    "text": "Trồng lúa trên ruộng bậc thang"
+                },
+                {
+                    "id": "q47b",
+                    "text": "Phát triển nuôi trồng thủy - hải sản"
+                },
+                {
+                    "id": "q47c",
+                    "text": "Thường xuyên đắp đê ngăn lũ lụt"
+                },
+                {
+                    "id": "q47d",
+                    "text": "Trồng lúa và cây lương thực khác"
+                }
+            ],
+            "correctOptionId": "q47a"
+        },
+        {
+            "id": "q48",
+            "question": "Nội dung nào sau đây không phản ánh đúng vai trò của các nghề thủ công đối với đời sống kinh tế - xã hội của người Kinh?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q48a",
+                    "text": "Đáp ứng nhu cầu của người dân"
+                },
+                {
+                    "id": "q48b",
+                    "text": "Tạo ra nguồn hàng hóa xuất khẩu"
+                },
+                {
+                    "id": "q48c",
+                    "text": "Đem lại việc làm cho người dân"
+                },
+                {
+                    "id": "q48d",
+                    "text": "Là động lực chính phát triển kinh tế"
+                }
+            ],
+            "correctOptionId": "q48d"
+        },
+        {
+            "id": "q49",
+            "question": "Một trong những nghề thủ công truyền thống tiêu biểu của người Kinh là",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q49a",
+                    "text": "làm rượu cần"
+                },
+                {
+                    "id": "q49b",
+                    "text": "làm gốm"
+                },
+                {
+                    "id": "q49c",
+                    "text": "dệt thổ cẩm"
+                },
+                {
+                    "id": "q49d",
+                    "text": "làm đồng hồ"
+                }
+            ],
+            "correctOptionId": "q49b"
+        },
+        {
+            "id": "q50",
+            "question": "Một trong những điểm khác biệt trong hoạt động sản xuất thủ công nghiệp của người Kinh so với các dân tộc thiểu số ở Việt Nam là",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q50a",
+                    "text": "Không chỉ đáp ứng nhu cầu trong nước mà còn hướng tới xuất khẩu"
+                },
+                {
+                    "id": "q50b",
+                    "text": "Sản phẩm thủ công chủ yếu đáp ứng nhu cầu người dân địa phương"
+                },
+                {
+                    "id": "q50c",
+                    "text": "Các ngành thủ công phong phú nhưng ít hình thành các làng nghề"
+                },
+                {
+                    "id": "q50d",
+                    "text": "Không ưu tiên các nghề truyền thống để tập trung cho các nghề hiện đại"
+                }
+            ],
+            "correctOptionId": "q50a"
+        },
+        {
+            "id": "q51",
+            "question": "Chợ trên sông là hình thức họp chợ tồn tại chủ yếu ở khu vực",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q51a",
+                    "text": "Bắc Bộ"
+                },
+                {
+                    "id": "q51b",
+                    "text": "Nam Bộ"
+                },
+                {
+                    "id": "q51c",
+                    "text": "Tây Nguyên"
+                },
+                {
+                    "id": "q51d",
+                    "text": "Trung Bộ"
+                }
+            ],
+            "correctOptionId": "q51b"
+        },
+        {
+            "id": "q52",
+            "question": "Các dân tộc ở vùng cao như Mông, Dao, Tày, Nùng chủ yếu trao đổi, buôn bán sản phẩm thông qua",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q52a",
+                    "text": "chợ nổi"
+                },
+                {
+                    "id": "q52b",
+                    "text": "chợ trên sông"
+                },
+                {
+                    "id": "q52c",
+                    "text": "chợ phiên"
+                },
+                {
+                    "id": "q52d",
+                    "text": "siêu thị"
+                }
+            ],
+            "correctOptionId": "q52c"
+        },
+        {
+            "id": "q53",
+            "question": "Đồ ăn, thức uống cơ bản của người Kinh ở miền Bắc Việt Nam là",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q53a",
+                    "text": "cơm tẻ, nước chè"
+                },
+                {
+                    "id": "q53b",
+                    "text": "mèn mén, rượu cần"
+                },
+                {
+                    "id": "q53c",
+                    "text": "cơm nếp, nước vối"
+                },
+                {
+                    "id": "q53d",
+                    "text": "xôi, ngô, rượu đoác"
+                }
+            ],
+            "correctOptionId": "q53a"
+        },
+        {
+            "id": "q54",
+            "question": "Nguồn lương thực chính của các dân tộc ở Việt Nam là",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q54a",
+                    "text": "thịt, cá"
+                },
+                {
+                    "id": "q54b",
+                    "text": "rau, củ"
+                },
+                {
+                    "id": "q54c",
+                    "text": "cá, rau"
+                },
+                {
+                    "id": "q54d",
+                    "text": "lúa, ngô"
+                }
+            ],
+            "correctOptionId": "q54d"
+        },
+        {
+            "id": "q55",
+            "question": "Nội dung nào sau đây phản ánh không đúng đặc điểm ăn uống của dân tộc Kinh trên lãnh thổ Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q55a",
+                    "text": "Gạo tẻ là nguồn lương thực chính hàng ngày"
+                },
+                {
+                    "id": "q55b",
+                    "text": "Tạo ra nhiều món ăn ngon nổi tiếng đặc trưng"
+                },
+                {
+                    "id": "q55c",
+                    "text": "Thường uống rượu cần vào các dịp lễ quan trọng"
+                },
+                {
+                    "id": "q55d",
+                    "text": "Các món ăn mang đậm bản sắc văn hóa vùng miền"
+                }
+            ],
+            "correctOptionId": "q55c"
+        },
+        {
+            "id": "q56",
+            "question": "Khăn Piêu là một sản phẩm thổ cẩm nổi tiếng của dân tộc nào sau đây?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q56a",
+                    "text": "Kinh"
+                },
+                {
+                    "id": "q56b",
+                    "text": "Thái"
+                },
+                {
+                    "id": "q56c",
+                    "text": "Hoa"
+                },
+                {
+                    "id": "q56d",
+                    "text": "Sán Dìu"
+                }
+            ],
+            "correctOptionId": "q56b"
+        },
+        {
+            "id": "q57",
+            "question": "Nhận xét nào sau đây không đúng về trang phục của các dân tộc ở Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q57a",
+                    "text": "Chủ yếu vay mượn từ bên ngoài"
+                },
+                {
+                    "id": "q57b",
+                    "text": "Phong phú về hoa văn trang trí"
+                },
+                {
+                    "id": "q57c",
+                    "text": "Đa dạng về kiểu dáng và màu sắc"
+                },
+                {
+                    "id": "q57d",
+                    "text": "Thể hiện tập quán của mỗi dân tộc"
+                }
+            ],
+            "correctOptionId": "q57a"
+        },
+        {
+            "id": "q58",
+            "question": "Kiểu nhà phổ biến của đồng bào các dân tộc thiểu số sống ở miền núi, trung du và cao nguyên của Việt Nam là",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q58a",
+                    "text": "nhà sàn"
+                },
+                {
+                    "id": "q58b",
+                    "text": "nhà trệt"
+                },
+                {
+                    "id": "q58c",
+                    "text": "nhà tầng"
+                },
+                {
+                    "id": "q58d",
+                    "text": "chung cư"
+                }
+            ],
+            "correctOptionId": "q58a"
+        },
+        {
+            "id": "q59",
+            "question": "Kiểu nhà ở phổ biến của người Kinh, Hoa và Chăm ở khu vực đồng bằng là",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q59a",
+                    "text": "nhà sàn"
+                },
+                {
+                    "id": "q59b",
+                    "text": "nhà thuyền"
+                },
+                {
+                    "id": "q59c",
+                    "text": "nhà rông"
+                },
+                {
+                    "id": "q59d",
+                    "text": "nhà trệt"
+                }
+            ],
+            "correctOptionId": "q59d"
+        },
+        {
+            "id": "q60",
+            "question": "Các dân tộc thiểu số ở nước ta trước đây chủ yếu đi bộ và vận chuyển đồ bằng gùi vì một trong những lý do nào sau đây?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q60a",
+                    "text": "Sinh sống chủ yếu ở miền núi dốc, hẹp"
+                },
+                {
+                    "id": "q60b",
+                    "text": "Sinh sống ở vùng đồng bằng nhiều sông"
+                },
+                {
+                    "id": "q60c",
+                    "text": "Nhu cầu vận chuyển đồ đạc ngày càng cao"
+                },
+                {
+                    "id": "q60d",
+                    "text": "Nền kinh tế thị trường chưa phát triển"
+                }
+            ],
+            "correctOptionId": "q60a"
+        },
+        {
+            "id": "q61",
+            "question": "Tín ngưỡng quan trọng nhất của người Kinh là",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q61a",
+                    "text": "tín ngưỡng phồn thực"
+                },
+                {
+                    "id": "q61b",
+                    "text": "thờ thần tự nhiên"
+                },
+                {
+                    "id": "q61c",
+                    "text": "thờ tổ nghề"
+                },
+                {
+                    "id": "q61d",
+                    "text": "thờ cúng tổ tiên"
+                }
+            ],
+            "correctOptionId": "q61d"
+        },
+        {
+            "id": "q62",
+            "question": "Hiện nay, phần lớn dân tộc Chăm cư trú ở Ninh Thuận và Bình Thuận theo",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q62a",
+                    "text": "Hin-đu giáo"
+                },
+                {
+                    "id": "q62b",
+                    "text": "Phật giáo"
+                },
+                {
+                    "id": "q62c",
+                    "text": "Thiên Chúa giáo"
+                },
+                {
+                    "id": "q62d",
+                    "text": "Hồi giáo"
+                }
+            ],
+            "correctOptionId": "q62d"
+        },
+        {
+            "id": "q63",
+            "question": "Tín ngưỡng nào sau đây không phải là tín ngưỡng bản địa của người Kinh?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q63a",
+                    "text": "Thờ tổ nghề"
+                },
+                {
+                    "id": "q63b",
+                    "text": "Thờ cúng tổ tiên"
+                },
+                {
+                    "id": "q63c",
+                    "text": "Thờ Mẫu"
+                },
+                {
+                    "id": "q63d",
+                    "text": "Thờ Chúa"
+                }
+            ],
+            "correctOptionId": "q63d"
+        },
+        {
+            "id": "q64",
+            "question": "Cộng đồng các dân tộc Việt Nam đều có chung tín ngưỡng nào sau đây?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q64a",
+                    "text": "Thờ thần nông nghiệp"
+                },
+                {
+                    "id": "q64b",
+                    "text": "Thờ Mẫu"
+                },
+                {
+                    "id": "q64c",
+                    "text": "Thờ Chúa"
+                },
+                {
+                    "id": "q64d",
+                    "text": "Thờ cúng tổ tiên"
+                }
+            ],
+            "correctOptionId": "q64d"
+        },
+        {
+            "id": "q65",
+            "question": "Nội dung nào sau đây không phản ánh đúng điểm tương đồng trong hoạt động tín ngưỡng, tôn giáo của cộng đồng các dân tộc Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q65a",
+                    "text": "Quan niệm vạn vật hữu linh"
+                },
+                {
+                    "id": "q65b",
+                    "text": "Thờ cúng tổ tiên"
+                },
+                {
+                    "id": "q65c",
+                    "text": "Tiếp thu nhiều tôn giáo lớn"
+                },
+                {
+                    "id": "q65d",
+                    "text": "Tôn giáo, tín ngưỡng phong phú"
+                }
+            ],
+            "correctOptionId": "q65a"
+        },
+        {
+            "id": "q66",
+            "question": "Nội dung nào sau đây không phản ánh đúng về lễ hội của người Kinh?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q66a",
+                    "text": "Quy mô lễ hội khá đa dạng"
+                },
+                {
+                    "id": "q66b",
+                    "text": "Mang đậm tính truyền thống"
+                },
+                {
+                    "id": "q66c",
+                    "text": "Lễ hội chỉ diễn ra vào mùa xuân"
+                },
+                {
+                    "id": "q66d",
+                    "text": "Hệ thống lễ hội đa dạng và phong phú"
+                }
+            ],
+            "correctOptionId": "q66c"
+        },
+        {
+            "id": "q67",
+            "question": "Lễ hội của các dân tộc thiểu số ở Việt Nam chủ yếu được tổ chức với quy mô như thế nào?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q67a",
+                    "text": "Làng/bản và tộc người"
+                },
+                {
+                    "id": "q67b",
+                    "text": "Quốc gia và quốc tế"
+                },
+                {
+                    "id": "q67c",
+                    "text": "Làng/bản và quốc tế"
+                },
+                {
+                    "id": "q67d",
+                    "text": "Tộc người và quốc tế"
+                }
+            ],
+            "correctOptionId": "q67a"
+        },
+        {
+            "id": "q68",
+            "question": "Nội dung nào sau đây không phản ánh đúng về đời sống tinh thần của cộng đồng các dân tộc ở Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q68a",
+                    "text": "Chỉ tiếp thu văn hóa phương Đông"
+                },
+                {
+                    "id": "q68b",
+                    "text": "Mang đậm bản sắc dân tộc"
+                },
+                {
+                    "id": "q68c",
+                    "text": "Có tiếp thu văn hóa bên ngoài"
+                },
+                {
+                    "id": "q68d",
+                    "text": "Đời sống tinh thần phong phú"
+                }
+            ],
+            "correctOptionId": "q68a"
+        },
+        {
+            "id": "q69",
+            "question": "Nội dung nào sau đây không phản ánh đúng vai trò của lễ hội đối với đời sống văn hóa tinh thần của các dân tộc Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q69a",
+                    "text": "Là dịp bày tỏ lòng biết ơn sự che chở, phù hộ của thần linh, tổ tiên"
+                },
+                {
+                    "id": "q69b",
+                    "text": "Là cơ sở vật chất tạo nên sự phát triển kinh tế - văn hóa - xã hội"
+                },
+                {
+                    "id": "q69c",
+                    "text": "Góp phần giữ gìn và phát huy bản sắc văn hóa qua các thế hệ"
+                },
+                {
+                    "id": "q69d",
+                    "text": "Là dịp các thành viên gặp gỡ, giao lưu và thắt chặt tình đoàn kết"
+                }
+            ],
+            "correctOptionId": "q69b"
+        },
+        {
+            "id": "q70",
+            "question": "Một trong những công trình kiến trúc tiêu biểu của nước ta dưới thời kì văn minh Đại Việt là",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q70a",
+                    "text": "thành nhà Hồ"
+                },
+                {
+                    "id": "q70b",
+                    "text": "Thánh địa Mỹ Sơn"
+                },
+                {
+                    "id": "q70c",
+                    "text": "Thành Cổ Loa"
+                },
+                {
+                    "id": "q70d",
+                    "text": "dinh Độc lập"
+                }
+            ],
+            "correctOptionId": "q70a"
+        },
+        {
+            "id": "q71",
+            "question": "Nội dung nào sau đây phản ánh đúng đặc điểm về đời sống văn hóa của cộng đồng các dân tộc Việt Nam?",
+            "type": "multiple-choice",
+            "options": [
+                {
+                    "id": "q71a",
+                    "text": "Có tính thống nhất trong đa dạng"
+                },
+                {
+                    "id": "q71b",
+                    "text": "Không tiếp thu yếu tố bên ngoài"
+                },
+                {
+                    "id": "q71c",
+                    "text": "Không có sự giao thoa giữa các tộc người"
+                },
+                {
+                    "id": "q71d",
+                    "text": "Đều lấy Phật giáo là tôn giáo chủ đạo"
+                }
+            ],
+            "correctOptionId": "q71a"
+        },
+        {
+            "id": "r1",
+            "type": "reading",
+            "passage": "Sinh sống ở vùng địa hình cao, dốc, làm ruộng bậc thang là cách thích ứng với tự nhiên của các dân tộc thiểu số ở một số tỉnh miền núi phía bắc. Trên vùng núi cao ở Sa Pa (Lào Cai), Mù Cang Chải (Yên Bái), Hoàng Su Phì (Hà Giang), các dân tộc Nùng, Dao, Mông, La Chí,… đã tạo nên những cánh đồng ruộng bậc thang rộng hàng nghìn héc-ta.",
+            "questions": [
+                {
+                    "id": "r1a",
+                    "question": "Ruộng bậc thang xuất hiện phổ biến ở các tỉnh miền núi phía Bắc, chủ yếu trồng các loại cây lương thực như ngô, khoai, sắn.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r1a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r1a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r1a2"
+                },
+                {
+                    "id": "r1b",
+                    "question": "Ruộng bậc thang là hình thức canh tác của dân tộc Kinh và một số dân tộc thiểu số ở phía Bắc.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r1b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r1b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r1b2"
+                },
+                {
+                    "id": "r1c",
+                    "question": "Ruộng bậc thang chỉ xuất hiện ở các vùng có địa hình cao, dốc, không xuất hiện ở đồng bằng.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r1c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r1c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r1c1"
+                },
+                {
+                    "id": "r1d",
+                    "question": "Phát triển ruộng bậc thang vừa phục vụ sản xuất nông nghiệp, vừa phục vụ du lịch.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r1d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r1d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r1d1"
+                }
+            ]
+        },
+        {
+            "id": "r2",
+            "type": "reading",
+            "passage": "Người Kinh và các dân tộc thiểu số đều phát triển nhiều ngành nghề thủ công truyền thống. Sản phẩm của người Kinh đa dạng, tinh xảo và có thể xuất khẩu; trong khi sản phẩm của các dân tộc thiểu số chủ yếu phục vụ nhu cầu địa phương.",
+            "questions": [
+                {
+                    "id": "r2a",
+                    "question": "Cả người Kinh và các dân tộc thiểu số đều phát triển đa dạng nghề thủ công.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r2a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r2a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r2a1"
+                },
+                {
+                    "id": "r2b",
+                    "question": "Nghề dệt, đan, rèn sắt, đúc đồng là nghề truyền thống của cả hai nhóm.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r2b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r2b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r2b1"
+                },
+                {
+                    "id": "r2c",
+                    "question": "Nghề thủ công của dân tộc thiểu số mang bản sắc riêng và chủ yếu phục vụ tại chỗ.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r2c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r2c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r2c1"
+                },
+                {
+                    "id": "r2d",
+                    "question": "Sự khác biệt thể hiện ở mức độ phổ biến và phạm vi tiêu thụ sản phẩm.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r2d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r2d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r2d1"
+                }
+            ]
+        },
+        {
+            "id": "r3",
+            "type": "reading",
+            "passage": "Ngữ hệ là nhóm các ngôn ngữ có cùng nguồn gốc. Việt Nam có nhiều ngữ hệ khác nhau, trong đó tiếng Việt thuộc nhóm Việt - Mường của ngữ hệ Nam Á.",
+            "questions": [
+                {
+                    "id": "r3a",
+                    "question": "Ngữ hệ gồm các ngôn ngữ giống hệt nhau về vốn từ.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r3a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r3a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r3a2"
+                },
+                {
+                    "id": "r3b",
+                    "question": "Việt Nam là quốc gia đa dân tộc và đa ngữ hệ.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r3b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r3b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r3b1"
+                },
+                {
+                    "id": "r3c",
+                    "question": "Ngôn ngữ quốc gia thuộc ngữ hệ Nam Á.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r3c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r3c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r3c1"
+                },
+                {
+                    "id": "r3d",
+                    "question": "Hiến pháp 2013 tôn trọng tiếng nói và chữ viết của các dân tộc.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r3d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r3d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r3d1"
+                }
+            ]
+        },
+        {
+            "id": "r4",
+            "type": "reading",
+            "passage": "Việt Nam có 54 dân tộc, trong đó Kinh, Hoa, Chăm, Khmer sống chủ yếu ở đồng bằng; các dân tộc khác chủ yếu ở miền núi. Hiện tượng cư trú đan xen diễn ra phổ biến.",
+            "questions": [
+                {
+                    "id": "r4a",
+                    "question": "4 dân tộc Kinh, Hoa, Chăm, Khmer là dân tộc đa số.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r4a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r4a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r4a2"
+                },
+                {
+                    "id": "r4b",
+                    "question": "Địa bàn cư trú của nhóm này khác với các dân tộc còn lại.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r4b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r4b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r4b1"
+                },
+                {
+                    "id": "r4c",
+                    "question": "Cư trú đan xen chỉ mới xuất hiện trong những thập kỉ gần đây.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r4c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r4c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r4c2"
+                },
+                {
+                    "id": "r4d",
+                    "question": "Cư trú đan xen là sự hoán đổi hoàn toàn nơi sống giữa các dân tộc.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r4d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r4d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r4d2"
+                }
+            ]
+        },
+        {
+            "id": "r5",
+            "type": "reading",
+            "passage": "Các dân tộc trên đất nước Việt Nam đã hình thành và phát triển lâu dài trong lịch sử, hợp thành cộng đồng các dân tộc Việt Nam; văn hóa Việt Nam là sự tổng hòa các giá trị văn hóa của 54 dân tộc anh em trên cùng lãnh thổ...",
+            "questions": [
+                {
+                    "id": "r5a",
+                    "question": "Văn hóa Việt Nam là sự tổng hòa văn hóa của tất cả các dân tộc sinh sống trên lãnh thổ Việt Nam.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r5a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r5a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r5a1"
+                },
+                {
+                    "id": "r5b",
+                    "question": "Các dân tộc sống trên lãnh thổ Việt Nam có sự khác biệt nhau hoàn toàn về ngôn ngữ, phong tục tập quán, hoạt động kinh tế.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r5b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r5b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r5b2"
+                },
+                {
+                    "id": "r5c",
+                    "question": "Đời sống văn hóa, tinh thần của các dân tộc hoàn toàn tương đồng.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r5c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r5c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r5c2"
+                },
+                {
+                    "id": "r5d",
+                    "question": "Thống nhất trong đa dạng là đặc điểm nổi bật của văn hóa Việt Nam.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r5d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r5d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r5d1"
+                }
+            ]
+        },
+        {
+            "id": "r6",
+            "type": "reading",
+            "passage": "Người Kinh tập trung chủ yếu ở vùng đồng bằng, trung du và duyên hải... Các dân tộc thiểu số trước đây chủ yếu du canh, hiện nay chuyển sang định canh...",
+            "questions": [
+                {
+                    "id": "r6a",
+                    "question": "Đoạn tư liệu phản ánh về cả nông nghiệp và thủ công nghiệp.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r6a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r6a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r6a2"
+                },
+                {
+                    "id": "r6b",
+                    "question": "Hoạt động nông nghiệp gồm trồng trọt và chăn nuôi, nhưng có sự khác nhau giữa các dân tộc.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r6b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r6b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r6b1"
+                },
+                {
+                    "id": "r6c",
+                    "question": "Trồng lúa nước chỉ do người Kinh thực hiện.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r6c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r6c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r6c2"
+                },
+                {
+                    "id": "r6d",
+                    "question": "Hình thức canh tác của các dân tộc thiểu số đang chuyển biến tích cực.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r6d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r6d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r6d1"
+                }
+            ]
+        },
+        {
+            "id": "r7",
+            "type": "reading",
+            "passage": "Bữa ăn truyền thống của người Kinh thường gồm cơm, rau, cá... Các dân tộc thiểu số có sự khác biệt trong chế biến và sử dụng thực phẩm...",
+            "questions": [
+                {
+                    "id": "r7a",
+                    "question": "Nguồn lương thực chính là lúa gạo.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r7a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r7a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r7a1"
+                },
+                {
+                    "id": "r7b",
+                    "question": "Bữa ăn bao gồm sản phẩm từ trồng trọt, chăn nuôi và thủy sản.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r7b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r7b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r7b1"
+                },
+                {
+                    "id": "r7c",
+                    "question": "Cách chế biến có sự khác biệt và mang bản sắc vùng miền.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r7c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r7c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r7c1"
+                },
+                {
+                    "id": "r7d",
+                    "question": "Các món thịt chỉ dùng trong lễ hội, cúng tế.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r7d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r7d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r7d2"
+                }
+            ]
+        },
+        {
+            "id": "r8",
+            "type": "reading",
+            "passage": "Người Kinh tiếp thu nhiều tôn giáo như Phật giáo, Công giáo... Các dân tộc thiểu số theo tín ngưỡng đa thần và cũng chịu ảnh hưởng tôn giáo lớn...",
+            "questions": [
+                {
+                    "id": "r8a",
+                    "question": "Đoạn tư liệu phản ánh đời sống tín ngưỡng, tôn giáo.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r8a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r8a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r8a1"
+                },
+                {
+                    "id": "r8b",
+                    "question": "Cả người Kinh và dân tộc thiểu số đều tiếp thu tôn giáo lớn.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r8b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r8b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r8b1"
+                },
+                {
+                    "id": "r8c",
+                    "question": "Chỉ người Kinh mới có công trình và lễ hội tôn giáo.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r8c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r8c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r8c2"
+                },
+                {
+                    "id": "r8d",
+                    "question": "Tín ngưỡng đa thần và thờ cúng tổ tiên chỉ có ở dân tộc thiểu số.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r8d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r8d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r8d2"
+                }
+            ]
+        },
+        {
+            "id": "r9",
+            "type": "reading",
+            "passage": "Trong Chiếu dời đô, vua Lý Thái Tổ đã nói rõ dời chuyển kinh đô là một việc trọng đại “không thể theo ý riêng tự dời” mà để “mưu nghiệp lớn”, “làm kế cho con cháu muôn vạn đời, trên kính mệnh trời, dưới theo ý dân”. Vua Lý Thái Tổ lúc này đã có một tầm nhìn chiến lược quan trọng đối với vận mệnh lâu dài của dân tộc là chọn thành Đại La – nơi hội tụ đầy đủ mọi điều kiện về kinh tế, chính trị và xã hội làm kinh đô của một quốc gia thống nhất và thịnh vượng.",
+            "questions": [
+                {
+                    "id": "r9a",
+                    "question": "Khi lên ngôi, vua Lý Thái Tổ đã quyết định cho dời đô từ vùng núi non hiểm trở về trung tâm đồng bằng.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r9a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r9a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r9a1"
+                },
+                {
+                    "id": "r9b",
+                    "question": "Thành Đại La từng là kinh đô của một số triều đại phong kiến độc lập của Việt Nam trước đó.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r9b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r9b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r9b2"
+                },
+                {
+                    "id": "r9c",
+                    "question": "Việc dời đô của Lý Thái Tổ chủ yếu xuất phát từ nhu cầu phòng thủ, bảo vệ đất nước.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r9c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r9c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r9c2"
+                },
+                {
+                    "id": "r9d",
+                    "question": "Việc dời đô ra Đại La đã mở ra thời kì phát triển rực rỡ của văn minh Đại Việt.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r9d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r9d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r9d1"
+                }
+            ]
+        },
+        {
+            "id": "r10",
+            "type": "reading",
+            "passage": "Bộ Quốc triều hình luật (gồm 722 điều) là bộ luật hoàn chỉnh nhất được thực thi từ thời Lê sơ đến thời Lê Trung hưng. Bộ luật này có nhiều điều tiến bộ, đặc biệt bảo vệ quyền lợi của phụ nữ như: con gái được chia tài sản như con trai; có quyền thừa kế nếu không có con trai; tài sản được chia cho cả vợ và chồng.",
+            "questions": [
+                {
+                    "id": "r10a",
+                    "question": "Quốc triều hình luật là một bộ luật hoàn chỉnh và tiến bộ của nước ta.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r10a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r10a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r10a1"
+                },
+                {
+                    "id": "r10b",
+                    "question": "Đây là bộ luật thành văn đầu tiên của nước ta.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r10b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r10b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r10b2"
+                },
+                {
+                    "id": "r10c",
+                    "question": "Các điều luật nêu trên nhằm bảo vệ quyền lợi của phụ nữ và người yếu thế.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r10c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r10c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r10c2"
+                },
+                {
+                    "id": "r10d",
+                    "question": "Con gái có quyền thừa kế tài sản cùng với con trai.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r10d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r10d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r10d2"
+                }
+            ]
+        },
+        {
+            "id": "r11",
+            "type": "reading",
+            "passage": "Theo Nghị định 05/2011/NĐ-CP: dân tộc đa số là dân tộc chiếm trên 50% dân số; dân tộc thiểu số là các dân tộc có số dân ít hơn so với dân tộc đa số.",
+            "questions": [
+                {
+                    "id": "r11a",
+                    "question": "Thành phần dân tộc nước ta được chia thành dân tộc đa số và dân tộc thiểu số.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r11a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r11a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r11a1"
+                },
+                {
+                    "id": "r11b",
+                    "question": "Việc phân chia còn dựa vào trình độ phát triển của từng dân tộc.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r11b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r11b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r11b2"
+                },
+                {
+                    "id": "r11c",
+                    "question": "Dân tộc đa số là dân tộc chiếm hơn một nửa dân số.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r11c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r11c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r11c1"
+                },
+                {
+                    "id": "r11d",
+                    "question": "Dân tộc Tày thuộc nhóm dân tộc thiểu số.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r11d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r11d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r11d1"
+                }
+            ]
+        },
+        {
+            "id": "r12",
+            "type": "reading",
+            "passage": "Ngữ hệ là nhóm các ngôn ngữ có cùng nguồn gốc và đặc điểm tương đồng. Việt Nam có 5 ngữ hệ lớn. Tiếng Việt thuộc nhóm Việt - Mường, ngữ hệ Nam Á. Hiến pháp 2013 quy định tiếng Việt là ngôn ngữ quốc gia và tôn trọng tiếng nói, chữ viết các dân tộc.",
+            "questions": [
+                {
+                    "id": "r12a",
+                    "question": "Các ngôn ngữ trong cùng ngữ hệ giống hệt nhau về từ vựng.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r12a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r12a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r12a2"
+                },
+                {
+                    "id": "r12b",
+                    "question": "Việt Nam là quốc gia đa dân tộc và đa ngữ hệ.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r12b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r12b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r12b1"
+                },
+                {
+                    "id": "r12c",
+                    "question": "Ngôn ngữ quốc gia thuộc ngữ hệ Nam Á.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r12c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r12c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r12c1"
+                },
+                {
+                    "id": "r12d",
+                    "question": "Hiến pháp tôn trọng tiếng nói, chữ viết của các dân tộc.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r12d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r12d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r12d1"
+                }
+            ]
+        },
+        {
+            "id": "r13",
+            "type": "reading",
+            "passage": "Người Kinh sáng tạo, duy trì và phát triển hệ thống lễ hội đa dạng và phong phú, gồm lễ hội liên quan đến các tín ngưỡng dân gian, lễ hội tôn giáo, lễ hội tưởng nhớ các anh hùng dân tộc,… Về quy mô, lễ hội của người Kinh cũng khá đa dạng, từ các lễ hội của cộng đồng làng đến lễ hội của vùng, quốc gia, quốc tế…. Lễ hội của các dân tộc thiểu số Việt Nam chủ yếu được tổ chức với quy mô làng/bản và tộc người. Một số lễ hội liên quan đến cộng đồng cư dân – dân tộc cư trú tại một vài làng/bản trong một khu vực. Các lễ hội phổ biến như: lễ tế thần, lễ hội cơm mới, đưa thóc vào kho,…, lễ hội liên quan đến chùa (người Khơ-me), đền, tháp (người Chăm, người Hoa),…",
+            "questions": [
+                {
+                    "id": "r13a",
+                    "question": "Hệ thống lễ hội của các dân tộc ở Việt Nam đều rất đa dạng, phong phú.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r13a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r13a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r13a1"
+                },
+                {
+                    "id": "r13b",
+                    "question": "Lễ hội cơm mới, đưa thóc vào kho gắn với hoạt động sản xuất nông nghiệp của các dân tộc thiểu số.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r13b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r13b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r13b1"
+                },
+                {
+                    "id": "r13c",
+                    "question": "Lễ hội của người Kinh và các dân tộc thiểu số không có sự khác biệt về quy mô và tầm ảnh hưởng.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r13c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r13c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r13c2"
+                },
+                {
+                    "id": "r13d",
+                    "question": "Các dân tộc ở Việt Nam ít duy trì lễ hội liên quan đến tín ngưỡng, tôn giáo.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r13d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r13d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r13d2"
+                }
+            ]
+        },
+        {
+            "id": "r14",
+            "type": "reading",
+            "passage": "Về chữ viết, trên cơ sở tiếp thu chữ Hán, người Việt đã sáng tạo ra chữ Nôm để ghi lại tiếng nói dân tộc. Bên cạnh chữ Hán là văn tự chính thống, một số triều đại đã khuyến khích chữ Nôm. Đến thế kỉ XVII, chữ Quốc ngữ hình thành từ bảng chữ cái La-tinh và dần trở thành chữ viết chính thức.",
+            "questions": [
+                {
+                    "id": "r14a",
+                    "question": "Chữ Nôm xuất hiện trước chữ Hán.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r14a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r14a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r14a2"
+                },
+                {
+                    "id": "r14b",
+                    "question": "Chữ viết chính thức hiện nay của người Việt ra đời từ thế kỉ XVII.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r14b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r14b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r14b1"
+                },
+                {
+                    "id": "r14c",
+                    "question": "Một số triều đại đã khuyến khích sử dụng chữ Nôm để đề cao tinh thần dân tộc.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r14c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r14c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r14c1"
+                },
+                {
+                    "id": "r14d",
+                    "question": "Chữ Nôm và chữ Quốc ngữ đều được sáng tạo trên cơ sở tiếp thu yếu tố bên ngoài.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r14d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r14d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r14d1"
+                }
+            ]
+        },
+        {
+            "id": "r15",
+            "type": "reading",
+            "passage": "Văn hóa Lý – Trần – Hồ là giai đoạn phát triển thịnh đạt của văn hóa Đại Việt. Nền văn hóa này vừa khôi phục yếu tố truyền thống, vừa tiếp thu yếu tố ngoại sinh, tạo nên bản sắc riêng, mang đậm tính dân tộc. Đồng thời, có sự hòa trộn giữa văn hóa dân gian và cung đình, giữa Phật – Đạo – Nho, trong đó yếu tố dân gian chiếm ưu thế.",
+            "questions": [
+                {
+                    "id": "r15a",
+                    "question": "Văn hóa thời Lý – Trần – Hồ mang đậm tính dân tộc và dân gian.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r15a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r15a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r15a1"
+                },
+                {
+                    "id": "r15b",
+                    "question": "“Tam giáo đồng nguyên” là đặc điểm nổi bật trong đời sống tôn giáo thời kì này.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r15b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r15b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r15b1"
+                },
+                {
+                    "id": "r15c",
+                    "question": "Văn hóa thời kì này phát triển hoàn toàn dựa trên yếu tố truyền thống.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r15c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r15c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r15c2"
+                },
+                {
+                    "id": "r15d",
+                    "question": "Văn hóa dân gian và cung đình có sự hòa hợp, trong đó văn hóa dân gian chiếm ưu thế.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r15d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r15d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r15d1"
+                }
+            ]
+        },
+        {
+            "id": "r16",
+            "type": "reading",
+            "passage": "Bữa ăn truyền thống của người Kinh gồm cơm, canh, rau và thường dùng nước mắm. Các dân tộc ở Tây Bắc ăn xôi, ngô và uống rượu cần trong dịp lễ. Trang phục dân tộc thiểu số đa dạng về hoa văn, màu sắc; vùng Tây Bắc thường có họa tiết đa sắc, còn vùng đồng bằng sông Cửu Long đơn giản hơn.",
+            "questions": [
+                {
+                    "id": "r16a",
+                    "question": "Bữa ăn của người Kinh và dân tộc Tây Bắc hoàn toàn giống nhau.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r16a1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r16a2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r16a2"
+                },
+                {
+                    "id": "r16b",
+                    "question": "Nước mắm là gia vị đặc trưng của người Kinh.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r16b1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r16b2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r16b1"
+                },
+                {
+                    "id": "r16c",
+                    "question": "Khăn Piêu thể hiện sự khéo léo của phụ nữ dân tộc Thái.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r16c1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r16c2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r16c1"
+                },
+                {
+                    "id": "r16d",
+                    "question": "Trang phục vùng đồng bằng sông Cửu Long cầu kỳ và đa sắc hơn Tây Bắc.",
+                    "type": "multiple-choice",
+                    "options": [
+                        {
+                            "id": "r16d1",
+                            "text": "Đ"
+                        },
+                        {
+                            "id": "r16d2",
+                            "text": "S"
+                        }
+                    ],
+                    "correctOptionId": "r16d2"
+                }
+            ]
+        }
+    ]
 }

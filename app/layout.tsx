@@ -5,42 +5,43 @@ import ThemeToggle from "@/components/theme-toggle";
 import "./globals.css";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+    variable: "--font-geist-sans",
+    subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+    variable: "--font-geist-mono",
+    subsets: ["latin"],
 });
 
 const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+    variable: "--font-plus-jakarta",
+    subsets: ["latin"],
+    weight: ["500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "Zenith EDU — Hệ thống quản lý học tập",
-  description: "Nền tảng quản lý học tập thông minh cho giáo viên và học sinh",
+    title: "Zenith EDU — Hệ thống quản lý học tập",
+    description:
+        "Nền tảng quản lý học tập thông minh cho giáo viên và học sinh",
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <ThemeProvider>
-      <html
-        lang="vi"
-        suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} ${plusJakarta.variable} h-full antialiased scroll-smooth`}
-      >
-        <body className="min-h-full flex flex-col font-sans">
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
+    return (
+        <ThemeProvider>
+            <html
+                lang="vi"
+                suppressHydrationWarning
+                className={`${geistSans.variable} ${geistMono.variable} ${plusJakarta.variable} h-full antialiased scroll-smooth`}
+            >
+                <body className="min-h-full flex flex-col font-sans">
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: `
                 (function() {
                   try {
                     var t = localStorage.getItem('zenith-theme');
@@ -54,11 +55,11 @@ export default function RootLayout({
                   } catch (e) {}
                 })();
               `,
-            }}
-          />
-          {children}
-        </body>
-      </html>
-    </ThemeProvider>
-  );
+                        }}
+                    />
+                    {children}
+                </body>
+            </html>
+        </ThemeProvider>
+    );
 }

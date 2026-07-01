@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 /**
  * proxy.ts — Next.js 16+
@@ -11,26 +11,26 @@ import type { NextRequest } from 'next/server'
  *   and call `supabase.auth.getUser()` to validate the JWT server-side.
  */
 export function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl
-  const session = request.cookies.get('session')?.value
+    const { pathname } = request.nextUrl;
+    const session = request.cookies.get("session")?.value;
 
-  // ── Protect /dashboard/* ─────────────────────────────────────────────────
-  if (pathname.startsWith('/dashboard')) {
-    if (!session) {
-      const loginUrl = new URL('/login', request.url)
-      loginUrl.searchParams.set('callbackUrl', pathname)
-      return NextResponse.redirect(loginUrl)
+    // ── Protect /dashboard/* ─────────────────────────────────────────────────
+    if (pathname.startsWith("/dashboard")) {
+        if (!session) {
+            const loginUrl = new URL("/login", request.url);
+            loginUrl.searchParams.set("callbackUrl", pathname);
+            return NextResponse.redirect(loginUrl);
+        }
     }
-  }
 
-  // ── Redirect authenticated users away from auth pages ────────────────────
-  if ((pathname === '/login' || pathname === '/signup') && session) {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
-  }
+    // ── Redirect authenticated users away from auth pages ────────────────────
+    if ((pathname === "/login" || pathname === "/signup") && session) {
+        return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
 
-  return NextResponse.next()
+    return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/login', '/signup'],
-}
+    matcher: ["/dashboard/:path*", "/login", "/signup"],
+};
