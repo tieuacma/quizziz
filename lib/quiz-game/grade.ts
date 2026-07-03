@@ -37,7 +37,7 @@ export function gradeFillBlank(
     return answers.some((answer) => {
         const normalized = caseSensitive
             ? answer.trim()
-            : answer.toLowerCase().trim();
+            : answer.trim().toLowerCase();
         return normalizedUser === normalized;
     });
 }

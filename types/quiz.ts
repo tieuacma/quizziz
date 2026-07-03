@@ -1,6 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Quiz TypeScript Interfaces
-// ─────────────────────────────────────────────────────────────
 
 export type QuizQuestionType =
     "multiple-choice" | "fill-in-the-blank" | "true-false" | "reading";

@@ -59,9 +59,10 @@ function sanitizeQuestion(question: QuizQuestion): ExamQuestion {
             return rest;
         }
         case "reading":
+            const { questions, ...rest } = question;
             return {
-                ...question,
-                questions: question.questions.map(sanitizeReadingSubQuestion),
+                ...rest,
+                questions: questions.map(sanitizeReadingSubQuestion),
             };
         default:
             return question as never;

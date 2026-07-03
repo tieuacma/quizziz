@@ -314,6 +314,7 @@ export default function QuizLivePreview({
                                                                                     65 +
                                                                                         oi
                                                                                 )}
+
                                                                                 .{" "}
                                                                                 {opt.text?.trim() ||
                                                                                     "Option"}
