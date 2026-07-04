@@ -1,7 +1,7 @@
-const Post = require("../models/Post");
-const Comment = require("../models/Comment");
-const Rating = require("../models/Rating");
-const { asyncHandler } = require("../middleware/async");
+import Post from '../models/Post.js';
+import Comment from '../models/Comment.js';
+import Rating from '../models/Rating.js';
+import { asyncHandler } from '../middleware/async.js';
 
 const createPost = asyncHandler(async (req, res) => {
     const { title, content, author, tags } = req.body;

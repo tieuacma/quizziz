@@ -1,18 +1,18 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const helmet = require("helmet");
-const morgan = require("morgan");
-const rateLimit = require("express-rate-limit");
-const forumRoutes = require("./routes/forum");
-const errorHandler = require("./middleware/errorHandler");
-const {
+import 'dotenv/config';
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import rateLimit from 'express-rate-limit';
+import forumRoutes from './routes/forum';
+import errorHandler from './middleware/errorHandler';
+import {
     mongoURI,
     port,
     rateLimitWindowMs,
     rateLimitMax,
-} = require("./config/db");
+} from './config/db';
 
 const app = express();
 

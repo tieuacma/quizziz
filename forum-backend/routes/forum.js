@@ -1,6 +1,7 @@
-const express = require("express");
+import express from 'express';
 const router = express.Router();
-const {
+
+import {
     createPost,
     getPosts,
     getPostById,
@@ -8,7 +9,7 @@ const {
     getCommentsByPostId,
     ratePost,
     rateComment,
-} = require("../controllers/forumController");
+} from '../controllers/forumController.js';
 
 router.post("/posts", createPost);
 router.get("/posts", getPosts);
